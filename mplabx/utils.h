@@ -76,7 +76,4 @@ extern "C" {
 
 #endif	/* XC_HEADER_TEMPLATE_H */
 
-void init_USART(void);
-void serial_tx_char(unsigned char val);
-void serial_tx_string(const char* val);
-unsigned char get_reg_value();
+const char* state_translator_fpga_to_micro(char state_machine_code, int* state);

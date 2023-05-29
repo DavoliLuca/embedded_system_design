@@ -1,0 +1,105 @@
+Version 4.0 HI-TECH Software Intermediate Code
+"1 utils.c
+[; ;utils.c: 1: const char* state_translator_fpga_to_micro(unsigned char state_machine_code, int* state){
+[v _state_translator_fpga_to_micro `(*Cuc ~T0 @X0 1 ef2`uc`*i ]
+{
+[e :U _state_translator_fpga_to_micro ]
+[v _state_machine_code `uc ~T0 @X0 1 r1 ]
+[v _state `*i ~T0 @X0 1 r2 ]
+[f ]
+"2
+[; ;utils.c: 2:     const char* state_msg;
+[v _state_msg `*Cuc ~T0 @X0 1 a ]
+"3
+[; ;utils.c: 3:     if (state_machine_code == 'A'){
+[e $ ! == -> _state_machine_code `ui -> 65 `ui 2  ]
+{
+"4
+[; ;utils.c: 4:         state_msg = "init_pos";
+[e = _state_msg :s 1C ]
+"5
+[; ;utils.c: 5:         *state = 1;
+[e = *U _state -> 1 `i ]
+"6
+[; ;utils.c: 6:     } else if (state_machine_code == 'B'){
+}
+[e $U 3  ]
+[e :U 2 ]
+[e $ ! == -> _state_machine_code `ui -> 66 `ui 4  ]
+{
+"7
+[; ;utils.c: 7:         state_msg = "oven";
+[e = _state_msg :s 2C ]
+"8
+[; ;utils.c: 8:         *state = 3;
+[e = *U _state -> 3 `i ]
+"9
+[; ;utils.c: 9:     } else if (state_machine_code == 'D'){
+}
+[e $U 5  ]
+[e :U 4 ]
+[e $ ! == -> _state_machine_code `ui -> 68 `ui 6  ]
+{
+"10
+[; ;utils.c: 10:         state_msg = "mixing_pos";
+[e = _state_msg :s 3C ]
+"11
+[; ;utils.c: 11:         *state = 4;
+[e = *U _state -> 4 `i ]
+"12
+[; ;utils.c: 12:     } else if (state_machine_code == '@'){
+}
+[e $U 7  ]
+[e :U 6 ]
+[e $ ! == -> _state_machine_code `ui -> 64 `ui 8  ]
+{
+"13
+[; ;utils.c: 13:         state_msg = "pick_up";
+[e = _state_msg :s 4C ]
+"14
+[; ;utils.c: 14:         *state = 5;
+[e = *U _state -> 5 `i ]
+"15
+[; ;utils.c: 15:     } else if (state_machine_code == 'H'){
+}
+[e $U 9  ]
+[e :U 8 ]
+[e $ ! == -> _state_machine_code `ui -> 72 `ui 10  ]
+{
+"16
+[; ;utils.c: 16:         state_msg = "movement";
+[e = _state_msg :s 5C ]
+"17
+[; ;utils.c: 17:         *state = 2;
+[e = *U _state -> 2 `i ]
+"18
+[; ;utils.c: 18:     } else {
+}
+[e $U 11  ]
+[e :U 10 ]
+{
+"19
+[; ;utils.c: 19:         state_msg = "NOTHING";
+[e = _state_msg :s 6C ]
+"21
+[; ;utils.c: 21:     }
+}
+[e :U 11 ]
+[e :U 9 ]
+[e :U 7 ]
+[e :U 5 ]
+[e :U 3 ]
+"22
+[; ;utils.c: 22:     return state_msg;
+[e ) _state_msg ]
+[e $UE 1  ]
+"23
+[; ;utils.c: 23: }
+[e :UE 1 ]
+}
+[a 5C 109 111 118 101 109 101 110 116 0 ]
+[a 1C 105 110 105 116 95 112 111 115 0 ]
+[a 3C 109 105 120 105 110 103 95 112 111 115 0 ]
+[a 4C 112 105 99 107 95 117 112 0 ]
+[a 2C 111 118 101 110 0 ]
+[a 6C 78 79 84 72 73 78 71 0 ]

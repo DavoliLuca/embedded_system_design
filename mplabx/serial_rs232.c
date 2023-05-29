@@ -47,3 +47,9 @@ void serial_tx_string(const char* val){
         serial_tx_char(val[i]);        
     }
 }
+
+unsigned char get_reg_value(){
+    unsigned char rx_char = RCREG;
+    RCREG = 0;
+    return rx_char;
+}

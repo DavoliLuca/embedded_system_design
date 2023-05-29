@@ -237,7 +237,7 @@ end arc_write_uart_sm;</string>
       <elementAttributes>
         <entry>
           <string>Frequency</string>
-          <int>10000</int>
+          <int>50000</int>
         </entry>
         <entry>
           <string>runRealTime</string>
@@ -294,6 +294,16 @@ end arc_write_uart_sm;</string>
       </elementAttributes>
       <pos x="1580" y="-100"/>
     </visualElement>
+    <visualElement>
+      <elementName>Out</elementName>
+      <elementAttributes>
+        <entry>
+          <string>Bits</string>
+          <int>8</int>
+        </entry>
+      </elementAttributes>
+      <pos x="1380" y="-220"/>
+    </visualElement>
   </visualElements>
   <wires>
     <wire>
@@ -309,62 +319,6 @@ end arc_write_uart_sm;</string>
       <p2 x="860" y="320"/>
     </wire>
     <wire>
-      <p1 x="720" y="160"/>
-      <p2 x="780" y="160"/>
-    </wire>
-    <wire>
-      <p1 x="1380" y="-100"/>
-      <p2 x="1400" y="-100"/>
-    </wire>
-    <wire>
-      <p1 x="1460" y="-100"/>
-      <p2 x="1580" y="-100"/>
-    </wire>
-    <wire>
-      <p1 x="780" y="420"/>
-      <p2 x="820" y="420"/>
-    </wire>
-    <wire>
-      <p1 x="180" y="420"/>
-      <p2 x="520" y="420"/>
-    </wire>
-    <wire>
-      <p1 x="620" y="420"/>
-      <p2 x="720" y="420"/>
-    </wire>
-    <wire>
-      <p1 x="660" y="100"/>
-      <p2 x="780" y="100"/>
-    </wire>
-    <wire>
-      <p1 x="1260" y="100"/>
-      <p2 x="1280" y="100"/>
-    </wire>
-    <wire>
-      <p1 x="800" y="100"/>
-      <p2 x="880" y="100"/>
-    </wire>
-    <wire>
-      <p1 x="980" y="100"/>
-      <p2 x="1020" y="100"/>
-    </wire>
-    <wire>
-      <p1 x="1280" y="100"/>
-      <p2 x="1360" y="100"/>
-    </wire>
-    <wire>
-      <p1 x="260" y="360"/>
-      <p2 x="540" y="360"/>
-    </wire>
-    <wire>
-      <p1 x="620" y="360"/>
-      <p2 x="700" y="360"/>
-    </wire>
-    <wire>
-      <p1 x="700" y="360"/>
-      <p2 x="860" y="360"/>
-    </wire>
-    <wire>
       <p1 x="760" y="200"/>
       <p2 x="780" y="200"/>
     </wire>
@@ -377,16 +331,16 @@ end arc_write_uart_sm;</string>
       <p2 x="1400" y="200"/>
     </wire>
     <wire>
-      <p1 x="1240" y="40"/>
-      <p2 x="1280" y="40"/>
-    </wire>
-    <wire>
       <p1 x="1320" y="-140"/>
-      <p2 x="1380" y="-140"/>
+      <p2 x="1360" y="-140"/>
     </wire>
     <wire>
       <p1 x="1240" y="-140"/>
       <p2 x="1300" y="-140"/>
+    </wire>
+    <wire>
+      <p1 x="1360" y="-140"/>
+      <p2 x="1380" y="-140"/>
     </wire>
     <wire>
       <p1 x="720" y="460"/>
@@ -445,6 +399,74 @@ end arc_write_uart_sm;</string>
       <p2 x="940" y="340"/>
     </wire>
     <wire>
+      <p1 x="1380" y="20"/>
+      <p2 x="1480" y="20"/>
+    </wire>
+    <wire>
+      <p1 x="1360" y="-220"/>
+      <p2 x="1380" y="-220"/>
+    </wire>
+    <wire>
+      <p1 x="720" y="160"/>
+      <p2 x="780" y="160"/>
+    </wire>
+    <wire>
+      <p1 x="1380" y="-100"/>
+      <p2 x="1400" y="-100"/>
+    </wire>
+    <wire>
+      <p1 x="1460" y="-100"/>
+      <p2 x="1580" y="-100"/>
+    </wire>
+    <wire>
+      <p1 x="780" y="420"/>
+      <p2 x="820" y="420"/>
+    </wire>
+    <wire>
+      <p1 x="180" y="420"/>
+      <p2 x="520" y="420"/>
+    </wire>
+    <wire>
+      <p1 x="620" y="420"/>
+      <p2 x="720" y="420"/>
+    </wire>
+    <wire>
+      <p1 x="660" y="100"/>
+      <p2 x="780" y="100"/>
+    </wire>
+    <wire>
+      <p1 x="1260" y="100"/>
+      <p2 x="1280" y="100"/>
+    </wire>
+    <wire>
+      <p1 x="800" y="100"/>
+      <p2 x="880" y="100"/>
+    </wire>
+    <wire>
+      <p1 x="980" y="100"/>
+      <p2 x="1020" y="100"/>
+    </wire>
+    <wire>
+      <p1 x="1280" y="100"/>
+      <p2 x="1360" y="100"/>
+    </wire>
+    <wire>
+      <p1 x="260" y="360"/>
+      <p2 x="540" y="360"/>
+    </wire>
+    <wire>
+      <p1 x="620" y="360"/>
+      <p2 x="700" y="360"/>
+    </wire>
+    <wire>
+      <p1 x="700" y="360"/>
+      <p2 x="860" y="360"/>
+    </wire>
+    <wire>
+      <p1 x="1240" y="40"/>
+      <p2 x="1280" y="40"/>
+    </wire>
+    <wire>
       <p1 x="680" y="500"/>
       <p2 x="760" y="500"/>
     </wire>
@@ -455,10 +477,6 @@ end arc_write_uart_sm;</string>
     <wire>
       <p1 x="740" y="180"/>
       <p2 x="780" y="180"/>
-    </wire>
-    <wire>
-      <p1 x="1380" y="20"/>
-      <p2 x="1480" y="20"/>
     </wire>
     <wire>
       <p1 x="1280" y="-120"/>
@@ -559,6 +577,10 @@ end arc_write_uart_sm;</string>
     <wire>
       <p1 x="880" y="60"/>
       <p2 x="880" y="100"/>
+    </wire>
+    <wire>
+      <p1 x="1360" y="-220"/>
+      <p2 x="1360" y="-140"/>
     </wire>
     <wire>
       <p1 x="660" y="100"/>

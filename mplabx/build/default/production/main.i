@@ -4040,19 +4040,78 @@ typedef uint32_t uint_fast32_t;
 # 9 "main.c" 2
 
 
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\string.h" 1 3
+# 25 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\string.h" 3
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\bits/alltypes.h" 1 3
+# 411 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef struct __locale_struct * locale_t;
+# 25 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\string.h" 2 3
+
+
+void *memcpy (void *restrict, const void *restrict, size_t);
+void *memmove (void *, const void *, size_t);
+void *memset (void *, int, size_t);
+int memcmp (const void *, const void *, size_t);
+void *memchr (const void *, int, size_t);
+
+char *strcpy (char *restrict, const char *restrict);
+char *strncpy (char *restrict, const char *restrict, size_t);
+
+char *strcat (char *restrict, const char *restrict);
+char *strncat (char *restrict, const char *restrict, size_t);
+
+int strcmp (const char *, const char *);
+int strncmp (const char *, const char *, size_t);
+
+int strcoll (const char *, const char *);
+size_t strxfrm (char *restrict, const char *restrict, size_t);
+
+char *strchr (const char *, int);
+char *strrchr (const char *, int);
+
+size_t strcspn (const char *, const char *);
+size_t strspn (const char *, const char *);
+char *strpbrk (const char *, const char *);
+char *strstr (const char *, const char *);
+char *strtok (char *restrict, const char *restrict);
+
+size_t strlen (const char *);
+
+char *strerror (int);
+# 65 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\string.h" 3
+char *strtok_r (char *restrict, const char *restrict, char **restrict);
+int strerror_r (int, char *, size_t);
+char *stpcpy(char *restrict, const char *restrict);
+char *stpncpy(char *restrict, const char *restrict, size_t);
+size_t strnlen (const char *, size_t);
+char *strdup (const char *);
+char *strndup (const char *, size_t);
+char *strsignal(int);
+char *strerror_l (int, locale_t);
+int strcoll_l (const char *, const char *, locale_t);
+size_t strxfrm_l (char *restrict, const char *restrict, size_t, locale_t);
+
+
+
+
+void *memccpy (void *restrict, const void *restrict, int, size_t);
+# 11 "main.c" 2
+
+
 # 1 "./serial_rs232.h" 1
 # 79 "./serial_rs232.h"
 void init_USART(void);
 void serial_tx_char(unsigned char val);
 void serial_tx_string(const char* val);
-# 11 "main.c" 2
+unsigned char get_reg_value();
+# 13 "main.c" 2
 
 # 1 "./init_PIC.h" 1
 # 79 "./init_PIC.h"
 void init_PORTS(void);
 
 void init_interrupts(void);
-# 12 "main.c" 2
+# 14 "main.c" 2
 
 # 1 "./lcd.h" 1
 # 98 "./lcd.h"
@@ -4060,7 +4119,17 @@ void lcd_init(void);
 void lcd_cmd(unsigned char val);
 void lcd_dat(unsigned char val);
 void lcd_str(const char* str);
-# 13 "main.c" 2
+# 15 "main.c" 2
+
+# 1 "./utils.h" 1
+# 79 "./utils.h"
+const char* state_translator_fpga_to_micro(char state_machine_code, int* state);
+# 16 "main.c" 2
+
+# 1 "./timer.h" 1
+# 79 "./timer.h"
+void init_timer_0(void);
+# 17 "main.c" 2
 
 
 void __attribute__((picinterrupt(("")))) rx_char_usart(void);
@@ -4070,7 +4139,9 @@ void __attribute__((picinterrupt(("")))) rx_char_usart(void);
 
 
 
-static _Bool new_char_rx = 0;
+static _Bool state_changed = 0;
+static _Bool timer_done = 0;
+int state;
 
 void main(void){
     unsigned char rx_char = ' ';
@@ -4084,23 +4155,53 @@ void main(void){
 
     while(1){
 
-        if (new_char_rx){
-            rx_char = RCREG;
-            const char* greet_str = "Hello the received: " + rx_char;
+        if (state_changed){
+            rx_char = get_reg_value();
+            const char* greet_str[80];
+            const char* state_msg = state_translator_fpga_to_micro(rx_char, &state);
+            snprintf(greet_str, sizeof(greet_str), "The current state is %s", state_msg);
             serial_tx_string(greet_str);
             serial_tx_char(rx_char);
 
-            LATBbits.LATB0 = !LATBbits.LATB0;
-            new_char_rx = 0;
+            LATBbits.LATB0 =! LATBbits.LATB0;
+            state_changed = 0;
             lcd_cmd(0x01);
             lcd_cmd(0x80);
             lcd_str(greet_str);
+        }
+        if (state == 2){
+            LATBbits.LATB1 = 1;
+        } else {
+            LATBbits.LATB1 = 0;
+            if (state == 3){
+                if (timer_done){
+                    state = 2;
+                } else {
+                    if (T0CONbits.TMR0ON == 0){
+                        init_timer_0();
+                    }
+                }
+            } else if (state == 4){
+                _delay((unsigned long)((2000)*(4000000/4000.0)));
+                state = 2;
+            } else if (state == 5){
+                _delay((unsigned long)((2000)*(4000000/4000.0)));
+                state = 2;
+            } else if (state == 6){
+                _delay((unsigned long)((2000)*(4000000/4000.0)));
+                state = 2;
+            }
         }
     }
 }
 void __attribute__((picinterrupt(("")))) rx_char_usart(void){
     if(PIE1bits.RCIE && PIR1bits.RCIF){
         PIR1bits.RCIF = 0;
-        new_char_rx = 1;
+        state_changed = 1;
+    }
+    if(INTCONbits.TMR0IE && INTCONbits.TMR0IF){
+        T0CON = 0;
+        INTCONbits.TMR0IF = 0;
+        timer_done = 1;
     }
 }

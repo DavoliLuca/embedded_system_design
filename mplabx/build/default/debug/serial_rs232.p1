@@ -66,6 +66,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 "3204
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 3204: extern volatile unsigned char TXREG __attribute__((address(0xFAD)));
 [v _TXREG `Vuc ~T0 @X0 0 e@4013 ]
+"3216
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 3216: extern volatile unsigned char RCREG __attribute__((address(0xFAE)));
+[v _RCREG `Vuc ~T0 @X0 0 e@4014 ]
 "54 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 54: __asm("PORTA equ 0F80h");
 [; <" PORTA equ 0F80h ;# ">
@@ -552,4 +555,25 @@ Version 4.0 HI-TECH Software Intermediate Code
 "49
 [; ;serial_rs232.c: 49: }
 [e :UE 245 ]
+}
+"51
+[; ;serial_rs232.c: 51: unsigned char get_reg_value(){
+[v _get_reg_value `(uc ~T0 @X0 1 ef ]
+{
+[e :U _get_reg_value ]
+[f ]
+"52
+[; ;serial_rs232.c: 52:     unsigned char rx_char = RCREG;
+[v _rx_char `uc ~T0 @X0 1 a ]
+[e = _rx_char _RCREG ]
+"53
+[; ;serial_rs232.c: 53:     RCREG = 0;
+[e = _RCREG -> -> 0 `i `uc ]
+"54
+[; ;serial_rs232.c: 54:     return rx_char;
+[e ) _rx_char ]
+[e $UE 250  ]
+"55
+[; ;serial_rs232.c: 55: }
+[e :UE 250 ]
 }

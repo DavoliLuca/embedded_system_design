@@ -4414,6 +4414,7 @@ double yn(int, double);
 void init_USART(void);
 void serial_tx_char(unsigned char val);
 void serial_tx_string(const char* val);
+unsigned char get_reg_value();
 # 7 "serial_rs232.c" 2
 
 
@@ -4448,4 +4449,10 @@ void serial_tx_string(const char* val){
     for (int i=0; val[i] != 0; i++){
         serial_tx_char(val[i]);
     }
+}
+
+unsigned char get_reg_value(){
+    unsigned char rx_char = RCREG;
+    RCREG = 0;
+    return rx_char;
 }

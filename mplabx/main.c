@@ -13,6 +13,8 @@
 #include "serial_rs232.h"
 #include "init_PIC.h"
 #include "lcd.h"
+#include "utils.h"
+#include "timer.h"
 
 void __interrupt() rx_char_usart(void);
 
@@ -21,7 +23,9 @@ void __interrupt() rx_char_usart(void);
 // noi la usiamo qui solo per ricezione, usiamo un altro modo per capire quando
 // e spedito
 
-static _Bool new_char_rx = false;
+static _Bool state_changed = false;
+static _Bool timer_done = false;
+int state;
 
 void main(void){
     unsigned char rx_char = ' ';
@@ -35,25 +39,58 @@ void main(void){
     
     while(1){
         // toggle rb0 then bit 0 of lATB set as output
-        if (new_char_rx){
-            rx_char = RCREG;
-            RCREG = 0;
+        if (state_changed){
+            rx_char = get_reg_value();
             const char* greet_str[80];
-            snprintf(greet_str, sizeof(greet_str), "The current state is %c", rx_char);
+            const char* state_msg = state_translator_fpga_to_micro(rx_char, &state);
+            snprintf(greet_str, sizeof(greet_str), "The current state is %s", state_msg);
             serial_tx_string(greet_str);
             serial_tx_char(rx_char);
-            
-            LATBbits.LATB0 =! LATBbits.LATB0; // toggle led
-            new_char_rx = false;
+
             lcd_cmd(L_CLR);
             lcd_cmd(L_L1);
             lcd_str(greet_str);
+            
+            state_changed = false;
+        }
+        if (state == 2){ // Movement
+            LATBbits.LATB1 = 1;
+        } else {
+            LATBbits.LATB1 = 0; // Stop Movement
+            if (state == 3){
+                if (timer_done){
+                    state = 2;
+                } else {
+                    if (T0CONbits.TMR0ON == 0){
+                        init_timer_0();
+                    }
+                }
+            } else if (state == 4){
+                __delay_ms(2000);
+                state = 2;
+            } else if (state == 5){
+                __delay_ms(2000);
+                state = 2;
+            } else if (state == 6){
+                if (timer_done){
+                    state = 2; // Here it should go either to trash Move [2] or to Idle [7]
+                } else {
+                    if (T0CONbits.TMR0ON == 0){
+                        init_timer_0();
+                    }
+                }
+            }
         }
     }    
 }
 void __interrupt() rx_char_usart(void){
     if(PIE1bits.RCIE && PIR1bits.RCIF){// It has to be enabled and triggered
         PIR1bits.RCIF = 0;
-        new_char_rx = true;
+        state_changed = true;
+    }
+    if(INTCONbits.TMR0IE && INTCONbits.TMR0IF){
+        T0CON = 0;
+        INTCONbits.TMR0IF = 0;
+        timer_done = true;
     }
 }

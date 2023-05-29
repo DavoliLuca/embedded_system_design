@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
-  <executable name="dist/default/debug\mplabx.X.debug.hex">
+  <executable name="dist/default/debug\mplabx.debug.hex">
     <memory name="program">
       <units>bytes</units>
       <length>32768</length>
-      <used>17313</used>
-      <free>15455</free>
+      <used>18221</used>
+      <free>14547</free>
     </memory>
     <memory name="data">
       <units>bytes</units>
       <length>1536</length>
-      <used>366</used>
-      <free>1170</free>
+      <used>372</used>
+      <free>1164</free>
     </memory>
   </executable>
 </project>

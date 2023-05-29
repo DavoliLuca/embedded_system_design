@@ -34,9 +34,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 "5344
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 5344: extern volatile INTCONbits_t INTCONbits __attribute__((address(0xFF2)));
 [v _INTCONbits `VS226 ~T0 @X0 0 e@4082 ]
-"3216
-[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 3216: extern volatile unsigned char RCREG __attribute__((address(0xFAE)));
-[v _RCREG `Vuc ~T0 @X0 0 e@4014 ]
+"82 ./serial_rs232.h
+[; ;./serial_rs232.h: 82: unsigned char get_reg_value();
+[v _get_reg_value `(uc ~T0 @X0 0 e? ]
+"79 ./utils.h
+[; ;./utils.h: 79: const char* state_translator_fpga_to_micro(char state_machine_code, int* state);
+[v _state_translator_fpga_to_micro `(*Cuc ~T0 @X0 0 ef2`uc`*i ]
+"114 C:\Program Files\Microchip\xc8\v2.20\pic\include\c99\stdio.h
+[v _snprintf `(i ~T0 @X0 0 e2v`*uc`ui`*Cuc ]
 "81 ./serial_rs232.h
 [; ;./serial_rs232.h: 81: void serial_tx_string(const char* val);
 [v _serial_tx_string `(v ~T0 @X0 0 ef1`*Cuc ]
@@ -61,6 +66,28 @@ Version 4.0 HI-TECH Software Intermediate Code
 "101 ./lcd.h
 [; ;./lcd.h: 101: void lcd_str(const char* str);
 [v _lcd_str `(v ~T0 @X0 0 ef1`*Cuc ]
+"4795 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 4795:     struct {
+[s S214 :3 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S214 . T0PS PSA T0SE T0CS T08BIT TMR0ON ]
+"4803
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 4803:     struct {
+[s S215 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S215 . T0PS0 T0PS1 T0PS2 ]
+"4794
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 4794: typedef union {
+[u S213 `S214 1 `S215 1 ]
+[n S213 . . . ]
+"4809
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 4809: extern volatile T0CONbits_t T0CONbits __attribute__((address(0xFD5)));
+[v _T0CONbits `VS213 ~T0 @X0 0 e@4053 ]
+"79 ./timer.h
+[; ;./timer.h: 79: void init_timer_0(void);
+[v _init_timer_0 `(v ~T0 @X0 0 ef ]
+[v F2107 `(v ~T0 @X0 1 tf1`ul ]
+"203 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\pic18.h
+[v __delay `JF2107 ~T0 @X0 0 e ]
+[p i __delay ]
 [t ~ __interrupt . k ]
 [t T39 __interrupt ]
 "2268 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h
@@ -93,6 +120,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 "2361
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 2361: extern volatile PIR1bits_t PIR1bits __attribute__((address(0xF9E)));
 [v _PIR1bits `VS84 ~T0 @X0 0 e@3998 ]
+"4789
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 4789: extern volatile unsigned char T0CON __attribute__((address(0xFD5)));
+[v _T0CON `Vuc ~T0 @X0 0 e@4053 ]
 "54 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 54: __asm("PORTA equ 0F80h");
 [; <" PORTA equ 0F80h ;# ">
@@ -474,114 +504,245 @@ Version 4.0 HI-TECH Software Intermediate Code
 "5763
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 5763: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
-"22 main.c
-[; ;main.c: 22: static _Bool new_char_rx = 0;
-[v _new_char_rx `a ~T0 @X0 1 s ]
-[i _new_char_rx
+"26 main.c
+[; ;main.c: 26: static _Bool state_changed = 0;
+[v _state_changed `a ~T0 @X0 1 s ]
+[i _state_changed
 -> -> 0 `i `a
 ]
+"27
+[; ;main.c: 27: static _Bool timer_done = 0;
+[v _timer_done `a ~T0 @X0 1 s ]
+[i _timer_done
+-> -> 0 `i `a
+]
+"28
+[; ;main.c: 28: int state;
+[v _state `i ~T0 @X0 1 e ]
 [v $root$_main `(v ~T0 @X0 0 e ]
-"24
-[; ;main.c: 24: void main(void){
+"30
+[; ;main.c: 30: void main(void){
 [v _main `(v ~T0 @X0 1 ef ]
 {
 [e :U _main ]
 [f ]
-"25
-[; ;main.c: 25:     unsigned char rx_char = ' ';
+"31
+[; ;main.c: 31:     unsigned char rx_char = ' ';
 [v _rx_char `uc ~T0 @X0 1 a ]
 [e = _rx_char -> -> 32 `ui `uc ]
-"26
-[; ;main.c: 26:     init_PORTS();
-[e ( _init_PORTS ..  ]
-"27
-[; ;main.c: 27:     init_USART();
-[e ( _init_USART ..  ]
-"28
-[; ;main.c: 28:     init_interrupts();
-[e ( _init_interrupts ..  ]
-"29
-[; ;main.c: 29:     lcd_init();
-[e ( _lcd_init ..  ]
-"30
-[; ;main.c: 30:     lcd_cmd(0x0C);
-[e ( _lcd_cmd (1 -> -> 12 `i `uc ]
 "32
-[; ;main.c: 32:     (INTCONbits.GIE = 1);
-[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
+[; ;main.c: 32:     init_PORTS();
+[e ( _init_PORTS ..  ]
+"33
+[; ;main.c: 33:     init_USART();
+[e ( _init_USART ..  ]
 "34
-[; ;main.c: 34:     while(1){
-[e :U 242 ]
-{
+[; ;main.c: 34:     init_interrupts();
+[e ( _init_interrupts ..  ]
+"35
+[; ;main.c: 35:     lcd_init();
+[e ( _lcd_init ..  ]
 "36
-[; ;main.c: 36:         if (new_char_rx){
-[e $ ! != -> _new_char_rx `i -> 0 `i 244  ]
-{
-"37
-[; ;main.c: 37:             rx_char = RCREG;
-[e = _rx_char _RCREG ]
+[; ;main.c: 36:     lcd_cmd(0x0C);
+[e ( _lcd_cmd (1 -> -> 12 `i `uc ]
 "38
-[; ;main.c: 38:             const char* greet_str = "Hello the received: " + rx_char;
-[v _greet_str `*Cuc ~T0 @X0 1 a ]
-[e = _greet_str -> + :s 1C * -> -> _rx_char `i `x -> -> # *U :s 1C `i `x `*Cuc ]
-"39
-[; ;main.c: 39:             serial_tx_string(greet_str);
-[e ( _serial_tx_string (1 _greet_str ]
+[; ;main.c: 38:     (INTCONbits.GIE = 1);
+[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
 "40
-[; ;main.c: 40:             serial_tx_char(rx_char);
-[e ( _serial_tx_char (1 _rx_char ]
-"42
-[; ;main.c: 42:             LATBbits.LATB0 = !LATBbits.LATB0;
-[e = . . _LATBbits 0 0 -> -> ! != -> . . _LATBbits 0 0 `i -> 0 `i `i `uc ]
-"43
-[; ;main.c: 43:             new_char_rx = 0;
-[e = _new_char_rx -> -> 0 `i `a ]
-"44
-[; ;main.c: 44:             lcd_cmd(0x01);
-[e ( _lcd_cmd (1 -> -> 1 `i `uc ]
-"45
-[; ;main.c: 45:             lcd_cmd(0x80);
-[e ( _lcd_cmd (1 -> -> 128 `i `uc ]
-"46
-[; ;main.c: 46:             lcd_str(greet_str);
-[e ( _lcd_str (1 _greet_str ]
-"47
-[; ;main.c: 47:         }
-}
-[e :U 244 ]
-"48
-[; ;main.c: 48:     }
-}
-[e :U 241 ]
-[e $U 242  ]
+[; ;main.c: 40:     while(1){
 [e :U 243 ]
-"49
-[; ;main.c: 49: }
-[e :UE 240 ]
+{
+"42
+[; ;main.c: 42:         if (state_changed){
+[e $ ! != -> _state_changed `i -> 0 `i 245  ]
+{
+"43
+[; ;main.c: 43:             rx_char = get_reg_value();
+[e = _rx_char ( _get_reg_value ..  ]
+"44
+[; ;main.c: 44:             const char* greet_str[80];
+[v _greet_str `*Cuc ~T0 @X0 -> 80 `i a ]
+"45
+[; ;main.c: 45:             const char* state_msg = state_translator_fpga_to_micro(rx_char, &state);
+[v _state_msg `*Cuc ~T0 @X0 1 a ]
+[e = _state_msg ( _state_translator_fpga_to_micro (2 , -> _rx_char `uc &U _state ]
+"46
+[; ;main.c: 46:             snprintf(greet_str, sizeof(greet_str), "The current state is %s", state_msg);
+[e ( _snprintf (2 , (. , , -> &U _greet_str `*uc -> # _greet_str `ui :s 1C _state_msg ]
+"47
+[; ;main.c: 47:             serial_tx_string(greet_str);
+[e ( _serial_tx_string (1 -> &U _greet_str `*Cuc ]
+"48
+[; ;main.c: 48:             serial_tx_char(rx_char);
+[e ( _serial_tx_char (1 _rx_char ]
+"50
+[; ;main.c: 50:             LATBbits.LATB0 =! LATBbits.LATB0;
+[e = . . _LATBbits 0 0 -> -> ! != -> . . _LATBbits 0 0 `i -> 0 `i `i `uc ]
+"51
+[; ;main.c: 51:             state_changed = 0;
+[e = _state_changed -> -> 0 `i `a ]
+"52
+[; ;main.c: 52:             lcd_cmd(0x01);
+[e ( _lcd_cmd (1 -> -> 1 `i `uc ]
+"53
+[; ;main.c: 53:             lcd_cmd(0x80);
+[e ( _lcd_cmd (1 -> -> 128 `i `uc ]
+"54
+[; ;main.c: 54:             lcd_str(greet_str);
+[e ( _lcd_str (1 -> &U _greet_str `*Cuc ]
+"55
+[; ;main.c: 55:         }
+}
+[e :U 245 ]
+"56
+[; ;main.c: 56:         if (state == 2){
+[e $ ! == _state -> 2 `i 246  ]
+{
+"57
+[; ;main.c: 57:             LATBbits.LATB1 = 1;
+[e = . . _LATBbits 0 1 -> -> 1 `i `uc ]
+"58
+[; ;main.c: 58:         } else {
+}
+[e $U 247  ]
+[e :U 246 ]
+{
+"59
+[; ;main.c: 59:             LATBbits.LATB1 = 0;
+[e = . . _LATBbits 0 1 -> -> 0 `i `uc ]
+"60
+[; ;main.c: 60:             if (state == 3){
+[e $ ! == _state -> 3 `i 248  ]
+{
+"61
+[; ;main.c: 61:                 if (timer_done){
+[e $ ! != -> _timer_done `i -> 0 `i 249  ]
+{
+"62
+[; ;main.c: 62:                     state = 2;
+[e = _state -> 2 `i ]
+"63
+[; ;main.c: 63:                 } else {
+}
+[e $U 250  ]
+[e :U 249 ]
+{
+"64
+[; ;main.c: 64:                     if (T0CONbits.TMR0ON == 0){
+[e $ ! == -> . . _T0CONbits 0 5 `i -> 0 `i 251  ]
+{
+"65
+[; ;main.c: 65:                         init_timer_0();
+[e ( _init_timer_0 ..  ]
+"66
+[; ;main.c: 66:                     }
+}
+[e :U 251 ]
+"67
+[; ;main.c: 67:                 }
+}
+[e :U 250 ]
+"68
+[; ;main.c: 68:             } else if (state == 4){
+}
+[e $U 252  ]
+[e :U 248 ]
+[e $ ! == _state -> 4 `i 253  ]
+{
+"69
+[; ;main.c: 69:                 _delay((unsigned long)((2000)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"70
+[; ;main.c: 70:                 state = 2;
+[e = _state -> 2 `i ]
+"71
+[; ;main.c: 71:             } else if (state == 5){
+}
+[e $U 254  ]
+[e :U 253 ]
+[e $ ! == _state -> 5 `i 255  ]
+{
+"72
+[; ;main.c: 72:                 _delay((unsigned long)((2000)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"73
+[; ;main.c: 73:                 state = 2;
+[e = _state -> 2 `i ]
+"74
+[; ;main.c: 74:             } else if (state == 6){
+}
+[e $U 256  ]
+[e :U 255 ]
+[e $ ! == _state -> 6 `i 257  ]
+{
+"75
+[; ;main.c: 75:                 _delay((unsigned long)((2000)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"76
+[; ;main.c: 76:                 state = 2;
+[e = _state -> 2 `i ]
+"77
+[; ;main.c: 77:             }
+}
+[e :U 257 ]
+[e :U 256 ]
+[e :U 254 ]
+[e :U 252 ]
+"78
+[; ;main.c: 78:         }
+}
+[e :U 247 ]
+"79
+[; ;main.c: 79:     }
+}
+[e :U 242 ]
+[e $U 243  ]
+[e :U 244 ]
+"80
+[; ;main.c: 80: }
+[e :UE 241 ]
 }
 [v $root$_rx_char_usart `(v ~T0 @X0 0 e ]
-"50
-[; ;main.c: 50: void __attribute__((picinterrupt(("")))) rx_char_usart(void){
+"81
+[; ;main.c: 81: void __attribute__((picinterrupt(("")))) rx_char_usart(void){
 [v _rx_char_usart `(v ~T39 @X0 1 ef ]
 {
 [e :U _rx_char_usart ]
 [f ]
-"51
-[; ;main.c: 51:     if(PIE1bits.RCIE && PIR1bits.RCIF){
-[e $ ! && != -> . . _PIE1bits 0 5 `i -> 0 `i != -> . . _PIR1bits 0 5 `i -> 0 `i 246  ]
+"82
+[; ;main.c: 82:     if(PIE1bits.RCIE && PIR1bits.RCIF){
+[e $ ! && != -> . . _PIE1bits 0 5 `i -> 0 `i != -> . . _PIR1bits 0 5 `i -> 0 `i 259  ]
 {
-"52
-[; ;main.c: 52:         PIR1bits.RCIF = 0;
+"83
+[; ;main.c: 83:         PIR1bits.RCIF = 0;
 [e = . . _PIR1bits 0 5 -> -> 0 `i `uc ]
-"53
-[; ;main.c: 53:         new_char_rx = 1;
-[e = _new_char_rx -> -> 1 `i `a ]
-"54
-[; ;main.c: 54:     }
+"84
+[; ;main.c: 84:         state_changed = 1;
+[e = _state_changed -> -> 1 `i `a ]
+"85
+[; ;main.c: 85:     }
 }
-[e :U 246 ]
-"55
-[; ;main.c: 55: }
-[e :UE 245 ]
+[e :U 259 ]
+"86
+[; ;main.c: 86:     if(INTCONbits.TMR0IE && INTCONbits.TMR0IF){
+[e $ ! && != -> . . _INTCONbits 0 5 `i -> 0 `i != -> . . _INTCONbits 0 2 `i -> 0 `i 260  ]
+{
+"87
+[; ;main.c: 87:         T0CON = 0;
+[e = _T0CON -> -> 0 `i `uc ]
+"88
+[; ;main.c: 88:         INTCONbits.TMR0IF = 0;
+[e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
+"89
+[; ;main.c: 89:         timer_done = 1;
+[e = _timer_done -> -> 1 `i `a ]
+"90
+[; ;main.c: 90:     }
 }
-[a 1C 72 101 108 108 111 32 116 104 101 32 114 101 99 101 105 118 101 100 58 32 0 ]
+[e :U 260 ]
+"91
+[; ;main.c: 91: }
+[e :UE 258 ]
+}
+[p f _snprintf 8650752 ]
+[a 1C 84 104 101 32 99 117 114 114 101 110 116 32 115 116 97 116 101 32 105 115 32 37 115 0 ]

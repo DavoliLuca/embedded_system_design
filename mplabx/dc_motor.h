@@ -76,7 +76,6 @@ extern "C" {
 
 #endif	/* XC_HEADER_TEMPLATE_H */
 
-void init_USART(void);
-void serial_tx_char(unsigned char val);
-void serial_tx_string(const char* val);
-unsigned char get_reg_value();
+void init_ccp1(void);
+void start_dc(uint8_t duty);
+void stop_dc(uint8_t duty);
