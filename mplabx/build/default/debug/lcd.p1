@@ -457,14 +457,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;lcd.c: 14:     PORTEbits.RE2=0;
 [e = . . _PORTEbits 0 2 -> -> 0 `i `uc ]
 "15
-[; ;lcd.c: 15:     _delay((unsigned long)((30)*(4000000/4000.0)));
-[e ( __delay (1 -> * -> -> 30 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+[; ;lcd.c: 15:     _delay((unsigned long)((1)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
 "16
 [; ;lcd.c: 16:     PORTEbits.RE1=0;
 [e = . . _PORTEbits 0 1 -> -> 0 `i `uc ]
 "17
-[; ;lcd.c: 17:     _delay((unsigned long)((30)*(4000000/4000.0)));
-[e ( __delay (1 -> * -> -> 30 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+[; ;lcd.c: 17:     _delay((unsigned long)((1)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
 "18
 [; ;lcd.c: 18:  PORTEbits.RE1=1;
 [e = . . _PORTEbits 0 1 -> -> 1 `i `uc ]
@@ -495,14 +495,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;lcd.c: 25:     PORTEbits.RE2=1;
 [e = . . _PORTEbits 0 2 -> -> 1 `i `uc ]
 "26
-[; ;lcd.c: 26:     _delay((unsigned long)((30)*(4000000/4000.0)));
-[e ( __delay (1 -> * -> -> 30 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+[; ;lcd.c: 26:     _delay((unsigned long)((1)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
 "27
 [; ;lcd.c: 27:     PORTEbits.RE1=0;
 [e = . . _PORTEbits 0 1 -> -> 0 `i `uc ]
 "28
-[; ;lcd.c: 28:     _delay((unsigned long)((30)*(4000000/4000.0)));
-[e ( __delay (1 -> * -> -> 30 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+[; ;lcd.c: 28:     _delay((unsigned long)((1)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
 "29
 [; ;lcd.c: 29:  PORTEbits.RE1=1;
 [e = . . _PORTEbits 0 1 -> -> 1 `i `uc ]

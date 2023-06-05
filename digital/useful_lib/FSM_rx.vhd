@@ -65,10 +65,10 @@ begin
            	if (rx_ready='1') then
 				turn_on_display <= '1';
 				next_state 	<= decode;
-		elsif(t_out = '1') then		-- Check timeout timer
-				turn_off_display <= '1';
-				next_state <= trig_timeout;
-		end if;
+			elsif(t_out = '1') then		-- Check timeout timer
+					turn_off_display <= '1';
+					next_state <= trig_timeout;
+			end if;
             
         when decode =>
 		state_int 	<= "010";

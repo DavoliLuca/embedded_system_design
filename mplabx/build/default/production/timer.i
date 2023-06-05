@@ -3807,11 +3807,105 @@ extern __attribute__((nonreentrant)) void _delaywdt(unsigned long);
 extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 33 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\\pic\\include\\xc.h" 2 3
 # 34 "./timer.h" 2
+
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\stdint.h" 1 3
+# 22 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\stdint.h" 3
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\bits/alltypes.h" 1 3
+# 127 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef unsigned long uintptr_t;
+# 142 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef long intptr_t;
+# 158 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef signed char int8_t;
+
+
+
+
+typedef short int16_t;
+# 173 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef long int32_t;
+
+
+
+
+
+typedef long long int64_t;
+# 188 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef long long intmax_t;
+
+
+
+
+
+typedef unsigned char uint8_t;
+
+
+
+
+typedef unsigned short uint16_t;
+# 209 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef unsigned long uint32_t;
+
+
+
+
+
+typedef unsigned long long uint64_t;
+# 229 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef unsigned long long uintmax_t;
+# 22 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\stdint.h" 2 3
+
+
+typedef int8_t int_fast8_t;
+
+typedef int64_t int_fast64_t;
+
+
+typedef int8_t int_least8_t;
+typedef int16_t int_least16_t;
+
+typedef int24_t int_least24_t;
+
+typedef int32_t int_least32_t;
+
+typedef int64_t int_least64_t;
+
+
+typedef uint8_t uint_fast8_t;
+
+typedef uint64_t uint_fast64_t;
+
+
+typedef uint8_t uint_least8_t;
+typedef uint16_t uint_least16_t;
+
+typedef uint24_t uint_least24_t;
+
+typedef uint32_t uint_least32_t;
+
+typedef uint64_t uint_least64_t;
+# 139 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\stdint.h" 3
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\bits/stdint.h" 1 3
+typedef int32_t int_fast16_t;
+typedef int32_t int_fast32_t;
+typedef uint32_t uint_fast16_t;
+typedef uint32_t uint_fast32_t;
+# 139 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\stdint.h" 2 3
+# 35 "./timer.h" 2
 # 79 "./timer.h"
 void init_timer_0(void);
+void init_timer_2(void);
+void init_ccp1(void);
+void update_pwm_duty_ccp1(double time_up);
 # 1 "timer.c" 2
 
 
+
+
+static double const f_osc = 1000000;
+static double const t_osc = 1/f_osc;
+static double pwm_period = 20e-3;
+static double tmr2_prescaler = 16;
 
 
 void init_timer_0(void){
@@ -3828,4 +3922,51 @@ void init_timer_0(void){
     T0CONbits.T0PS1 = 1;
     T0CONbits.T0PS2 = 1;
     T0CONbits.TMR0ON = 1;
+}
+
+void init_timer_2(void){
+
+    T2CON = 0;
+    TMR2 = 0;
+
+    T2CONbits.TMR2ON = 1;
+    T2CONbits.T2CKPS0 = 1;
+    T2CONbits.T2CKPS1 = 1;
+
+    PR2 = (uint8_t) (((pwm_period / (4*t_osc*tmr2_prescaler)) - 1)*4);
+
+    return;
+}
+
+void init_ccp1(void){
+    CCP1CON = 0x00;
+
+
+    update_pwm_duty_ccp1(5e-3);
+
+
+    CCP1CONbits.CCP1M3 = 1;
+    CCP1CONbits.CCP1M2 = 1;
+    return;
+}
+
+void update_pwm_duty_ccp1(double time_up){
+
+
+    uint16_t new_duty;
+    uint8_t lsbs_duty;
+
+    new_duty = (0.001) / (t_osc * tmr2_prescaler);
+    lsbs_duty = (uint8_t) new_duty;
+
+
+
+    if (lsbs_duty & 0x01) CCP1CON |= (1u << 4);
+    else CCP1CON &= ~(1u << 4);
+
+    if (lsbs_duty & 0x02) CCP1CON |= (1u << 5);
+    else CCP1CON &= ~(1u << 5);
+
+
+    CCPR1L = (uint8_t) (new_duty >> 2);
 }

@@ -60,6 +60,10 @@
 
 void init_PORTS(void){
     // Init usart and debug led
+    LATA = 0;
+    PORTA = 0;
+    TRISA = 0x00;
+    
     LATB = 0;
     PORTB = 0;
     TRISB = 0xF0; // rb0-3 output and the more significant as default on 
@@ -67,6 +71,7 @@ void init_PORTS(void){
     // PORTC
     LATC = 0;
     PORTC = 0;
+    TRISCbits.RC2 = 0; // Set RC6 as output
     TRISCbits.RC7 = 1; // All pins as input by default
     TRISCbits.RC6 = 0; // Set RC6 as output
     

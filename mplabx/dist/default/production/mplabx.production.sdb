@@ -95,7 +95,7 @@
 [v ___omul __omul `(uo  1 e 8 0 ]
 "61 C:\Users\davol\embedded_system_design\mplabx\init_PIC.c
 [v _init_PORTS init_PORTS `(v  1 e 1 0 ]
-"76
+"81
 [v _init_interrupts init_interrupts `(v  1 e 1 0 ]
 "5 C:\Users\davol\embedded_system_design\mplabx\lcd.c
 [v _lcd_wr lcd_wr `(v  1 e 1 0 ]
@@ -107,54 +107,70 @@
 [v _lcd_init lcd_init `(v  1 e 1 0 ]
 "62
 [v _lcd_str lcd_str `(v  1 e 1 0 ]
-"30 C:\Users\davol\embedded_system_design\mplabx\main.c
+"43 C:\Users\davol\embedded_system_design\mplabx\main.c
 [v _main main `(v  1 e 1 0 ]
-"81
+"162
+[v _compute_next_step compute_next_step `(v  1 e 1 0 ]
+"172
+[v _update_direction_and_counters update_direction_and_counters `(v  1 e 1 0 ]
+"182
+[v _mix_exit_condition mix_exit_condition `(v  1 e 1 0 ]
+"188
 [v _rx_char_usart rx_char_usart `IIH(v  1 e 1 0 ]
 "13 C:\Users\davol\embedded_system_design\mplabx\serial_rs232.c
 [v _init_USART init_USART `(v  1 e 1 0 ]
 "39
 [v _serial_tx_char serial_tx_char `(v  1 e 1 0 ]
-"45
-[v _serial_tx_string serial_tx_string `(v  1 e 1 0 ]
 "51
 [v _get_reg_value get_reg_value `(uc  1 e 1 0 ]
-"5 C:\Users\davol\embedded_system_design\mplabx\timer.c
+"11 C:\Users\davol\embedded_system_design\mplabx\timer.c
 [v _init_timer_0 init_timer_0 `(v  1 e 1 0 ]
-"1 C:\Users\davol\embedded_system_design\mplabx\utils.c
-[v _state_translator_fpga_to_micro state_translator_fpga_to_micro `(*.25Cuc  1 e 2 0 ]
-"197 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h
+"27
+[v _init_timer_2 init_timer_2 `(v  1 e 1 0 ]
+"41
+[v _init_ccp1 init_ccp1 `(v  1 e 1 0 ]
+"53
+[v _update_pwm_duty_ccp1 update_pwm_duty_ccp1 `(v  1 e 1 0 ]
+"2 C:\Users\davol\embedded_system_design\mplabx\utils.c
+[v _state_translator_fpga_to_micro state_translator_fpga_to_micro `(v  1 e 1 0 ]
+"19
+[v _state_translator_micro_to_fpga state_translator_micro_to_fpga `(uc  1 e 1 0 ]
+"52 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h
+[v _PORTA PORTA `VEuc  1 e 1 @3968 ]
+"197
 [v _PORTB PORTB `VEuc  1 e 1 @3969 ]
 "322
 [v _PORTC PORTC `VEuc  1 e 1 @3970 ]
 "489
 [v _PORTD PORTD `VEuc  1 e 1 @3971 ]
-[s S596 . 1 `uc 1 RE0 1 0 :1:0 
+[s S653 . 1 `uc 1 RE0 1 0 :1:0 
 `uc 1 RE1 1 0 :1:1 
 `uc 1 RE2 1 0 :1:2 
 ]
 "642
-[s S600 . 1 `uc 1 AN5 1 0 :1:0 
+[s S657 . 1 `uc 1 AN5 1 0 :1:0 
 `uc 1 AN6 1 0 :1:1 
 `uc 1 AN7 1 0 :1:2 
 ]
-[s S604 . 1 `uc 1 RD 1 0 :1:0 
+[s S661 . 1 `uc 1 RD 1 0 :1:0 
 `uc 1 WR 1 0 :1:1 
 `uc 1 CS 1 0 :1:2 
 ]
-[s S608 . 1 `uc 1 PD2 1 0 :1:0 
+[s S665 . 1 `uc 1 PD2 1 0 :1:0 
 `uc 1 PC2 1 0 :1:1 
 `uc 1 CCP10 1 0 :1:2 
 ]
-[s S612 . 1 `uc 1 RDE 1 0 :1:0 
+[s S669 . 1 `uc 1 RDE 1 0 :1:0 
 `uc 1 WRE 1 0 :1:1 
 `uc 1 PB2 1 0 :1:2 
 ]
-[u S616 . 1 `S596 1 . 1 0 `S600 1 . 1 0 `S604 1 . 1 0 `S608 1 . 1 0 `S612 1 . 1 0 ]
-[v _PORTEbits PORTEbits `VES616  1 e 1 @3972 ]
+[u S673 . 1 `S653 1 . 1 0 `S657 1 . 1 0 `S661 1 . 1 0 `S665 1 . 1 0 `S669 1 . 1 0 ]
+[v _PORTEbits PORTEbits `VES673  1 e 1 @3972 ]
+"722
+[v _LATA LATA `VEuc  1 e 1 @3977 ]
 "822
 [v _LATB LATB `VEuc  1 e 1 @3978 ]
-[s S264 . 1 `uc 1 LATB0 1 0 :1:0 
+[s S276 . 1 `uc 1 LATB0 1 0 :1:0 
 `uc 1 LATB1 1 0 :1:1 
 `uc 1 LATB2 1 0 :1:2 
 `uc 1 LATB3 1 0 :1:3 
@@ -164,7 +180,7 @@
 `uc 1 LATB7 1 0 :1:7 
 ]
 "849
-[s S273 . 1 `uc 1 LB0 1 0 :1:0 
+[s S285 . 1 `uc 1 LB0 1 0 :1:0 
 `uc 1 LB1 1 0 :1:1 
 `uc 1 LB2 1 0 :1:2 
 `uc 1 LB3 1 0 :1:3 
@@ -173,13 +189,15 @@
 `uc 1 LB6 1 0 :1:6 
 `uc 1 LB7 1 0 :1:7 
 ]
-[u S282 . 1 `S264 1 . 1 0 `S273 1 . 1 0 ]
-[v _LATBbits LATBbits `VES282  1 e 1 @3978 ]
+[u S294 . 1 `S276 1 . 1 0 `S285 1 . 1 0 ]
+[v _LATBbits LATBbits `VES294  1 e 1 @3978 ]
 "934
 [v _LATC LATC `VEuc  1 e 1 @3979 ]
+"1210
+[v _TRISA TRISA `VEuc  1 e 1 @3986 ]
 "1408
 [v _TRISB TRISB `VEuc  1 e 1 @3987 ]
-[s S477 . 1 `uc 1 TRISC0 1 0 :1:0 
+[s S534 . 1 `uc 1 TRISC0 1 0 :1:0 
 `uc 1 TRISC1 1 0 :1:1 
 `uc 1 TRISC2 1 0 :1:2 
 `uc 1 TRISC3 1 0 :1:3 
@@ -189,7 +207,7 @@
 `uc 1 TRISC7 1 0 :1:7 
 ]
 "1684
-[s S486 . 1 `uc 1 RC0 1 0 :1:0 
+[s S543 . 1 `uc 1 RC0 1 0 :1:0 
 `uc 1 RC1 1 0 :1:1 
 `uc 1 RC2 1 0 :1:2 
 `uc 1 RC3 1 0 :1:3 
@@ -198,12 +216,12 @@
 `uc 1 RC6 1 0 :1:6 
 `uc 1 RC7 1 0 :1:7 
 ]
-[s S495 . 1 `uc 1 . 1 0 :1:0 
+[s S552 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 CCP2 1 0 :1:1 
 ]
-[u S498 . 1 `S477 1 . 1 0 `S486 1 . 1 0 `S495 1 . 1 0 ]
-[v _TRISCbits TRISCbits `VES498  1 e 1 @3988 ]
-[s S345 . 1 `uc 1 TMR1IE 1 0 :1:0 
+[u S555 . 1 `S534 1 . 1 0 `S543 1 . 1 0 `S552 1 . 1 0 ]
+[v _TRISCbits TRISCbits `VES555  1 e 1 @3988 ]
+[s S377 . 1 `uc 1 TMR1IE 1 0 :1:0 
 `uc 1 TMR2IE 1 0 :1:1 
 `uc 1 CCP1IE 1 0 :1:2 
 `uc 1 SSPIE 1 0 :1:3 
@@ -213,13 +231,13 @@
 `uc 1 PSPIE 1 0 :1:7 
 ]
 "2284
-[s S354 . 1 `uc 1 . 1 0 :4:0 
+[s S386 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 TX1IE 1 0 :1:4 
 `uc 1 RC1IE 1 0 :1:5 
 ]
-[u S358 . 1 `S345 1 . 1 0 `S354 1 . 1 0 ]
-[v _PIE1bits PIE1bits `VES358  1 e 1 @3997 ]
-[s S375 . 1 `uc 1 TMR1IF 1 0 :1:0 
+[u S390 . 1 `S377 1 . 1 0 `S386 1 . 1 0 ]
+[v _PIE1bits PIE1bits `VES390  1 e 1 @3997 ]
+[s S407 . 1 `uc 1 TMR1IF 1 0 :1:0 
 `uc 1 TMR2IF 1 0 :1:1 
 `uc 1 CCP1IF 1 0 :1:2 
 `uc 1 SSPIF 1 0 :1:3 
@@ -229,12 +247,12 @@
 `uc 1 PSPIF 1 0 :1:7 
 ]
 "2361
-[s S384 . 1 `uc 1 . 1 0 :4:0 
+[s S416 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 TX1IF 1 0 :1:4 
 `uc 1 RC1IF 1 0 :1:5 
 ]
-[u S388 . 1 `S375 1 . 1 0 `S384 1 . 1 0 ]
-[v _PIR1bits PIR1bits `VES388  1 e 1 @3998 ]
+[u S420 . 1 `S407 1 . 1 0 `S416 1 . 1 0 ]
+[v _PIR1bits PIR1bits `VES420  1 e 1 @3998 ]
 [s S93 . 1 `uc 1 RX9D 1 0 :1:0 
 `uc 1 OERR 1 0 :1:1 
 `uc 1 FERR 1 0 :1:2 
@@ -300,9 +318,51 @@
 [v _RCREG RCREG `VEuc  1 e 1 @4014 ]
 "3228
 [v _SPBRG SPBRG `VEuc  1 e 1 @4015 ]
+"3491
+[v _CCP1CON CCP1CON `VEuc  1 e 1 @4029 ]
+[s S806 . 1 `uc 1 CCP1M 1 0 :4:0 
+`uc 1 DC1B 1 0 :2:4 
+]
+"3515
+[s S809 . 1 `uc 1 CCP1M0 1 0 :1:0 
+`uc 1 CCP1M1 1 0 :1:1 
+`uc 1 CCP1M2 1 0 :1:2 
+`uc 1 CCP1M3 1 0 :1:3 
+`uc 1 DC1B0 1 0 :1:4 
+`uc 1 DC1B1 1 0 :1:5 
+]
+[s S816 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 CCP1Y 1 0 :1:4 
+`uc 1 CCP1X 1 0 :1:5 
+]
+[u S820 . 1 `S806 1 . 1 0 `S809 1 . 1 0 `S816 1 . 1 0 ]
+[v _CCP1CONbits CCP1CONbits `VES820  1 e 1 @4029 ]
+"3577
+[v _CCPR1L CCPR1L `VEuc  1 e 1 @4030 ]
+"4224
+[v _T2CON T2CON `VEuc  1 e 1 @4042 ]
+[s S771 . 1 `uc 1 T2CKPS 1 0 :2:0 
+`uc 1 TMR2ON 1 0 :1:2 
+`uc 1 TOUTPS 1 0 :4:3 
+]
+"4245
+[s S775 . 1 `uc 1 T2CKPS0 1 0 :1:0 
+`uc 1 T2CKPS1 1 0 :1:1 
+`uc 1 . 1 0 :1:2 
+`uc 1 TOUTPS0 1 0 :1:3 
+`uc 1 TOUTPS1 1 0 :1:4 
+`uc 1 TOUTPS2 1 0 :1:5 
+`uc 1 TOUTPS3 1 0 :1:6 
+]
+[u S783 . 1 `S771 1 . 1 0 `S775 1 . 1 0 ]
+[v _T2CONbits T2CONbits `VES783  1 e 1 @4042 ]
+"4295
+[v _PR2 PR2 `VEuc  1 e 1 @4043 ]
+"4405
+[v _TMR2 TMR2 `VEuc  1 e 1 @4044 ]
 "4789
 [v _T0CON T0CON `VEuc  1 e 1 @4053 ]
-[s S309 . 1 `uc 1 T0PS 1 0 :3:0 
+[s S321 . 1 `uc 1 T0PS 1 0 :3:0 
 `uc 1 PSA 1 0 :1:3 
 `uc 1 T0SE 1 0 :1:4 
 `uc 1 T0CS 1 0 :1:5 
@@ -310,17 +370,17 @@
 `uc 1 TMR0ON 1 0 :1:7 
 ]
 "4809
-[s S316 . 1 `uc 1 T0PS0 1 0 :1:0 
+[s S328 . 1 `uc 1 T0PS0 1 0 :1:0 
 `uc 1 T0PS1 1 0 :1:1 
 `uc 1 T0PS2 1 0 :1:2 
 ]
-[u S320 . 1 `S309 1 . 1 0 `S316 1 . 1 0 ]
-[v _T0CONbits T0CONbits `VES320  1 e 1 @4053 ]
+[u S332 . 1 `S321 1 . 1 0 `S328 1 . 1 0 ]
+[v _T0CONbits T0CONbits `VES332  1 e 1 @4053 ]
 "4866
 [v _TMR0L TMR0L `VEuc  1 e 1 @4054 ]
 "4873
 [v _TMR0H TMR0H `VEuc  1 e 1 @4055 ]
-[s S199 . 1 `uc 1 RBIF 1 0 :1:0 
+[s S212 . 1 `uc 1 RBIF 1 0 :1:0 
 `uc 1 INT0IF 1 0 :1:1 
 `uc 1 TMR0IF 1 0 :1:2 
 `uc 1 RBIE 1 0 :1:3 
@@ -330,7 +390,7 @@
 `uc 1 GIE_GIEH 1 0 :1:7 
 ]
 "5344
-[s S208 . 1 `uc 1 . 1 0 :1:0 
+[s S221 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 INT0F 1 0 :1:1 
 `uc 1 T0IF 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
@@ -339,12 +399,12 @@
 `uc 1 PEIE 1 0 :1:6 
 `uc 1 GIE 1 0 :1:7 
 ]
-[s S217 . 1 `uc 1 . 1 0 :6:0 
+[s S230 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 GIEL 1 0 :1:6 
 `uc 1 GIEH 1 0 :1:7 
 ]
-[u S221 . 1 `S199 1 . 1 0 `S208 1 . 1 0 `S217 1 . 1 0 ]
-[v _INTCONbits INTCONbits `VES221  1 e 1 @4082 ]
+[u S234 . 1 `S212 1 . 1 0 `S221 1 . 1 0 `S230 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES234  1 e 1 @4082 ]
 "55 C:\Program Files\Microchip\xc8\v2.20\pic\sources\c99\common\doprnt.c
 [v _flags flags `i  1 s 2 flags ]
 [v _prec prec `i  1 s 2 prec ]
@@ -355,35 +415,62 @@
 [v _nout nout `i  1 s 2 nout ]
 "3 C:\Program Files\Microchip\xc8\v2.20\pic\sources\c99\common\errno.c
 [v _errno errno `i  1 e 2 0 ]
-"26 C:\Users\davol\embedded_system_design\mplabx\main.c
+"24 C:\Users\davol\embedded_system_design\mplabx\main.c
 [v _state_changed state_changed `a  1 s 1 state_changed ]
+"25
+[v _msg_sent msg_sent `a  1 s 1 msg_sent ]
+"26
+[v _read_new_char read_new_char `a  1 s 1 read_new_char ]
 "27
 [v _timer_done timer_done `a  1 s 1 timer_done ]
 "28
+[v _state_msgs state_msgs `[6]*.25Cuc  1 e 12 0 ]
+"36
 [v _state state `i  1 e 2 0 ]
-"30
+"37
+[v _mix_current_step mix_current_step `i  1 e 2 0 ]
+"38
+[v _mix_direction mix_direction `i  1 e 2 0 ]
+"39
+[v _mix_step_counter mix_step_counter `i  1 e 2 0 ]
+"40
+[v _mix_counter mix_counter `i  1 e 2 0 ]
+"8 C:\Users\davol\embedded_system_design\mplabx\timer.c
+[v _tmr2_prescaler tmr2_prescaler `d  1 s 4 tmr2_prescaler ]
+"43 C:\Users\davol\embedded_system_design\mplabx\main.c
 [v _main main `(v  1 e 1 0 ]
 {
-"44
+"65
 [v main@greet_str greet_str `[80]*.35Cuc  1 a 160 0 ]
-"45
-[v main@state_msg state_msg `*.25Cuc  1 a 2 160 ]
-"31
-[v main@rx_char rx_char `uc  1 a 1 162 ]
-"80
+"44
+[v main@rx_char rx_char `uc  1 a 1 160 ]
+"160
 } 0
-"1 C:\Users\davol\embedded_system_design\mplabx\utils.c
-[v _state_translator_fpga_to_micro state_translator_fpga_to_micro `(*.25Cuc  1 e 2 0 ]
+"172
+[v _update_direction_and_counters update_direction_and_counters `(v  1 e 1 0 ]
+{
+[v update_direction_and_counters@counter_step counter_step `*.39i  1 p 2 0 ]
+[v update_direction_and_counters@step_direction step_direction `*.39i  1 p 2 2 ]
+[v update_direction_and_counters@counter counter `*.39i  1 p 2 4 ]
+"180
+} 0
+"19 C:\Users\davol\embedded_system_design\mplabx\utils.c
+[v _state_translator_micro_to_fpga state_translator_micro_to_fpga `(uc  1 e 1 0 ]
+{
+"20
+[v state_translator_micro_to_fpga@state_machine_code state_machine_code `uc  1 a 1 4 ]
+"19
+[v state_translator_micro_to_fpga@state state `*.39i  1 p 2 0 ]
+"35
+} 0
+"2
+[v _state_translator_fpga_to_micro state_translator_fpga_to_micro `(v  1 e 1 0 ]
 {
 [v state_translator_fpga_to_micro@state_machine_code state_machine_code `uc  1 a 1 wreg ]
-"2
-[v state_translator_fpga_to_micro@state_msg state_msg `*.25Cuc  1 a 2 2 ]
-"1
 [v state_translator_fpga_to_micro@state_machine_code state_machine_code `uc  1 a 1 wreg ]
-[v state_translator_fpga_to_micro@state state `*.39i  1 p 2 0 ]
-"3
+[v state_translator_fpga_to_micro@state state `*.39i  1 p 2 2 ]
 [v state_translator_fpga_to_micro@state_machine_code state_machine_code `uc  1 a 1 4 ]
-"23
+"17
 } 0
 "4 C:\Program Files\Microchip\xc8\v2.20\pic\sources\c99\common\snprintf.c
 [v _snprintf snprintf `(i  1 e 2 0 ]
@@ -399,9 +486,9 @@
 "11 C:\Program Files\Microchip\xc8\v2.20\pic\sources\c99\common\nf_vsnprintf.c
 [v _vsnprintf vsnprintf `(i  1 e 2 0 ]
 {
-[s S1190 _IO_FILE 6 `*.39uc 1 buffer 2 0 `i 1 count 2 2 `i 1 limit 2 4 ]
+[s S1341 _IO_FILE 6 `*.39uc 1 buffer 2 0 `i 1 count 2 2 `i 1 limit 2 4 ]
 "14
-[v vsnprintf@f f `S1190  1 a 6 4 ]
+[v vsnprintf@f f `S1341  1 a 6 4 ]
 "13
 [v vsnprintf@cnt cnt `i  1 a 2 2 ]
 "11
@@ -416,9 +503,9 @@
 {
 "1371
 [v vfprintf@cfmt cfmt `*.25uc  1 a 2 109 ]
-[s S1215 _IO_FILE 0 ]
+[s S1366 _IO_FILE 0 ]
 "1368
-[v vfprintf@fp fp `*.39S1215  1 p 2 103 ]
+[v vfprintf@fp fp `*.39S1366  1 p 2 103 ]
 [v vfprintf@fmt fmt `*.25Cuc  1 p 2 105 ]
 [v vfprintf@ap ap `*.39*.39v  1 p 2 107 ]
 "1382
@@ -437,9 +524,9 @@
 "672
 [v vfpfcnvrt@cp cp `*.35uc  1 a 2 76 ]
 [v vfpfcnvrt@c c `uc  1 a 1 94 ]
-[s S1215 _IO_FILE 0 ]
+[s S1366 _IO_FILE 0 ]
 "670
-[v vfpfcnvrt@fp fp `*.39S1215  1 p 2 66 ]
+[v vfpfcnvrt@fp fp `*.39S1366  1 p 2 66 ]
 [v vfpfcnvrt@fmt fmt `*.39*.25uc  1 p 2 68 ]
 [v vfpfcnvrt@ap ap `*.39*.39v  1 p 2 70 ]
 "1365
@@ -454,9 +541,9 @@
 [v xtoa@i i `i  1 a 2 62 ]
 [v xtoa@w w `i  1 a 2 52 ]
 [v xtoa@p p `i  1 a 2 50 ]
-[s S1215 _IO_FILE 0 ]
+[s S1366 _IO_FILE 0 ]
 "623
-[v xtoa@fp fp `*.39S1215  1 p 2 27 ]
+[v xtoa@fp fp `*.39S1366  1 p 2 27 ]
 [v xtoa@d d `uo  1 p 8 29 ]
 [v xtoa@x x `uc  1 p 1 37 ]
 "665
@@ -494,9 +581,9 @@
 [v utoa@i i `i  1 a 2 57 ]
 [v utoa@w w `i  1 a 2 47 ]
 [v utoa@p p `i  1 a 2 45 ]
-[s S1215 _IO_FILE 0 ]
+[s S1366 _IO_FILE 0 ]
 "593
-[v utoa@fp fp `*.39S1215  1 p 2 27 ]
+[v utoa@fp fp `*.39S1366  1 p 2 27 ]
 [v utoa@d d `uo  1 p 8 29 ]
 "619
 } 0
@@ -547,9 +634,9 @@
 "549
 [v stoa@w w `i  1 a 2 23 ]
 [v stoa@i i `i  1 a 2 21 ]
-[s S1215 _IO_FILE 0 ]
+[s S1366 _IO_FILE 0 ]
 "546
-[v stoa@fp fp `*.39S1215  1 p 2 9 ]
+[v stoa@fp fp `*.39S1366  1 p 2 9 ]
 [v stoa@s s `*.35uc  1 p 2 11 ]
 "548
 [v stoa@F1152 F1152 `[7]uc  1 s 7 F1152 ]
@@ -565,9 +652,9 @@
 [v otoa@w w `i  1 a 2 49 ]
 [v otoa@t t `i  1 a 2 47 ]
 [v otoa@p p `i  1 a 2 45 ]
-[s S1215 _IO_FILE 0 ]
+[s S1366 _IO_FILE 0 ]
 "507
-[v otoa@fp fp `*.39S1215  1 p 2 27 ]
+[v otoa@fp fp `*.39S1366  1 p 2 27 ]
 [v otoa@d d `uo  1 p 8 29 ]
 "542
 } 0
@@ -581,9 +668,9 @@
 [v dtoa@s s `i  1 a 2 51 ]
 [v dtoa@w w `i  1 a 2 49 ]
 [v dtoa@p p `i  1 a 2 47 ]
-[s S1215 _IO_FILE 0 ]
+[s S1366 _IO_FILE 0 ]
 "274
-[v dtoa@fp fp `*.39S1215  1 p 2 27 ]
+[v dtoa@fp fp `*.39S1366  1 p 2 27 ]
 [v dtoa@d d `o  1 p 8 29 ]
 "315
 } 0
@@ -622,9 +709,9 @@
 {
 "261
 [v ctoa@w w `i  1 a 2 30 ]
-[s S1215 _IO_FILE 0 ]
+[s S1366 _IO_FILE 0 ]
 "259
-[v ctoa@fp fp `*.39S1215  1 p 2 27 ]
+[v ctoa@fp fp `*.39S1366  1 p 2 27 ]
 [v ctoa@c c `uc  1 p 1 29 ]
 "270
 } 0
@@ -634,9 +721,9 @@
 "74
 [v pad@w w `i  1 a 2 25 ]
 [v pad@i i `i  1 a 2 23 ]
-[s S1215 _IO_FILE 0 ]
+[s S1366 _IO_FILE 0 ]
 "72
-[v pad@fp fp `*.39S1215  1 p 2 16 ]
+[v pad@fp fp `*.39S1366  1 p 2 16 ]
 [v pad@buf buf `*.39uc  1 p 2 18 ]
 [v pad@p p `i  1 p 2 20 ]
 "95
@@ -659,16 +746,16 @@
 [v fputs@c c `uc  1 a 1 13 ]
 "8
 [v fputs@s s `*.39Cuc  1 p 2 9 ]
-[s S1190 _IO_FILE 6 `*.39uc 1 buffer 2 0 `i 1 count 2 2 `i 1 limit 2 4 ]
-[v fputs@fp fp `*.39S1190  1 p 2 11 ]
+[s S1341 _IO_FILE 6 `*.39uc 1 buffer 2 0 `i 1 count 2 2 `i 1 limit 2 4 ]
+[v fputs@fp fp `*.39S1341  1 p 2 11 ]
 "19
 } 0
 "8 C:\Program Files\Microchip\xc8\v2.20\pic\sources\c99\common\nf_fputc.c
 [v _fputc fputc `(i  1 e 2 0 ]
 {
 [v fputc@c c `i  1 p 2 0 ]
-[s S1190 _IO_FILE 6 `*.39uc 1 buffer 2 0 `i 1 count 2 2 `i 1 limit 2 4 ]
-[v fputc@fp fp `*.39S1190  1 p 2 2 ]
+[s S1341 _IO_FILE 6 `*.39uc 1 buffer 2 0 `i 1 count 2 2 `i 1 limit 2 4 ]
+[v fputc@fp fp `*.39S1341  1 p 2 2 ]
 "21
 } 0
 "7 C:\Program Files\Microchip\xc8\v2.20\pic\sources\c99\common\putch.c
@@ -708,16 +795,7 @@
 [v ___wmul@multiplicand multiplicand `ui  1 p 2 2 ]
 "53
 } 0
-"45 C:\Users\davol\embedded_system_design\mplabx\serial_rs232.c
-[v _serial_tx_string serial_tx_string `(v  1 e 1 0 ]
-{
-"46
-[v serial_tx_string@i i `i  1 a 2 3 ]
-"45
-[v serial_tx_string@val val `*.39Cuc  1 p 2 1 ]
-"49
-} 0
-"39
+"39 C:\Users\davol\embedded_system_design\mplabx\serial_rs232.c
 [v _serial_tx_char serial_tx_char `(v  1 e 1 0 ]
 {
 [v serial_tx_char@val val `uc  1 a 1 wreg ]
@@ -725,13 +803,20 @@
 [v serial_tx_char@val val `uc  1 a 1 0 ]
 "43
 } 0
+"182 C:\Users\davol\embedded_system_design\mplabx\main.c
+[v _mix_exit_condition mix_exit_condition `(v  1 e 1 0 ]
+{
+[v mix_exit_condition@counter counter `i  1 p 2 0 ]
+[v mix_exit_condition@current_step current_step `*.39i  1 p 2 2 ]
+"186
+} 0
 "62 C:\Users\davol\embedded_system_design\mplabx\lcd.c
 [v _lcd_str lcd_str `(v  1 e 1 0 ]
 {
 "64
-[v lcd_str@i i `uc  1 a 1 5 ]
+[v lcd_str@i i `uc  1 a 1 6 ]
 "62
-[v lcd_str@str str `*.39Cuc  1 p 2 3 ]
+[v lcd_str@str str `*.35Cuc  1 p 2 2 ]
 "71
 } 0
 "21
@@ -740,7 +825,7 @@
 [v lcd_dat@val val `uc  1 a 1 wreg ]
 [v lcd_dat@val val `uc  1 a 1 wreg ]
 "23
-[v lcd_dat@val val `uc  1 a 1 2 ]
+[v lcd_dat@val val `uc  1 a 1 1 ]
 "30
 } 0
 "32
@@ -754,7 +839,7 @@
 [v lcd_cmd@val val `uc  1 a 1 wreg ]
 [v lcd_cmd@val val `uc  1 a 1 wreg ]
 "12
-[v lcd_cmd@val val `uc  1 a 1 2 ]
+[v lcd_cmd@val val `uc  1 a 1 1 ]
 "19
 } 0
 "5
@@ -766,15 +851,56 @@
 [v lcd_wr@val val `uc  1 a 1 0 ]
 "8
 } 0
-"5 C:\Users\davol\embedded_system_design\mplabx\timer.c
+"27 C:\Users\davol\embedded_system_design\mplabx\timer.c
+[v _init_timer_2 init_timer_2 `(v  1 e 1 0 ]
+{
+"39
+} 0
+"11
 [v _init_timer_0 init_timer_0 `(v  1 e 1 0 ]
 {
-"19
+"25
 } 0
-"76 C:\Users\davol\embedded_system_design\mplabx\init_PIC.c
+"81 C:\Users\davol\embedded_system_design\mplabx\init_PIC.c
 [v _init_interrupts init_interrupts `(v  1 e 1 0 ]
 {
-"83
+"88
+} 0
+"41 C:\Users\davol\embedded_system_design\mplabx\timer.c
+[v _init_ccp1 init_ccp1 `(v  1 e 1 0 ]
+{
+"51
+} 0
+"53
+[v _update_pwm_duty_ccp1 update_pwm_duty_ccp1 `(v  1 e 1 0 ]
+{
+"56
+[v update_pwm_duty_ccp1@new_duty new_duty `us  1 a 2 116 ]
+"57
+[v update_pwm_duty_ccp1@lsbs_duty lsbs_duty `uc  1 a 1 118 ]
+"53
+[v update_pwm_duty_ccp1@time_up time_up `d  1 p 4 110 ]
+"72
+} 0
+"11 C:\Program Files\Microchip\xc8\v2.20\pic\sources\c99\common\sprcdiv.c
+[v ___fldiv __fldiv `(d  1 e 4 0 ]
+{
+"21
+[v ___fldiv@grs grs `ul  1 a 4 44 ]
+"22
+[v ___fldiv@rem rem `ul  1 a 4 37 ]
+"20
+[v ___fldiv@new_exp new_exp `s  1 a 2 42 ]
+"19
+[v ___fldiv@aexp aexp `uc  1 a 1 49 ]
+"18
+[v ___fldiv@bexp bexp `uc  1 a 1 48 ]
+"16
+[v ___fldiv@sign sign `uc  1 a 1 41 ]
+"11
+[v ___fldiv@b b `d  1 p 4 25 ]
+[v ___fldiv@a a `d  1 p 4 29 ]
+"185
 } 0
 "13 C:\Users\davol\embedded_system_design\mplabx\serial_rs232.c
 [v _init_USART init_USART `(v  1 e 1 0 ]
@@ -785,39 +911,39 @@
 [v _roundf roundf `(f  1 e 4 0 ]
 {
 "16
-[v roundf@y y `f  1 a 4 47 ]
-[u S1156 . 4 `f 1 f 4 0 `ul 1 i 4 0 ]
+[v roundf@y y `f  1 a 4 96 ]
+[u S1307 . 4 `f 1 f 4 0 `ul 1 i 4 0 ]
 "14
-[v roundf@u u `S1156  1 a 4 43 ]
+[v roundf@u u `S1307  1 a 4 92 ]
 "15
-[v roundf@e e `i  1 a 2 37 ]
+[v roundf@e e `i  1 a 2 86 ]
 "12
-[v roundf@x x `f  1 p 4 25 ]
+[v roundf@x x `f  1 p 4 74 ]
 "13
-[v roundf@F525 F525 `S1156  1 s 4 F525 ]
+[v roundf@F525 F525 `S1307  1 s 4 F525 ]
 "36
 } 0
 "245 C:\Program Files\Microchip\xc8\v2.20\pic\sources\c99\common\sprcadd.c
 [v ___flsub __flsub `(d  1 e 4 0 ]
 {
-[v ___flsub@b b `d  1 p 4 16 ]
-[v ___flsub@a a `d  1 p 4 20 ]
+[v ___flsub@b b `d  1 p 4 66 ]
+[v ___flsub@a a `d  1 p 4 70 ]
 "250
 } 0
 "10
 [v ___fladd __fladd `(d  1 e 4 0 ]
 {
 "17
-[v ___fladd@grs grs `uc  1 a 1 15 ]
+[v ___fladd@grs grs `uc  1 a 1 65 ]
 "15
-[v ___fladd@bexp bexp `uc  1 a 1 14 ]
+[v ___fladd@bexp bexp `uc  1 a 1 64 ]
 "16
-[v ___fladd@aexp aexp `uc  1 a 1 13 ]
+[v ___fladd@aexp aexp `uc  1 a 1 63 ]
 "13
-[v ___fladd@signs signs `uc  1 a 1 12 ]
+[v ___fladd@signs signs `uc  1 a 1 62 ]
 "10
-[v ___fladd@b b `d  1 p 4 0 ]
-[v ___fladd@a a `d  1 p 4 4 ]
+[v ___fladd@b b `d  1 p 4 50 ]
+[v ___fladd@a a `d  1 p 4 54 ]
 "237
 } 0
 "15 C:\Program Files\Microchip\xc8\v2.20\pic\sources\c99\common\flneg.c
@@ -829,17 +955,17 @@
 "8 C:\Program Files\Microchip\xc8\v2.20\pic\sources\c99\common\sprcmul.c
 [v ___flmul __flmul `(d  1 e 4 0 ]
 {
-[s S1021 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
+[s S1172 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
 "13
-[s S1026 . 4 `s 1 wordA 2 0 `s 1 wordB 2 2 ]
-[u S1029 . 4 `l 1 i 4 0 `d 1 f 4 0 `S1021 1 fAsBytes 4 0 `S1026 1 fAsWords 4 0 ]
-[v ___flmul@prod prod `S1029  1 a 4 19 ]
+[s S1177 . 4 `s 1 wordA 2 0 `s 1 wordB 2 2 ]
+[u S1180 . 4 `l 1 i 4 0 `d 1 f 4 0 `S1172 1 fAsBytes 4 0 `S1177 1 fAsWords 4 0 ]
+[v ___flmul@prod prod `S1180  1 a 4 19 ]
 "12
 [v ___flmul@grs grs `ul  1 a 4 13 ]
-[s S1097 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
+[s S1248 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
 "14
-[u S1100 . 2 `s 1 i 2 0 `us 1 n 2 0 `S1097 1 nAsBytes 2 0 ]
-[v ___flmul@temp temp `S1100  1 a 2 23 ]
+[u S1251 . 2 `s 1 i 2 0 `us 1 n 2 0 `S1248 1 nAsBytes 2 0 ]
+[v ___flmul@temp temp `S1251  1 a 2 23 ]
 "10
 [v ___flmul@bexp bexp `uc  1 a 1 18 ]
 "11
@@ -862,16 +988,16 @@
 [v ___fltol __fltol `(l  1 e 4 0 ]
 {
 "45
-[v ___fltol@exp1 exp1 `uc  1 a 1 60 ]
-[v ___fltol@sign1 sign1 `uc  1 a 1 59 ]
+[v ___fltol@exp1 exp1 `uc  1 a 1 109 ]
+[v ___fltol@sign1 sign1 `uc  1 a 1 108 ]
 "43
-[v ___fltol@f1 f1 `d  1 p 4 51 ]
+[v ___fltol@f1 f1 `d  1 p 4 100 ]
 "70
 } 0
 "61 C:\Users\davol\embedded_system_design\mplabx\init_PIC.c
 [v _init_PORTS init_PORTS `(v  1 e 1 0 ]
 {
-"74
+"79
 } 0
 "51 C:\Users\davol\embedded_system_design\mplabx\serial_rs232.c
 [v _get_reg_value get_reg_value `(uc  1 e 1 0 ]
@@ -880,8 +1006,15 @@
 [v get_reg_value@rx_char rx_char `uc  1 a 1 0 ]
 "55
 } 0
-"81 C:\Users\davol\embedded_system_design\mplabx\main.c
+"162 C:\Users\davol\embedded_system_design\mplabx\main.c
+[v _compute_next_step compute_next_step `(v  1 e 1 0 ]
+{
+[v compute_next_step@current_step current_step `*.39i  1 p 2 0 ]
+[v compute_next_step@step_direction step_direction `i  1 p 2 2 ]
+"170
+} 0
+"188
 [v _rx_char_usart rx_char_usart `IIH(v  1 e 1 0 ]
 {
-"91
+"199
 } 0

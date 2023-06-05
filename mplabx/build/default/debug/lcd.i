@@ -3826,9 +3826,9 @@ void lcd_cmd(unsigned char val)
  PORTEbits.RE1=1;
     lcd_wr(val);
     PORTEbits.RE2=0;
-    _delay((unsigned long)((30)*(4000000/4000.0)));
+    _delay((unsigned long)((1)*(4000000/4000.0)));
     PORTEbits.RE1=0;
-    _delay((unsigned long)((30)*(4000000/4000.0)));
+    _delay((unsigned long)((1)*(4000000/4000.0)));
  PORTEbits.RE1=1;
 }
 
@@ -3837,9 +3837,9 @@ void lcd_dat(unsigned char val)
  PORTEbits.RE1=1;
     lcd_wr(val);
     PORTEbits.RE2=1;
-    _delay((unsigned long)((30)*(4000000/4000.0)));
+    _delay((unsigned long)((1)*(4000000/4000.0)));
     PORTEbits.RE1=0;
-    _delay((unsigned long)((30)*(4000000/4000.0)));
+    _delay((unsigned long)((1)*(4000000/4000.0)));
  PORTEbits.RE1=1;
 }
 

@@ -76,4 +76,5 @@ extern "C" {
 
 #endif	/* XC_HEADER_TEMPLATE_H */
 
-const char* state_translator_fpga_to_micro(char state_machine_code, int* state);
+void state_translator_fpga_to_micro(char state_machine_code, int* state);
+unsigned char state_translator_micro_to_fpga(int* state);

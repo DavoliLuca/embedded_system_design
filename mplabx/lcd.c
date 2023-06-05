@@ -12,9 +12,9 @@ void lcd_cmd(unsigned char val)
 	LENA=1;
     lcd_wr(val);
     LDAT=0;
-    __delay_ms(30);
+    __delay_ms(1);
     LENA=0;
-    __delay_ms(30);
+    __delay_ms(1);
 	LENA=1;
 }
  
@@ -23,9 +23,9 @@ void lcd_dat(unsigned char val)
 	LENA=1;
     lcd_wr(val);
     LDAT=1;
-    __delay_ms(30);
+    __delay_ms(1);
     LENA=0;
-    __delay_ms(30);
+    __delay_ms(1);
 	LENA=1;
 }
 

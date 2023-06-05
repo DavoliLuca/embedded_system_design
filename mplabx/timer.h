@@ -32,7 +32,7 @@
 #define	XC_HEADER_TEMPLATE_H
 
 #include <xc.h> // include processor files - each processor file is guarded.  
-
+#include <stdint.h>
 // TODO Insert appropriate #include <>
 
 // TODO Insert C++ class definitions if appropriate
@@ -77,4 +77,6 @@ extern "C" {
 #endif	/* XC_HEADER_TEMPLATE_H */
 
 void init_timer_0(void);
-
+void init_timer_2(void);
+void init_ccp1(void);
+void update_pwm_duty_ccp1(double time_up);

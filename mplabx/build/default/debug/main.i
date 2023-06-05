@@ -4123,81 +4123,193 @@ void lcd_str(const char* str);
 
 # 1 "./utils.h" 1
 # 79 "./utils.h"
-const char* state_translator_fpga_to_micro(char state_machine_code, int* state);
+void state_translator_fpga_to_micro(char state_machine_code, int* state);
+unsigned char state_translator_micro_to_fpga(int* state);
 # 16 "main.c" 2
 
 # 1 "./timer.h" 1
 # 79 "./timer.h"
 void init_timer_0(void);
+void init_timer_2(void);
+void init_ccp1(void);
+void update_pwm_duty_ccp1(double time_up);
 # 17 "main.c" 2
 
 
 void __attribute__((picinterrupt(("")))) rx_char_usart(void);
-
-
-
-
-
+void compute_next_step(int* current_step, int step_direction);
+void update_direction_and_counters(int* counter_step, int* step_direction, int* counter);
+void mix_exit_condition(int counter, int* current_step);
 
 static _Bool state_changed = 0;
+static _Bool msg_sent = 0;
+static _Bool read_new_char = 0;
 static _Bool timer_done = 0;
+const char* state_msgs[6] = {
+    "IDLE: waiting for jab to be placed in init pos",
+    "INIT_POS: the jab is at the init position, process is starting",
+    "MOVEMENT",
+    "OVEN: reaching the correct temperature",
+    "MIXING_STATION: the jab has reached the mixing station",
+    "PICK_UP: the jab has reached the pick up station"
+};
 int state;
+int mix_current_step;
+int mix_direction;
+int mix_step_counter;
+int mix_counter;
+
 
 void main(void){
     unsigned char rx_char = ' ';
     init_PORTS();
     init_USART();
+    init_timer_2();
+    init_ccp1();
     init_interrupts();
     lcd_init();
     lcd_cmd(0x0C);
 
+    lcd_cmd(0x01);
+    lcd_cmd(0x80);
+    lcd_str("Device has been reset");
+
     (INTCONbits.GIE = 1);
+    mix_current_step = 0;
+    mix_direction = 1;
+    mix_step_counter = 0;
+    mix_counter = 0;
 
     while(1){
-
         if (state_changed){
-            rx_char = get_reg_value();
             const char* greet_str[80];
-            const char* state_msg = state_translator_fpga_to_micro(rx_char, &state);
-            snprintf(greet_str, sizeof(greet_str), "The current state is %s", state_msg);
-            serial_tx_string(greet_str);
-            serial_tx_char(rx_char);
-
-            LATBbits.LATB0 =! LATBbits.LATB0;
-            state_changed = 0;
+            if (read_new_char){
+                rx_char = get_reg_value();
+                if (rx_char == 'u'){
+                    serial_tx_char(rx_char);
+                }
+                serial_tx_char(rx_char);
+                state_translator_fpga_to_micro(rx_char, &state);
+                read_new_char = 0;
+            }
+            snprintf(greet_str, sizeof(greet_str), "%s", state_msgs[state]);
             lcd_cmd(0x01);
             lcd_cmd(0x80);
             lcd_str(greet_str);
+
+            state_changed = 0;
         }
+
+
         if (state == 2){
             LATBbits.LATB1 = 1;
         } else {
             LATBbits.LATB1 = 0;
-            if (state == 3){
+            if (state == 0) {
+                if (!msg_sent){
+                    serial_tx_char(state_translator_micro_to_fpga(&state));
+                    msg_sent = 1;
+                }
+            } else if (state == 1){
+                state = 2;
+                state_changed = 1;
+                serial_tx_char(state_translator_micro_to_fpga(&state));
+            } else if (state == 3){
                 if (timer_done){
                     state = 2;
+                    state_changed = 1;
+                    serial_tx_char(state_translator_micro_to_fpga(&state));
+
                 } else {
                     if (T0CONbits.TMR0ON == 0){
                         init_timer_0();
                     }
                 }
             } else if (state == 4){
-                _delay((unsigned long)((2000)*(4000000/4000.0)));
-                state = 2;
+                switch(mix_current_step){
+
+                    case 0:
+                        LATA = 0x01;
+                        compute_next_step(&mix_current_step, mix_direction);
+                        update_direction_and_counters(&mix_step_counter, &mix_direction, &mix_counter);
+                        mix_exit_condition(mix_counter, &mix_current_step);
+                        _delay((unsigned long)((10)*(4000000/4000.0)));
+                        break;
+                    case 1:
+                        LATA = 0x02;
+                        compute_next_step(&mix_current_step, mix_direction);
+                        update_direction_and_counters(&mix_step_counter, &mix_direction, &mix_counter);
+                        mix_exit_condition(mix_counter, &mix_current_step);
+                        _delay((unsigned long)((1)*(4000000/4000.0)));
+                        break;
+                    case 2:
+                        LATA = 0x04;
+                        compute_next_step(&mix_current_step, mix_direction);
+                        update_direction_and_counters(&mix_step_counter, &mix_direction, &mix_counter);
+                        mix_exit_condition(mix_counter, &mix_current_step);
+                        _delay((unsigned long)((1)*(4000000/4000.0)));
+                        break;
+                    case 3:
+                        LATA = 0x08;
+                        compute_next_step(&mix_current_step, mix_direction);
+                        update_direction_and_counters(&mix_step_counter, &mix_direction, &mix_counter);
+                        mix_exit_condition(mix_counter, &mix_current_step);
+                        _delay((unsigned long)((1)*(4000000/4000.0)));
+                        break;
+                    case 10:
+                        state = 2;
+                        state_changed = 1;
+                        mix_direction = 1;
+                        mix_step_counter = 0;
+                        mix_counter = 0;
+
+                }
             } else if (state == 5){
-                _delay((unsigned long)((2000)*(4000000/4000.0)));
-                state = 2;
-            } else if (state == 6){
-                _delay((unsigned long)((2000)*(4000000/4000.0)));
-                state = 2;
+                if (timer_done){
+                    state = 2;
+                    state_changed = 1;
+                    serial_tx_char(state_translator_micro_to_fpga(&state));
+                } else {
+                    if (T0CONbits.TMR0ON == 0){
+                        init_timer_0();
+                    }
+                }
             }
         }
     }
 }
+
+void compute_next_step(int* current_step, int step_direction){
+    *current_step = *current_step + step_direction;
+    if (*current_step == -1) {
+        *current_step = 3;
+    } else if(*current_step == 4) {
+        *current_step = 0;
+    }
+    return;
+}
+
+void update_direction_and_counters(int* counter_step, int* step_direction, int* counter){
+    *counter_step = *counter_step + 1;
+    if (*counter_step >= 96){
+        *counter_step = 0;
+        *counter = *counter + 1;
+        *step_direction = *step_direction *(-1);
+    }
+    return;
+}
+
+void mix_exit_condition(int counter, int* current_step){
+    if (counter >= 20){
+        *current_step = 10;
+    }
+}
+
 void __attribute__((picinterrupt(("")))) rx_char_usart(void){
     if(PIE1bits.RCIE && PIR1bits.RCIF){
         PIR1bits.RCIF = 0;
         state_changed = 1;
+        read_new_char = 1;
     }
     if(INTCONbits.TMR0IE && INTCONbits.TMR0IF){
         T0CON = 0;

@@ -6,6 +6,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 "79 ./serial_rs232.h
 [; ;./serial_rs232.h: 79: void init_USART(void);
 [v _init_USART `(v ~T0 @X0 0 ef ]
+"80 ./timer.h
+[; ;./timer.h: 80: void init_timer_2(void);
+[v _init_timer_2 `(v ~T0 @X0 0 ef ]
+"81
+[; ;./timer.h: 81: void init_ccp1(void);
+[v _init_ccp1 `(v ~T0 @X0 0 ef ]
 "81 ./init_PIC.h
 [; ;./init_PIC.h: 81: void init_interrupts(void);
 [v _init_interrupts `(v ~T0 @X0 0 ef ]
@@ -15,6 +21,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 "99
 [; ;./lcd.h: 99: void lcd_cmd(unsigned char val);
 [v _lcd_cmd `(v ~T0 @X0 0 ef1`uc ]
+"101
+[; ;./lcd.h: 101: void lcd_str(const char* str);
+[v _lcd_str `(v ~T0 @X0 0 ef1`*Cuc ]
 "5318 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 5318:     struct {
 [s S227 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
@@ -37,17 +46,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 "82 ./serial_rs232.h
 [; ;./serial_rs232.h: 82: unsigned char get_reg_value();
 [v _get_reg_value `(uc ~T0 @X0 0 e? ]
-"79 ./utils.h
-[; ;./utils.h: 79: const char* state_translator_fpga_to_micro(char state_machine_code, int* state);
-[v _state_translator_fpga_to_micro `(*Cuc ~T0 @X0 0 ef2`uc`*i ]
-"114 C:\Program Files\Microchip\xc8\v2.20\pic\include\c99\stdio.h
-[v _snprintf `(i ~T0 @X0 0 e2v`*uc`ui`*Cuc ]
-"81 ./serial_rs232.h
-[; ;./serial_rs232.h: 81: void serial_tx_string(const char* val);
-[v _serial_tx_string `(v ~T0 @X0 0 ef1`*Cuc ]
 "80
 [; ;./serial_rs232.h: 80: void serial_tx_char(unsigned char val);
 [v _serial_tx_char `(v ~T0 @X0 0 ef1`uc ]
+"79 ./utils.h
+[; ;./utils.h: 79: void state_translator_fpga_to_micro(char state_machine_code, int* state);
+[v _state_translator_fpga_to_micro `(v ~T0 @X0 0 ef2`uc`*i ]
+"114 C:\Program Files\Microchip\xc8\v2.20\pic\include\c99\stdio.h
+[v _snprintf `(i ~T0 @X0 0 e2v`*uc`ui`*Cuc ]
 "828 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 828:     struct {
 [s S36 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
@@ -63,9 +69,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 "849
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 849: extern volatile LATBbits_t LATBbits __attribute__((address(0xF8A)));
 [v _LATBbits `VS35 ~T0 @X0 0 e@3978 ]
-"101 ./lcd.h
-[; ;./lcd.h: 101: void lcd_str(const char* str);
-[v _lcd_str `(v ~T0 @X0 0 ef1`*Cuc ]
+"80 ./utils.h
+[; ;./utils.h: 80: unsigned char state_translator_micro_to_fpga(int* state);
+[v _state_translator_micro_to_fpga `(uc ~T0 @X0 0 ef1`*i ]
 "4795 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 4795:     struct {
 [s S214 :3 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
@@ -84,6 +90,18 @@ Version 4.0 HI-TECH Software Intermediate Code
 "79 ./timer.h
 [; ;./timer.h: 79: void init_timer_0(void);
 [v _init_timer_0 `(v ~T0 @X0 0 ef ]
+"722 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 722: extern volatile unsigned char LATA __attribute__((address(0xF89)));
+[v _LATA `Vuc ~T0 @X0 0 e@3977 ]
+"20 main.c
+[; ;main.c: 20: void compute_next_step(int* current_step, int step_direction);
+[v _compute_next_step `(v ~T0 @X0 0 ef2`*i`i ]
+"21
+[; ;main.c: 21: void update_direction_and_counters(int* counter_step, int* step_direction, int* counter);
+[v _update_direction_and_counters `(v ~T0 @X0 0 ef3`*i`*i`*i ]
+"22
+[; ;main.c: 22: void mix_exit_condition(int counter, int* current_step);
+[v _mix_exit_condition `(v ~T0 @X0 0 ef2`i`*i ]
 [v F2107 `(v ~T0 @X0 1 tf1`ul ]
 "203 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\pic18.h
 [v __delay `JF2107 ~T0 @X0 0 e ]
@@ -504,10 +522,22 @@ Version 4.0 HI-TECH Software Intermediate Code
 "5763
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 5763: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
-"26 main.c
-[; ;main.c: 26: static _Bool state_changed = 0;
+"24 main.c
+[; ;main.c: 24: static _Bool state_changed = 0;
 [v _state_changed `a ~T0 @X0 1 s ]
 [i _state_changed
+-> -> 0 `i `a
+]
+"25
+[; ;main.c: 25: static _Bool msg_sent = 0;
+[v _msg_sent `a ~T0 @X0 1 s ]
+[i _msg_sent
+-> -> 0 `i `a
+]
+"26
+[; ;main.c: 26: static _Bool read_new_char = 0;
+[v _read_new_char `a ~T0 @X0 1 s ]
+[i _read_new_char
 -> -> 0 `i `a
 ]
 "27
@@ -517,232 +547,579 @@ Version 4.0 HI-TECH Software Intermediate Code
 -> -> 0 `i `a
 ]
 "28
-[; ;main.c: 28: int state;
+[; ;main.c: 28: const char* state_msgs[6] = {
+[v _state_msgs `*Cuc ~T0 @X0 -> 6 `i e ]
+[i _state_msgs
+:U ..
+:s 1C
+:s 2C
+:s 3C
+:s 4C
+:s 5C
+:s 6C
+..
+]
+"36
+[; ;main.c: 36: int state;
 [v _state `i ~T0 @X0 1 e ]
+"37
+[; ;main.c: 37: int mix_current_step;
+[v _mix_current_step `i ~T0 @X0 1 e ]
+"38
+[; ;main.c: 38: int mix_direction;
+[v _mix_direction `i ~T0 @X0 1 e ]
+"39
+[; ;main.c: 39: int mix_step_counter;
+[v _mix_step_counter `i ~T0 @X0 1 e ]
+"40
+[; ;main.c: 40: int mix_counter;
+[v _mix_counter `i ~T0 @X0 1 e ]
 [v $root$_main `(v ~T0 @X0 0 e ]
-"30
-[; ;main.c: 30: void main(void){
+"43
+[; ;main.c: 43: void main(void){
 [v _main `(v ~T0 @X0 1 ef ]
 {
 [e :U _main ]
 [f ]
-"31
-[; ;main.c: 31:     unsigned char rx_char = ' ';
+"44
+[; ;main.c: 44:     unsigned char rx_char = ' ';
 [v _rx_char `uc ~T0 @X0 1 a ]
 [e = _rx_char -> -> 32 `ui `uc ]
-"32
-[; ;main.c: 32:     init_PORTS();
+"45
+[; ;main.c: 45:     init_PORTS();
 [e ( _init_PORTS ..  ]
-"33
-[; ;main.c: 33:     init_USART();
+"46
+[; ;main.c: 46:     init_USART();
 [e ( _init_USART ..  ]
-"34
-[; ;main.c: 34:     init_interrupts();
+"47
+[; ;main.c: 47:     init_timer_2();
+[e ( _init_timer_2 ..  ]
+"48
+[; ;main.c: 48:     init_ccp1();
+[e ( _init_ccp1 ..  ]
+"49
+[; ;main.c: 49:     init_interrupts();
 [e ( _init_interrupts ..  ]
-"35
-[; ;main.c: 35:     lcd_init();
+"50
+[; ;main.c: 50:     lcd_init();
 [e ( _lcd_init ..  ]
-"36
-[; ;main.c: 36:     lcd_cmd(0x0C);
+"51
+[; ;main.c: 51:     lcd_cmd(0x0C);
 [e ( _lcd_cmd (1 -> -> 12 `i `uc ]
-"38
-[; ;main.c: 38:     (INTCONbits.GIE = 1);
+"53
+[; ;main.c: 53:     lcd_cmd(0x01);
+[e ( _lcd_cmd (1 -> -> 1 `i `uc ]
+"54
+[; ;main.c: 54:     lcd_cmd(0x80);
+[e ( _lcd_cmd (1 -> -> 128 `i `uc ]
+"55
+[; ;main.c: 55:     lcd_str("Device has been reset");
+[e ( _lcd_str (1 :s 7C ]
+"57
+[; ;main.c: 57:     (INTCONbits.GIE = 1);
 [e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
-"40
-[; ;main.c: 40:     while(1){
+"58
+[; ;main.c: 58:     mix_current_step = 0;
+[e = _mix_current_step -> 0 `i ]
+"59
+[; ;main.c: 59:     mix_direction = 1;
+[e = _mix_direction -> 1 `i ]
+"60
+[; ;main.c: 60:     mix_step_counter = 0;
+[e = _mix_step_counter -> 0 `i ]
+"61
+[; ;main.c: 61:     mix_counter = 0;
+[e = _mix_counter -> 0 `i ]
+"63
+[; ;main.c: 63:     while(1){
 [e :U 243 ]
 {
-"42
-[; ;main.c: 42:         if (state_changed){
+"64
+[; ;main.c: 64:         if (state_changed){
 [e $ ! != -> _state_changed `i -> 0 `i 245  ]
 {
-"43
-[; ;main.c: 43:             rx_char = get_reg_value();
-[e = _rx_char ( _get_reg_value ..  ]
-"44
-[; ;main.c: 44:             const char* greet_str[80];
-[v _greet_str `*Cuc ~T0 @X0 -> 80 `i a ]
-"45
-[; ;main.c: 45:             const char* state_msg = state_translator_fpga_to_micro(rx_char, &state);
-[v _state_msg `*Cuc ~T0 @X0 1 a ]
-[e = _state_msg ( _state_translator_fpga_to_micro (2 , -> _rx_char `uc &U _state ]
-"46
-[; ;main.c: 46:             snprintf(greet_str, sizeof(greet_str), "The current state is %s", state_msg);
-[e ( _snprintf (2 , (. , , -> &U _greet_str `*uc -> # _greet_str `ui :s 1C _state_msg ]
-"47
-[; ;main.c: 47:             serial_tx_string(greet_str);
-[e ( _serial_tx_string (1 -> &U _greet_str `*Cuc ]
-"48
-[; ;main.c: 48:             serial_tx_char(rx_char);
-[e ( _serial_tx_char (1 _rx_char ]
-"50
-[; ;main.c: 50:             LATBbits.LATB0 =! LATBbits.LATB0;
-[e = . . _LATBbits 0 0 -> -> ! != -> . . _LATBbits 0 0 `i -> 0 `i `i `uc ]
-"51
-[; ;main.c: 51:             state_changed = 0;
-[e = _state_changed -> -> 0 `i `a ]
-"52
-[; ;main.c: 52:             lcd_cmd(0x01);
-[e ( _lcd_cmd (1 -> -> 1 `i `uc ]
-"53
-[; ;main.c: 53:             lcd_cmd(0x80);
-[e ( _lcd_cmd (1 -> -> 128 `i `uc ]
-"54
-[; ;main.c: 54:             lcd_str(greet_str);
-[e ( _lcd_str (1 -> &U _greet_str `*Cuc ]
-"55
-[; ;main.c: 55:         }
-}
-[e :U 245 ]
-"56
-[; ;main.c: 56:         if (state == 2){
-[e $ ! == _state -> 2 `i 246  ]
-{
-"57
-[; ;main.c: 57:             LATBbits.LATB1 = 1;
-[e = . . _LATBbits 0 1 -> -> 1 `i `uc ]
-"58
-[; ;main.c: 58:         } else {
-}
-[e $U 247  ]
-[e :U 246 ]
-{
-"59
-[; ;main.c: 59:             LATBbits.LATB1 = 0;
-[e = . . _LATBbits 0 1 -> -> 0 `i `uc ]
-"60
-[; ;main.c: 60:             if (state == 3){
-[e $ ! == _state -> 3 `i 248  ]
-{
-"61
-[; ;main.c: 61:                 if (timer_done){
-[e $ ! != -> _timer_done `i -> 0 `i 249  ]
-{
-"62
-[; ;main.c: 62:                     state = 2;
-[e = _state -> 2 `i ]
-"63
-[; ;main.c: 63:                 } else {
-}
-[e $U 250  ]
-[e :U 249 ]
-{
-"64
-[; ;main.c: 64:                     if (T0CONbits.TMR0ON == 0){
-[e $ ! == -> . . _T0CONbits 0 5 `i -> 0 `i 251  ]
-{
 "65
-[; ;main.c: 65:                         init_timer_0();
-[e ( _init_timer_0 ..  ]
+[; ;main.c: 65:             const char* greet_str[80];
+[v _greet_str `*Cuc ~T0 @X0 -> 80 `i a ]
 "66
-[; ;main.c: 66:                     }
-}
-[e :U 251 ]
+[; ;main.c: 66:             if (read_new_char){
+[e $ ! != -> _read_new_char `i -> 0 `i 246  ]
+{
 "67
-[; ;main.c: 67:                 }
-}
-[e :U 250 ]
+[; ;main.c: 67:                 rx_char = get_reg_value();
+[e = _rx_char ( _get_reg_value ..  ]
 "68
-[; ;main.c: 68:             } else if (state == 4){
-}
-[e $U 252  ]
-[e :U 248 ]
-[e $ ! == _state -> 4 `i 253  ]
+[; ;main.c: 68:                 if (rx_char == 'u'){
+[e $ ! == -> _rx_char `ui -> 117 `ui 247  ]
 {
 "69
-[; ;main.c: 69:                 _delay((unsigned long)((2000)*(4000000/4000.0)));
-[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+[; ;main.c: 69:                     serial_tx_char(rx_char);
+[e ( _serial_tx_char (1 _rx_char ]
 "70
-[; ;main.c: 70:                 state = 2;
-[e = _state -> 2 `i ]
+[; ;main.c: 70:                 }
+}
+[e :U 247 ]
 "71
-[; ;main.c: 71:             } else if (state == 5){
+[; ;main.c: 71:                 serial_tx_char(rx_char);
+[e ( _serial_tx_char (1 _rx_char ]
+"72
+[; ;main.c: 72:                 state_translator_fpga_to_micro(rx_char, &state);
+[e ( _state_translator_fpga_to_micro (2 , -> _rx_char `uc &U _state ]
+"73
+[; ;main.c: 73:                 read_new_char = 0;
+[e = _read_new_char -> -> 0 `i `a ]
+"74
+[; ;main.c: 74:             }
+}
+[e :U 246 ]
+"75
+[; ;main.c: 75:             snprintf(greet_str, sizeof(greet_str), "%s", state_msgs[state]);
+[e ( _snprintf (2 , (. , , -> &U _greet_str `*uc -> # _greet_str `ui :s 8C *U + &U _state_msgs * -> -> _state `ui `ux -> -> # *U &U _state_msgs `ui `ux ]
+"76
+[; ;main.c: 76:             lcd_cmd(0x01);
+[e ( _lcd_cmd (1 -> -> 1 `i `uc ]
+"77
+[; ;main.c: 77:             lcd_cmd(0x80);
+[e ( _lcd_cmd (1 -> -> 128 `i `uc ]
+"78
+[; ;main.c: 78:             lcd_str(greet_str);
+[e ( _lcd_str (1 -> &U _greet_str `*Cuc ]
+"80
+[; ;main.c: 80:             state_changed = 0;
+[e = _state_changed -> -> 0 `i `a ]
+"81
+[; ;main.c: 81:         }
+}
+[e :U 245 ]
+"84
+[; ;main.c: 84:         if (state == 2){
+[e $ ! == _state -> 2 `i 248  ]
+{
+"85
+[; ;main.c: 85:             LATBbits.LATB1 = 1;
+[e = . . _LATBbits 0 1 -> -> 1 `i `uc ]
+"86
+[; ;main.c: 86:         } else {
+}
+[e $U 249  ]
+[e :U 248 ]
+{
+"87
+[; ;main.c: 87:             LATBbits.LATB1 = 0;
+[e = . . _LATBbits 0 1 -> -> 0 `i `uc ]
+"88
+[; ;main.c: 88:             if (state == 0) {
+[e $ ! == _state -> 0 `i 250  ]
+{
+"89
+[; ;main.c: 89:                 if (!msg_sent){
+[e $ ! ! != -> _msg_sent `i -> 0 `i 251  ]
+{
+"90
+[; ;main.c: 90:                     serial_tx_char(state_translator_micro_to_fpga(&state));
+[e ( _serial_tx_char (1 ( _state_translator_micro_to_fpga (1 &U _state ]
+"91
+[; ;main.c: 91:                     msg_sent = 1;
+[e = _msg_sent -> -> 1 `i `a ]
+"92
+[; ;main.c: 92:                 }
+}
+[e :U 251 ]
+"93
+[; ;main.c: 93:             } else if (state == 1){
+}
+[e $U 252  ]
+[e :U 250 ]
+[e $ ! == _state -> 1 `i 253  ]
+{
+"94
+[; ;main.c: 94:                 state = 2;
+[e = _state -> 2 `i ]
+"95
+[; ;main.c: 95:                 state_changed = 1;
+[e = _state_changed -> -> 1 `i `a ]
+"96
+[; ;main.c: 96:                 serial_tx_char(state_translator_micro_to_fpga(&state));
+[e ( _serial_tx_char (1 ( _state_translator_micro_to_fpga (1 &U _state ]
+"97
+[; ;main.c: 97:             } else if (state == 3){
 }
 [e $U 254  ]
 [e :U 253 ]
-[e $ ! == _state -> 5 `i 255  ]
+[e $ ! == _state -> 3 `i 255  ]
 {
-"72
-[; ;main.c: 72:                 _delay((unsigned long)((2000)*(4000000/4000.0)));
-[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-"73
-[; ;main.c: 73:                 state = 2;
+"98
+[; ;main.c: 98:                 if (timer_done){
+[e $ ! != -> _timer_done `i -> 0 `i 256  ]
+{
+"99
+[; ;main.c: 99:                     state = 2;
 [e = _state -> 2 `i ]
-"74
-[; ;main.c: 74:             } else if (state == 6){
+"100
+[; ;main.c: 100:                     state_changed = 1;
+[e = _state_changed -> -> 1 `i `a ]
+"101
+[; ;main.c: 101:                     serial_tx_char(state_translator_micro_to_fpga(&state));
+[e ( _serial_tx_char (1 ( _state_translator_micro_to_fpga (1 &U _state ]
+"103
+[; ;main.c: 103:                 } else {
 }
-[e $U 256  ]
-[e :U 255 ]
-[e $ ! == _state -> 6 `i 257  ]
+[e $U 257  ]
+[e :U 256 ]
 {
-"75
-[; ;main.c: 75:                 _delay((unsigned long)((2000)*(4000000/4000.0)));
-[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-"76
-[; ;main.c: 76:                 state = 2;
-[e = _state -> 2 `i ]
-"77
-[; ;main.c: 77:             }
+"104
+[; ;main.c: 104:                     if (T0CONbits.TMR0ON == 0){
+[e $ ! == -> . . _T0CONbits 0 5 `i -> 0 `i 258  ]
+{
+"105
+[; ;main.c: 105:                         init_timer_0();
+[e ( _init_timer_0 ..  ]
+"106
+[; ;main.c: 106:                     }
+}
+[e :U 258 ]
+"107
+[; ;main.c: 107:                 }
 }
 [e :U 257 ]
-[e :U 256 ]
+"108
+[; ;main.c: 108:             } else if (state == 4){
+}
+[e $U 259  ]
+[e :U 255 ]
+[e $ ! == _state -> 4 `i 260  ]
+{
+"109
+[; ;main.c: 109:                 mix_direction = 1;
+[e = _mix_direction -> 1 `i ]
+"110
+[; ;main.c: 110:                 mix_step_counter = 0;
+[e = _mix_step_counter -> 0 `i ]
+"111
+[; ;main.c: 111:                 mix_counter = 0;
+[e = _mix_counter -> 0 `i ]
+"112
+[; ;main.c: 112:                 switch(mix_current_step){
+[e $U 262  ]
+{
+"114
+[; ;main.c: 114:                     case 0:
+[e :U 263 ]
+"115
+[; ;main.c: 115:                         LATA = 0x01;
+[e = _LATA -> -> 1 `i `uc ]
+"116
+[; ;main.c: 116:                         compute_next_step(&mix_current_step, mix_direction);
+[e ( _compute_next_step (2 , &U _mix_current_step _mix_direction ]
+"117
+[; ;main.c: 117:                         update_direction_and_counters(&mix_step_counter, &mix_direction, &mix_counter);
+[e ( _update_direction_and_counters (3 , , &U _mix_step_counter &U _mix_direction &U _mix_counter ]
+"118
+[; ;main.c: 118:                         mix_exit_condition(mix_counter, &mix_current_step);
+[e ( _mix_exit_condition (2 , _mix_counter &U _mix_current_step ]
+"119
+[; ;main.c: 119:                         _delay((unsigned long)((1)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"120
+[; ;main.c: 120:                         break;
+[e $U 261  ]
+"121
+[; ;main.c: 121:                     case 1:
+[e :U 264 ]
+"122
+[; ;main.c: 122:                         LATA = 0x02;
+[e = _LATA -> -> 2 `i `uc ]
+"123
+[; ;main.c: 123:                         compute_next_step(&mix_current_step, mix_direction);
+[e ( _compute_next_step (2 , &U _mix_current_step _mix_direction ]
+"124
+[; ;main.c: 124:                         update_direction_and_counters(&mix_step_counter, &mix_direction, &mix_counter);
+[e ( _update_direction_and_counters (3 , , &U _mix_step_counter &U _mix_direction &U _mix_counter ]
+"125
+[; ;main.c: 125:                         mix_exit_condition(mix_counter, &mix_current_step);
+[e ( _mix_exit_condition (2 , _mix_counter &U _mix_current_step ]
+"126
+[; ;main.c: 126:                         _delay((unsigned long)((1)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"127
+[; ;main.c: 127:                         break;
+[e $U 261  ]
+"128
+[; ;main.c: 128:                     case 2:
+[e :U 265 ]
+"129
+[; ;main.c: 129:                         LATA = 0x04;
+[e = _LATA -> -> 4 `i `uc ]
+"130
+[; ;main.c: 130:                         compute_next_step(&mix_current_step, mix_direction);
+[e ( _compute_next_step (2 , &U _mix_current_step _mix_direction ]
+"131
+[; ;main.c: 131:                         update_direction_and_counters(&mix_step_counter, &mix_direction, &mix_counter);
+[e ( _update_direction_and_counters (3 , , &U _mix_step_counter &U _mix_direction &U _mix_counter ]
+"132
+[; ;main.c: 132:                         mix_exit_condition(mix_counter, &mix_current_step);
+[e ( _mix_exit_condition (2 , _mix_counter &U _mix_current_step ]
+"133
+[; ;main.c: 133:                         _delay((unsigned long)((1)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"134
+[; ;main.c: 134:                         break;
+[e $U 261  ]
+"135
+[; ;main.c: 135:                     case 3:
+[e :U 266 ]
+"136
+[; ;main.c: 136:                         LATA = 0x08;
+[e = _LATA -> -> 8 `i `uc ]
+"137
+[; ;main.c: 137:                         compute_next_step(&mix_current_step, mix_direction);
+[e ( _compute_next_step (2 , &U _mix_current_step _mix_direction ]
+"138
+[; ;main.c: 138:                         update_direction_and_counters(&mix_step_counter, &mix_direction, &mix_counter);
+[e ( _update_direction_and_counters (3 , , &U _mix_step_counter &U _mix_direction &U _mix_counter ]
+"139
+[; ;main.c: 139:                         mix_exit_condition(mix_counter, &mix_current_step);
+[e ( _mix_exit_condition (2 , _mix_counter &U _mix_current_step ]
+"140
+[; ;main.c: 140:                         _delay((unsigned long)((1)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"141
+[; ;main.c: 141:                         break;
+[e $U 261  ]
+"142
+[; ;main.c: 142:                     case 10:
+[e :U 267 ]
+"143
+[; ;main.c: 143:                         state = 2;
+[e = _state -> 2 `i ]
+"144
+[; ;main.c: 144:                         state_changed = 1;
+[e = _state_changed -> -> 1 `i `a ]
+"146
+[; ;main.c: 146:                 }
+}
+[e $U 261  ]
+[e :U 262 ]
+[e [\ _mix_current_step , $ -> 0 `i 263
+ , $ -> 1 `i 264
+ , $ -> 2 `i 265
+ , $ -> 3 `i 266
+ , $ -> 10 `i 267
+ 261 ]
+[e :U 261 ]
+"147
+[; ;main.c: 147:             } else if (state == 5){
+}
+[e $U 268  ]
+[e :U 260 ]
+[e $ ! == _state -> 5 `i 269  ]
+{
+"148
+[; ;main.c: 148:                 if (timer_done){
+[e $ ! != -> _timer_done `i -> 0 `i 270  ]
+{
+"149
+[; ;main.c: 149:                     state = 2;
+[e = _state -> 2 `i ]
+"150
+[; ;main.c: 150:                     state_changed = 1;
+[e = _state_changed -> -> 1 `i `a ]
+"151
+[; ;main.c: 151:                     serial_tx_char(state_translator_micro_to_fpga(&state));
+[e ( _serial_tx_char (1 ( _state_translator_micro_to_fpga (1 &U _state ]
+"152
+[; ;main.c: 152:                 } else {
+}
+[e $U 271  ]
+[e :U 270 ]
+{
+"153
+[; ;main.c: 153:                     if (T0CONbits.TMR0ON == 0){
+[e $ ! == -> . . _T0CONbits 0 5 `i -> 0 `i 272  ]
+{
+"154
+[; ;main.c: 154:                         init_timer_0();
+[e ( _init_timer_0 ..  ]
+"155
+[; ;main.c: 155:                     }
+}
+[e :U 272 ]
+"156
+[; ;main.c: 156:                 }
+}
+[e :U 271 ]
+"157
+[; ;main.c: 157:             }
+}
+[e :U 269 ]
+[e :U 268 ]
+[e :U 259 ]
 [e :U 254 ]
 [e :U 252 ]
-"78
-[; ;main.c: 78:         }
+"158
+[; ;main.c: 158:         }
 }
-[e :U 247 ]
-"79
-[; ;main.c: 79:     }
+[e :U 249 ]
+"159
+[; ;main.c: 159:     }
 }
 [e :U 242 ]
 [e $U 243  ]
 [e :U 244 ]
-"80
-[; ;main.c: 80: }
+"160
+[; ;main.c: 160: }
 [e :UE 241 ]
 }
+"162
+[; ;main.c: 162: void compute_next_step(int* current_step, int step_direction){
+[v _compute_next_step `(v ~T0 @X0 1 ef2`*i`i ]
+{
+[e :U _compute_next_step ]
+[v _current_step `*i ~T0 @X0 1 r1 ]
+[v _step_direction `i ~T0 @X0 1 r2 ]
+[f ]
+"163
+[; ;main.c: 163:     *current_step = *current_step + step_direction;
+[e = *U _current_step + *U _current_step _step_direction ]
+"164
+[; ;main.c: 164:     if (*current_step == -1) {
+[e $ ! == *U _current_step -U -> 1 `i 274  ]
+{
+"165
+[; ;main.c: 165:         *current_step = 3;
+[e = *U _current_step -> 3 `i ]
+"166
+[; ;main.c: 166:     } else if(*current_step == 4) {
+}
+[e $U 275  ]
+[e :U 274 ]
+[e $ ! == *U _current_step -> 4 `i 276  ]
+{
+"167
+[; ;main.c: 167:         *current_step = 0;
+[e = *U _current_step -> 0 `i ]
+"168
+[; ;main.c: 168:     }
+}
+[e :U 276 ]
+[e :U 275 ]
+"169
+[; ;main.c: 169:     return;
+[e $UE 273  ]
+"170
+[; ;main.c: 170: }
+[e :UE 273 ]
+}
+"172
+[; ;main.c: 172: void update_direction_and_counters(int* counter_step, int* step_direction, int* counter){
+[v _update_direction_and_counters `(v ~T0 @X0 1 ef3`*i`*i`*i ]
+{
+[e :U _update_direction_and_counters ]
+[v _counter_step `*i ~T0 @X0 1 r1 ]
+[v _step_direction `*i ~T0 @X0 1 r2 ]
+[v _counter `*i ~T0 @X0 1 r3 ]
+[f ]
+"173
+[; ;main.c: 173:     *counter_step = *counter_step + 1;
+[e = *U _counter_step + *U _counter_step -> 1 `i ]
+"174
+[; ;main.c: 174:     if (*counter_step >= 100){
+[e $ ! >= *U _counter_step -> 100 `i 278  ]
+{
+"175
+[; ;main.c: 175:         *counter_step = 0;
+[e = *U _counter_step -> 0 `i ]
+"176
+[; ;main.c: 176:         *counter = *counter + 1;
+[e = *U _counter + *U _counter -> 1 `i ]
+"177
+[; ;main.c: 177:         *step_direction = *step_direction *(-1);
+[e = *U _step_direction * *U _step_direction -U -> 1 `i ]
+"178
+[; ;main.c: 178:     }
+}
+[e :U 278 ]
+"179
+[; ;main.c: 179:     return;
+[e $UE 277  ]
+"180
+[; ;main.c: 180: }
+[e :UE 277 ]
+}
+"182
+[; ;main.c: 182: void mix_exit_condition(int counter, int* current_step){
+[v _mix_exit_condition `(v ~T0 @X0 1 ef2`i`*i ]
+{
+[e :U _mix_exit_condition ]
+[v _counter `i ~T0 @X0 1 r1 ]
+[v _current_step `*i ~T0 @X0 1 r2 ]
+[f ]
+"183
+[; ;main.c: 183:     if (counter >= 20){
+[e $ ! >= _counter -> 20 `i 280  ]
+{
+"184
+[; ;main.c: 184:         *current_step = 10;
+[e = *U _current_step -> 10 `i ]
+"185
+[; ;main.c: 185:     }
+}
+[e :U 280 ]
+"186
+[; ;main.c: 186: }
+[e :UE 279 ]
+}
 [v $root$_rx_char_usart `(v ~T0 @X0 0 e ]
-"81
-[; ;main.c: 81: void __attribute__((picinterrupt(("")))) rx_char_usart(void){
+"188
+[; ;main.c: 188: void __attribute__((picinterrupt(("")))) rx_char_usart(void){
 [v _rx_char_usart `(v ~T39 @X0 1 ef ]
 {
 [e :U _rx_char_usart ]
 [f ]
-"82
-[; ;main.c: 82:     if(PIE1bits.RCIE && PIR1bits.RCIF){
-[e $ ! && != -> . . _PIE1bits 0 5 `i -> 0 `i != -> . . _PIR1bits 0 5 `i -> 0 `i 259  ]
+"189
+[; ;main.c: 189:     if(PIE1bits.RCIE && PIR1bits.RCIF){
+[e $ ! && != -> . . _PIE1bits 0 5 `i -> 0 `i != -> . . _PIR1bits 0 5 `i -> 0 `i 282  ]
 {
-"83
-[; ;main.c: 83:         PIR1bits.RCIF = 0;
+"190
+[; ;main.c: 190:         PIR1bits.RCIF = 0;
 [e = . . _PIR1bits 0 5 -> -> 0 `i `uc ]
-"84
-[; ;main.c: 84:         state_changed = 1;
+"191
+[; ;main.c: 191:         state_changed = 1;
 [e = _state_changed -> -> 1 `i `a ]
-"85
-[; ;main.c: 85:     }
+"192
+[; ;main.c: 192:         read_new_char = 1;
+[e = _read_new_char -> -> 1 `i `a ]
+"193
+[; ;main.c: 193:     }
 }
-[e :U 259 ]
-"86
-[; ;main.c: 86:     if(INTCONbits.TMR0IE && INTCONbits.TMR0IF){
-[e $ ! && != -> . . _INTCONbits 0 5 `i -> 0 `i != -> . . _INTCONbits 0 2 `i -> 0 `i 260  ]
+[e :U 282 ]
+"194
+[; ;main.c: 194:     if(INTCONbits.TMR0IE && INTCONbits.TMR0IF){
+[e $ ! && != -> . . _INTCONbits 0 5 `i -> 0 `i != -> . . _INTCONbits 0 2 `i -> 0 `i 283  ]
 {
-"87
-[; ;main.c: 87:         T0CON = 0;
+"195
+[; ;main.c: 195:         T0CON = 0;
 [e = _T0CON -> -> 0 `i `uc ]
-"88
-[; ;main.c: 88:         INTCONbits.TMR0IF = 0;
+"196
+[; ;main.c: 196:         INTCONbits.TMR0IF = 0;
 [e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
-"89
-[; ;main.c: 89:         timer_done = 1;
+"197
+[; ;main.c: 197:         timer_done = 1;
 [e = _timer_done -> -> 1 `i `a ]
-"90
-[; ;main.c: 90:     }
+"198
+[; ;main.c: 198:     }
 }
-[e :U 260 ]
-"91
-[; ;main.c: 91: }
-[e :UE 258 ]
+[e :U 283 ]
+"199
+[; ;main.c: 199: }
+[e :UE 281 ]
 }
 [p f _snprintf 8650752 ]
-[a 1C 84 104 101 32 99 117 114 114 101 110 116 32 115 116 97 116 101 32 105 115 32 37 115 0 ]
+[a 7C 68 101 118 105 99 101 32 104 97 115 32 98 101 101 110 32 114 101 115 101 116 0 ]
+[a 1C 73 68 76 69 58 32 119 97 105 116 105 110 103 32 102 111 114 32 106 97 98 32 116 111 32 98 101 32 112 108 97 99 101 100 32 105 110 32 105 110 105 116 32 112 111 115 0 ]
+[a 8C 37 115 0 ]
+[a 6C 80 73 67 75 95 85 80 58 32 116 104 101 32 106 97 98 32 104 97 115 32 114 101 97 99 104 101 100 32 116 104 101 32 112 105 99 107 32 117 112 32 115 116 97 116 105 111 110 0 ]
+[a 5C 77 73 88 73 78 71 95 83 84 65 84 73 79 78 58 32 116 104 101 32 106 97 98 32 104 97 115 32 114 101 97 99 104 101 100 32 116 104 101 32 109 105 120 105 110 103 32 115 116 97 116 105 111 110 0 ]
+[a 2C 73 78 73 84 95 80 79 83 58 32 116 104 101 32 106 97 98 32 105 115 32 97 116 32 116 104 101 32 105 110 105 116 32 112 111 115 105 116 105 111 110 44 32 112 114 111 99 101 115 115 32 105 115 32 115 116 97 114 116 105 110 103 0 ]
+[a 4C 79 86 69 78 58 32 114 101 97 99 104 105 110 103 32 116 104 101 32 99 111 114 114 101 99 116 32 116 101 109 112 101 114 97 116 117 114 101 0 ]
+[a 3C 77 79 86 69 77 69 78 84 0 ]
