@@ -62,11 +62,11 @@ void init_PORTS(void){
     // Init usart and debug led
     LATA = 0;
     PORTA = 0;
-    TRISA = 0x00;
+    TRISA = 0xF0;
     
     LATB = 0;
     PORTB = 0;
-    TRISB = 0xF0; // rb0-3 output and the more significant as default on 
+    TRISB = 0x00; // rb0-3 output and the more significant as default on 
    
     // PORTC
     LATC = 0;

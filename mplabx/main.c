@@ -15,10 +15,11 @@
 #include "lcd.h"
 #include "utils.h"
 #include "timer.h"
+#include "stepper_motor.h"
 
 void __interrupt() rx_char_usart(void);
 void compute_next_step(int* current_step, int step_direction);
-void update_direction_and_counters(int* counter_step, int* step_direction, int* counter);
+void update_stepper_direction_and_counters(int* counter_step, int* step_direction, int* counter);
 void mix_exit_condition(int counter, int* current_step);
 
 static _Bool state_changed = false;
@@ -26,18 +27,28 @@ static _Bool msg_sent = false;
 static _Bool read_new_char = false;
 static _Bool timer_done = false;
 const char* state_msgs[6] = {
-    "IDLE: waiting for jab to be placed in init pos",
-    "INIT_POS: the jab is at the init position, process is starting",
+    "IDLE: waiting for  vial to be placed in init pos",
+    "INIT_POS: the vial is at the init position, process is starting",
     "MOVEMENT",
     "OVEN: reaching the correct temperature",
-    "MIXING_STATION: the jab has reached the mixing station",
-    "PICK_UP: the jab has reached the pick up station"
+    "GRASPING",
+    "MIXING",
+    "DILUTING",
+    "PICK_UP: the vial has reached the pick up station"
 };
 int state;
 int mix_current_step;
 int mix_direction;
 int mix_step_counter;
 int mix_counter;
+int hex_joint_values[COILS_NUMBER] = {0x01, 0x02, 0x04, 0x08};
+int hex_end_effector_values[COILS_NUMBER] = {0x01*16, 0x02*16, 0x04*16, 0x08*16};
+int joint_homed = 0;
+int end_effector_homed = 0;
+
+stepperMotor joint_stepper;
+
+stepperMotor end_effector_stepper;
 
 
 void main(void){
@@ -47,6 +58,8 @@ void main(void){
     init_timer_2();
     init_ccp1();
     init_interrupts();
+    init_stepper(&joint_stepper, 0, 0, 1, hex_joint_values);
+    init_stepper(&end_effector_stepper, 0, 0, 1, hex_end_effector_values);
     lcd_init();
     lcd_cmd(L_NCR);
     
@@ -55,9 +68,7 @@ void main(void){
     lcd_str("Device has been reset");
     
     ei();
-    mix_current_step = 0;
-    mix_direction = 1;
-    mix_step_counter = 0;
+    
     mix_counter = 0;
     
     while(1){
@@ -82,9 +93,9 @@ void main(void){
         
         
         if (state == 2){ // Movement
-            LATBbits.LATB1 = 1;
+            LATAbits.LATA1 = 1;
         } else {
-            LATBbits.LATB1 = 0; // Stop Movement
+            LATAbits.LATA1 = 0; // Stop Movement
             if (state == 0) {
                 if (!msg_sent){
                     serial_tx_char(state_translator_micro_to_fpga(&state));
@@ -106,45 +117,46 @@ void main(void){
                     }
                 }
             } else if (state == 4){
-                switch(mix_current_step){
-                    
-                    case 0:
-                        LATA = 0x01;
-                        compute_next_step(&mix_current_step, mix_direction);
-                        update_direction_and_counters(&mix_step_counter, &mix_direction, &mix_counter);
-                        mix_exit_condition(mix_counter, &mix_current_step);
-                        __delay_ms(10);
-                        break;
-                    case 1:
-                        LATA = 0x02;
-                        compute_next_step(&mix_current_step, mix_direction);
-                        update_direction_and_counters(&mix_step_counter, &mix_direction, &mix_counter);
-                        mix_exit_condition(mix_counter, &mix_current_step);
-                        __delay_ms(1);
-                        break;
-                    case 2:
-                        LATA = 0x04;
-                        compute_next_step(&mix_current_step, mix_direction);
-                        update_direction_and_counters(&mix_step_counter, &mix_direction, &mix_counter);
-                        mix_exit_condition(mix_counter, &mix_current_step);
-                        __delay_ms(1);
-                        break;
-                    case 3:
-                        LATA = 0x08;
-                        compute_next_step(&mix_current_step, mix_direction);
-                        update_direction_and_counters(&mix_step_counter, &mix_direction, &mix_counter);
-                        mix_exit_condition(mix_counter, &mix_current_step);
-                        __delay_ms(1);
-                        break;
-                    case 10:
-                        state = 2;
-                        state_changed = true;
-                        mix_direction = 1;
-                        mix_step_counter = 0;
-                        mix_counter = 0;
-                    
+                __delay_ms(3);
+                if (joint_homed && reach_goal(&joint_stepper, 50)){
+                    joint_homed = 0;
+                }
+                if (!joint_homed && end_effector_homed && reach_goal(&end_effector_stepper, 100)){
+                    end_effector_homed = 0;
+                }
+                if (!end_effector_homed * !joint_homed){
+                    state = 5;
+                    state_changed = true;
                 }
             } else if (state == 5){
+                __delay_ms(3);
+                if (reach_goal(&joint_stepper, 100)) {
+                    change_direction(&joint_stepper);
+                    mix_counter++;
+                }
+                
+                if (mix_counter >= 20){
+                    state = 6;
+                    mix_counter = 0;
+                    init_stepper(&joint_stepper, 0, 0, 1, hex_joint_values);
+                    change_direction(&joint_stepper);
+                    change_direction(&end_effector_stepper);
+                }
+            } else if (state == 6){
+                __delay_ms(3);
+                
+                if (!end_effector_homed && reach_goal(&end_effector_stepper, 100)){
+                    end_effector_homed = 1;
+                }
+                
+                if (end_effector_homed && !joint_homed && reach_goal(&joint_stepper, 50)){
+                    joint_homed = 1;
+                }
+                
+                if (end_effector_homed * joint_homed){
+                    state = 7;
+                }
+            } else if (state == 7){
                 if (timer_done){
                     state = 2; // Here it should go either to trash Move [2] or to Idle [7]
                     state_changed = true;
@@ -157,26 +169,6 @@ void main(void){
             }
         }
     }    
-}
-
-void compute_next_step(int* current_step, int step_direction){
-    *current_step = *current_step + step_direction;
-    if (*current_step == -1) {
-        *current_step = 3;
-    } else if(*current_step == 4) {
-        *current_step = 0;
-    }
-    return;
-}
-
-void update_direction_and_counters(int* counter_step, int* step_direction, int* counter){
-    *counter_step = *counter_step + 1;
-    if (*counter_step >= 96){
-        *counter_step = 0;
-        *counter = *counter + 1;
-        *step_direction = *step_direction *(-1);
-    }
-    return;
 }
 
 void mix_exit_condition(int counter, int* current_step){

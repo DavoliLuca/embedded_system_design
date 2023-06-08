@@ -1,147 +1,11 @@
 Version 4.0 HI-TECH Software Intermediate Code
 "81 ./stepper_motor.h
 [; ;./stepper_motor.h: 81: typedef struct {
-[s S241 `i 1 `i 1 `i 1 `ui -> 4 `i ]
-[n S241 . current_coil step_counter direction hex_coil_register_values ]
-[p mainexit ]
-"79 ./init_PIC.h
-[; ;./init_PIC.h: 79: void init_PORTS(void);
-[v _init_PORTS `(v ~T0 @X0 0 ef ]
-"79 ./serial_rs232.h
-[; ;./serial_rs232.h: 79: void init_USART(void);
-[v _init_USART `(v ~T0 @X0 0 ef ]
-"80 ./timer.h
-[; ;./timer.h: 80: void init_timer_2(void);
-[v _init_timer_2 `(v ~T0 @X0 0 ef ]
-"81
-[; ;./timer.h: 81: void init_ccp1(void);
-[v _init_ccp1 `(v ~T0 @X0 0 ef ]
-"81 ./init_PIC.h
-[; ;./init_PIC.h: 81: void init_interrupts(void);
-[v _init_interrupts `(v ~T0 @X0 0 ef ]
-"89 ./stepper_motor.h
-[; ;./stepper_motor.h: 89: void init_stepper(stepperMotor* stepper_motor, int current_step, int step_counter, int direction, int hex_coil_register_values[4]);
-[v _init_stepper `(v ~T0 @X0 0 ef5`*S241`i`i`i`*i ]
-"98 ./lcd.h
-[; ;./lcd.h: 98: void lcd_init(void);
-[v _lcd_init `(v ~T0 @X0 0 ef ]
-"99
-[; ;./lcd.h: 99: void lcd_cmd(unsigned char val);
-[v _lcd_cmd `(v ~T0 @X0 0 ef1`uc ]
-"101
-[; ;./lcd.h: 101: void lcd_str(const char* str);
-[v _lcd_str `(v ~T0 @X0 0 ef1`*Cuc ]
-"5318 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h
-[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 5318:     struct {
-[s S227 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S227 . RBIF INT0IF TMR0IF RBIE INT0IE TMR0IE PEIE_GIEL GIE_GIEH ]
-"5328
-[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 5328:     struct {
-[s S228 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S228 . . INT0F T0IF . INT0E T0IE PEIE GIE ]
-"5338
-[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 5338:     struct {
-[s S229 :6 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S229 . . GIEL GIEH ]
-"5317
-[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 5317: typedef union {
-[u S226 `S227 1 `S228 1 `S229 1 ]
-[n S226 . . . . ]
-"5344
-[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 5344: extern volatile INTCONbits_t INTCONbits __attribute__((address(0xFF2)));
-[v _INTCONbits `VS226 ~T0 @X0 0 e@4082 ]
-"82 ./serial_rs232.h
-[; ;./serial_rs232.h: 82: unsigned char get_reg_value();
-[v _get_reg_value `(uc ~T0 @X0 0 e? ]
-"80
-[; ;./serial_rs232.h: 80: void serial_tx_char(unsigned char val);
-[v _serial_tx_char `(v ~T0 @X0 0 ef1`uc ]
-"79 ./utils.h
-[; ;./utils.h: 79: void state_translator_fpga_to_micro(char state_machine_code, int* state);
-[v _state_translator_fpga_to_micro `(v ~T0 @X0 0 ef2`uc`*i ]
-"114 C:\Program Files\Microchip\xc8\v2.20\pic\include\c99\stdio.h
-[v _snprintf `(i ~T0 @X0 0 e2v`*uc`ui`*Cuc ]
-"728 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h
-[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 728:     struct {
-[s S33 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S33 . LATA0 LATA1 LATA2 LATA3 LATA4 LATA5 LATA6 ]
-"737
-[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 737:     struct {
-[s S34 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S34 . LA0 LA1 LA2 LA3 LA4 LA5 LA6 ]
-"727
-[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 727: typedef union {
-[u S32 `S33 1 `S34 1 ]
-[n S32 . . . ]
-"747
-[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 747: extern volatile LATAbits_t LATAbits __attribute__((address(0xF89)));
-[v _LATAbits `VS32 ~T0 @X0 0 e@3977 ]
-"80 ./utils.h
-[; ;./utils.h: 80: unsigned char state_translator_micro_to_fpga(int* state);
-[v _state_translator_micro_to_fpga `(uc ~T0 @X0 0 ef1`*i ]
-"4795 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h
-[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 4795:     struct {
-[s S214 :3 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S214 . T0PS PSA T0SE T0CS T08BIT TMR0ON ]
-"4803
-[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 4803:     struct {
-[s S215 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S215 . T0PS0 T0PS1 T0PS2 ]
-"4794
-[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 4794: typedef union {
-[u S213 `S214 1 `S215 1 ]
-[n S213 . . . ]
-"4809
-[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 4809: extern volatile T0CONbits_t T0CONbits __attribute__((address(0xFD5)));
-[v _T0CONbits `VS213 ~T0 @X0 0 e@4053 ]
-"79 ./timer.h
-[; ;./timer.h: 79: void init_timer_0(void);
-[v _init_timer_0 `(v ~T0 @X0 0 ef ]
-[v F2107 `(v ~T0 @X0 1 tf1`ul ]
-"203 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\pic18.h
-[v __delay `JF2107 ~T0 @X0 0 e ]
-[p i __delay ]
-"91 ./stepper_motor.h
-[; ;./stepper_motor.h: 91: int reach_goal(stepperMotor* stepper_motor, int goal_to_reach);
-[v _reach_goal `(i ~T0 @X0 0 ef2`*S241`i ]
-"92
-[; ;./stepper_motor.h: 92: void change_direction(stepperMotor* stepper_motor);
-[v _change_direction `(v ~T0 @X0 0 ef1`*S241 ]
-[t ~ __interrupt . k ]
-[t T39 __interrupt ]
-"2268 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h
-[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 2268:     struct {
-[s S82 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S82 . TMR1IE TMR2IE CCP1IE SSPIE TXIE RCIE ADIE PSPIE ]
-"2278
-[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 2278:     struct {
-[s S83 :4 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S83 . . TX1IE RC1IE ]
-"2267
-[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 2267: typedef union {
-[u S81 `S82 1 `S83 1 ]
-[n S81 . . . ]
-"2284
-[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 2284: extern volatile PIE1bits_t PIE1bits __attribute__((address(0xF9D)));
-[v _PIE1bits `VS81 ~T0 @X0 0 e@3997 ]
-"2345
-[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 2345:     struct {
-[s S85 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S85 . TMR1IF TMR2IF CCP1IF SSPIF TXIF RCIF ADIF PSPIF ]
-"2355
-[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 2355:     struct {
-[s S86 :4 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S86 . . TX1IF RC1IF ]
-"2344
-[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 2344: typedef union {
-[u S84 `S85 1 `S86 1 ]
-[n S84 . . . ]
-"2361
-[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 2361: extern volatile PIR1bits_t PIR1bits __attribute__((address(0xF9E)));
-[v _PIR1bits `VS84 ~T0 @X0 0 e@3998 ]
-"4789
-[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 4789: extern volatile unsigned char T0CON __attribute__((address(0xFD5)));
-[v _T0CON `Vuc ~T0 @X0 0 e@4053 ]
+[s S238 `i 1 `i 1 `i 1 `ui -> 4 `i ]
+[n S238 . current_coil step_counter direction hex_coil_register_values ]
+"822 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 822: extern volatile unsigned char LATB __attribute__((address(0xF8A)));
+[v _LATB `Vuc ~T0 @X0 0 e@3978 ]
 "54 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 54: __asm("PORTA equ 0F80h");
 [; <" PORTA equ 0F80h ;# ">
@@ -523,578 +387,165 @@ Version 4.0 HI-TECH Software Intermediate Code
 "5763
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 5763: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
-"25 main.c
-[; ;main.c: 25: static _Bool state_changed = 0;
-[v _state_changed `a ~T0 @X0 1 s ]
-[i _state_changed
--> -> 0 `i `a
-]
-"26
-[; ;main.c: 26: static _Bool msg_sent = 0;
-[v _msg_sent `a ~T0 @X0 1 s ]
-[i _msg_sent
--> -> 0 `i `a
-]
-"27
-[; ;main.c: 27: static _Bool read_new_char = 0;
-[v _read_new_char `a ~T0 @X0 1 s ]
-[i _read_new_char
--> -> 0 `i `a
-]
-"28
-[; ;main.c: 28: static _Bool timer_done = 0;
-[v _timer_done `a ~T0 @X0 1 s ]
-[i _timer_done
--> -> 0 `i `a
-]
-"29
-[; ;main.c: 29: const char* state_msgs[6] = {
-[v _state_msgs `*Cuc ~T0 @X0 -> 6 `i e ]
-[i _state_msgs
-:U ..
-:s 1C
-:s 2C
-:s 3C
-:s 4C
-:s 5C
-:s 6C
-..
-]
-"39
-[; ;main.c: 39: int state;
-[v _state `i ~T0 @X0 1 e ]
-"40
-[; ;main.c: 40: int mix_current_step;
-[v _mix_current_step `i ~T0 @X0 1 e ]
-"41
-[; ;main.c: 41: int mix_direction;
-[v _mix_direction `i ~T0 @X0 1 e ]
-"42
-[; ;main.c: 42: int mix_step_counter;
-[v _mix_step_counter `i ~T0 @X0 1 e ]
-"43
-[; ;main.c: 43: int mix_counter;
-[v _mix_counter `i ~T0 @X0 1 e ]
-"44
-[; ;main.c: 44: int hex_joint_values[4] = {0x01, 0x02, 0x04, 0x08};
-[v _hex_joint_values `i ~T0 @X0 -> 4 `i e ]
-[i _hex_joint_values
-:U ..
--> 1 `i
--> 2 `i
--> 4 `i
--> 8 `i
-..
-]
-"45
-[; ;main.c: 45: int hex_end_effector_values[4] = {0x01*16, 0x02*16, 0x04*16, 0x08*16};
-[v _hex_end_effector_values `i ~T0 @X0 -> 4 `i e ]
-[i _hex_end_effector_values
-:U ..
-* -> 1 `i -> 16 `i
-* -> 2 `i -> 16 `i
-* -> 4 `i -> 16 `i
-* -> 8 `i -> 16 `i
-..
-]
-"46
-[; ;main.c: 46: int joint_homed = 0;
-[v _joint_homed `i ~T0 @X0 1 e ]
-[i _joint_homed
--> 0 `i
-]
-"47
-[; ;main.c: 47: int end_effector_homed = 0;
-[v _end_effector_homed `i ~T0 @X0 1 e ]
-[i _end_effector_homed
--> 0 `i
-]
-"49
-[; ;main.c: 49: stepperMotor joint_stepper;
-[v _joint_stepper `S241 ~T0 @X0 1 e ]
-"51
-[; ;main.c: 51: stepperMotor end_effector_stepper;
-[v _end_effector_stepper `S241 ~T0 @X0 1 e ]
-[v $root$_main `(v ~T0 @X0 0 e ]
-"54
-[; ;main.c: 54: void main(void){
-[v _main `(v ~T0 @X0 1 ef ]
+"4 stepper_motor.c
+[; ;stepper_motor.c: 4: void init_stepper(stepperMotor* stepper_motor, int current_coil, int step_counter, int direction, int hex_coil_register_values[4]){
+[v _init_stepper `(v ~T0 @X0 1 ef5`*S238`i`i`i`*i ]
 {
-[e :U _main ]
+[e :U _init_stepper ]
+[v _stepper_motor `*S238 ~T0 @X0 1 r1 ]
+[v _current_coil `i ~T0 @X0 1 r2 ]
+[v _step_counter `i ~T0 @X0 1 r3 ]
+[v _direction `i ~T0 @X0 1 r4 ]
+[v _hex_coil_register_values `*i ~T0 @X0 1 r5 ]
 [f ]
-"55
-[; ;main.c: 55:     unsigned char rx_char = ' ';
-[v _rx_char `uc ~T0 @X0 1 a ]
-[e = _rx_char -> -> 32 `ui `uc ]
-"56
-[; ;main.c: 56:     init_PORTS();
-[e ( _init_PORTS ..  ]
-"57
-[; ;main.c: 57:     init_USART();
-[e ( _init_USART ..  ]
-"58
-[; ;main.c: 58:     init_timer_2();
-[e ( _init_timer_2 ..  ]
-"59
-[; ;main.c: 59:     init_ccp1();
-[e ( _init_ccp1 ..  ]
-"60
-[; ;main.c: 60:     init_interrupts();
-[e ( _init_interrupts ..  ]
-"61
-[; ;main.c: 61:     init_stepper(&joint_stepper, 0, 0, 1, hex_joint_values);
-[e ( _init_stepper (4 , , , , &U _joint_stepper -> 0 `i -> 0 `i -> 1 `i &U _hex_joint_values ]
-"62
-[; ;main.c: 62:     init_stepper(&end_effector_stepper, 0, 0, 1, hex_end_effector_values);
-[e ( _init_stepper (4 , , , , &U _end_effector_stepper -> 0 `i -> 0 `i -> 1 `i &U _hex_end_effector_values ]
-"63
-[; ;main.c: 63:     lcd_init();
-[e ( _lcd_init ..  ]
-"64
-[; ;main.c: 64:     lcd_cmd(0x0C);
-[e ( _lcd_cmd (1 -> -> 12 `i `uc ]
-"66
-[; ;main.c: 66:     lcd_cmd(0x01);
-[e ( _lcd_cmd (1 -> -> 1 `i `uc ]
-"67
-[; ;main.c: 67:     lcd_cmd(0x80);
-[e ( _lcd_cmd (1 -> -> 128 `i `uc ]
-"68
-[; ;main.c: 68:     lcd_str("Device has been reset");
-[e ( _lcd_str (1 :s 7C ]
-"70
-[; ;main.c: 70:     (INTCONbits.GIE = 1);
-[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
-"72
-[; ;main.c: 72:     mix_counter = 0;
-[e = _mix_counter -> 0 `i ]
-"74
-[; ;main.c: 74:     while(1){
-[e :U 244 ]
+"5
+[; ;stepper_motor.c: 5:     for (int i = 0; i < 4; i++) {
 {
-"75
-[; ;main.c: 75:         if (state_changed){
-[e $ ! != -> _state_changed `i -> 0 `i 246  ]
+[v _i `i ~T0 @X0 1 a ]
+[e = _i -> 0 `i ]
+[e $ < _i -> 4 `i 240  ]
+[e $U 241  ]
+[e :U 240 ]
 {
-"76
-[; ;main.c: 76:             const char* greet_str[80];
-[v _greet_str `*Cuc ~T0 @X0 -> 80 `i a ]
-"77
-[; ;main.c: 77:             if (read_new_char){
-[e $ ! != -> _read_new_char `i -> 0 `i 247  ]
-{
-"78
-[; ;main.c: 78:                 rx_char = get_reg_value();
-[e = _rx_char ( _get_reg_value ..  ]
-"79
-[; ;main.c: 79:                 if (rx_char == 'u'){
-[e $ ! == -> _rx_char `ui -> 117 `ui 248  ]
-{
-"80
-[; ;main.c: 80:                     serial_tx_char(rx_char);
-[e ( _serial_tx_char (1 _rx_char ]
-"81
-[; ;main.c: 81:                 }
+"6
+[; ;stepper_motor.c: 6:        stepper_motor -> hex_coil_register_values[i] = hex_coil_register_values[i];
+[e = *U + &U . *U _stepper_motor 3 * -> -> _i `ui `ux -> -> # *U &U . *U _stepper_motor 3 `ui `ux -> *U + _hex_coil_register_values * -> _i `x -> -> # *U _hex_coil_register_values `i `x `ui ]
+"7
+[; ;stepper_motor.c: 7:     }
 }
-[e :U 248 ]
-"82
-[; ;main.c: 82:                 serial_tx_char(rx_char);
-[e ( _serial_tx_char (1 _rx_char ]
-"83
-[; ;main.c: 83:                 state_translator_fpga_to_micro(rx_char, &state);
-[e ( _state_translator_fpga_to_micro (2 , -> _rx_char `uc &U _state ]
-"84
-[; ;main.c: 84:                 read_new_char = 0;
-[e = _read_new_char -> -> 0 `i `a ]
-"85
-[; ;main.c: 85:             }
+[e ++ _i -> 1 `i ]
+[e $ < _i -> 4 `i 240  ]
+[e :U 241 ]
+}
+"8
+[; ;stepper_motor.c: 8:     stepper_motor -> current_coil = current_coil;
+[e = . *U _stepper_motor 0 _current_coil ]
+"9
+[; ;stepper_motor.c: 9:     stepper_motor -> step_counter = step_counter;
+[e = . *U _stepper_motor 1 _step_counter ]
+"10
+[; ;stepper_motor.c: 10:     stepper_motor -> direction = direction;
+[e = . *U _stepper_motor 2 _direction ]
+"11
+[; ;stepper_motor.c: 11: }
+[e :UE 239 ]
+}
+"13
+[; ;stepper_motor.c: 13: void turn_on_current_coil(stepperMotor* stepper_motor){
+[v _turn_on_current_coil `(v ~T0 @X0 1 ef1`*S238 ]
+{
+[e :U _turn_on_current_coil ]
+[v _stepper_motor `*S238 ~T0 @X0 1 r1 ]
+[f ]
+"14
+[; ;stepper_motor.c: 14:     LATB = stepper_motor -> hex_coil_register_values[stepper_motor -> current_coil];
+[e = _LATB -> *U + &U . *U _stepper_motor 3 * -> -> . *U _stepper_motor 0 `ui `ux -> -> # *U &U . *U _stepper_motor 3 `ui `ux `uc ]
+"15
+[; ;stepper_motor.c: 15:     return;
+[e $UE 243  ]
+"16
+[; ;stepper_motor.c: 16: }
+[e :UE 243 ]
+}
+"18
+[; ;stepper_motor.c: 18: void update_current_coil(stepperMotor* stepper_motor){
+[v _update_current_coil `(v ~T0 @X0 1 ef1`*S238 ]
+{
+[e :U _update_current_coil ]
+[v _stepper_motor `*S238 ~T0 @X0 1 r1 ]
+[f ]
+"19
+[; ;stepper_motor.c: 19:     stepper_motor -> current_coil = stepper_motor -> current_coil + stepper_motor -> direction;
+[e = . *U _stepper_motor 0 + . *U _stepper_motor 0 . *U _stepper_motor 2 ]
+"20
+[; ;stepper_motor.c: 20:     stepper_motor -> step_counter = stepper_motor -> step_counter + 1;
+[e = . *U _stepper_motor 1 + . *U _stepper_motor 1 -> 1 `i ]
+"21
+[; ;stepper_motor.c: 21:     if (stepper_motor -> current_coil == -1) {
+[e $ ! == . *U _stepper_motor 0 -U -> 1 `i 245  ]
+{
+"22
+[; ;stepper_motor.c: 22:         stepper_motor -> current_coil = 3;
+[e = . *U _stepper_motor 0 -> 3 `i ]
+"23
+[; ;stepper_motor.c: 23:     } else if(stepper_motor -> current_coil == 4) {
+}
+[e $U 246  ]
+[e :U 245 ]
+[e $ ! == . *U _stepper_motor 0 -> 4 `i 247  ]
+{
+"24
+[; ;stepper_motor.c: 24:         stepper_motor -> current_coil = 0;
+[e = . *U _stepper_motor 0 -> 0 `i ]
+"25
+[; ;stepper_motor.c: 25:     }
 }
 [e :U 247 ]
-"86
-[; ;main.c: 86:             snprintf(greet_str, sizeof(greet_str), "%s", state_msgs[state]);
-[e ( _snprintf (2 , (. , , -> &U _greet_str `*uc -> # _greet_str `ui :s 8C *U + &U _state_msgs * -> -> _state `ui `ux -> -> # *U &U _state_msgs `ui `ux ]
-"87
-[; ;main.c: 87:             lcd_cmd(0x01);
-[e ( _lcd_cmd (1 -> -> 1 `i `uc ]
-"88
-[; ;main.c: 88:             lcd_cmd(0x80);
-[e ( _lcd_cmd (1 -> -> 128 `i `uc ]
-"89
-[; ;main.c: 89:             lcd_str(greet_str);
-[e ( _lcd_str (1 -> &U _greet_str `*Cuc ]
-"91
-[; ;main.c: 91:             state_changed = 0;
-[e = _state_changed -> -> 0 `i `a ]
-"92
-[; ;main.c: 92:         }
-}
 [e :U 246 ]
-"95
-[; ;main.c: 95:         if (state == 2){
-[e $ ! == _state -> 2 `i 249  ]
+"26
+[; ;stepper_motor.c: 26:     return;
+[e $UE 244  ]
+"27
+[; ;stepper_motor.c: 27: }
+[e :UE 244 ]
+}
+"29
+[; ;stepper_motor.c: 29: int reach_goal(stepperMotor* stepper_motor, int goal_to_reach){
+[v _reach_goal `(i ~T0 @X0 1 ef2`*S238`i ]
 {
-"96
-[; ;main.c: 96:             LATAbits.LATA1 = 1;
-[e = . . _LATAbits 0 1 -> -> 1 `i `uc ]
-"97
-[; ;main.c: 97:         } else {
+[e :U _reach_goal ]
+[v _stepper_motor `*S238 ~T0 @X0 1 r1 ]
+[v _goal_to_reach `i ~T0 @X0 1 r2 ]
+[f ]
+"30
+[; ;stepper_motor.c: 30:     if(stepper_motor -> step_counter >= goal_to_reach){
+[e $ ! >= . *U _stepper_motor 1 _goal_to_reach 249  ]
+{
+"31
+[; ;stepper_motor.c: 31:         stepper_motor -> step_counter = 0;
+[e = . *U _stepper_motor 1 -> 0 `i ]
+"32
+[; ;stepper_motor.c: 32:         return 1;
+[e ) -> 1 `i ]
+[e $UE 248  ]
+"33
+[; ;stepper_motor.c: 33:     } else {
 }
 [e $U 250  ]
 [e :U 249 ]
 {
-"98
-[; ;main.c: 98:             LATAbits.LATA1 = 0;
-[e = . . _LATAbits 0 1 -> -> 0 `i `uc ]
-"99
-[; ;main.c: 99:             if (state == 0) {
-[e $ ! == _state -> 0 `i 251  ]
-{
-"100
-[; ;main.c: 100:                 if (!msg_sent){
-[e $ ! ! != -> _msg_sent `i -> 0 `i 252  ]
-{
-"101
-[; ;main.c: 101:                     serial_tx_char(state_translator_micro_to_fpga(&state));
-[e ( _serial_tx_char (1 ( _state_translator_micro_to_fpga (1 &U _state ]
-"102
-[; ;main.c: 102:                     msg_sent = 1;
-[e = _msg_sent -> -> 1 `i `a ]
-"103
-[; ;main.c: 103:                 }
-}
-[e :U 252 ]
-"104
-[; ;main.c: 104:             } else if (state == 1){
-}
-[e $U 253  ]
-[e :U 251 ]
-[e $ ! == _state -> 1 `i 254  ]
-{
-"105
-[; ;main.c: 105:                 state = 2;
-[e = _state -> 2 `i ]
-"106
-[; ;main.c: 106:                 state_changed = 1;
-[e = _state_changed -> -> 1 `i `a ]
-"107
-[; ;main.c: 107:                 serial_tx_char(state_translator_micro_to_fpga(&state));
-[e ( _serial_tx_char (1 ( _state_translator_micro_to_fpga (1 &U _state ]
-"108
-[; ;main.c: 108:             } else if (state == 3){
-}
-[e $U 255  ]
-[e :U 254 ]
-[e $ ! == _state -> 3 `i 256  ]
-{
-"109
-[; ;main.c: 109:                 if (timer_done){
-[e $ ! != -> _timer_done `i -> 0 `i 257  ]
-{
-"110
-[; ;main.c: 110:                     state = 2;
-[e = _state -> 2 `i ]
-"111
-[; ;main.c: 111:                     state_changed = 1;
-[e = _state_changed -> -> 1 `i `a ]
-"112
-[; ;main.c: 112:                     serial_tx_char(state_translator_micro_to_fpga(&state));
-[e ( _serial_tx_char (1 ( _state_translator_micro_to_fpga (1 &U _state ]
-"114
-[; ;main.c: 114:                 } else {
-}
-[e $U 258  ]
-[e :U 257 ]
-{
-"115
-[; ;main.c: 115:                     if (T0CONbits.TMR0ON == 0){
-[e $ ! == -> . . _T0CONbits 0 5 `i -> 0 `i 259  ]
-{
-"116
-[; ;main.c: 116:                         init_timer_0();
-[e ( _init_timer_0 ..  ]
-"117
-[; ;main.c: 117:                     }
-}
-[e :U 259 ]
-"118
-[; ;main.c: 118:                 }
-}
-[e :U 258 ]
-"119
-[; ;main.c: 119:             } else if (state == 4){
-}
-[e $U 260  ]
-[e :U 256 ]
-[e $ ! == _state -> 4 `i 261  ]
-{
-"120
-[; ;main.c: 120:                 _delay((unsigned long)((3)*(4000000/4000.0)));
-[e ( __delay (1 -> * -> -> 3 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-"121
-[; ;main.c: 121:                 if (joint_homed && reach_goal(&joint_stepper, 50)){
-[e $ ! && != _joint_homed -> 0 `i != ( _reach_goal (2 , &U _joint_stepper -> 50 `i -> 0 `i 262  ]
-{
-"122
-[; ;main.c: 122:                     joint_homed = 0;
-[e = _joint_homed -> 0 `i ]
-"123
-[; ;main.c: 123:                 }
-}
-[e :U 262 ]
-"124
-[; ;main.c: 124:                 if (!joint_homed && end_effector_homed && reach_goal(&end_effector_stepper, 100)){
-[e $ ! && && ! != _joint_homed -> 0 `i != _end_effector_homed -> 0 `i != ( _reach_goal (2 , &U _end_effector_stepper -> 100 `i -> 0 `i 263  ]
-{
-"125
-[; ;main.c: 125:                     end_effector_homed = 0;
-[e = _end_effector_homed -> 0 `i ]
-"126
-[; ;main.c: 126:                 }
-}
-[e :U 263 ]
-"127
-[; ;main.c: 127:                 if (!end_effector_homed * !joint_homed){
-[e $ ! != * -> ! != _end_effector_homed -> 0 `i `i -> ! != _joint_homed -> 0 `i `i -> 0 `i 264  ]
-{
-"128
-[; ;main.c: 128:                     state = 5;
-[e = _state -> 5 `i ]
-"129
-[; ;main.c: 129:                     state_changed = 1;
-[e = _state_changed -> -> 1 `i `a ]
-"130
-[; ;main.c: 130:                 }
-}
-[e :U 264 ]
-"131
-[; ;main.c: 131:             } else if (state == 5){
-}
-[e $U 265  ]
-[e :U 261 ]
-[e $ ! == _state -> 5 `i 266  ]
-{
-"132
-[; ;main.c: 132:                 _delay((unsigned long)((3)*(4000000/4000.0)));
-[e ( __delay (1 -> * -> -> 3 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-"133
-[; ;main.c: 133:                 if (reach_goal(&joint_stepper, 100)) {
-[e $ ! != ( _reach_goal (2 , &U _joint_stepper -> 100 `i -> 0 `i 267  ]
-{
-"134
-[; ;main.c: 134:                     change_direction(&joint_stepper);
-[e ( _change_direction (1 &U _joint_stepper ]
-"135
-[; ;main.c: 135:                     mix_counter++;
-[e ++ _mix_counter -> 1 `i ]
-"136
-[; ;main.c: 136:                 }
-}
-[e :U 267 ]
-"138
-[; ;main.c: 138:                 if (mix_counter >= 20){
-[e $ ! >= _mix_counter -> 20 `i 268  ]
-{
-"139
-[; ;main.c: 139:                     state = 6;
-[e = _state -> 6 `i ]
-"140
-[; ;main.c: 140:                     mix_counter = 0;
-[e = _mix_counter -> 0 `i ]
-"141
-[; ;main.c: 141:                     init_stepper(&joint_stepper, 0, 0, 1, hex_joint_values);
-[e ( _init_stepper (4 , , , , &U _joint_stepper -> 0 `i -> 0 `i -> 1 `i &U _hex_joint_values ]
-"142
-[; ;main.c: 142:                     change_direction(&joint_stepper);
-[e ( _change_direction (1 &U _joint_stepper ]
-"143
-[; ;main.c: 143:                     change_direction(&end_effector_stepper);
-[e ( _change_direction (1 &U _end_effector_stepper ]
-"144
-[; ;main.c: 144:                 }
-}
-[e :U 268 ]
-"145
-[; ;main.c: 145:             } else if (state == 6){
-}
-[e $U 269  ]
-[e :U 266 ]
-[e $ ! == _state -> 6 `i 270  ]
-{
-"146
-[; ;main.c: 146:                 _delay((unsigned long)((3)*(4000000/4000.0)));
-[e ( __delay (1 -> * -> -> 3 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-"148
-[; ;main.c: 148:                 if (!end_effector_homed && reach_goal(&end_effector_stepper, 100)){
-[e $ ! && ! != _end_effector_homed -> 0 `i != ( _reach_goal (2 , &U _end_effector_stepper -> 100 `i -> 0 `i 271  ]
-{
-"149
-[; ;main.c: 149:                     end_effector_homed = 1;
-[e = _end_effector_homed -> 1 `i ]
-"150
-[; ;main.c: 150:                 }
-}
-[e :U 271 ]
-"152
-[; ;main.c: 152:                 if (end_effector_homed && !joint_homed && reach_goal(&joint_stepper, 50)){
-[e $ ! && && != _end_effector_homed -> 0 `i ! != _joint_homed -> 0 `i != ( _reach_goal (2 , &U _joint_stepper -> 50 `i -> 0 `i 272  ]
-{
-"153
-[; ;main.c: 153:                     joint_homed = 1;
-[e = _joint_homed -> 1 `i ]
-"154
-[; ;main.c: 154:                 }
-}
-[e :U 272 ]
-"156
-[; ;main.c: 156:                 if (end_effector_homed * joint_homed){
-[e $ ! != * _end_effector_homed _joint_homed -> 0 `i 273  ]
-{
-"157
-[; ;main.c: 157:                     state = 7;
-[e = _state -> 7 `i ]
-"158
-[; ;main.c: 158:                 }
-}
-[e :U 273 ]
-"159
-[; ;main.c: 159:             } else if (state == 7){
-}
-[e $U 274  ]
-[e :U 270 ]
-[e $ ! == _state -> 7 `i 275  ]
-{
-"160
-[; ;main.c: 160:                 if (timer_done){
-[e $ ! != -> _timer_done `i -> 0 `i 276  ]
-{
-"161
-[; ;main.c: 161:                     state = 2;
-[e = _state -> 2 `i ]
-"162
-[; ;main.c: 162:                     state_changed = 1;
-[e = _state_changed -> -> 1 `i `a ]
-"163
-[; ;main.c: 163:                     serial_tx_char(state_translator_micro_to_fpga(&state));
-[e ( _serial_tx_char (1 ( _state_translator_micro_to_fpga (1 &U _state ]
-"164
-[; ;main.c: 164:                 } else {
-}
-[e $U 277  ]
-[e :U 276 ]
-{
-"165
-[; ;main.c: 165:                     if (T0CONbits.TMR0ON == 0){
-[e $ ! == -> . . _T0CONbits 0 5 `i -> 0 `i 278  ]
-{
-"166
-[; ;main.c: 166:                         init_timer_0();
-[e ( _init_timer_0 ..  ]
-"167
-[; ;main.c: 167:                     }
-}
-[e :U 278 ]
-"168
-[; ;main.c: 168:                 }
-}
-[e :U 277 ]
-"169
-[; ;main.c: 169:             }
-}
-[e :U 275 ]
-[e :U 274 ]
-[e :U 269 ]
-[e :U 265 ]
-[e :U 260 ]
-[e :U 255 ]
-[e :U 253 ]
-"170
-[; ;main.c: 170:         }
+"34
+[; ;stepper_motor.c: 34:         turn_on_current_coil(stepper_motor);
+[e ( _turn_on_current_coil (1 _stepper_motor ]
+"35
+[; ;stepper_motor.c: 35:         update_current_coil(stepper_motor);
+[e ( _update_current_coil (1 _stepper_motor ]
+"36
+[; ;stepper_motor.c: 36:         return 0;
+[e ) -> 0 `i ]
+[e $UE 248  ]
+"37
+[; ;stepper_motor.c: 37:     }
 }
 [e :U 250 ]
-"171
-[; ;main.c: 171:     }
+"38
+[; ;stepper_motor.c: 38: }
+[e :UE 248 ]
 }
-[e :U 243 ]
-[e $U 244  ]
-[e :U 245 ]
-"172
-[; ;main.c: 172: }
-[e :UE 242 ]
-}
-"174
-[; ;main.c: 174: void mix_exit_condition(int counter, int* current_step){
-[v _mix_exit_condition `(v ~T0 @X0 1 ef2`i`*i ]
+"40
+[; ;stepper_motor.c: 40: void change_direction(stepperMotor* stepper_motor){
+[v _change_direction `(v ~T0 @X0 1 ef1`*S238 ]
 {
-[e :U _mix_exit_condition ]
-[v _counter `i ~T0 @X0 1 r1 ]
-[v _current_step `*i ~T0 @X0 1 r2 ]
+[e :U _change_direction ]
+[v _stepper_motor `*S238 ~T0 @X0 1 r1 ]
 [f ]
-"175
-[; ;main.c: 175:     if (counter >= 20){
-[e $ ! >= _counter -> 20 `i 280  ]
-{
-"176
-[; ;main.c: 176:         *current_step = 10;
-[e = *U _current_step -> 10 `i ]
-"177
-[; ;main.c: 177:     }
+"41
+[; ;stepper_motor.c: 41:     stepper_motor -> direction = stepper_motor -> direction*(-1);
+[e = . *U _stepper_motor 2 * . *U _stepper_motor 2 -U -> 1 `i ]
+"42
+[; ;stepper_motor.c: 42:     return;
+[e $UE 251  ]
+"43
+[; ;stepper_motor.c: 43: }
+[e :UE 251 ]
 }
-[e :U 280 ]
-"178
-[; ;main.c: 178: }
-[e :UE 279 ]
-}
-[v $root$_rx_char_usart `(v ~T0 @X0 0 e ]
-"180
-[; ;main.c: 180: void __attribute__((picinterrupt(("")))) rx_char_usart(void){
-[v _rx_char_usart `(v ~T39 @X0 1 ef ]
-{
-[e :U _rx_char_usart ]
-[f ]
-"181
-[; ;main.c: 181:     if(PIE1bits.RCIE && PIR1bits.RCIF){
-[e $ ! && != -> . . _PIE1bits 0 5 `i -> 0 `i != -> . . _PIR1bits 0 5 `i -> 0 `i 282  ]
-{
-"182
-[; ;main.c: 182:         PIR1bits.RCIF = 0;
-[e = . . _PIR1bits 0 5 -> -> 0 `i `uc ]
-"183
-[; ;main.c: 183:         state_changed = 1;
-[e = _state_changed -> -> 1 `i `a ]
-"184
-[; ;main.c: 184:         read_new_char = 1;
-[e = _read_new_char -> -> 1 `i `a ]
-"185
-[; ;main.c: 185:     }
-}
-[e :U 282 ]
-"186
-[; ;main.c: 186:     if(INTCONbits.TMR0IE && INTCONbits.TMR0IF){
-[e $ ! && != -> . . _INTCONbits 0 5 `i -> 0 `i != -> . . _INTCONbits 0 2 `i -> 0 `i 283  ]
-{
-"187
-[; ;main.c: 187:         T0CON = 0;
-[e = _T0CON -> -> 0 `i `uc ]
-"188
-[; ;main.c: 188:         INTCONbits.TMR0IF = 0;
-[e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
-"189
-[; ;main.c: 189:         timer_done = 1;
-[e = _timer_done -> -> 1 `i `a ]
-"190
-[; ;main.c: 190:     }
-}
-[e :U 283 ]
-"191
-[; ;main.c: 191: }
-[e :UE 281 ]
-}
-[p f _snprintf 8650752 ]
-[a 7C 68 101 118 105 99 101 32 104 97 115 32 98 101 101 110 32 114 101 115 101 116 0 ]
-[a 1C 73 68 76 69 58 32 119 97 105 116 105 110 103 32 102 111 114 32 32 118 105 97 108 32 116 111 32 98 101 32 112 108 97 99 101 100 32 105 110 32 105 110 105 116 32 112 111 115 0 ]
-[a 8C 37 115 0 ]
-[a 2C 73 78 73 84 95 80 79 83 58 32 116 104 101 32 118 105 97 108 32 105 115 32 97 116 32 116 104 101 32 105 110 105 116 32 112 111 115 105 116 105 111 110 44 32 112 114 111 99 101 115 115 32 105 115 32 115 116 97 114 116 105 110 103 0 ]
-[a 4C 79 86 69 78 58 32 114 101 97 99 104 105 110 103 32 116 104 101 32 99 111 114 114 101 99 116 32 116 101 109 112 101 114 97 116 117 114 101 0 ]
-[a 3C 77 79 86 69 77 69 78 84 0 ]
-[a 6C 77 73 88 73 78 71 0 ]
-[a 5C 71 82 65 83 80 73 78 71 0 ]

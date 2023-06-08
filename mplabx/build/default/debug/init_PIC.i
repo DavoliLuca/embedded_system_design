@@ -3876,11 +3876,11 @@ void init_PORTS(void){
 
     LATA = 0;
     PORTA = 0;
-    TRISA = 0x00;
+    TRISA = 0xF0;
 
     LATB = 0;
     PORTB = 0;
-    TRISB = 0xF0;
+    TRISB = 0x00;
 
 
     LATC = 0;

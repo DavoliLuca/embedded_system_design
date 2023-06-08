@@ -4135,10 +4135,26 @@ void init_ccp1(void);
 void update_pwm_duty_ccp1(double time_up);
 # 17 "main.c" 2
 
+# 1 "./stepper_motor.h" 1
+# 81 "./stepper_motor.h"
+typedef struct {
+    int current_coil;
+    int step_counter;
+    int direction;
+    unsigned int hex_coil_register_values[4];
+} stepperMotor;
+
+void turn_on_current_coil(stepperMotor* stepper_motor);
+void init_stepper(stepperMotor* stepper_motor, int current_step, int step_counter, int direction, int hex_coil_register_values[4]);
+void update_current_coil(stepperMotor* stepper_motor);
+int reach_goal(stepperMotor* stepper_motor, int goal_to_reach);
+void change_direction(stepperMotor* stepper_motor);
+# 18 "main.c" 2
+
 
 void __attribute__((picinterrupt(("")))) rx_char_usart(void);
 void compute_next_step(int* current_step, int step_direction);
-void update_direction_and_counters(int* counter_step, int* step_direction, int* counter);
+void update_stepper_direction_and_counters(int* counter_step, int* step_direction, int* counter);
 void mix_exit_condition(int counter, int* current_step);
 
 static _Bool state_changed = 0;
@@ -4146,18 +4162,28 @@ static _Bool msg_sent = 0;
 static _Bool read_new_char = 0;
 static _Bool timer_done = 0;
 const char* state_msgs[6] = {
-    "IDLE: waiting for jab to be placed in init pos",
-    "INIT_POS: the jab is at the init position, process is starting",
+    "IDLE: waiting for  vial to be placed in init pos",
+    "INIT_POS: the vial is at the init position, process is starting",
     "MOVEMENT",
     "OVEN: reaching the correct temperature",
-    "MIXING_STATION: the jab has reached the mixing station",
-    "PICK_UP: the jab has reached the pick up station"
+    "GRASPING",
+    "MIXING",
+    "DILUTING",
+    "PICK_UP: the vial has reached the pick up station"
 };
 int state;
 int mix_current_step;
 int mix_direction;
 int mix_step_counter;
 int mix_counter;
+int hex_joint_values[4] = {0x01, 0x02, 0x04, 0x08};
+int hex_end_effector_values[4] = {0x01*16, 0x02*16, 0x04*16, 0x08*16};
+int joint_homed = 0;
+int end_effector_homed = 0;
+
+stepperMotor joint_stepper;
+
+stepperMotor end_effector_stepper;
 
 
 void main(void){
@@ -4167,6 +4193,8 @@ void main(void){
     init_timer_2();
     init_ccp1();
     init_interrupts();
+    init_stepper(&joint_stepper, 0, 0, 1, hex_joint_values);
+    init_stepper(&end_effector_stepper, 0, 0, 1, hex_end_effector_values);
     lcd_init();
     lcd_cmd(0x0C);
 
@@ -4175,9 +4203,7 @@ void main(void){
     lcd_str("Device has been reset");
 
     (INTCONbits.GIE = 1);
-    mix_current_step = 0;
-    mix_direction = 1;
-    mix_step_counter = 0;
+
     mix_counter = 0;
 
     while(1){
@@ -4202,9 +4228,9 @@ void main(void){
 
 
         if (state == 2){
-            LATBbits.LATB1 = 1;
+            LATAbits.LATA1 = 1;
         } else {
-            LATBbits.LATB1 = 0;
+            LATAbits.LATA1 = 0;
             if (state == 0) {
                 if (!msg_sent){
                     serial_tx_char(state_translator_micro_to_fpga(&state));
@@ -4226,45 +4252,46 @@ void main(void){
                     }
                 }
             } else if (state == 4){
-                switch(mix_current_step){
-
-                    case 0:
-                        LATA = 0x01;
-                        compute_next_step(&mix_current_step, mix_direction);
-                        update_direction_and_counters(&mix_step_counter, &mix_direction, &mix_counter);
-                        mix_exit_condition(mix_counter, &mix_current_step);
-                        _delay((unsigned long)((10)*(4000000/4000.0)));
-                        break;
-                    case 1:
-                        LATA = 0x02;
-                        compute_next_step(&mix_current_step, mix_direction);
-                        update_direction_and_counters(&mix_step_counter, &mix_direction, &mix_counter);
-                        mix_exit_condition(mix_counter, &mix_current_step);
-                        _delay((unsigned long)((1)*(4000000/4000.0)));
-                        break;
-                    case 2:
-                        LATA = 0x04;
-                        compute_next_step(&mix_current_step, mix_direction);
-                        update_direction_and_counters(&mix_step_counter, &mix_direction, &mix_counter);
-                        mix_exit_condition(mix_counter, &mix_current_step);
-                        _delay((unsigned long)((1)*(4000000/4000.0)));
-                        break;
-                    case 3:
-                        LATA = 0x08;
-                        compute_next_step(&mix_current_step, mix_direction);
-                        update_direction_and_counters(&mix_step_counter, &mix_direction, &mix_counter);
-                        mix_exit_condition(mix_counter, &mix_current_step);
-                        _delay((unsigned long)((1)*(4000000/4000.0)));
-                        break;
-                    case 10:
-                        state = 2;
-                        state_changed = 1;
-                        mix_direction = 1;
-                        mix_step_counter = 0;
-                        mix_counter = 0;
-
+                _delay((unsigned long)((3)*(4000000/4000.0)));
+                if (joint_homed && reach_goal(&joint_stepper, 50)){
+                    joint_homed = 0;
+                }
+                if (!joint_homed && end_effector_homed && reach_goal(&end_effector_stepper, 100)){
+                    end_effector_homed = 0;
+                }
+                if (!end_effector_homed * !joint_homed){
+                    state = 5;
+                    state_changed = 1;
                 }
             } else if (state == 5){
+                _delay((unsigned long)((3)*(4000000/4000.0)));
+                if (reach_goal(&joint_stepper, 100)) {
+                    change_direction(&joint_stepper);
+                    mix_counter++;
+                }
+
+                if (mix_counter >= 20){
+                    state = 6;
+                    mix_counter = 0;
+                    init_stepper(&joint_stepper, 0, 0, 1, hex_joint_values);
+                    change_direction(&joint_stepper);
+                    change_direction(&end_effector_stepper);
+                }
+            } else if (state == 6){
+                _delay((unsigned long)((3)*(4000000/4000.0)));
+
+                if (!end_effector_homed && reach_goal(&end_effector_stepper, 100)){
+                    end_effector_homed = 1;
+                }
+
+                if (end_effector_homed && !joint_homed && reach_goal(&joint_stepper, 50)){
+                    joint_homed = 1;
+                }
+
+                if (end_effector_homed * joint_homed){
+                    state = 7;
+                }
+            } else if (state == 7){
                 if (timer_done){
                     state = 2;
                     state_changed = 1;
@@ -4277,26 +4304,6 @@ void main(void){
             }
         }
     }
-}
-
-void compute_next_step(int* current_step, int step_direction){
-    *current_step = *current_step + step_direction;
-    if (*current_step == -1) {
-        *current_step = 3;
-    } else if(*current_step == 4) {
-        *current_step = 0;
-    }
-    return;
-}
-
-void update_direction_and_counters(int* counter_step, int* step_direction, int* counter){
-    *counter_step = *counter_step + 1;
-    if (*counter_step >= 96){
-        *counter_step = 0;
-        *counter = *counter + 1;
-        *step_direction = *step_direction *(-1);
-    }
-    return;
 }
 
 void mix_exit_condition(int counter, int* current_step){
