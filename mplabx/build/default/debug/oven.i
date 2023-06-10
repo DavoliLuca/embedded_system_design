@@ -1,4 +1,4 @@
-# 1 "main.c"
+# 1 "oven.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,9 +6,7 @@
 # 1 "<built-in>" 2
 # 1 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "main.c" 2
-
-
+# 1 "oven.c" 2
 
 # 1 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\\pic\\include\\xc.h" 1 3
 # 18 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\\pic\\include\\xc.h" 3
@@ -3807,325 +3805,7 @@ extern __attribute__((nonreentrant)) void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 33 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\\pic\\include\\xc.h" 2 3
-# 4 "main.c" 2
-
-
-
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\stdio.h" 1 3
-# 24 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\stdio.h" 3
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\bits/alltypes.h" 1 3
-
-
-
-
-
-typedef void * va_list[1];
-
-
-
-
-typedef void * __isoc_va_list[1];
-# 137 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef long ssize_t;
-# 246 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef long long off_t;
-# 399 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef struct _IO_FILE FILE;
-# 24 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\stdio.h" 2 3
-# 52 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\stdio.h" 3
-typedef union _G_fpos64_t {
- char __opaque[16];
- double __align;
-} fpos_t;
-
-extern FILE *const stdin;
-extern FILE *const stdout;
-extern FILE *const stderr;
-
-
-
-
-
-FILE *fopen(const char *restrict, const char *restrict);
-FILE *freopen(const char *restrict, const char *restrict, FILE *restrict);
-int fclose(FILE *);
-
-int remove(const char *);
-int rename(const char *, const char *);
-
-int feof(FILE *);
-int ferror(FILE *);
-int fflush(FILE *);
-void clearerr(FILE *);
-
-int fseek(FILE *, long, int);
-long ftell(FILE *);
-void rewind(FILE *);
-
-int fgetpos(FILE *restrict, fpos_t *restrict);
-int fsetpos(FILE *, const fpos_t *);
-
-size_t fread(void *restrict, size_t, size_t, FILE *restrict);
-size_t fwrite(const void *restrict, size_t, size_t, FILE *restrict);
-
-int fgetc(FILE *);
-int getc(FILE *);
-int getchar(void);
-int ungetc(int, FILE *);
-
-int fputc(int, FILE *);
-int putc(int, FILE *);
-int putchar(int);
-
-char *fgets(char *restrict, int, FILE *restrict);
-
-char *gets(char *);
-
-
-int fputs(const char *restrict, FILE *restrict);
-int puts(const char *);
-
-#pragma printf_check(printf) const
-#pragma printf_check(vprintf) const
-#pragma printf_check(sprintf) const
-#pragma printf_check(snprintf) const
-#pragma printf_check(vsprintf) const
-#pragma printf_check(vsnprintf) const
-
-int printf(const char *restrict, ...);
-int fprintf(FILE *restrict, const char *restrict, ...);
-int sprintf(char *restrict, const char *restrict, ...);
-int snprintf(char *restrict, size_t, const char *restrict, ...);
-
-int vprintf(const char *restrict, __isoc_va_list);
-int vfprintf(FILE *restrict, const char *restrict, __isoc_va_list);
-int vsprintf(char *restrict, const char *restrict, __isoc_va_list);
-int vsnprintf(char *restrict, size_t, const char *restrict, __isoc_va_list);
-
-int scanf(const char *restrict, ...);
-int fscanf(FILE *restrict, const char *restrict, ...);
-int sscanf(const char *restrict, const char *restrict, ...);
-int vscanf(const char *restrict, __isoc_va_list);
-int vfscanf(FILE *restrict, const char *restrict, __isoc_va_list);
-int vsscanf(const char *restrict, const char *restrict, __isoc_va_list);
-
-void perror(const char *);
-
-int setvbuf(FILE *restrict, char *restrict, int, size_t);
-void setbuf(FILE *restrict, char *restrict);
-
-char *tmpnam(char *);
-FILE *tmpfile(void);
-
-
-
-
-FILE *fmemopen(void *restrict, size_t, const char *restrict);
-FILE *open_memstream(char **, size_t *);
-FILE *fdopen(int, const char *);
-FILE *popen(const char *, const char *);
-int pclose(FILE *);
-int fileno(FILE *);
-int fseeko(FILE *, off_t, int);
-off_t ftello(FILE *);
-int dprintf(int, const char *restrict, ...);
-int vdprintf(int, const char *restrict, __isoc_va_list);
-void flockfile(FILE *);
-int ftrylockfile(FILE *);
-void funlockfile(FILE *);
-int getc_unlocked(FILE *);
-int getchar_unlocked(void);
-int putc_unlocked(int, FILE *);
-int putchar_unlocked(int);
-ssize_t getdelim(char **restrict, size_t *restrict, int, FILE *restrict);
-ssize_t getline(char **restrict, size_t *restrict, FILE *restrict);
-int renameat(int, const char *, int, const char *);
-char *ctermid(char *);
-
-
-
-
-
-
-
-char *tempnam(const char *, const char *);
-# 7 "main.c" 2
-
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\stdint.h" 1 3
-# 22 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\stdint.h" 3
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\bits/alltypes.h" 1 3
-# 127 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef unsigned long uintptr_t;
-# 142 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef long intptr_t;
-# 158 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef signed char int8_t;
-
-
-
-
-typedef short int16_t;
-# 173 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef long int32_t;
-
-
-
-
-
-typedef long long int64_t;
-# 188 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef long long intmax_t;
-
-
-
-
-
-typedef unsigned char uint8_t;
-
-
-
-
-typedef unsigned short uint16_t;
-# 209 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef unsigned long uint32_t;
-
-
-
-
-
-typedef unsigned long long uint64_t;
-# 229 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef unsigned long long uintmax_t;
-# 22 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\stdint.h" 2 3
-
-
-typedef int8_t int_fast8_t;
-
-typedef int64_t int_fast64_t;
-
-
-typedef int8_t int_least8_t;
-typedef int16_t int_least16_t;
-
-typedef int24_t int_least24_t;
-
-typedef int32_t int_least32_t;
-
-typedef int64_t int_least64_t;
-
-
-typedef uint8_t uint_fast8_t;
-
-typedef uint64_t uint_fast64_t;
-
-
-typedef uint8_t uint_least8_t;
-typedef uint16_t uint_least16_t;
-
-typedef uint24_t uint_least24_t;
-
-typedef uint32_t uint_least32_t;
-
-typedef uint64_t uint_least64_t;
-# 139 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\stdint.h" 3
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\bits/stdint.h" 1 3
-typedef int32_t int_fast16_t;
-typedef int32_t int_fast32_t;
-typedef uint32_t uint_fast16_t;
-typedef uint32_t uint_fast32_t;
-# 139 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\stdint.h" 2 3
-# 8 "main.c" 2
-
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\stdbool.h" 1 3
-# 9 "main.c" 2
-
-
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\string.h" 1 3
-# 25 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\string.h" 3
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\bits/alltypes.h" 1 3
-# 411 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef struct __locale_struct * locale_t;
-# 25 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\string.h" 2 3
-
-
-void *memcpy (void *restrict, const void *restrict, size_t);
-void *memmove (void *, const void *, size_t);
-void *memset (void *, int, size_t);
-int memcmp (const void *, const void *, size_t);
-void *memchr (const void *, int, size_t);
-
-char *strcpy (char *restrict, const char *restrict);
-char *strncpy (char *restrict, const char *restrict, size_t);
-
-char *strcat (char *restrict, const char *restrict);
-char *strncat (char *restrict, const char *restrict, size_t);
-
-int strcmp (const char *, const char *);
-int strncmp (const char *, const char *, size_t);
-
-int strcoll (const char *, const char *);
-size_t strxfrm (char *restrict, const char *restrict, size_t);
-
-char *strchr (const char *, int);
-char *strrchr (const char *, int);
-
-size_t strcspn (const char *, const char *);
-size_t strspn (const char *, const char *);
-char *strpbrk (const char *, const char *);
-char *strstr (const char *, const char *);
-char *strtok (char *restrict, const char *restrict);
-
-size_t strlen (const char *);
-
-char *strerror (int);
-# 65 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\string.h" 3
-char *strtok_r (char *restrict, const char *restrict, char **restrict);
-int strerror_r (int, char *, size_t);
-char *stpcpy(char *restrict, const char *restrict);
-char *stpncpy(char *restrict, const char *restrict, size_t);
-size_t strnlen (const char *, size_t);
-char *strdup (const char *);
-char *strndup (const char *, size_t);
-char *strsignal(int);
-char *strerror_l (int, locale_t);
-int strcoll_l (const char *, const char *, locale_t);
-size_t strxfrm_l (char *restrict, const char *restrict, size_t, locale_t);
-
-
-
-
-void *memccpy (void *restrict, const void *restrict, int, size_t);
-# 11 "main.c" 2
-
-
-# 1 "./serial_rs232.h" 1
-# 79 "./serial_rs232.h"
-void init_USART(void);
-void serial_tx_char(unsigned char val);
-void serial_tx_string(const char* val);
-unsigned char get_reg_value();
-# 13 "main.c" 2
-
-# 1 "./init_PIC.h" 1
-# 79 "./init_PIC.h"
-void init_PORTS(void);
-
-void init_interrupts(void);
-# 14 "main.c" 2
-
-# 1 "./lcd.h" 1
-# 98 "./lcd.h"
-void lcd_init(void);
-void lcd_cmd(unsigned char val);
-void lcd_dat(unsigned char val);
-void lcd_str(const char* str);
-# 15 "main.c" 2
-
-# 1 "./utils.h" 1
-# 79 "./utils.h"
-void state_translator_fpga_to_micro(char state_machine_code, int* state);
-unsigned char state_translator_micro_to_fpga(int* state);
-# 16 "main.c" 2
+# 2 "oven.c" 2
 
 # 1 "./oven.h" 1
 # 84 "./oven.h"
@@ -4139,218 +3819,45 @@ void configure_analog_digital_conversion(void);
 int get_temperature(void);
 void wait_for_zero(void);
 void check_for_temperature(int temp_to_be_checked);
-# 17 "main.c" 2
-
-# 1 "./timer.h" 1
-# 79 "./timer.h"
-void init_timer_0(void);
-void init_timer_2(void);
-void init_ccp1(void);
-void update_pwm_duty_ccp1(double time_up);
-# 18 "main.c" 2
-
-# 1 "./stepper_motor.h" 1
-# 81 "./stepper_motor.h"
-typedef struct {
-    int current_coil;
-    int step_counter;
-    int direction;
-    unsigned int hex_coil_register_values[4];
-} stepperMotor;
-
-void turn_on_current_coil(stepperMotor* stepper_motor);
-void init_stepper(stepperMotor* stepper_motor, int current_step, int step_counter, int direction, int hex_coil_register_values[4]);
-void update_current_coil(stepperMotor* stepper_motor);
-int reach_goal(stepperMotor* stepper_motor, int goal_to_reach);
-void change_direction(stepperMotor* stepper_motor);
-# 19 "main.c" 2
+# 3 "oven.c" 2
 
 
-void __attribute__((picinterrupt(("")))) rx_char_usart(void);
+int temperature_int;
+int temperature_scaled;
 
-static _Bool state_changed = 0;
-static _Bool msg_sent = 0;
-static _Bool read_new_char = 0;
-static _Bool timer_done = 0;
-const char* state_msgs[8] = {
-    "IDLE: waiting for  vial to be placed in init pos",
-    "INIT_POS: the vial is at the init position, process is starting",
-    "MOVEMENT",
-    "OVEN: reaching the correct temperature",
-    "GRASPING",
-    "MIXING",
-    "DILUTING",
-    "PICK_UP: the vial has reached the pick up station"
-};
-int state;
-int mix_current_step;
-int mix_direction;
-int mix_step_counter;
-int mix_counter;
-int hex_joint_values[4] = {0x01, 0x02, 0x04, 0x08};
-int hex_end_effector_values[4] = {0x01*16, 0x02*16, 0x04*16, 0x08*16};
-int joint_homed = 0;
-int end_effector_homed = 0;
-int trash_counter = 0;
-int move_to_trash = 0;
+void configure_analog_digital_conversion(void){
+    LATA = 0;
+    PORTA = 0;
+    TRISA = 0xFF;
+    ADCON0 = 0;
+    ADCON0bits.CHS0 = 0;
+    ADCON0bits.CHS1 = 0;
+    ADCON0bits.CHS2 = 1;
+    ADCON0bits.ADON = 1;
+    ADRESH = 0;
+    ADRESL = 0;
+    ADCON1 = 0;
+}
 
-stepperMotor joint_stepper;
+int get_temperature(void){
+    ADCON0bits.GO = 1;
+    while(ADCON0bits.GO == 1);
+    return (int) (ADRESH * 0.25) + -55;
+}
 
-stepperMotor end_effector_stepper;
-
-
-void main(void){
-    unsigned char rx_char = ' ';
-    init_PORTS();
-    init_USART();
-    init_timer_2();
-    init_ccp1();
-    init_interrupts();
-    configure_analog_digital_conversion();
-    init_stepper(&joint_stepper, 0, 0, 1, hex_joint_values);
-    init_stepper(&end_effector_stepper, 0, 0, 1, hex_end_effector_values);
-    lcd_init();
-    lcd_cmd(0x0C);
-
-    lcd_cmd(0x01);
-    lcd_cmd(0x80);
-    lcd_str("Device has been reset");
-
-    (INTCONbits.GIE = 1);
-
-    mix_counter = 0;
-
+void wait_for_zero(void){
     while(1){
-        if (state_changed){
-            const char* greet_str[80];
-            if (read_new_char){
-                rx_char = get_reg_value();
-                if (rx_char == 'u'){
-                    serial_tx_char(rx_char);
-                }
-                serial_tx_char(rx_char);
-                state_translator_fpga_to_micro(rx_char, &state);
-                read_new_char = 0;
-            }
-            snprintf(greet_str, sizeof(greet_str), "%s", state_msgs[state]);
-            lcd_cmd(0x01);
-            lcd_cmd(0x80);
-            lcd_str(greet_str);
-
-            state_changed = 0;
-        }
-
-
-        if (state == 2){
-            LATAbits.LATA1 = 1;
-            if (move_to_trash && trash_counter < 100){
-                trash_counter++;
-            } else if (move_to_trash && trash_counter >= 100){
-                state = 0;
-            }
-        } else {
-            LATAbits.LATA1 = 0;
-            if (state == 0) {
-                if (!msg_sent){
-                    serial_tx_char(state_translator_micro_to_fpga(&state));
-                    msg_sent = 1;
-                }
-            } else if (state == 1){
-                state = 2;
-                state_changed = 1;
-                serial_tx_char(state_translator_micro_to_fpga(&state));
-            } else if (state == 3){
-                if (timer_done){
-                    if(check_temperature(get_temperature())){
-                        state = 2;
-                        state_changed = 1;
-                        timer_done = 0;
-                        serial_tx_char(state_translator_micro_to_fpga(&state));
-                    } else{
-
-                    }
-
-                } else {
-                    if (T0CONbits.TMR0ON == 0){
-                        wait_for_zero();
-                        init_timer_0();
-                    }
-                    int current_temp = get_temperature();
-                }
-
-            } else if (state == 4){
-                _delay((unsigned long)((3)*(4000000/4000.0)));
-                if (joint_homed && reach_goal(&joint_stepper, 50)){
-                    joint_homed = 0;
-                }
-                if (!joint_homed && end_effector_homed && reach_goal(&end_effector_stepper, 100)){
-                    end_effector_homed = 0;
-                }
-                if (!end_effector_homed * !joint_homed){
-                    state = 5;
-                    state_changed = 1;
-                }
-            } else if (state == 5){
-                _delay((unsigned long)((3)*(4000000/4000.0)));
-                if (reach_goal(&joint_stepper, 100)) {
-                    change_direction(&joint_stepper);
-                    mix_counter++;
-                }
-
-                if (mix_counter >= 20){
-                    state = 6;
-                    mix_counter = 0;
-                    init_stepper(&joint_stepper, 0, 0, 1, hex_joint_values);
-                    change_direction(&joint_stepper);
-                    change_direction(&end_effector_stepper);
-                }
-            } else if (state == 6){
-                _delay((unsigned long)((3)*(4000000/4000.0)));
-
-                if (!end_effector_homed && reach_goal(&end_effector_stepper, 100)){
-                    end_effector_homed = 1;
-                }
-
-                if (end_effector_homed && !joint_homed && reach_goal(&joint_stepper, 50)){
-                    joint_homed = 1;
-                }
-
-                if (end_effector_homed * joint_homed){
-                    state = 2;
-                }
-            } else if (state == 7){
-                if (timer_done){
-                    state_changed = 1;
-                    serial_tx_char(state_translator_micro_to_fpga(&state));
-                    state = 2;
-                    move_to_trash = 1;
-                    trash_counter = 0;
-                } else {
-                    if (T0CONbits.TMR0ON == 0){
-                        init_timer_0();
-                    }
-
-                }
-            }
+        if (get_temperature() == -55){
+            break;
         }
     }
 }
 
-void mix_exit_condition(int counter, int* current_step){
-    if (counter >= 20){
-        *current_step = 10;
-    }
-}
-
-void __attribute__((picinterrupt(("")))) rx_char_usart(void){
-    if(PIE1bits.RCIE && PIR1bits.RCIF){
-        PIR1bits.RCIF = 0;
-        state_changed = 1;
-        read_new_char = 1;
-    }
-    if(INTCONbits.TMR0IE && INTCONbits.TMR0IF){
-        T0CON = 0;
-        INTCONbits.TMR0IF = 0;
-        timer_done = 1;
+int check_temperature(int temp_to_be_checked){
+    float grad = abs(temp_to_be_checked - (-63))/5;
+    if (grad >= 12 && grad <= 13){
+        return 1;
+    } else {
+        return 0;
     }
 }

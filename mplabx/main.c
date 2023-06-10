@@ -14,19 +14,17 @@
 #include "init_PIC.h"
 #include "lcd.h"
 #include "utils.h"
+#include "oven.h"
 #include "timer.h"
 #include "stepper_motor.h"
 
 void __interrupt() rx_char_usart(void);
-void compute_next_step(int* current_step, int step_direction);
-void update_stepper_direction_and_counters(int* counter_step, int* step_direction, int* counter);
-void mix_exit_condition(int counter, int* current_step);
 
 static _Bool state_changed = false;
 static _Bool msg_sent = false;
 static _Bool read_new_char = false;
 static _Bool timer_done = false;
-const char* state_msgs[6] = {
+const char* state_msgs[8] = {
     "IDLE: waiting for  vial to be placed in init pos",
     "INIT_POS: the vial is at the init position, process is starting",
     "MOVEMENT",
@@ -45,6 +43,8 @@ int hex_joint_values[COILS_NUMBER] = {0x01, 0x02, 0x04, 0x08};
 int hex_end_effector_values[COILS_NUMBER] = {0x01*16, 0x02*16, 0x04*16, 0x08*16};
 int joint_homed = 0;
 int end_effector_homed = 0;
+int trash_counter = 0;
+int move_to_trash = 0;
 
 stepperMotor joint_stepper;
 
@@ -58,6 +58,7 @@ void main(void){
     init_timer_2();
     init_ccp1();
     init_interrupts();
+    configure_analog_digital_conversion();
     init_stepper(&joint_stepper, 0, 0, 1, hex_joint_values);
     init_stepper(&end_effector_stepper, 0, 0, 1, hex_end_effector_values);
     lcd_init();
@@ -92,10 +93,15 @@ void main(void){
         }
         
         
-        if (state == 2){ // Movement
-            LATAbits.LATA1 = 1;
+        if (state == 2){
+            LATAbits.LATA1 = 1; // Belt Movement
+            if (move_to_trash && trash_counter < 100){
+                trash_counter++;
+            } else if (move_to_trash && trash_counter >= 100){
+                state = 0;
+            }
         } else {
-            LATAbits.LATA1 = 0; // Stop Movement
+            LATAbits.LATA1 = 0; // Stop Belt Movement
             if (state == 0) {
                 if (!msg_sent){
                     serial_tx_char(state_translator_micro_to_fpga(&state));
@@ -107,15 +113,23 @@ void main(void){
                 serial_tx_char(state_translator_micro_to_fpga(&state));
             } else if (state == 3){
                 if (timer_done){
-                    state = 2;
-                    state_changed = true;
-                    serial_tx_char(state_translator_micro_to_fpga(&state)); // Send state update to fpga
+                    if(check_temperature(get_temperature())){
+                        state = 2;
+                        state_changed = true;
+                        timer_done = false;
+                        serial_tx_char(state_translator_micro_to_fpga(&state)); // Send state update to fpga
+                    } else{
+                        //Stop or move to trash
+                    }
                     
                 } else {
                     if (T0CONbits.TMR0ON == 0){ // The first time init the timer
+                        wait_for_zero();
                         init_timer_0(); // Initializes and starts a timer
                     }
+                    int current_temp = get_temperature();
                 }
+                
             } else if (state == 4){
                 __delay_ms(3);
                 if (joint_homed && reach_goal(&joint_stepper, 50)){
@@ -154,17 +168,20 @@ void main(void){
                 }
                 
                 if (end_effector_homed * joint_homed){
-                    state = 7;
+                    state = 2;
                 }
             } else if (state == 7){
                 if (timer_done){
-                    state = 2; // Here it should go either to trash Move [2] or to Idle [7]
                     state_changed = true;
                     serial_tx_char(state_translator_micro_to_fpga(&state)); // Send state update to fpga
+                    state = 2; // Here it should go either to trash Move [2] because the vial hasn't been picked up on time
+                    move_to_trash = 1;
+                    trash_counter = 0;
                 } else {
-                    if (T0CONbits.TMR0ON == 0){ // init if it has not been turned on yet
+                    if (T0CONbits.TMR0ON == 0){ // Init if it has not been turned on yet
                         init_timer_0();
                     }
+                    // Here we should check if the vial is still there
                 }
             }
         }

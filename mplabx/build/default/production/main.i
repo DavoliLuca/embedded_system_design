@@ -4127,13 +4127,27 @@ void state_translator_fpga_to_micro(char state_machine_code, int* state);
 unsigned char state_translator_micro_to_fpga(int* state);
 # 16 "main.c" 2
 
+# 1 "./oven.h" 1
+# 84 "./oven.h"
+typedef struct {
+    int phase;
+    int start_temp;
+    int stop_temp;
+} oven;
+
+void configure_analog_digital_conversion(void);
+int get_temperature(void);
+void wait_for_zero(void);
+void check_for_temperature(int temp_to_be_checked);
+# 17 "main.c" 2
+
 # 1 "./timer.h" 1
 # 79 "./timer.h"
 void init_timer_0(void);
 void init_timer_2(void);
 void init_ccp1(void);
 void update_pwm_duty_ccp1(double time_up);
-# 17 "main.c" 2
+# 18 "main.c" 2
 
 # 1 "./stepper_motor.h" 1
 # 81 "./stepper_motor.h"
@@ -4149,19 +4163,16 @@ void init_stepper(stepperMotor* stepper_motor, int current_step, int step_counte
 void update_current_coil(stepperMotor* stepper_motor);
 int reach_goal(stepperMotor* stepper_motor, int goal_to_reach);
 void change_direction(stepperMotor* stepper_motor);
-# 18 "main.c" 2
+# 19 "main.c" 2
 
 
 void __attribute__((picinterrupt(("")))) rx_char_usart(void);
-void compute_next_step(int* current_step, int step_direction);
-void update_stepper_direction_and_counters(int* counter_step, int* step_direction, int* counter);
-void mix_exit_condition(int counter, int* current_step);
 
 static _Bool state_changed = 0;
 static _Bool msg_sent = 0;
 static _Bool read_new_char = 0;
 static _Bool timer_done = 0;
-const char* state_msgs[6] = {
+const char* state_msgs[8] = {
     "IDLE: waiting for  vial to be placed in init pos",
     "INIT_POS: the vial is at the init position, process is starting",
     "MOVEMENT",
@@ -4178,8 +4189,10 @@ int mix_step_counter;
 int mix_counter;
 int hex_joint_values[4] = {0x01, 0x02, 0x04, 0x08};
 int hex_end_effector_values[4] = {0x01*16, 0x02*16, 0x04*16, 0x08*16};
-int joint_ready = 0;
-int end_effector_ready = 0;
+int joint_homed = 0;
+int end_effector_homed = 0;
+int trash_counter = 0;
+int move_to_trash = 0;
 
 stepperMotor joint_stepper;
 
@@ -4193,6 +4206,7 @@ void main(void){
     init_timer_2();
     init_ccp1();
     init_interrupts();
+    configure_analog_digital_conversion();
     init_stepper(&joint_stepper, 0, 0, 1, hex_joint_values);
     init_stepper(&end_effector_stepper, 0, 0, 1, hex_end_effector_values);
     lcd_init();
@@ -4229,6 +4243,11 @@ void main(void){
 
         if (state == 2){
             LATAbits.LATA1 = 1;
+            if (move_to_trash && trash_counter < 100){
+                trash_counter++;
+            } else if (move_to_trash && trash_counter >= 100){
+                state = 0;
+            }
         } else {
             LATAbits.LATA1 = 0;
             if (state == 0) {
@@ -4242,27 +4261,34 @@ void main(void){
                 serial_tx_char(state_translator_micro_to_fpga(&state));
             } else if (state == 3){
                 if (timer_done){
-                    state = 2;
-                    state_changed = 1;
-                    serial_tx_char(state_translator_micro_to_fpga(&state));
+                    if(check_temperature(get_temperature())){
+                        state = 2;
+                        state_changed = 1;
+                        timer_done = 0;
+                        serial_tx_char(state_translator_micro_to_fpga(&state));
+                    } else{
+
+                    }
 
                 } else {
                     if (T0CONbits.TMR0ON == 0){
+                        wait_for_zero();
                         init_timer_0();
                     }
+                    int current_temp = get_temperature();
                 }
+
             } else if (state == 4){
                 _delay((unsigned long)((3)*(4000000/4000.0)));
-                if (!joint_ready && reach_goal(&joint_stepper, 50)){
-                    joint_ready = 1;
+                if (joint_homed && reach_goal(&joint_stepper, 50)){
+                    joint_homed = 0;
                 }
-                if (joint_ready && !end_effector_ready && reach_goal(&end_effector_stepper, 100)){
-                    end_effector_ready = 1;
+                if (!joint_homed && end_effector_homed && reach_goal(&end_effector_stepper, 100)){
+                    end_effector_homed = 0;
                 }
-                if (end_effector_ready * joint_ready){
-                    state = 2;
-                    joint_ready = 0;
-                    end_effector_ready = 0;
+                if (!end_effector_homed * !joint_homed){
+                    state = 5;
+                    state_changed = 1;
                 }
             } else if (state == 5){
                 _delay((unsigned long)((3)*(4000000/4000.0)));
@@ -4272,21 +4298,38 @@ void main(void){
                 }
 
                 if (mix_counter >= 20){
-                    state = 2;
+                    state = 6;
                     mix_counter = 0;
                     init_stepper(&joint_stepper, 0, 0, 1, hex_joint_values);
+                    change_direction(&joint_stepper);
+                    change_direction(&end_effector_stepper);
                 }
             } else if (state == 6){
+                _delay((unsigned long)((3)*(4000000/4000.0)));
 
+                if (!end_effector_homed && reach_goal(&end_effector_stepper, 100)){
+                    end_effector_homed = 1;
+                }
+
+                if (end_effector_homed && !joint_homed && reach_goal(&joint_stepper, 50)){
+                    joint_homed = 1;
+                }
+
+                if (end_effector_homed * joint_homed){
+                    state = 2;
+                }
             } else if (state == 7){
                 if (timer_done){
-                    state = 2;
                     state_changed = 1;
                     serial_tx_char(state_translator_micro_to_fpga(&state));
+                    state = 2;
+                    move_to_trash = 1;
+                    trash_counter = 0;
                 } else {
                     if (T0CONbits.TMR0ON == 0){
                         init_timer_0();
                     }
+
                 }
             }
         }
