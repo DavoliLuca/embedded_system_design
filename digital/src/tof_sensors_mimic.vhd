@@ -8,9 +8,10 @@ entity tof_mimic is
 end entity tof_mimic;
 
 architecture arc_tof_mimic of tof_mimic is
-    signal mv_counter: std_logic;
+    signal mv_counter: std_logic := '0';
+    signal state_msg: std_logic_vector(7 downto 0) = "00000000";
 begin
-    comb: process(i1, i2, i3, i4)
+    comb: process(mv_counter, i1, i2, i3, i4)
     begin
         tof1 <= i1;
         tof2 <= i2;
@@ -23,19 +24,26 @@ begin
             tof4 <= '0';
         end if;
     end process;
+    
+    upd_msg: process(mv_msg)
+    begin
+        if mv_msg /= "ZZZZZZZZ" then
+            state_msg <= mv_msg;
+        end if;
+    end process;
 
     upd: process(mv_msg, i1, i2, i3, i4)
     begin
-        if (mv_msg = "01001000" and mv_msg'event) then
+        if (i1'event and i1 = '1') then
+            mv_counter <= '0';
+        elsif (i2'event and i2 = '1') then
+            mv_counter <= '0';
+        elsif (i3'event and i3 = '1') then
+            mv_counter <= '0';
+        elsif (i4'event and i4 = '1') then
+            mv_counter <= '0';
+        elsif (mv_msg'event and state_msg = "01001000") then
             mv_counter <= '1';
-        elsif (i1'event and i1 = '0') then
-            mv_counter <= '0';
-        elsif (i2'event and i2 = '0') then
-            mv_counter <= '0';
-        elsif (i3'event and i3 = '0') then
-            mv_counter <= '0';
-        elsif (i4'event and i4 = '0') then
-            mv_counter <= '0';
         end if;
     end process;
 end arc_tof_mimic;

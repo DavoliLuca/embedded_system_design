@@ -21,7 +21,7 @@
 void __interrupt() rx_char_usart(void);
 
 static _Bool state_changed = false;
-static _Bool msg_sent = false;
+static _Bool idle_msg_sent = false;
 static _Bool read_new_char = false;
 static _Bool timer_done = false;
 const char* state_msgs[8] = {
@@ -77,12 +77,14 @@ void main(void){
             const char* greet_str[80];
             if (read_new_char){
                 rx_char = get_reg_value();
-                if (rx_char == 'u'){
-                    serial_tx_char(rx_char);
-                }
-                serial_tx_char(rx_char);
-                state_translator_fpga_to_micro(rx_char, &state);
+                /*if (rx_char == 'u'){ // Debug
+                    serial_tx_char(rx_char); // Debug
+                } // Debug
+                serial_tx_char(rx_char); // Debug */
+                state_translator_fpga_to_micro(rx_char, &state);  // Send state update to fpga
                 read_new_char = false;  
+            } else {
+                serial_tx_char(state_translator_micro_to_fpga(&state));
             }
             snprintf(greet_str, sizeof(greet_str), "%s", state_msgs[state]);
             lcd_cmd(L_CLR);
@@ -90,6 +92,7 @@ void main(void){
             lcd_str(greet_str);
             
             state_changed = false;
+            idle_msg_sent = false;
         }
         
         
@@ -99,27 +102,26 @@ void main(void){
                 trash_counter++;
             } else if (move_to_trash && trash_counter >= 100){
                 state = 0;
+                idle_msg_sent = false;
             }
         } else {
             LATAbits.LATA1 = 0; // Stop Belt Movement
             if (state == 0) {
-                if (!msg_sent){
-                    serial_tx_char(state_translator_micro_to_fpga(&state));
-                    msg_sent = true;
+                if (!idle_msg_sent){
+                    state_changed = true;
+                    idle_msg_sent = true;
                 }
             } else if (state == 1){
                 state = 2;
                 state_changed = true;
-                serial_tx_char(state_translator_micro_to_fpga(&state));
             } else if (state == 3){
                 if (timer_done){
                     if(check_temperature(get_temperature())){
                         state = 2;
                         state_changed = true;
                         timer_done = false;
-                        serial_tx_char(state_translator_micro_to_fpga(&state)); // Send state update to fpga
                     } else{
-                        //Stop or move to trash
+                        // Stop or move to trash should go by itself
                     }
                     
                 } else {
@@ -173,7 +175,6 @@ void main(void){
             } else if (state == 7){
                 if (timer_done){
                     state_changed = true;
-                    serial_tx_char(state_translator_micro_to_fpga(&state)); // Send state update to fpga
                     state = 2; // Here it should go either to trash Move [2] because the vial hasn't been picked up on time
                     move_to_trash = 1;
                     trash_counter = 0;
@@ -188,11 +189,6 @@ void main(void){
     }    
 }
 
-void mix_exit_condition(int counter, int* current_step){
-    if (counter >= 20){
-        *current_step = 10;
-    }    
-}
 
 void __interrupt() rx_char_usart(void){
     if(PIE1bits.RCIE && PIR1bits.RCIF){// It has to be enabled and triggered

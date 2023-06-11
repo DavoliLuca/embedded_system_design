@@ -4138,7 +4138,7 @@ typedef struct {
 void configure_analog_digital_conversion(void);
 int get_temperature(void);
 void wait_for_zero(void);
-void check_for_temperature(int temp_to_be_checked);
+int check_for_temperature(int temp_to_be_checked);
 # 17 "main.c" 2
 
 # 1 "./timer.h" 1
@@ -4169,7 +4169,7 @@ void change_direction(stepperMotor* stepper_motor);
 void __attribute__((picinterrupt(("")))) rx_char_usart(void);
 
 static _Bool state_changed = 0;
-static _Bool msg_sent = 0;
+static _Bool idle_msg_sent = 0;
 static _Bool read_new_char = 0;
 static _Bool timer_done = 0;
 const char* state_msgs[8] = {
@@ -4225,12 +4225,14 @@ void main(void){
             const char* greet_str[80];
             if (read_new_char){
                 rx_char = get_reg_value();
-                if (rx_char == 'u'){
-                    serial_tx_char(rx_char);
-                }
-                serial_tx_char(rx_char);
+
+
+
+
                 state_translator_fpga_to_micro(rx_char, &state);
                 read_new_char = 0;
+            } else {
+                serial_tx_char(state_translator_micro_to_fpga(&state));
             }
             snprintf(greet_str, sizeof(greet_str), "%s", state_msgs[state]);
             lcd_cmd(0x01);
@@ -4238,6 +4240,7 @@ void main(void){
             lcd_str(greet_str);
 
             state_changed = 0;
+            idle_msg_sent = 0;
         }
 
 
@@ -4247,25 +4250,24 @@ void main(void){
                 trash_counter++;
             } else if (move_to_trash && trash_counter >= 100){
                 state = 0;
+                idle_msg_sent = 0;
             }
         } else {
             LATAbits.LATA1 = 0;
             if (state == 0) {
-                if (!msg_sent){
-                    serial_tx_char(state_translator_micro_to_fpga(&state));
-                    msg_sent = 1;
+                if (!idle_msg_sent){
+                    state_changed = 1;
+                    idle_msg_sent = 1;
                 }
             } else if (state == 1){
                 state = 2;
                 state_changed = 1;
-                serial_tx_char(state_translator_micro_to_fpga(&state));
             } else if (state == 3){
                 if (timer_done){
                     if(check_temperature(get_temperature())){
                         state = 2;
                         state_changed = 1;
                         timer_done = 0;
-                        serial_tx_char(state_translator_micro_to_fpga(&state));
                     } else{
 
                     }
@@ -4321,7 +4323,6 @@ void main(void){
             } else if (state == 7){
                 if (timer_done){
                     state_changed = 1;
-                    serial_tx_char(state_translator_micro_to_fpga(&state));
                     state = 2;
                     move_to_trash = 1;
                     trash_counter = 0;
@@ -4336,11 +4337,6 @@ void main(void){
     }
 }
 
-void mix_exit_condition(int counter, int* current_step){
-    if (counter >= 20){
-        *current_step = 10;
-    }
-}
 
 void __attribute__((picinterrupt(("")))) rx_char_usart(void){
     if(PIE1bits.RCIE && PIR1bits.RCIF){

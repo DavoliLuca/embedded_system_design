@@ -90,4 +90,4 @@ typedef struct {
 void configure_analog_digital_conversion(void);
 int get_temperature(void);
 void wait_for_zero(void);
-void check_for_temperature(int temp_to_be_checked);
+int check_temperature(int temp_to_be_checked);

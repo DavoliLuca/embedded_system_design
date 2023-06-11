@@ -459,90 +459,58 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 242 ]
 [e :U 240 ]
 "17
-[; ;utils.c: 17: }
+[; ;utils.c: 17:     return;
+[e $UE 238  ]
+"18
+[; ;utils.c: 18: }
 [e :UE 238 ]
 }
-"19
-[; ;utils.c: 19: unsigned char state_translator_micro_to_fpga(int* state){
+"20
+[; ;utils.c: 20: unsigned char state_translator_micro_to_fpga(int* state){
 [v _state_translator_micro_to_fpga `(uc ~T0 @X0 1 ef1`*i ]
 {
 [e :U _state_translator_micro_to_fpga ]
 [v _state `*i ~T0 @X0 1 r1 ]
 [f ]
-"20
-[; ;utils.c: 20:     unsigned char state_machine_code;
-[v _state_machine_code `uc ~T0 @X0 1 a ]
 "21
-[; ;utils.c: 21:     if (*state == 0){
-[e $ ! == *U _state -> 0 `i 250  ]
-{
+[; ;utils.c: 21:     unsigned char state_machine_code;
+[v _state_machine_code `uc ~T0 @X0 1 a ]
 "22
-[; ;utils.c: 22:         state_machine_code = 0;
-[e = _state_machine_code -> -> 0 `i `uc ]
+[; ;utils.c: 22:     if (*state == 2){
+[e $ ! == *U _state -> 2 `i 250  ]
+{
 "23
-[; ;utils.c: 23:     } else if (*state == 1){
+[; ;utils.c: 23:         state_machine_code = 'H';
+[e = _state_machine_code -> -> 72 `ui `uc ]
+"24
+[; ;utils.c: 24:     } else if (*state == 0) {
 }
 [e $U 251  ]
 [e :U 250 ]
-[e $ ! == *U _state -> 1 `i 252  ]
+[e $ ! == *U _state -> 0 `i 252  ]
 {
-"24
-[; ;utils.c: 24:         state_machine_code = 'A';
-[e = _state_machine_code -> -> 65 `ui `uc ]
 "25
-[; ;utils.c: 25:     } else if (*state == 3){
+[; ;utils.c: 25:         state_machine_code = 'E';
+[e = _state_machine_code -> -> 69 `ui `uc ]
+"26
+[; ;utils.c: 26:     } else {
 }
 [e $U 253  ]
 [e :U 252 ]
-[e $ ! == *U _state -> 3 `i 254  ]
 {
-"26
-[; ;utils.c: 26:         state_machine_code = 'B';
-[e = _state_machine_code -> -> 66 `ui `uc ]
 "27
-[; ;utils.c: 27:     } else if (*state == 4){
-}
-[e $U 255  ]
-[e :U 254 ]
-[e $ ! == *U _state -> 4 `i 256  ]
-{
+[; ;utils.c: 27:         state_machine_code = 'P';
+[e = _state_machine_code -> -> 80 `ui `uc ]
 "28
-[; ;utils.c: 28:         state_machine_code = 'D';
-[e = _state_machine_code -> -> 68 `ui `uc ]
-"29
-[; ;utils.c: 29:     } else if (*state == 5){
+[; ;utils.c: 28:     }
 }
-[e $U 257  ]
-[e :U 256 ]
-[e $ ! == *U _state -> 5 `i 258  ]
-{
-"30
-[; ;utils.c: 30:         state_machine_code = '@';
-[e = _state_machine_code -> -> 64 `ui `uc ]
-"31
-[; ;utils.c: 31:     } else if (*state == 2){
-}
-[e $U 259  ]
-[e :U 258 ]
-[e $ ! == *U _state -> 2 `i 260  ]
-{
-"32
-[; ;utils.c: 32:         state_machine_code = 'H';
-[e = _state_machine_code -> -> 72 `ui `uc ]
-"33
-[; ;utils.c: 33:     }
-}
-[e :U 260 ]
-[e :U 259 ]
-[e :U 257 ]
-[e :U 255 ]
 [e :U 253 ]
 [e :U 251 ]
-"34
-[; ;utils.c: 34:     return state_machine_code;
+"29
+[; ;utils.c: 29:     return state_machine_code;
 [e ) _state_machine_code ]
 [e $UE 249  ]
-"35
-[; ;utils.c: 35: }
+"30
+[; ;utils.c: 30: }
 [e :UE 249 ]
 }

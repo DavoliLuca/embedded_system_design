@@ -16,65 +16,79 @@
         </entry>
         <entry>
           <string>externalInputs</string>
-          <string>i1,i2,i3,i4,msg:8</string>
+          <string>i1,i2,i3,i4,ck,msg:8</string>
         </entry>
         <entry>
           <string>Code</string>
-          <string>library ieee;
-use ieee.std_logic_1164.all;
-
-entity decoder_5_6 is
-	port ( i1, i2, i3, i4: in std_logic;
-           msg: in std_logic_vector(7 downto 0);
-	       o1, o2, o3, o4, mv, pr, err: out std_logic);
-end entity decoder_5_6;
-
-architecture arc_decoder_5_6 of decoder_5_6 is
-    signal idle: std_logic;
-begin
-    process(msg) is
-    begin
-        pr &lt;= &apos;0&apos;;
-        idle &lt;= &apos;0&apos;;
-        if (msg = &quot;01010000&quot;) then
-            pr &lt;= &apos;1&apos;;
-        elsif (msg = &quot;00000000&quot;) then
-            idle &lt;= &apos;1&apos;;
-        end if;
-    end process;
-
-    process(i1, i2, i3, i4, pr, idle) is
-        variable combined_input: std_logic_vector(4 downto 0);
-    begin
-        combined_input := pr &amp; i4 &amp; i3 &amp; i2 &amp; i1;
-        o1 &lt;= &apos;0&apos;;
-        o2 &lt;= &apos;0&apos;;
-        o3 &lt;= &apos;0&apos;;
-        o4 &lt;= &apos;0&apos;;
-        mv &lt;= &apos;0&apos;;
-        pr &lt;= &apos;0&apos;;
-        err &lt;= &apos;0&apos;;
-        case combined_input is
-            when &quot;00001&quot; =&gt;
-                o1 &lt;= &apos;1&apos;;
-            when &quot;00010&quot; =&gt;
-                o2 &lt;= &apos;1&apos;;
-            when &quot;00100&quot; =&gt;
-                o3 &lt;= &apos;1&apos;;
-            when &quot;01000&quot; =&gt;
-                o4 &lt;= &apos;1&apos;;
-            when &quot;00000&quot; =&gt;
-                if (idle = &apos;0&apos;) then
-                    mv &lt;= &apos;1&apos;;
-                else
-                    mv &lt;= &apos;0&apos;;
-                end if;
-            when &quot;10000&quot; | &quot;10010&quot; | &quot;10100&quot; | &quot;11000&quot; =&gt;
-                pr &lt;= &apos;1&apos;;
-            when others =&gt;
-                err &lt;= &apos;1&apos;;
-        end case;
-    end process;
+          <string>library ieee;&#xd;
+use ieee.std_logic_1164.all;&#xd;
+&#xd;
+entity decoder_5_6 is&#xd;
+	port ( i1, i2, i3, i4, ck: in std_logic;&#xd;
+           msg: in std_logic_vector(7 downto 0);&#xd;
+	       o1, o2, o3, o4, mv, pr, err: out std_logic);&#xd;
+end entity decoder_5_6;&#xd;
+&#xd;
+architecture arc_decoder_5_6 of decoder_5_6 is&#xd;
+    signal pr_state: std_logic:=&apos;0&apos;;&#xd;
+    signal mv_state: std_logic:=&apos;0&apos;;&#xd;
+    signal idle_state: std_logic:=&apos;0&apos;;&#xd;
+    signal combined_state: std_logic_vector(2 downto 0) := &quot;000&quot;;&#xd;
+    signal previous_i4: std_logic;&#xd;
+begin&#xd;
+    process(combined_state, i1, i2, i3, i4) is&#xd;
+        variable combined_input: std_logic_vector(3 downto 0);&#xd;
+    begin&#xd;
+        o1 &lt;= &apos;0&apos;;&#xd;
+        o2 &lt;= &apos;0&apos;;&#xd;
+        o3 &lt;= &apos;0&apos;;&#xd;
+        o4 &lt;= &apos;0&apos;;&#xd;
+        pr &lt;= combined_state(0);&#xd;
+        mv &lt;= combined_state(2);&#xd;
+        err &lt;= &apos;0&apos;;&#xd;
+        if combined_state(2) then&#xd;
+            combined_input := i4 &amp; i3 &amp; i2 &amp; i1;&#xd;
+            mv &lt;= &apos;0&apos;;&#xd;
+            case combined_input is&#xd;
+                when &quot;0001&quot; =&gt;&#xd;
+                    o1 &lt;= &apos;1&apos;;&#xd;
+                when &quot;0010&quot; =&gt;&#xd;
+                    o2 &lt;= &apos;1&apos;;&#xd;
+                when &quot;0100&quot; =&gt;&#xd;
+                    o3 &lt;= &apos;1&apos;;&#xd;
+                when &quot;1000&quot; =&gt;&#xd;
+                    o4 &lt;= &apos;1&apos;;&#xd;
+                when &quot;0000&quot; =&gt;&#xd;
+                    mv &lt;= &apos;1&apos;;&#xd;
+                when others =&gt;&#xd;
+                    err &lt;= &apos;1&apos;;&#xd;
+            end case;&#xd;
+        elsif combined_state(0) = &apos;1&apos; and i4 = &apos;0&apos; and previous_i4 = &apos;1&apos; then&#xd;
+            pr &lt;= &apos;1&apos;;&#xd;
+            mv &lt;= &apos;1&apos;; &#xd;
+        end if;&#xd;
+    end process;&#xd;
+&#xd;
+    process(msg) is  &#xd;
+    begin&#xd;
+        combined_state &lt;= &quot;000&quot;;&#xd;
+        if (msg = &quot;01010000&quot;) then&#xd;
+            combined_state &lt;= &quot;001&quot;;&#xd;
+        elsif (msg = &quot;00000000&quot; or msg = &quot;01000101&quot;) then&#xd;
+            combined_state &lt;= &quot;010&quot;;&#xd;
+        elsif (msg = &quot;01001000&quot;) then&#xd;
+            combined_state &lt;= &quot;100&quot;;&#xd;
+        end if;&#xd;
+    end process;&#xd;
+&#xd;
+    process(ck) is&#xd;
+    begin&#xd;
+        if (ck&apos;event and ck = &apos;1&apos;) then&#xd;
+            previous_i4 &lt;= i4;&#xd;
+        end if;&#xd;
+    end process;&#xd;
+&#xd;
+&#xd;
 end arc_decoder_5_6;</string>
         </entry>
         <entry>
@@ -87,7 +101,7 @@ end arc_decoder_5_6;</string>
         </entry>
         <entry>
           <string>Code_File</string>
-          <string>C:\Users\davol\embedded_system_design\digital\src\encoder_4_2.vhd</string>
+          <string>C:\Users\davol\embedded_system_design\digital\src\decoder.vhd</string>
         </entry>
       </elementAttributes>
       <pos x="540" y="320"/>
@@ -100,7 +114,7 @@ end arc_decoder_5_6;</string>
           <string>photocell2</string>
         </entry>
       </elementAttributes>
-      <pos x="60" y="300"/>
+      <pos x="40" y="280"/>
     </visualElement>
     <visualElement>
       <elementName>In</elementName>
@@ -110,7 +124,7 @@ end arc_decoder_5_6;</string>
           <string>photocell3</string>
         </entry>
       </elementAttributes>
-      <pos x="60" y="340"/>
+      <pos x="40" y="320"/>
     </visualElement>
     <visualElement>
       <elementName>Out</elementName>
@@ -145,12 +159,12 @@ end arc_decoder_5_6;</string>
           <string>photocell4</string>
         </entry>
       </elementAttributes>
-      <pos x="60" y="380"/>
+      <pos x="40" y="360"/>
     </visualElement>
     <visualElement>
       <elementName>Out</elementName>
       <elementAttributes/>
-      <pos x="840" y="460"/>
+      <pos x="720" y="460"/>
     </visualElement>
     <visualElement>
       <elementName>External</elementName>
@@ -260,10 +274,6 @@ end arc_write_uart_sm;</string>
           <string>runRealTime</string>
           <boolean>true</boolean>
         </entry>
-        <entry>
-          <string>Frequency</string>
-          <int>50000</int>
-        </entry>
       </elementAttributes>
       <pos x="900" y="200"/>
     </visualElement>
@@ -343,7 +353,7 @@ end arc_write_uart_sm;</string>
           <string>photocell1</string>
         </entry>
       </elementAttributes>
-      <pos x="60" y="260"/>
+      <pos x="40" y="240"/>
     </visualElement>
     <visualElement>
       <elementName>External</elementName>
@@ -358,59 +368,71 @@ end arc_write_uart_sm;</string>
         </entry>
         <entry>
           <string>externalInputs</string>
-          <string>mv_msg:8,i1,i2,i3,i4</string>
+          <string>i1,i2,i3,i4,mv_msg:8</string>
         </entry>
         <entry>
           <string>Code</string>
-          <string>library ieee;
-use ieee.std_logic_1164.all;
-
-entity tof_mimic is
-	port ( i1, i2, i3, i4: in std_logic;
-           mv_msg: in std_logic_vector(7 downto 0);
-	       tof1, tof2, tof3, tof4: out std_logic);
-end entity tof_mimic;
-
-architecture arc_tof_mimic of tof_mimic is
-    signal mv_counter: std_logic;
-begin
-    comb: process(mv_counter, i1, i2, i3, i4)
-    begin
-        tof1 &lt;= i1;
-        tof2 &lt;= i2;
-        tof3 &lt;= i3;
-        tof4 &lt;= i4;
-        if (mv_counter) then
-            tof1 &lt;= &apos;0&apos;;
-            tof2 &lt;= &apos;0&apos;;
-            tof3 &lt;= &apos;0&apos;;
-            tof4 &lt;= &apos;0&apos;;
-        end if;
-    end process;
-
-    upd: process(mv_msg, i1, i2, i3, i4)
-    begin
-        if (mv_msg = &quot;01001000&quot; and mv_msg&apos;event) then
-            mv_counter &lt;= &apos;1&apos;;
-        elsif (i1&apos;event and i1 = &apos;0&apos;) then
-            mv_counter &lt;= &apos;0&apos;;
-        elsif (i2&apos;event and i2 = &apos;0&apos;) then
-            mv_counter &lt;= &apos;0&apos;;
-        elsif (i3&apos;event and i3 = &apos;0&apos;) then
-            mv_counter &lt;= &apos;0&apos;;
-        elsif (i4&apos;event and i4 = &apos;0&apos;) then
-            mv_counter &lt;= &apos;0&apos;;
-        end if;
-    end process;
+          <string>library ieee;&#xd;
+use ieee.std_logic_1164.all;&#xd;
+&#xd;
+entity tof_mimic is&#xd;
+	port ( i1, i2, i3, i4: in std_logic;&#xd;
+           mv_msg: in std_logic_vector(7 downto 0);&#xd;
+           state_msg: out std_logic_vector(7 downto 0);&#xd;
+	       tof1, tof2, tof3, tof4: out std_logic);&#xd;
+end entity tof_mimic;&#xd;
+&#xd;
+architecture arc_tof_mimic of tof_mimic is&#xd;
+    signal mv_counter: std_logic := &apos;0&apos;;&#xd;
+begin&#xd;
+    comb: process(mv_counter, i1, i2, i3, i4)&#xd;
+    begin&#xd;
+        tof1 &lt;= i1;&#xd;
+        tof2 &lt;= i2;&#xd;
+        tof3 &lt;= i3;&#xd;
+        tof4 &lt;= i4;&#xd;
+        if (mv_counter) then&#xd;
+            tof1 &lt;= &apos;0&apos;;&#xd;
+            tof2 &lt;= &apos;0&apos;;&#xd;
+            tof3 &lt;= &apos;0&apos;;&#xd;
+            tof4 &lt;= &apos;0&apos;;&#xd;
+        end if;&#xd;
+    end process;&#xd;
+    &#xd;
+    upd_msg: process(mv_msg)&#xd;
+    begin&#xd;
+        if mv_msg /= &quot;ZZZZZZZZ&quot; then&#xd;
+            state_msg &lt;= mv_msg;&#xd;
+        end if;&#xd;
+    end process;&#xd;
+&#xd;
+    upd: process(mv_msg, i1, i2, i3, i4)&#xd;
+    begin&#xd;
+        if (i1&apos;event and i1 = &apos;1&apos;) then&#xd;
+            mv_counter &lt;= &apos;0&apos;;&#xd;
+        elsif (i2&apos;event and i2 = &apos;1&apos;) then&#xd;
+            mv_counter &lt;= &apos;0&apos;;&#xd;
+        elsif (i3&apos;event and i3 = &apos;1&apos;) then&#xd;
+            mv_counter &lt;= &apos;0&apos;;&#xd;
+        elsif (i4&apos;event and i4 = &apos;1&apos;) then&#xd;
+            mv_counter &lt;= &apos;0&apos;;&#xd;
+        elsif (mv_msg&apos;event and state_msg = &quot;01001000&quot;) then&#xd;
+            mv_counter &lt;= &apos;1&apos;;&#xd;
+        end if;&#xd;
+    end process;&#xd;
 end arc_tof_mimic;</string>
         </entry>
         <entry>
           <string>externalOutputs</string>
-          <string>tof1,tof2,tof3,tof4</string>
+          <string>tof1,tof2,tof3,tof4,state_msg:8</string>
         </entry>
         <entry>
           <string>Width</string>
           <int>7</int>
+        </entry>
+        <entry>
+          <string>Code_File</string>
+          <string>C:\Users\davol\embedded_system_design\digital\src\tof_sensors_mimic.vhd</string>
         </entry>
       </elementAttributes>
       <pos x="140" y="240"/>
@@ -523,6 +545,16 @@ end behav;</string>
       </elementAttributes>
       <pos x="600" y="-200"/>
     </visualElement>
+    <visualElement>
+      <elementName>Out</elementName>
+      <elementAttributes>
+        <entry>
+          <string>Bits</string>
+          <int>8</int>
+        </entry>
+      </elementAttributes>
+      <pos x="320" y="360"/>
+    </visualElement>
   </visualElements>
   <wires>
     <wire>
@@ -530,24 +562,32 @@ end behav;</string>
       <p2 x="660" y="320"/>
     </wire>
     <wire>
+      <p1 x="460" y="320"/>
+      <p2 x="540" y="320"/>
+    </wire>
+    <wire>
       <p1 x="120" y="320"/>
       <p2 x="140" y="320"/>
     </wire>
     <wire>
-      <p1 x="460" y="320"/>
-      <p2 x="540" y="320"/>
+      <p1 x="40" y="320"/>
+      <p2 x="80" y="320"/>
+    </wire>
+    <wire>
+      <p1 x="280" y="320"/>
+      <p2 x="320" y="320"/>
     </wire>
     <wire>
       <p1 x="660" y="320"/>
       <p2 x="860" y="320"/>
     </wire>
     <wire>
-      <p1 x="60" y="260"/>
-      <p2 x="140" y="260"/>
-    </wire>
-    <wire>
       <p1 x="280" y="260"/>
       <p2 x="440" y="260"/>
+    </wire>
+    <wire>
+      <p1 x="60" y="260"/>
+      <p2 x="140" y="260"/>
     </wire>
     <wire>
       <p1 x="600" y="-200"/>
@@ -566,8 +606,16 @@ end behav;</string>
       <p2 x="980" y="200"/>
     </wire>
     <wire>
-      <p1 x="980" y="200"/>
+      <p1 x="1060" y="200"/>
       <p2 x="1400" y="200"/>
+    </wire>
+    <wire>
+      <p1 x="980" y="200"/>
+      <p2 x="1060" y="200"/>
+    </wire>
+    <wire>
+      <p1 x="480" y="520"/>
+      <p2 x="1060" y="520"/>
     </wire>
     <wire>
       <p1 x="1320" y="-140"/>
@@ -580,14 +628,6 @@ end behav;</string>
     <wire>
       <p1 x="1360" y="-140"/>
       <p2 x="1380" y="-140"/>
-    </wire>
-    <wire>
-      <p1 x="720" y="460"/>
-      <p2 x="740" y="460"/>
-    </wire>
-    <wire>
-      <p1 x="740" y="460"/>
-      <p2 x="840" y="460"/>
     </wire>
     <wire>
       <p1 x="700" y="140"/>
@@ -611,14 +651,14 @@ end behav;</string>
     </wire>
     <wire>
       <p1 x="620" y="400"/>
-      <p2 x="720" y="400"/>
+      <p2 x="740" y="400"/>
     </wire>
     <wire>
-      <p1 x="380" y="400"/>
+      <p1 x="480" y="400"/>
       <p2 x="540" y="400"/>
     </wire>
     <wire>
-      <p1 x="720" y="400"/>
+      <p1 x="740" y="400"/>
       <p2 x="780" y="400"/>
     </wire>
     <wire>
@@ -628,10 +668,6 @@ end behav;</string>
     <wire>
       <p1 x="620" y="340"/>
       <p2 x="680" y="340"/>
-    </wire>
-    <wire>
-      <p1 x="60" y="340"/>
-      <p2 x="100" y="340"/>
     </wire>
     <wire>
       <p1 x="440" y="340"/>
@@ -646,12 +682,16 @@ end behav;</string>
       <p2 x="640" y="-280"/>
     </wire>
     <wire>
+      <p1 x="280" y="280"/>
+      <p2 x="420" y="280"/>
+    </wire>
+    <wire>
       <p1 x="80" y="280"/>
       <p2 x="140" y="280"/>
     </wire>
     <wire>
-      <p1 x="280" y="280"/>
-      <p2 x="420" y="280"/>
+      <p1 x="40" y="280"/>
+      <p2 x="60" y="280"/>
     </wire>
     <wire>
       <p1 x="1360" y="-220"/>
@@ -678,11 +718,7 @@ end behav;</string>
       <p2 x="1520" y="-100"/>
     </wire>
     <wire>
-      <p1 x="120" y="-100"/>
-      <p2 x="380" y="-100"/>
-    </wire>
-    <wire>
-      <p1 x="380" y="-100"/>
+      <p1 x="360" y="-100"/>
       <p2 x="760" y="-100"/>
     </wire>
     <wire>
@@ -696,6 +732,10 @@ end behav;</string>
     <wire>
       <p1 x="620" y="420"/>
       <p2 x="720" y="420"/>
+    </wire>
+    <wire>
+      <p1 x="360" y="420"/>
+      <p2 x="540" y="420"/>
     </wire>
     <wire>
       <p1 x="660" y="100"/>
@@ -726,6 +766,10 @@ end behav;</string>
       <p2 x="540" y="360"/>
     </wire>
     <wire>
+      <p1 x="40" y="360"/>
+      <p2 x="100" y="360"/>
+    </wire>
+    <wire>
       <p1 x="700" y="360"/>
       <p2 x="860" y="360"/>
     </wire>
@@ -738,28 +782,24 @@ end behav;</string>
       <p2 x="640" y="-300"/>
     </wire>
     <wire>
-      <p1 x="60" y="300"/>
-      <p2 x="80" y="300"/>
+      <p1 x="280" y="300"/>
+      <p2 x="400" y="300"/>
     </wire>
     <wire>
       <p1 x="100" y="300"/>
       <p2 x="140" y="300"/>
     </wire>
     <wire>
-      <p1 x="280" y="300"/>
-      <p2 x="400" y="300"/>
-    </wire>
-    <wire>
       <p1 x="620" y="-240"/>
       <p2 x="640" y="-240"/>
     </wire>
     <wire>
-      <p1 x="120" y="240"/>
-      <p2 x="140" y="240"/>
-    </wire>
-    <wire>
       <p1 x="280" y="240"/>
       <p2 x="460" y="240"/>
+    </wire>
+    <wire>
+      <p1 x="40" y="240"/>
+      <p2 x="140" y="240"/>
     </wire>
     <wire>
       <p1 x="580" y="-180"/>
@@ -807,19 +847,23 @@ end behav;</string>
     </wire>
     <wire>
       <p1 x="620" y="380"/>
-      <p2 x="940" y="380"/>
-    </wire>
-    <wire>
-      <p1 x="60" y="380"/>
-      <p2 x="120" y="380"/>
+      <p2 x="720" y="380"/>
     </wire>
     <wire>
       <p1 x="400" y="380"/>
       <p2 x="540" y="380"/>
     </wire>
     <wire>
+      <p1 x="720" y="380"/>
+      <p2 x="940" y="380"/>
+    </wire>
+    <wire>
       <p1 x="880" y="60"/>
       <p2 x="980" y="60"/>
+    </wire>
+    <wire>
+      <p1 x="120" y="-320"/>
+      <p2 x="560" y="-320"/>
     </wire>
     <wire>
       <p1 x="560" y="-320"/>
@@ -832,6 +876,10 @@ end behav;</string>
     <wire>
       <p1 x="1280" y="40"/>
       <p2 x="1280" y="100"/>
+    </wire>
+    <wire>
+      <p1 x="320" y="320"/>
+      <p2 x="320" y="360"/>
     </wire>
     <wire>
       <p1 x="580" y="-300"/>
@@ -855,19 +903,19 @@ end behav;</string>
     </wire>
     <wire>
       <p1 x="720" y="160"/>
-      <p2 x="720" y="400"/>
+      <p2 x="720" y="380"/>
     </wire>
     <wire>
       <p1 x="1360" y="-220"/>
       <p2 x="1360" y="-140"/>
     </wire>
     <wire>
-      <p1 x="80" y="280"/>
-      <p2 x="80" y="300"/>
-    </wire>
-    <wire>
       <p1 x="400" y="300"/>
       <p2 x="400" y="380"/>
+    </wire>
+    <wire>
+      <p1 x="80" y="280"/>
+      <p2 x="80" y="320"/>
     </wire>
     <wire>
       <p1 x="660" y="100"/>
@@ -886,20 +934,28 @@ end behav;</string>
       <p2 x="1240" y="40"/>
     </wire>
     <wire>
-      <p1 x="740" y="180"/>
-      <p2 x="740" y="460"/>
+      <p1 x="480" y="400"/>
+      <p2 x="480" y="520"/>
     </wire>
     <wire>
       <p1 x="1380" y="-140"/>
       <p2 x="1380" y="-100"/>
     </wire>
     <wire>
-      <p1 x="100" y="300"/>
-      <p2 x="100" y="340"/>
-    </wire>
-    <wire>
       <p1 x="420" y="280"/>
       <p2 x="420" y="360"/>
+    </wire>
+    <wire>
+      <p1 x="1060" y="200"/>
+      <p2 x="1060" y="520"/>
+    </wire>
+    <wire>
+      <p1 x="100" y="300"/>
+      <p2 x="100" y="360"/>
+    </wire>
+    <wire>
+      <p1 x="740" y="180"/>
+      <p2 x="740" y="400"/>
     </wire>
     <wire>
       <p1 x="680" y="440"/>
@@ -912,6 +968,10 @@ end behav;</string>
     <wire>
       <p1 x="1320" y="-80"/>
       <p2 x="1320" y="120"/>
+    </wire>
+    <wire>
+      <p1 x="360" y="-100"/>
+      <p2 x="360" y="420"/>
     </wire>
     <wire>
       <p1 x="940" y="-220"/>
@@ -946,16 +1006,12 @@ end behav;</string>
       <p2 x="1400" y="200"/>
     </wire>
     <wire>
-      <p1 x="120" y="320"/>
-      <p2 x="120" y="380"/>
-    </wire>
-    <wire>
-      <p1 x="120" y="-100"/>
-      <p2 x="120" y="240"/>
-    </wire>
-    <wire>
       <p1 x="440" y="260"/>
       <p2 x="440" y="340"/>
+    </wire>
+    <wire>
+      <p1 x="120" y="-320"/>
+      <p2 x="120" y="320"/>
     </wire>
     <wire>
       <p1 x="700" y="140"/>
@@ -966,8 +1022,8 @@ end behav;</string>
       <p2 x="1340" y="140"/>
     </wire>
     <wire>
-      <p1 x="380" y="-100"/>
-      <p2 x="380" y="400"/>
+      <p1 x="60" y="260"/>
+      <p2 x="60" y="280"/>
     </wire>
   </wires>
   <measurementOrdering/>

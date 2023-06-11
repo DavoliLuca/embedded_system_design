@@ -3829,22 +3829,17 @@ void state_translator_fpga_to_micro(unsigned char state_machine_code, int* state
     } else {
         *state = 0;
     }
+    return;
 }
 
 unsigned char state_translator_micro_to_fpga(int* state){
     unsigned char state_machine_code;
-    if (*state == 0){
-        state_machine_code = 0;
-    } else if (*state == 1){
-        state_machine_code = 'A';
-    } else if (*state == 3){
-        state_machine_code = 'B';
-    } else if (*state == 4){
-        state_machine_code = 'D';
-    } else if (*state == 5){
-        state_machine_code = '@';
-    } else if (*state == 2){
+    if (*state == 2){
         state_machine_code = 'H';
+    } else if (*state == 0) {
+        state_machine_code = 'E';
+    } else {
+        state_machine_code = 'P';
     }
     return state_machine_code;
 }
