@@ -4,7 +4,7 @@ use ieee.std_logic_1164.all;
 entity decoder_5_6 is
 	port ( i1, i2, i3, i4, ck: in std_logic;
            msg: in std_logic_vector(7 downto 0);
-	       o1, o2, o3, o4, mv, pr, err: out std_logic);
+	       o1, o2, o3, o4, mv, pr, picked, err: out std_logic);
 end entity decoder_5_6;
 
 architecture arc_decoder_5_6 of decoder_5_6 is
@@ -23,9 +23,10 @@ begin
         o4 <= '0';
         pr <= combined_state(0);
         mv <= combined_state(2);
+        picked <= '0';
         err <= '0';
-        if combined_state(2) then
-            combined_input := i4 & i3 & i2 & i1;
+        combined_input := i4 & i3 & i2 & i1;
+        if combined_state(2) then -- Con
             mv <= '0';
             case combined_input is
                 when "0001" =>
@@ -41,20 +42,23 @@ begin
                 when others =>
                     err <= '1';
             end case;
-        elsif combined_state(0) = '1' and i4 = '0' and previous_i4 = '1' then
-            pr <= '1';
-            mv <= '1'; 
+        elsif combined_state(0) = '1' and i4 = '0' and previous_i4 = '1' then -- Picked condition
+            picked <= '1';
+        elsif combined_state(1) then -- Idle should be interrupted when vial at first station
+            if (combined_input = "0001") then
+                o1 <= '1';
+            end if;
         end if;
     end process;
 
     process(msg) is  
     begin
         combined_state <= "000";
-        if (msg = "01010000") then
+        if (msg = "10010101") then -- Process
             combined_state <= "001";
-        elsif (msg = "00000000" or msg = "01000101") then
+        elsif (msg = "00000000" or msg = "10000000" or msg = "10001001") then -- Idle
             combined_state <= "010";
-        elsif (msg = "01001000") then
+        elsif (msg = "10010000") then -- Move
             combined_state <= "100";
         end if;
     end process;

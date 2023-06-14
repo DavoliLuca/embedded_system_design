@@ -102,15 +102,12 @@ void main(void){
                 trash_counter++;
             } else if (move_to_trash && trash_counter >= 100){
                 state = 0;
-                idle_msg_sent = false;
+                state_changed = true;
             }
         } else {
             LATAbits.LATA1 = 0; // Stop Belt Movement
             if (state == 0) {
-                if (!idle_msg_sent){
-                    state_changed = true;
-                    idle_msg_sent = true;
-                }
+                
             } else if (state == 1){
                 state = 2;
                 state_changed = true;

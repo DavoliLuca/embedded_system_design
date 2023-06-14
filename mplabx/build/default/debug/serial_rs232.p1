@@ -1,7 +1,74 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"100 ./lcd.h
-[; ;./lcd.h: 100: void lcd_dat(unsigned char val);
-[v _lcd_dat `(v ~T0 @X0 0 ef1`uc ]
+"3228 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 3228: extern volatile unsigned char SPBRG __attribute__((address(0xFAF)));
+[v _SPBRG `Vuc ~T0 @X0 0 e@4015 ]
+"343 C:\Program Files\Microchip\xc8\v2.20\pic\include\c99\math.h
+[; ;C:\Program Files\Microchip\xc8\v2.20\pic\include\c99\math.h: 343: float roundf(float);
+[v _roundf `(f ~T0 @X0 0 ef1`f ]
+"2947 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 2947:     struct {
+[s S114 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S114 . TX9D TRMT BRGH . SYNC TXEN TX9 CSRC ]
+"2957
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 2957:     struct {
+[s S115 :1 `uc 1 :5 `uc 1 :1 `uc 1 ]
+[n S115 . TXD8 . TX8_9 ]
+"2962
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 2962:     struct {
+[s S116 :6 `uc 1 :1 `uc 1 ]
+[n S116 . . NOT_TX8 ]
+"2966
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 2966:     struct {
+[s S117 :6 `uc 1 :1 `uc 1 ]
+[n S117 . . nTX8 ]
+"2970
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 2970:     struct {
+[s S118 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S118 . TX9D1 TRMT1 BRGH1 . SYNC1 TXEN1 TX91 CSRC1 ]
+"2946
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 2946: typedef union {
+[u S113 `S114 1 `S115 1 `S116 1 `S117 1 `S118 1 ]
+[n S113 . . . . . . ]
+"2981
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 2981: extern volatile TXSTAbits_t TXSTAbits __attribute__((address(0xFAC)));
+[v _TXSTAbits `VS113 ~T0 @X0 0 e@4012 ]
+"2723
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 2723:     struct {
+[s S100 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S100 . RX9D OERR FERR ADDEN CREN SREN RX9 SPEN ]
+"2733
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 2733:     struct {
+[s S101 :1 `uc 1 :5 `uc 1 :1 `uc 1 ]
+[n S101 . RCD8 . RC8_9 ]
+"2738
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 2738:     struct {
+[s S102 :6 `uc 1 :1 `uc 1 ]
+[n S102 . . NOT_RC8 ]
+"2742
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 2742:     struct {
+[s S103 :6 `uc 1 :1 `uc 1 ]
+[n S103 . . nRC8 ]
+"2746
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 2746:     struct {
+[s S104 :6 `uc 1 :1 `uc 1 ]
+[n S104 . . RC9 ]
+"2750
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 2750:     struct {
+[s S105 :5 `uc 1 :1 `uc 1 ]
+[n S105 . . SRENA ]
+"2722
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 2722: typedef union {
+[u S99 `S100 1 `S101 1 `S102 1 `S103 1 `S104 1 `S105 1 ]
+[n S99 . . . . . . . ]
+"2755
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 2755: extern volatile RCSTAbits_t RCSTAbits __attribute__((address(0xFAB)));
+[v _RCSTAbits `VS99 ~T0 @X0 0 e@4011 ]
+"3204
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 3204: extern volatile unsigned char TXREG __attribute__((address(0xFAD)));
+[v _TXREG `Vuc ~T0 @X0 0 e@4013 ]
+"3216
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 3216: extern volatile unsigned char RCREG __attribute__((address(0xFAE)));
+[v _RCREG `Vuc ~T0 @X0 0 e@4014 ]
 "54 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 54: __asm("PORTA equ 0F80h");
 [; <" PORTA equ 0F80h ;# ">
@@ -383,156 +450,130 @@ Version 4.0 HI-TECH Software Intermediate Code
 "5763
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 5763: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
-"2 utils.c
-[; ;utils.c: 2: void state_translator_fpga_to_micro(unsigned char state_machine_code, int* state){
-[v _state_translator_fpga_to_micro `(v ~T0 @X0 1 ef2`uc`*i ]
-{
-[e :U _state_translator_fpga_to_micro ]
-[v _state_machine_code `uc ~T0 @X0 1 r1 ]
-[v _state `*i ~T0 @X0 1 r2 ]
-[f ]
-"3
-[; ;utils.c: 3:     lcd_dat(state_machine_code);
-[e ( _lcd_dat (1 _state_machine_code ]
-"4
-[; ;utils.c: 4:     if (state_machine_code == 0x81){
-[e $ ! == -> _state_machine_code `i -> 129 `i 239  ]
-{
-"5
-[; ;utils.c: 5:         *state = 1;
-[e = *U _state -> 1 `i ]
-"6
-[; ;utils.c: 6:     } else if (state_machine_code == 0x82){
-}
-[e $U 240  ]
-[e :U 239 ]
-[e $ ! == -> _state_machine_code `i -> 130 `i 241  ]
-{
-"7
-[; ;utils.c: 7:         *state = 3;
-[e = *U _state -> 3 `i ]
-"8
-[; ;utils.c: 8:     } else if (state_machine_code == 0x84){
-}
-[e $U 242  ]
-[e :U 241 ]
-[e $ ! == -> _state_machine_code `i -> 132 `i 243  ]
-{
-"9
-[; ;utils.c: 9:         *state = 4;
-[e = *U _state -> 4 `i ]
+"9 serial_rs232.c
+[; ;serial_rs232.c: 9: static double const fosc = 4000000;
+[v _fosc `Cd ~T0 @X0 1 s ]
+[i _fosc
+-> -> 4000000 `l `d
+]
 "10
-[; ;utils.c: 10:     } else if (state_machine_code == 0x88){
-}
-[e $U 244  ]
-[e :U 243 ]
-[e $ ! == -> _state_machine_code `i -> 136 `i 245  ]
-{
+[; ;serial_rs232.c: 10: static double tosc = 1/fosc;
+[v _tosc `d ~T0 @X0 1 s ]
+[i _tosc
+/ -> -> 1 `i `d _fosc
+]
 "11
-[; ;utils.c: 11:         *state = 7;
-[e = *U _state -> 7 `i ]
-"12
-[; ;utils.c: 12:     } else if (state_machine_code == 0x90){
-}
-[e $U 246  ]
-[e :U 245 ]
-[e $ ! == -> _state_machine_code `i -> 144 `i 247  ]
-{
+[; ;serial_rs232.c: 11: static double const desired_baudrate = 9600;
+[v _desired_baudrate `Cd ~T0 @X0 1 s ]
+[i _desired_baudrate
+-> -> 9600 `i `d
+]
 "13
-[; ;utils.c: 13:         *state = 2;
-[e = *U _state -> 2 `i ]
-"14
-[; ;utils.c: 14:     } else if (state_machine_code == 0xA0){
-}
-[e $U 248  ]
-[e :U 247 ]
-[e $ ! == -> _state_machine_code `i -> 160 `i 249  ]
+[; ;serial_rs232.c: 13: void init_USART(void){
+[v _init_USART `(v ~T0 @X0 1 ef ]
 {
-"15
-[; ;utils.c: 15:         *state = 8;
-[e = *U _state -> 8 `i ]
-"16
-[; ;utils.c: 16:     } else {
-}
-[e $U 250  ]
-[e :U 249 ]
-{
-"17
-[; ;utils.c: 17:         *state = 0;
-[e = *U _state -> 0 `i ]
-"18
-[; ;utils.c: 18:     }
-}
-[e :U 250 ]
-[e :U 248 ]
-[e :U 246 ]
-[e :U 244 ]
-[e :U 242 ]
-[e :U 240 ]
-"19
-[; ;utils.c: 19:     return;
-[e $UE 238  ]
-"20
-[; ;utils.c: 20: }
-[e :UE 238 ]
-}
-"22
-[; ;utils.c: 22: unsigned char state_translator_micro_to_fpga(int* state){
-[v _state_translator_micro_to_fpga `(uc ~T0 @X0 1 ef1`*i ]
-{
-[e :U _state_translator_micro_to_fpga ]
-[v _state `*i ~T0 @X0 1 r1 ]
+[e :U _init_USART ]
 [f ]
-"23
-[; ;utils.c: 23:     unsigned char state_machine_code;
-[v _state_machine_code `uc ~T0 @X0 1 a ]
 "24
-[; ;utils.c: 24:     if (*state == 2){
-[e $ ! == *U _state -> 2 `i 252  ]
-{
-"25
-[; ;utils.c: 25:         state_machine_code = 0x90;
-[e = _state_machine_code -> -> 144 `i `uc ]
-"26
-[; ;utils.c: 26:     } else if (*state == 0) {
-}
-[e $U 253  ]
-[e :U 252 ]
-[e $ ! == *U _state -> 0 `i 254  ]
-{
-"27
-[; ;utils.c: 27:         state_machine_code = 0x89;
-[e = _state_machine_code -> -> 137 `i `uc ]
+[; ;serial_rs232.c: 24:     SPBRG = roundf(((fosc / desired_baudrate) / 16) - 1);
+[e = _SPBRG -> ( _roundf (1 -> - / / _fosc _desired_baudrate -> -> 16 `i `d -> -> 1 `i `d `f `uc ]
 "28
-[; ;utils.c: 28:     } else if (*state == 8) {
-}
-[e $U 255  ]
-[e :U 254 ]
-[e $ ! == *U _state -> 8 `i 256  ]
-{
+[; ;serial_rs232.c: 28:     TXSTAbits.TX9 = 0;
+[e = . . _TXSTAbits 0 6 -> -> 0 `i `uc ]
 "29
-[; ;utils.c: 29:         state_machine_code = 0xA0;
-[e = _state_machine_code -> -> 160 `i `uc ]
+[; ;serial_rs232.c: 29:     TXSTAbits.TXEN = 1;
+[e = . . _TXSTAbits 0 5 -> -> 1 `i `uc ]
 "30
-[; ;utils.c: 30:     } else {
-}
-[e $U 257  ]
-[e :U 256 ]
-{
+[; ;serial_rs232.c: 30:     TXSTAbits.SYNC =0;
+[e = . . _TXSTAbits 0 4 -> -> 0 `i `uc ]
 "31
-[; ;utils.c: 31:         state_machine_code = 0x93;
-[e = _state_machine_code -> -> 147 `i `uc ]
-"32
-[; ;utils.c: 32:     }
-}
-[e :U 257 ]
-[e :U 255 ]
-[e :U 253 ]
+[; ;serial_rs232.c: 31:     TXSTAbits.BRGH = 1;
+[e = . . _TXSTAbits 0 2 -> -> 1 `i `uc ]
 "33
-[; ;utils.c: 33:     return state_machine_code;
-[e ) _state_machine_code ]
-[e $UE 251  ]
+[; ;serial_rs232.c: 33:     RCSTAbits.SPEN = 1;
+[e = . . _RCSTAbits 0 7 -> -> 1 `i `uc ]
 "34
-[; ;utils.c: 34: }
-[e :UE 251 ]
+[; ;serial_rs232.c: 34:     RCSTAbits.RX9 = 0;
+[e = . . _RCSTAbits 0 6 -> -> 0 `i `uc ]
+"35
+[; ;serial_rs232.c: 35:     RCSTAbits.CREN = 1;
+[e = . . _RCSTAbits 0 4 -> -> 1 `i `uc ]
+"36
+[; ;serial_rs232.c: 36:     return;
+[e $UE 240  ]
+"37
+[; ;serial_rs232.c: 37: }
+[e :UE 240 ]
+}
+"39
+[; ;serial_rs232.c: 39: void serial_tx_char(unsigned char val){
+[v _serial_tx_char `(v ~T0 @X0 1 ef1`uc ]
+{
+[e :U _serial_tx_char ]
+[v _val `uc ~T0 @X0 1 r1 ]
+[f ]
+"40
+[; ;serial_rs232.c: 40:     TXREG = val;
+[e = _TXREG _val ]
+"41
+[; ;serial_rs232.c: 41:     while(!TXSTAbits.TRMT);
+[e $U 242  ]
+[e :U 243 ]
+[e :U 242 ]
+[e $ ! != -> . . _TXSTAbits 0 1 `i -> 0 `i 243  ]
+[e :U 244 ]
+"43
+[; ;serial_rs232.c: 43: }
+[e :UE 241 ]
+}
+"45
+[; ;serial_rs232.c: 45: void serial_tx_string(const char* val){
+[v _serial_tx_string `(v ~T0 @X0 1 ef1`*Cuc ]
+{
+[e :U _serial_tx_string ]
+[v _val `*Cuc ~T0 @X0 1 r1 ]
+[f ]
+"46
+[; ;serial_rs232.c: 46:     for (int i=0; val[i] != 0; i++){
+{
+[v _i `i ~T0 @X0 1 a ]
+[e = _i -> 0 `i ]
+[e $U 249  ]
+[e :U 246 ]
+{
+"47
+[; ;serial_rs232.c: 47:         serial_tx_char(val[i]);
+[e ( _serial_tx_char (1 -> *U + _val * -> _i `x -> -> # *U _val `i `x `uc ]
+"48
+[; ;serial_rs232.c: 48:     }
+}
+[e ++ _i -> 1 `i ]
+[e :U 249 ]
+[e $ != -> *U + _val * -> _i `x -> -> # *U _val `i `x `i -> 0 `i 246  ]
+[e :U 247 ]
+}
+"49
+[; ;serial_rs232.c: 49: }
+[e :UE 245 ]
+}
+"51
+[; ;serial_rs232.c: 51: unsigned char get_reg_value(){
+[v _get_reg_value `(uc ~T0 @X0 1 ef ]
+{
+[e :U _get_reg_value ]
+[f ]
+"52
+[; ;serial_rs232.c: 52:     unsigned char rx_char = RCREG;
+[v _rx_char `uc ~T0 @X0 1 a ]
+[e = _rx_char _RCREG ]
+"53
+[; ;serial_rs232.c: 53:     RCREG = 0;
+[e = _RCREG -> -> 0 `i `uc ]
+"54
+[; ;serial_rs232.c: 54:     return rx_char;
+[e ) _rx_char ]
+[e $UE 250  ]
+"55
+[; ;serial_rs232.c: 55: }
+[e :UE 250 ]
 }

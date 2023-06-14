@@ -1,7 +1,11 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"100 ./lcd.h
-[; ;./lcd.h: 100: void lcd_dat(unsigned char val);
-[v _lcd_dat `(v ~T0 @X0 0 ef1`uc ]
+"81 ./stepper_motor.h
+[; ;./stepper_motor.h: 81: typedef struct {
+[s S238 `i 1 `i 1 `i 1 `ui -> 4 `i ]
+[n S238 . current_coil step_counter direction hex_coil_register_values ]
+"822 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 822: extern volatile unsigned char LATB __attribute__((address(0xF8A)));
+[v _LATB `Vuc ~T0 @X0 0 e@3978 ]
 "54 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 54: __asm("PORTA equ 0F80h");
 [; <" PORTA equ 0F80h ;# ">
@@ -383,156 +387,165 @@ Version 4.0 HI-TECH Software Intermediate Code
 "5763
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 5763: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
-"2 utils.c
-[; ;utils.c: 2: void state_translator_fpga_to_micro(unsigned char state_machine_code, int* state){
-[v _state_translator_fpga_to_micro `(v ~T0 @X0 1 ef2`uc`*i ]
+"4 stepper_motor.c
+[; ;stepper_motor.c: 4: void init_stepper(stepperMotor* stepper_motor, int current_coil, int step_counter, int direction, int hex_coil_register_values[4]){
+[v _init_stepper `(v ~T0 @X0 1 ef5`*S238`i`i`i`*i ]
 {
-[e :U _state_translator_fpga_to_micro ]
-[v _state_machine_code `uc ~T0 @X0 1 r1 ]
-[v _state `*i ~T0 @X0 1 r2 ]
+[e :U _init_stepper ]
+[v _stepper_motor `*S238 ~T0 @X0 1 r1 ]
+[v _current_coil `i ~T0 @X0 1 r2 ]
+[v _step_counter `i ~T0 @X0 1 r3 ]
+[v _direction `i ~T0 @X0 1 r4 ]
+[v _hex_coil_register_values `*i ~T0 @X0 1 r5 ]
 [f ]
-"3
-[; ;utils.c: 3:     lcd_dat(state_machine_code);
-[e ( _lcd_dat (1 _state_machine_code ]
-"4
-[; ;utils.c: 4:     if (state_machine_code == 0x81){
-[e $ ! == -> _state_machine_code `i -> 129 `i 239  ]
-{
 "5
-[; ;utils.c: 5:         *state = 1;
-[e = *U _state -> 1 `i ]
+[; ;stepper_motor.c: 5:     for (int i = 0; i < 4; i++) {
+{
+[v _i `i ~T0 @X0 1 a ]
+[e = _i -> 0 `i ]
+[e $ < _i -> 4 `i 240  ]
+[e $U 241  ]
+[e :U 240 ]
+{
 "6
-[; ;utils.c: 6:     } else if (state_machine_code == 0x82){
-}
-[e $U 240  ]
-[e :U 239 ]
-[e $ ! == -> _state_machine_code `i -> 130 `i 241  ]
-{
+[; ;stepper_motor.c: 6:        stepper_motor -> hex_coil_register_values[i] = hex_coil_register_values[i];
+[e = *U + &U . *U _stepper_motor 3 * -> -> _i `ui `ux -> -> # *U &U . *U _stepper_motor 3 `ui `ux -> *U + _hex_coil_register_values * -> _i `x -> -> # *U _hex_coil_register_values `i `x `ui ]
 "7
-[; ;utils.c: 7:         *state = 3;
-[e = *U _state -> 3 `i ]
-"8
-[; ;utils.c: 8:     } else if (state_machine_code == 0x84){
+[; ;stepper_motor.c: 7:     }
 }
-[e $U 242  ]
+[e ++ _i -> 1 `i ]
+[e $ < _i -> 4 `i 240  ]
 [e :U 241 ]
-[e $ ! == -> _state_machine_code `i -> 132 `i 243  ]
-{
-"9
-[; ;utils.c: 9:         *state = 4;
-[e = *U _state -> 4 `i ]
-"10
-[; ;utils.c: 10:     } else if (state_machine_code == 0x88){
 }
-[e $U 244  ]
-[e :U 243 ]
-[e $ ! == -> _state_machine_code `i -> 136 `i 245  ]
-{
+"8
+[; ;stepper_motor.c: 8:     stepper_motor -> current_coil = current_coil;
+[e = . *U _stepper_motor 0 _current_coil ]
+"9
+[; ;stepper_motor.c: 9:     stepper_motor -> step_counter = step_counter;
+[e = . *U _stepper_motor 1 _step_counter ]
+"10
+[; ;stepper_motor.c: 10:     stepper_motor -> direction = direction;
+[e = . *U _stepper_motor 2 _direction ]
 "11
-[; ;utils.c: 11:         *state = 7;
-[e = *U _state -> 7 `i ]
-"12
-[; ;utils.c: 12:     } else if (state_machine_code == 0x90){
+[; ;stepper_motor.c: 11: }
+[e :UE 239 ]
+}
+"13
+[; ;stepper_motor.c: 13: void turn_on_current_coil(stepperMotor* stepper_motor){
+[v _turn_on_current_coil `(v ~T0 @X0 1 ef1`*S238 ]
+{
+[e :U _turn_on_current_coil ]
+[v _stepper_motor `*S238 ~T0 @X0 1 r1 ]
+[f ]
+"14
+[; ;stepper_motor.c: 14:     LATB = stepper_motor -> hex_coil_register_values[stepper_motor -> current_coil];
+[e = _LATB -> *U + &U . *U _stepper_motor 3 * -> -> . *U _stepper_motor 0 `ui `ux -> -> # *U &U . *U _stepper_motor 3 `ui `ux `uc ]
+"15
+[; ;stepper_motor.c: 15:     return;
+[e $UE 243  ]
+"16
+[; ;stepper_motor.c: 16: }
+[e :UE 243 ]
+}
+"18
+[; ;stepper_motor.c: 18: void update_current_coil(stepperMotor* stepper_motor){
+[v _update_current_coil `(v ~T0 @X0 1 ef1`*S238 ]
+{
+[e :U _update_current_coil ]
+[v _stepper_motor `*S238 ~T0 @X0 1 r1 ]
+[f ]
+"19
+[; ;stepper_motor.c: 19:     stepper_motor -> current_coil = stepper_motor -> current_coil + stepper_motor -> direction;
+[e = . *U _stepper_motor 0 + . *U _stepper_motor 0 . *U _stepper_motor 2 ]
+"20
+[; ;stepper_motor.c: 20:     stepper_motor -> step_counter = stepper_motor -> step_counter + 1;
+[e = . *U _stepper_motor 1 + . *U _stepper_motor 1 -> 1 `i ]
+"21
+[; ;stepper_motor.c: 21:     if (stepper_motor -> current_coil == -1) {
+[e $ ! == . *U _stepper_motor 0 -U -> 1 `i 245  ]
+{
+"22
+[; ;stepper_motor.c: 22:         stepper_motor -> current_coil = 3;
+[e = . *U _stepper_motor 0 -> 3 `i ]
+"23
+[; ;stepper_motor.c: 23:     } else if(stepper_motor -> current_coil == 4) {
 }
 [e $U 246  ]
 [e :U 245 ]
-[e $ ! == -> _state_machine_code `i -> 144 `i 247  ]
+[e $ ! == . *U _stepper_motor 0 -> 4 `i 247  ]
 {
-"13
-[; ;utils.c: 13:         *state = 2;
-[e = *U _state -> 2 `i ]
-"14
-[; ;utils.c: 14:     } else if (state_machine_code == 0xA0){
+"24
+[; ;stepper_motor.c: 24:         stepper_motor -> current_coil = 0;
+[e = . *U _stepper_motor 0 -> 0 `i ]
+"25
+[; ;stepper_motor.c: 25:     }
 }
-[e $U 248  ]
 [e :U 247 ]
-[e $ ! == -> _state_machine_code `i -> 160 `i 249  ]
+[e :U 246 ]
+"26
+[; ;stepper_motor.c: 26:     return;
+[e $UE 244  ]
+"27
+[; ;stepper_motor.c: 27: }
+[e :UE 244 ]
+}
+"29
+[; ;stepper_motor.c: 29: int reach_goal(stepperMotor* stepper_motor, int goal_to_reach){
+[v _reach_goal `(i ~T0 @X0 1 ef2`*S238`i ]
 {
-"15
-[; ;utils.c: 15:         *state = 8;
-[e = *U _state -> 8 `i ]
-"16
-[; ;utils.c: 16:     } else {
+[e :U _reach_goal ]
+[v _stepper_motor `*S238 ~T0 @X0 1 r1 ]
+[v _goal_to_reach `i ~T0 @X0 1 r2 ]
+[f ]
+"30
+[; ;stepper_motor.c: 30:     if(stepper_motor -> step_counter >= goal_to_reach){
+[e $ ! >= . *U _stepper_motor 1 _goal_to_reach 249  ]
+{
+"31
+[; ;stepper_motor.c: 31:         stepper_motor -> step_counter = 0;
+[e = . *U _stepper_motor 1 -> 0 `i ]
+"32
+[; ;stepper_motor.c: 32:         return 1;
+[e ) -> 1 `i ]
+[e $UE 248  ]
+"33
+[; ;stepper_motor.c: 33:     } else {
 }
 [e $U 250  ]
 [e :U 249 ]
 {
-"17
-[; ;utils.c: 17:         *state = 0;
-[e = *U _state -> 0 `i ]
-"18
-[; ;utils.c: 18:     }
+"34
+[; ;stepper_motor.c: 34:         turn_on_current_coil(stepper_motor);
+[e ( _turn_on_current_coil (1 _stepper_motor ]
+"35
+[; ;stepper_motor.c: 35:         update_current_coil(stepper_motor);
+[e ( _update_current_coil (1 _stepper_motor ]
+"36
+[; ;stepper_motor.c: 36:         return 0;
+[e ) -> 0 `i ]
+[e $UE 248  ]
+"37
+[; ;stepper_motor.c: 37:     }
 }
 [e :U 250 ]
-[e :U 248 ]
-[e :U 246 ]
-[e :U 244 ]
-[e :U 242 ]
-[e :U 240 ]
-"19
-[; ;utils.c: 19:     return;
-[e $UE 238  ]
-"20
-[; ;utils.c: 20: }
-[e :UE 238 ]
+"38
+[; ;stepper_motor.c: 38: }
+[e :UE 248 ]
 }
-"22
-[; ;utils.c: 22: unsigned char state_translator_micro_to_fpga(int* state){
-[v _state_translator_micro_to_fpga `(uc ~T0 @X0 1 ef1`*i ]
+"40
+[; ;stepper_motor.c: 40: void change_direction(stepperMotor* stepper_motor){
+[v _change_direction `(v ~T0 @X0 1 ef1`*S238 ]
 {
-[e :U _state_translator_micro_to_fpga ]
-[v _state `*i ~T0 @X0 1 r1 ]
+[e :U _change_direction ]
+[v _stepper_motor `*S238 ~T0 @X0 1 r1 ]
 [f ]
-"23
-[; ;utils.c: 23:     unsigned char state_machine_code;
-[v _state_machine_code `uc ~T0 @X0 1 a ]
-"24
-[; ;utils.c: 24:     if (*state == 2){
-[e $ ! == *U _state -> 2 `i 252  ]
-{
-"25
-[; ;utils.c: 25:         state_machine_code = 0x90;
-[e = _state_machine_code -> -> 144 `i `uc ]
-"26
-[; ;utils.c: 26:     } else if (*state == 0) {
-}
-[e $U 253  ]
-[e :U 252 ]
-[e $ ! == *U _state -> 0 `i 254  ]
-{
-"27
-[; ;utils.c: 27:         state_machine_code = 0x89;
-[e = _state_machine_code -> -> 137 `i `uc ]
-"28
-[; ;utils.c: 28:     } else if (*state == 8) {
-}
-[e $U 255  ]
-[e :U 254 ]
-[e $ ! == *U _state -> 8 `i 256  ]
-{
-"29
-[; ;utils.c: 29:         state_machine_code = 0xA0;
-[e = _state_machine_code -> -> 160 `i `uc ]
-"30
-[; ;utils.c: 30:     } else {
-}
-[e $U 257  ]
-[e :U 256 ]
-{
-"31
-[; ;utils.c: 31:         state_machine_code = 0x93;
-[e = _state_machine_code -> -> 147 `i `uc ]
-"32
-[; ;utils.c: 32:     }
-}
-[e :U 257 ]
-[e :U 255 ]
-[e :U 253 ]
-"33
-[; ;utils.c: 33:     return state_machine_code;
-[e ) _state_machine_code ]
+"41
+[; ;stepper_motor.c: 41:     stepper_motor -> direction = stepper_motor -> direction*(-1);
+[e = . *U _stepper_motor 2 * . *U _stepper_motor 2 -U -> 1 `i ]
+"42
+[; ;stepper_motor.c: 42:     return;
 [e $UE 251  ]
-"34
-[; ;utils.c: 34: }
+"43
+[; ;stepper_motor.c: 43: }
 [e :UE 251 ]
 }

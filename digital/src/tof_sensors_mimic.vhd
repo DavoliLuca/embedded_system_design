@@ -9,7 +9,7 @@ end entity tof_mimic;
 
 architecture arc_tof_mimic of tof_mimic is
     signal mv_counter: std_logic := '0';
-    signal state_msg: std_logic_vector(7 downto 0) = "00000000";
+    signal state_msg: std_logic_vector(7 downto 0) := "00000000";
 begin
     comb: process(mv_counter, i1, i2, i3, i4)
     begin
@@ -42,7 +42,7 @@ begin
             mv_counter <= '0';
         elsif (i4'event and i4 = '1') then
             mv_counter <= '0';
-        elsif (mv_msg'event and state_msg = "01001000") then
+        elsif (mv_msg'event and state_msg = "10010000") then
             mv_counter <= '1';
         end if;
     end process;

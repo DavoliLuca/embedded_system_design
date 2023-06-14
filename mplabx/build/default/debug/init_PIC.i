@@ -1,4 +1,4 @@
-# 1 "oven.c"
+# 1 "init_PIC.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,7 +6,64 @@
 # 1 "<built-in>" 2
 # 1 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "oven.c" 2
+# 1 "init_PIC.c" 2
+
+
+
+
+
+#pragma config OSC = RCIO
+#pragma config OSCS = OFF
+
+
+#pragma config PWRT = OFF
+#pragma config BOR = ON
+#pragma config BORV = 20
+
+
+#pragma config WDT = OFF
+#pragma config WDTPS = 128
+
+
+#pragma config CCP2MUX = ON
+
+
+#pragma config STVR = ON
+#pragma config LVP = ON
+
+
+#pragma config CP0 = OFF
+#pragma config CP1 = OFF
+#pragma config CP2 = OFF
+#pragma config CP3 = OFF
+
+
+#pragma config CPB = OFF
+#pragma config CPD = OFF
+
+
+#pragma config WRT0 = OFF
+#pragma config WRT1 = OFF
+#pragma config WRT2 = OFF
+#pragma config WRT3 = OFF
+
+
+#pragma config WRTC = OFF
+#pragma config WRTB = OFF
+#pragma config WRTD = OFF
+
+
+#pragma config EBTR0 = OFF
+#pragma config EBTR1 = OFF
+#pragma config EBTR2 = OFF
+#pragma config EBTR3 = OFF
+
+
+#pragma config EBTRB = OFF
+
+
+
+
 
 # 1 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\\pic\\include\\xc.h" 1 3
 # 18 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\\pic\\include\\xc.h" 3
@@ -3805,59 +3862,41 @@ extern __attribute__((nonreentrant)) void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 33 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\\pic\\include\\xc.h" 2 3
-# 2 "oven.c" 2
+# 58 "init_PIC.c" 2
 
-# 1 "./oven.h" 1
-# 84 "./oven.h"
-typedef struct {
-    int phase;
-    int start_temp;
-    int stop_temp;
-} oven;
+# 1 "./init_PIC.h" 1
+# 79 "./init_PIC.h"
+void init_PORTS(void);
 
-void configure_analog_digital_conversion(void);
-int get_temperature(void);
-void wait_for_zero(void);
-int check_temperature(int temp_to_be_checked);
-# 3 "oven.c" 2
+void init_interrupts(void);
+# 59 "init_PIC.c" 2
 
 
-int temperature_int;
-int temperature_scaled;
+void init_PORTS(void){
 
-void configure_analog_digital_conversion(void){
     LATA = 0;
     PORTA = 0;
-    TRISA = 0xFF;
-    ADCON0 = 0;
-    ADCON0bits.CHS0 = 0;
-    ADCON0bits.CHS1 = 0;
-    ADCON0bits.CHS2 = 1;
-    ADCON0bits.ADON = 1;
-    ADRESH = 0;
-    ADRESL = 0;
-    ADCON1 = 0;
+    TRISA = 0xF0;
+
+    LATB = 0;
+    PORTB = 0;
+    TRISB = 0x00;
+
+
+    LATC = 0;
+    PORTC = 0;
+    TRISCbits.RC2 = 0;
+    TRISCbits.RC7 = 1;
+    TRISCbits.RC6 = 0;
+
+    return;
 }
 
-int get_temperature(void){
-    ADCON0bits.GO = 1;
-    while(ADCON0bits.GO == 1);
-    return (int) (ADRESH * 0.25) + -55;
-}
+void init_interrupts(void){
 
-void wait_for_zero(void){
-    while(1){
-        if (get_temperature() == -55){
-            break;
-        }
-    }
-}
+    PIR1bits.RCIF = 0;
+    PIE1bits.RCIE = 1;
+    INTCONbits.PEIE = 1;
 
-int check_temperature(int temp_to_be_checked){
-    float grad = abs(temp_to_be_checked - (-63))/5;
-    if (grad >= 12 && grad <= 13){
-        return 1;
-    } else {
-        return 0;
-    }
+    return;
 }

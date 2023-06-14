@@ -1,7 +1,71 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"100 ./lcd.h
-[; ;./lcd.h: 100: void lcd_dat(unsigned char val);
-[v _lcd_dat `(v ~T0 @X0 0 ef1`uc ]
+"722 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 722: extern volatile unsigned char LATA __attribute__((address(0xF89)));
+[v _LATA `Vuc ~T0 @X0 0 e@3977 ]
+"52
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 52: extern volatile unsigned char PORTA __attribute__((address(0xF80)));
+[v _PORTA `Vuc ~T0 @X0 0 e@3968 ]
+"1210
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 1210: extern volatile unsigned char TRISA __attribute__((address(0xF92)));
+[v _TRISA `Vuc ~T0 @X0 0 e@3986 ]
+"3659
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 3659: extern volatile unsigned char ADCON0 __attribute__((address(0xFC2)));
+[v _ADCON0 `Vuc ~T0 @X0 0 e@4034 ]
+"3665
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 3665:     struct {
+[s S146 :2 `uc 1 :1 `uc 1 ]
+[n S146 . . GO_NOT_DONE ]
+"3669
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 3669:     struct {
+[s S147 :1 `uc 1 :1 `uc 1 :1 `uc 1 :3 `uc 1 :2 `uc 1 ]
+[n S147 . ADON . GO_nDONE CHS ADCS ]
+"3676
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 3676:     struct {
+[s S148 :2 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S148 . . GO CHS0 CHS1 CHS2 ADCS0 ADCS1 ]
+"3685
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 3685:     struct {
+[s S149 :2 `uc 1 :1 `uc 1 ]
+[n S149 . . NOT_DONE ]
+"3689
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 3689:     struct {
+[s S150 :2 `uc 1 :1 `uc 1 ]
+[n S150 . . nDONE ]
+"3693
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 3693:     struct {
+[s S151 :2 `uc 1 :1 `uc 1 ]
+[n S151 . . DONE ]
+"3697
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 3697:     struct {
+[s S152 :2 `uc 1 :1 `uc 1 ]
+[n S152 . . GO_DONE ]
+"3701
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 3701:     struct {
+[s S153 :7 `uc 1 :1 `uc 1 ]
+[n S153 . . ADCAL ]
+"3705
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 3705:     struct {
+[s S154 :2 `uc 1 :1 `uc 1 ]
+[n S154 . . GODONE ]
+"3664
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 3664: typedef union {
+[u S145 `S146 1 `S147 1 `S148 1 `S149 1 `S150 1 `S151 1 `S152 1 `S153 1 `S154 1 ]
+[n S145 . . . . . . . . . . ]
+"3710
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 3710: extern volatile ADCON0bits_t ADCON0bits __attribute__((address(0xFC2)));
+[v _ADCON0bits `VS145 ~T0 @X0 0 e@4034 ]
+"3814
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 3814: extern volatile unsigned char ADRESH __attribute__((address(0xFC4)));
+[v _ADRESH `Vuc ~T0 @X0 0 e@4036 ]
+"3807
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 3807: extern volatile unsigned char ADRESL __attribute__((address(0xFC3)));
+[v _ADRESL `Vuc ~T0 @X0 0 e@4035 ]
+"3591
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 3591: extern volatile unsigned char ADCON1 __attribute__((address(0xFC1)));
+[v _ADCON1 `Vuc ~T0 @X0 0 e@4033 ]
+"51 C:\Program Files\Microchip\xc8\v2.20\pic\include\c99\stdlib.h
+[; ;C:\Program Files\Microchip\xc8\v2.20\pic\include\c99\stdlib.h: 51: int abs (int);
+[v _abs `(i ~T0 @X0 0 ef1`i ]
 "54 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 54: __asm("PORTA equ 0F80h");
 [; <" PORTA equ 0F80h ;# ">
@@ -383,156 +447,144 @@ Version 4.0 HI-TECH Software Intermediate Code
 "5763
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 5763: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
-"2 utils.c
-[; ;utils.c: 2: void state_translator_fpga_to_micro(unsigned char state_machine_code, int* state){
-[v _state_translator_fpga_to_micro `(v ~T0 @X0 1 ef2`uc`*i ]
-{
-[e :U _state_translator_fpga_to_micro ]
-[v _state_machine_code `uc ~T0 @X0 1 r1 ]
-[v _state `*i ~T0 @X0 1 r2 ]
-[f ]
-"3
-[; ;utils.c: 3:     lcd_dat(state_machine_code);
-[e ( _lcd_dat (1 _state_machine_code ]
-"4
-[; ;utils.c: 4:     if (state_machine_code == 0x81){
-[e $ ! == -> _state_machine_code `i -> 129 `i 239  ]
-{
-"5
-[; ;utils.c: 5:         *state = 1;
-[e = *U _state -> 1 `i ]
+"5 oven.c
+[; ;oven.c: 5: int temperature_int;
+[v _temperature_int `i ~T0 @X0 1 e ]
 "6
-[; ;utils.c: 6:     } else if (state_machine_code == 0x82){
-}
-[e $U 240  ]
-[e :U 239 ]
-[e $ ! == -> _state_machine_code `i -> 130 `i 241  ]
-{
-"7
-[; ;utils.c: 7:         *state = 3;
-[e = *U _state -> 3 `i ]
+[; ;oven.c: 6: int temperature_scaled;
+[v _temperature_scaled `i ~T0 @X0 1 e ]
 "8
-[; ;utils.c: 8:     } else if (state_machine_code == 0x84){
-}
-[e $U 242  ]
-[e :U 241 ]
-[e $ ! == -> _state_machine_code `i -> 132 `i 243  ]
+[; ;oven.c: 8: void configure_analog_digital_conversion(void){
+[v _configure_analog_digital_conversion `(v ~T0 @X0 1 ef ]
 {
+[e :U _configure_analog_digital_conversion ]
+[f ]
 "9
-[; ;utils.c: 9:         *state = 4;
-[e = *U _state -> 4 `i ]
+[; ;oven.c: 9:     LATA = 0;
+[e = _LATA -> -> 0 `i `uc ]
 "10
-[; ;utils.c: 10:     } else if (state_machine_code == 0x88){
-}
-[e $U 244  ]
-[e :U 243 ]
-[e $ ! == -> _state_machine_code `i -> 136 `i 245  ]
-{
+[; ;oven.c: 10:     PORTA = 0;
+[e = _PORTA -> -> 0 `i `uc ]
 "11
-[; ;utils.c: 11:         *state = 7;
-[e = *U _state -> 7 `i ]
+[; ;oven.c: 11:     TRISA = 0xFF;
+[e = _TRISA -> -> 255 `i `uc ]
 "12
-[; ;utils.c: 12:     } else if (state_machine_code == 0x90){
-}
-[e $U 246  ]
-[e :U 245 ]
-[e $ ! == -> _state_machine_code `i -> 144 `i 247  ]
-{
+[; ;oven.c: 12:     ADCON0 = 0;
+[e = _ADCON0 -> -> 0 `i `uc ]
 "13
-[; ;utils.c: 13:         *state = 2;
-[e = *U _state -> 2 `i ]
+[; ;oven.c: 13:     ADCON0bits.CHS0 = 0;
+[e = . . _ADCON0bits 2 2 -> -> 0 `i `uc ]
 "14
-[; ;utils.c: 14:     } else if (state_machine_code == 0xA0){
-}
-[e $U 248  ]
-[e :U 247 ]
-[e $ ! == -> _state_machine_code `i -> 160 `i 249  ]
-{
+[; ;oven.c: 14:     ADCON0bits.CHS1 = 0;
+[e = . . _ADCON0bits 2 3 -> -> 0 `i `uc ]
 "15
-[; ;utils.c: 15:         *state = 8;
-[e = *U _state -> 8 `i ]
+[; ;oven.c: 15:     ADCON0bits.CHS2 = 1;
+[e = . . _ADCON0bits 2 4 -> -> 1 `i `uc ]
 "16
-[; ;utils.c: 16:     } else {
-}
-[e $U 250  ]
-[e :U 249 ]
-{
+[; ;oven.c: 16:     ADCON0bits.ADON = 1;
+[e = . . _ADCON0bits 1 0 -> -> 1 `i `uc ]
 "17
-[; ;utils.c: 17:         *state = 0;
-[e = *U _state -> 0 `i ]
+[; ;oven.c: 17:     ADRESH = 0;
+[e = _ADRESH -> -> 0 `i `uc ]
 "18
-[; ;utils.c: 18:     }
-}
-[e :U 250 ]
-[e :U 248 ]
-[e :U 246 ]
-[e :U 244 ]
-[e :U 242 ]
-[e :U 240 ]
+[; ;oven.c: 18:     ADRESL = 0;
+[e = _ADRESL -> -> 0 `i `uc ]
 "19
-[; ;utils.c: 19:     return;
-[e $UE 238  ]
+[; ;oven.c: 19:     ADCON1 = 0;
+[e = _ADCON1 -> -> 0 `i `uc ]
 "20
-[; ;utils.c: 20: }
-[e :UE 238 ]
+[; ;oven.c: 20: }
+[e :UE 239 ]
 }
 "22
-[; ;utils.c: 22: unsigned char state_translator_micro_to_fpga(int* state){
-[v _state_translator_micro_to_fpga `(uc ~T0 @X0 1 ef1`*i ]
+[; ;oven.c: 22: int get_temperature(void){
+[v _get_temperature `(i ~T0 @X0 1 ef ]
 {
-[e :U _state_translator_micro_to_fpga ]
-[v _state `*i ~T0 @X0 1 r1 ]
+[e :U _get_temperature ]
 [f ]
 "23
-[; ;utils.c: 23:     unsigned char state_machine_code;
-[v _state_machine_code `uc ~T0 @X0 1 a ]
+[; ;oven.c: 23:     ADCON0bits.GO = 1;
+[e = . . _ADCON0bits 2 1 -> -> 1 `i `uc ]
 "24
-[; ;utils.c: 24:     if (*state == 2){
-[e $ ! == *U _state -> 2 `i 252  ]
-{
+[; ;oven.c: 24:     while(ADCON0bits.GO == 1);
+[e $U 241  ]
+[e :U 242 ]
+[e :U 241 ]
+[e $ == -> . . _ADCON0bits 2 1 `i -> 1 `i 242  ]
+[e :U 243 ]
 "25
-[; ;utils.c: 25:         state_machine_code = 0x90;
-[e = _state_machine_code -> -> 144 `i `uc ]
+[; ;oven.c: 25:     return (int) (ADRESH * 0.25) + -55;
+[e ) + -> * -> -> _ADRESH `i `d .0.25 `i -U -> 55 `i ]
+[e $UE 240  ]
 "26
-[; ;utils.c: 26:     } else if (*state == 0) {
+[; ;oven.c: 26: }
+[e :UE 240 ]
 }
-[e $U 253  ]
-[e :U 252 ]
-[e $ ! == *U _state -> 0 `i 254  ]
-{
-"27
-[; ;utils.c: 27:         state_machine_code = 0x89;
-[e = _state_machine_code -> -> 137 `i `uc ]
 "28
-[; ;utils.c: 28:     } else if (*state == 8) {
-}
-[e $U 255  ]
-[e :U 254 ]
-[e $ ! == *U _state -> 8 `i 256  ]
+[; ;oven.c: 28: void wait_for_zero(void){
+[v _wait_for_zero `(v ~T0 @X0 1 ef ]
 {
+[e :U _wait_for_zero ]
+[f ]
 "29
-[; ;utils.c: 29:         state_machine_code = 0xA0;
-[e = _state_machine_code -> -> 160 `i `uc ]
+[; ;oven.c: 29:     while(1){
+[e :U 246 ]
+{
 "30
-[; ;utils.c: 30:     } else {
-}
-[e $U 257  ]
-[e :U 256 ]
+[; ;oven.c: 30:         if (get_temperature() == -55){
+[e $ ! == ( _get_temperature ..  -U -> 55 `i 248  ]
 {
 "31
-[; ;utils.c: 31:         state_machine_code = 0x93;
-[e = _state_machine_code -> -> 147 `i `uc ]
+[; ;oven.c: 31:             break;
+[e $U 247  ]
 "32
-[; ;utils.c: 32:     }
+[; ;oven.c: 32:         }
 }
-[e :U 257 ]
-[e :U 255 ]
-[e :U 253 ]
+[e :U 248 ]
 "33
-[; ;utils.c: 33:     return state_machine_code;
-[e ) _state_machine_code ]
-[e $UE 251  ]
+[; ;oven.c: 33:     }
+}
+[e :U 245 ]
+[e $U 246  ]
+[e :U 247 ]
 "34
-[; ;utils.c: 34: }
-[e :UE 251 ]
+[; ;oven.c: 34: }
+[e :UE 244 ]
+}
+"36
+[; ;oven.c: 36: int check_temperature(int temp_to_be_checked){
+[v _check_temperature `(i ~T0 @X0 1 ef1`i ]
+{
+[e :U _check_temperature ]
+[v _temp_to_be_checked `i ~T0 @X0 1 r1 ]
+[f ]
+"37
+[; ;oven.c: 37:     float grad = abs(temp_to_be_checked - (-63))/5;
+[v _grad `f ~T0 @X0 1 a ]
+[e = _grad -> / ( _abs (1 - _temp_to_be_checked -U -> 63 `i -> 5 `i `f ]
+"38
+[; ;oven.c: 38:     if (grad >= 12 && grad <= 13){
+[e $ ! && >= _grad -> -> 12 `i `f <= _grad -> -> 13 `i `f 250  ]
+{
+"39
+[; ;oven.c: 39:         return 1;
+[e ) -> 1 `i ]
+[e $UE 249  ]
+"40
+[; ;oven.c: 40:     } else {
+}
+[e $U 251  ]
+[e :U 250 ]
+{
+"41
+[; ;oven.c: 41:         return 0;
+[e ) -> 0 `i ]
+[e $UE 249  ]
+"42
+[; ;oven.c: 42:     }
+}
+[e :U 251 ]
+"43
+[; ;oven.c: 43: }
+[e :UE 249 ]
 }

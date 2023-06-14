@@ -60,6 +60,7 @@ _nout 84 0 BANK0 1
 strncmp@r A 0 COMRAM 1
 ___fltol@f1 CA 0 BANK0 1
 _init_timer_2 702A 0 CODE 0
+__cntErrataNOP_dist/default/debug\mplabx.debug.o 461 0 ABS 0
 ?_isspace 1 0 COMRAM 1
 ?_isalpha 1 0 COMRAM 1
 _TMR0H FD7 0 ABS 0
@@ -588,7 +589,6 @@ __Ltext22 0 0 ABS 0
 __ptext12 68AE 0 CODE 0
 __ptext31 686C 0 CODE 0
 __ptext50 2984 0 CODE 0
-__cntErrataNOP_dist/default/production\mplabx.production.o 461 0 ABS 0
 __Htext51 0 0 ABS 0
 __Htext32 0 0 ABS 0
 __Htext13 0 0 ABS 0
@@ -776,7 +776,7 @@ __size_of_atoi 0 0 ABS 0
 vfpfcnvrt@ap 47 0 COMRAM 1
 __end_of___lodiv 7862 0 CODE 0
 __accesstop 80 0 ABS 0
-__cntErrataNOP_C:\Users\davol\AppData\Local\Temp\sl78.o 1 0 ABS 0
+__cntErrataNOP_C:\Users\davol\AppData\Local\Temp\s5a4.o 1 0 ABS 0
 __Hintcode_body 0 0 ABS 0
 __Lintcode_body 0 0 ABS 0
 __end_of_init_stepper 6F66 0 CODE 0
@@ -932,9 +932,9 @@ text41 6592 659D CODE 6592 0
 text45 6586 6591 CODE 6586 0
 text28 6580 6585 CODE 6580 0
 %locals
-dist/default/production\mplabx.production.o
+dist/default/debug\mplabx.debug.o
 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h
-C:\Users\davol\AppData\Local\Temp\sl78.s
+C:\Users\davol\AppData\Local\Temp\s5a4.s
 2932 6B80 0 CODE 0
 2934 6B80 0 CODE 0
 2937 6B80 0 CODE 0
@@ -2206,7 +2206,7 @@ stepper_motor.c
 40 6776 0 CODE 0
 41 6778 0 CODE 0
 43 67A8 0 CODE 0
-C:\Users\davol\AppData\Local\Temp\sl78.s
+C:\Users\davol\AppData\Local\Temp\s5a4.s
 21489 8 0 CODE 0
 main.c
 190 8 0 CODE 0

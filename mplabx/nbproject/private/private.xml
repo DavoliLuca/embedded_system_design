@@ -3,11 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/davol/embedded_system_design/mplabx/timer.c</file>
+            <file>file:/C:/Users/davol/embedded_system_design/mplabx/oven.h</file>
+            <file>file:/C:/Users/davol/embedded_system_design/mplabx/utils.c</file>
+            <file>file:/C:/Users/davol/embedded_system_design/mplabx/lcd.c</file>
             <file>file:/C:/Users/davol/embedded_system_design/mplabx/main.c</file>
-            <file>file:/C:/Users/davol/embedded_system_design/mplabx/init_PIC.c</file>
-            <file>file:/C:/Users/davol/embedded_system_design/mplabx/stepper_motor.c</file>
-            <file>file:/C:/Users/davol/embedded_system_design/mplabx/serial_rs232.c</file>
+            <file>file:/C:/Program%20Files/Microchip/xc8/v2.20/pic/sources/c99/common/nf_fputc.c</file>
             <file>file:/C:/Users/davol/embedded_system_design/mplabx/oven.c</file>
         </group>
     </open-files>

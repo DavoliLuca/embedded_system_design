@@ -1,4 +1,4 @@
-# 1 "oven.c"
+# 1 "stepper_motor.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,8 +6,7 @@
 # 1 "<built-in>" 2
 # 1 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "oven.c" 2
-
+# 1 "stepper_motor.c" 2
 # 1 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\\pic\\include\\xc.h" 1 3
 # 18 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -3805,59 +3804,62 @@ extern __attribute__((nonreentrant)) void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 33 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\\pic\\include\\xc.h" 2 3
-# 2 "oven.c" 2
+# 1 "stepper_motor.c" 2
 
-# 1 "./oven.h" 1
-# 84 "./oven.h"
+# 1 "./stepper_motor.h" 1
+# 81 "./stepper_motor.h"
 typedef struct {
-    int phase;
-    int start_temp;
-    int stop_temp;
-} oven;
+    int current_coil;
+    int step_counter;
+    int direction;
+    unsigned int hex_coil_register_values[4];
+} stepperMotor;
 
-void configure_analog_digital_conversion(void);
-int get_temperature(void);
-void wait_for_zero(void);
-int check_temperature(int temp_to_be_checked);
-# 3 "oven.c" 2
+void turn_on_current_coil(stepperMotor* stepper_motor);
+void init_stepper(stepperMotor* stepper_motor, int current_step, int step_counter, int direction, int hex_coil_register_values[4]);
+void update_current_coil(stepperMotor* stepper_motor);
+int reach_goal(stepperMotor* stepper_motor, int goal_to_reach);
+void change_direction(stepperMotor* stepper_motor);
+# 2 "stepper_motor.c" 2
 
 
-int temperature_int;
-int temperature_scaled;
-
-void configure_analog_digital_conversion(void){
-    LATA = 0;
-    PORTA = 0;
-    TRISA = 0xFF;
-    ADCON0 = 0;
-    ADCON0bits.CHS0 = 0;
-    ADCON0bits.CHS1 = 0;
-    ADCON0bits.CHS2 = 1;
-    ADCON0bits.ADON = 1;
-    ADRESH = 0;
-    ADRESL = 0;
-    ADCON1 = 0;
-}
-
-int get_temperature(void){
-    ADCON0bits.GO = 1;
-    while(ADCON0bits.GO == 1);
-    return (int) (ADRESH * 0.25) + -55;
-}
-
-void wait_for_zero(void){
-    while(1){
-        if (get_temperature() == -55){
-            break;
-        }
+void init_stepper(stepperMotor* stepper_motor, int current_coil, int step_counter, int direction, int hex_coil_register_values[4]){
+    for (int i = 0; i < 4; i++) {
+       stepper_motor -> hex_coil_register_values[i] = hex_coil_register_values[i];
     }
+    stepper_motor -> current_coil = current_coil;
+    stepper_motor -> step_counter = step_counter;
+    stepper_motor -> direction = direction;
 }
 
-int check_temperature(int temp_to_be_checked){
-    float grad = abs(temp_to_be_checked - (-63))/5;
-    if (grad >= 12 && grad <= 13){
+void turn_on_current_coil(stepperMotor* stepper_motor){
+    LATB = stepper_motor -> hex_coil_register_values[stepper_motor -> current_coil];
+    return;
+}
+
+void update_current_coil(stepperMotor* stepper_motor){
+    stepper_motor -> current_coil = stepper_motor -> current_coil + stepper_motor -> direction;
+    stepper_motor -> step_counter = stepper_motor -> step_counter + 1;
+    if (stepper_motor -> current_coil == -1) {
+        stepper_motor -> current_coil = 3;
+    } else if(stepper_motor -> current_coil == 4) {
+        stepper_motor -> current_coil = 0;
+    }
+    return;
+}
+
+int reach_goal(stepperMotor* stepper_motor, int goal_to_reach){
+    if(stepper_motor -> step_counter >= goal_to_reach){
+        stepper_motor -> step_counter = 0;
         return 1;
     } else {
+        turn_on_current_coil(stepper_motor);
+        update_current_coil(stepper_motor);
         return 0;
     }
+}
+
+void change_direction(stepperMotor* stepper_motor){
+    stepper_motor -> direction = stepper_motor -> direction*(-1);
+    return;
 }

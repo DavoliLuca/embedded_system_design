@@ -1,4 +1,4 @@
-# 1 "oven.c"
+# 1 "lcd.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,7 +6,7 @@
 # 1 "<built-in>" 2
 # 1 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "oven.c" 2
+# 1 "lcd.c" 2
 
 # 1 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\\pic\\include\\xc.h" 1 3
 # 18 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\\pic\\include\\xc.h" 3
@@ -3805,59 +3805,81 @@ extern __attribute__((nonreentrant)) void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 33 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\\pic\\include\\xc.h" 2 3
-# 2 "oven.c" 2
+# 2 "lcd.c" 2
 
-# 1 "./oven.h" 1
-# 84 "./oven.h"
-typedef struct {
-    int phase;
-    int start_temp;
-    int stop_temp;
-} oven;
-
-void configure_analog_digital_conversion(void);
-int get_temperature(void);
-void wait_for_zero(void);
-int check_temperature(int temp_to_be_checked);
-# 3 "oven.c" 2
+# 1 "./lcd.h" 1
+# 98 "./lcd.h"
+void lcd_init(void);
+void lcd_cmd(unsigned char val);
+void lcd_dat(unsigned char val);
+void lcd_str(const char* str);
+# 3 "lcd.c" 2
 
 
-int temperature_int;
-int temperature_scaled;
-
-void configure_analog_digital_conversion(void){
-    LATA = 0;
-    PORTA = 0;
-    TRISA = 0xFF;
-    ADCON0 = 0;
-    ADCON0bits.CHS0 = 0;
-    ADCON0bits.CHS1 = 0;
-    ADCON0bits.CHS2 = 1;
-    ADCON0bits.ADON = 1;
-    ADRESH = 0;
-    ADRESL = 0;
-    ADCON1 = 0;
+void lcd_wr(unsigned char val)
+{
+    PORTD=val;
 }
 
-int get_temperature(void){
-    ADCON0bits.GO = 1;
-    while(ADCON0bits.GO == 1);
-    return (int) (ADRESH * 0.25) + -55;
+void lcd_cmd(unsigned char val)
+{
+ PORTEbits.RE1=1;
+    lcd_wr(val);
+    PORTEbits.RE2=0;
+    _delay((unsigned long)((1)*(4000000/4000.0)));
+    PORTEbits.RE1=0;
+    _delay((unsigned long)((1)*(4000000/4000.0)));
+ PORTEbits.RE1=1;
 }
 
-void wait_for_zero(void){
-    while(1){
-        if (get_temperature() == -55){
-            break;
-        }
-    }
+void lcd_dat(unsigned char val)
+{
+ PORTEbits.RE1=1;
+    lcd_wr(val);
+    PORTEbits.RE2=1;
+    _delay((unsigned long)((1)*(4000000/4000.0)));
+    PORTEbits.RE1=0;
+    _delay((unsigned long)((1)*(4000000/4000.0)));
+ PORTEbits.RE1=1;
 }
 
-int check_temperature(int temp_to_be_checked){
-    float grad = abs(temp_to_be_checked - (-63))/5;
-    if (grad >= 12 && grad <= 13){
-        return 1;
-    } else {
-        return 0;
+void lcd_init(void)
+{
+
+    __asm("CLRF PORTD");
+    __asm("MOVLW 0x00");
+    __asm("MOVWF TRISD");
+
+    __asm("CLRF PORTE");
+    __asm("MOVLW 0x00");
+    __asm("MOVWF TRISE");
+
+
+
+ PORTEbits.RE1=0;
+ PORTEbits.RE2=0;
+ _delay((unsigned long)((30)*(4000000/4000.0)));
+ PORTEbits.RE1=1;
+
+ lcd_cmd(0x38);
+ _delay((unsigned long)((30)*(4000000/4000.0)));
+ lcd_cmd(0x38);
+    _delay((unsigned long)((30)*(4000000/4000.0)));
+ lcd_cmd(0x38);
+ lcd_cmd(0x08);
+ lcd_cmd(0x0F);
+ lcd_cmd(0x01);
+ lcd_cmd(0x38);
+    lcd_cmd(0x80);
+}
+
+void lcd_str(const char* str)
+{
+    unsigned char i=0;
+
+    while(str[i] != 0 )
+    {
+      lcd_dat(str[i]);
+      i++;
     }
 }

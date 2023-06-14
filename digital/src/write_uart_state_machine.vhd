@@ -2,16 +2,16 @@ library ieee;
 use ieee.std_logic_1164.all;
 
 entity write_uart_sm is
-	port ( state_vector: in std_logic_vector(5 downto 0);
+	port ( state_vector: in std_logic_vector(6 downto 0);
            ext_error: in std_logic;
            clk: in std_logic;
-	       data_write: out std_logic_vector(5 downto 0); 
+	       data_write: out std_logic_vector(6 downto 0); 
            data_write_bool: out std_logic);
 end entity write_uart_sm;
 
 architecture arc_write_uart_sm of write_uart_sm is
     signal state_changed: std_logic;
-    signal current_state: std_logic_vector(5 downto 0);
+    signal current_state: std_logic_vector(6 downto 0);
 begin
     process(clk) is
     begin
