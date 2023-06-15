@@ -4227,17 +4227,15 @@ void main(void){
                 rx_char = get_reg_value();
 
 
-
-
                 state_translator_fpga_to_micro(rx_char, &state);
                 read_new_char = 0;
+                snprintf(greet_str, sizeof(greet_str), "%s", state_msgs[state]);
+                lcd_cmd(0x01);
+                lcd_cmd(0x80);
+                lcd_str(greet_str);
             } else {
                 serial_tx_char(state_translator_micro_to_fpga(&state));
             }
-            snprintf(greet_str, sizeof(greet_str), "%s", state_msgs[state]);
-            lcd_cmd(0x01);
-            lcd_cmd(0x80);
-            lcd_str(greet_str);
 
             state_changed = 0;
             idle_msg_sent = 0;
@@ -4260,6 +4258,9 @@ void main(void){
                 state = 2;
                 state_changed = 1;
             } else if (state == 3){
+                state = 9;
+                state_changed = 1;
+            } else if (state == 9){
                 if (timer_done){
                     if(check_temperature(get_temperature())){
                         state = 2;
@@ -4278,6 +4279,9 @@ void main(void){
                 }
 
             } else if (state == 4){
+                state = 10;
+                state_changed = 1;
+            }else if (state == 10){
                 _delay((unsigned long)((3)*(4000000/4000.0)));
                 if (joint_homed && reach_goal(&joint_stepper, 50)){
                     joint_homed = 0;
@@ -4316,8 +4320,12 @@ void main(void){
 
                 if (end_effector_homed * joint_homed){
                     state = 2;
+                    state_changed = 1;
                 }
             } else if (state == 7){
+                state = 11;
+                state_changed = 1;
+            }else if (state == 11){
                 if (timer_done){
                     state_changed = 1;
                     state = 2;

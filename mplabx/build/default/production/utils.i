@@ -3816,18 +3816,20 @@ void lcd_str(const char* str);
 
 void state_translator_fpga_to_micro(unsigned char state_machine_code, int* state){
     lcd_dat(state_machine_code);
-    if (state_machine_code == 0x81){
+    if (state_machine_code == 0x01){
         *state = 1;
-    } else if (state_machine_code == 0x82){
+    } else if (state_machine_code == 0x02){
         *state = 3;
-    } else if (state_machine_code == 0x84){
+    } else if (state_machine_code == 0x04){
         *state = 4;
-    } else if (state_machine_code == 0x88){
+    } else if (state_machine_code == 0x08){
         *state = 7;
-    } else if (state_machine_code == 0x90){
+    } else if (state_machine_code == 0x10){
         *state = 2;
-    } else if (state_machine_code == 0xA0){
+    } else if (state_machine_code == 0x40){
         *state = 8;
+    } else if (state_machine_code == 0x80){
+
     } else {
         *state = 0;
     }
@@ -3837,13 +3839,13 @@ void state_translator_fpga_to_micro(unsigned char state_machine_code, int* state
 unsigned char state_translator_micro_to_fpga(int* state){
     unsigned char state_machine_code;
     if (*state == 2){
-        state_machine_code = 0x90;
+        state_machine_code = 0x10;
     } else if (*state == 0) {
-        state_machine_code = 0x89;
+        state_machine_code = 0x09;
     } else if (*state == 8) {
-        state_machine_code = 0xA0;
+        state_machine_code = 0x40;
     } else {
-        state_machine_code = 0x93;
+        state_machine_code = 0x80;
     }
     return state_machine_code;
 }

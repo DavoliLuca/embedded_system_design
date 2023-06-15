@@ -77,19 +77,17 @@ void main(void){
             const char* greet_str[80];
             if (read_new_char){
                 rx_char = get_reg_value();
-                /*if (rx_char == 'u'){ // Debug
-                    serial_tx_char(rx_char); // Debug
-                } // Debug
-                serial_tx_char(rx_char); // Debug */
+
+                // serial_tx_char(rx_char); // Debug
                 state_translator_fpga_to_micro(rx_char, &state);  // Send state update to fpga
-                read_new_char = false;  
+                read_new_char = false;
+                snprintf(greet_str, sizeof(greet_str), "%s", state_msgs[state]);
+                lcd_cmd(L_CLR);
+                lcd_cmd(L_L1);
+                lcd_str(greet_str);
             } else {
                 serial_tx_char(state_translator_micro_to_fpga(&state));
             }
-            snprintf(greet_str, sizeof(greet_str), "%s", state_msgs[state]);
-            lcd_cmd(L_CLR);
-            lcd_cmd(L_L1);
-            lcd_str(greet_str);
             
             state_changed = false;
             idle_msg_sent = false;
@@ -107,11 +105,14 @@ void main(void){
         } else {
             LATAbits.LATA1 = 0; // Stop Belt Movement
             if (state == 0) {
-                
+                // Idle
             } else if (state == 1){
                 state = 2;
                 state_changed = true;
-            } else if (state == 3){
+            }  else if (state == 3){
+                state = 9;
+                state_changed = true;
+            } else if (state == 9){
                 if (timer_done){
                     if(check_temperature(get_temperature())){
                         state = 2;
@@ -130,6 +131,9 @@ void main(void){
                 }
                 
             } else if (state == 4){
+                state = 10;
+                state_changed = true;
+            }else if (state == 10){
                 __delay_ms(3);
                 if (joint_homed && reach_goal(&joint_stepper, 50)){
                     joint_homed = 0;
@@ -141,7 +145,7 @@ void main(void){
                     state = 5;
                     state_changed = true;
                 }
-            } else if (state == 5){
+            } else if (state == 5){ // Mix 10 times
                 __delay_ms(3);
                 if (reach_goal(&joint_stepper, 100)) {
                     change_direction(&joint_stepper);
@@ -168,8 +172,12 @@ void main(void){
                 
                 if (end_effector_homed * joint_homed){
                     state = 2;
+                    state_changed = true;
                 }
             } else if (state == 7){
+                state = 11;
+                state_changed = true;
+            }else if (state == 11){
                 if (timer_done){
                     state_changed = true;
                     state = 2; // Here it should go either to trash Move [2] because the vial hasn't been picked up on time

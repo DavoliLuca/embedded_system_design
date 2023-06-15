@@ -54,11 +54,11 @@ begin
     process(msg) is  
     begin
         combined_state <= "000";
-        if (msg = "10010101") then -- Process
+        if (msg = "10000000") then -- Process
             combined_state <= "001";
-        elsif (msg = "00000000" or msg = "10000000" or msg = "10001001") then -- Idle
+        elsif (msg = "00000000" or msg = "00001001") then -- Idle
             combined_state <= "010";
-        elsif (msg = "10010000") then -- Move
+        elsif (msg = "00010000") then -- Move
             combined_state <= "100";
         end if;
     end process;

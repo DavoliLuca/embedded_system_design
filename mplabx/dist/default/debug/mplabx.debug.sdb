@@ -113,7 +113,7 @@
 [v _lcd_str lcd_str `(v  1 e 1 0 ]
 "54 C:\Users\davol\embedded_system_design\mplabx\main.c
 [v _main main `(v  1 e 1 0 ]
-"190
+"198
 [v _rx_char_usart rx_char_usart `IIH(v  1 e 1 0 ]
 "8 C:\Users\davol\embedded_system_design\mplabx\oven.c
 [v _configure_analog_digital_conversion configure_analog_digital_conversion `(v  1 e 1 0 ]
@@ -149,7 +149,7 @@
 [v _update_pwm_duty_ccp1 update_pwm_duty_ccp1 `(v  1 e 1 0 ]
 "2 C:\Users\davol\embedded_system_design\mplabx\utils.c
 [v _state_translator_fpga_to_micro state_translator_fpga_to_micro `(v  1 e 1 0 ]
-"22
+"24
 [v _state_translator_micro_to_fpga state_translator_micro_to_fpga `(uc  1 e 1 0 ]
 "52 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h
 [v _PORTA PORTA `VEuc  1 e 1 @3968 ]
@@ -511,13 +511,13 @@
 "54 C:\Users\davol\embedded_system_design\mplabx\main.c
 [v _main main `(v  1 e 1 0 ]
 {
-"129
+"130
 [v main@current_temp current_temp `i  1 a 2 160 ]
 "77
 [v main@greet_str greet_str `[80]*.35Cuc  1 a 160 0 ]
 "55
 [v main@rx_char rx_char `uc  1 a 1 162 ]
-"187
+"195
 } 0
 "28 C:\Users\davol\embedded_system_design\mplabx\oven.c
 [v _wait_for_zero wait_for_zero `(v  1 e 1 0 ]
@@ -529,14 +529,14 @@
 {
 "26
 } 0
-"22 C:\Users\davol\embedded_system_design\mplabx\utils.c
+"24 C:\Users\davol\embedded_system_design\mplabx\utils.c
 [v _state_translator_micro_to_fpga state_translator_micro_to_fpga `(uc  1 e 1 0 ]
 {
-"23
+"25
 [v state_translator_micro_to_fpga@state_machine_code state_machine_code `uc  1 a 1 4 ]
-"22
+"24
 [v state_translator_micro_to_fpga@state state `*.39i  1 p 2 0 ]
-"34
+"36
 } 0
 "2
 [v _state_translator_fpga_to_micro state_translator_fpga_to_micro `(v  1 e 1 0 ]
@@ -545,7 +545,7 @@
 [v state_translator_fpga_to_micro@state_machine_code state_machine_code `uc  1 a 1 wreg ]
 [v state_translator_fpga_to_micro@state state `*.39i  1 p 2 2 ]
 [v state_translator_fpga_to_micro@state_machine_code state_machine_code `uc  1 a 1 4 ]
-"20
+"22
 } 0
 "4 C:\Program Files\Microchip\xc8\v2.20\pic\sources\c99\common\snprintf.c
 [v _snprintf snprintf `(i  1 e 2 0 ]
@@ -1159,8 +1159,8 @@
 [v change_direction@stepper_motor stepper_motor `*.39S181  1 p 2 0 ]
 "43
 } 0
-"190 C:\Users\davol\embedded_system_design\mplabx\main.c
+"198 C:\Users\davol\embedded_system_design\mplabx\main.c
 [v _rx_char_usart rx_char_usart `IIH(v  1 e 1 0 ]
 {
-"201
+"209
 } 0

@@ -17,7 +17,7 @@ begin
         tof2 <= i2;
         tof3 <= i3;
         tof4 <= i4;
-        if (mv_counter) then
+        if (mv_counter = '1') then
             tof1 <= '0';
             tof2 <= '0';
             tof3 <= '0';
@@ -32,7 +32,7 @@ begin
         end if;
     end process;
 
-    upd: process(mv_msg, i1, i2, i3, i4)
+    upd: process(state_msg, i1, i2, i3, i4)
     begin
         if (i1'event and i1 = '1') then
             mv_counter <= '0';
@@ -42,8 +42,12 @@ begin
             mv_counter <= '0';
         elsif (i4'event and i4 = '1') then
             mv_counter <= '0';
-        elsif (mv_msg'event and state_msg = "10010000") then
-            mv_counter <= '1';
+        elsif (state_msg'event) then
+            if state_msg = "00010000" then
+                mv_counter <= '1';
+            else    
+                mv_counter <= '0';
+            end if;
         end if;
     end process;
 end arc_tof_mimic;

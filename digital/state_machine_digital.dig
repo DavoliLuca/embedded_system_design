@@ -36,7 +36,7 @@ architecture arc_decoder_5_6 of decoder_5_6 is&#xd;
     signal combined_state: std_logic_vector(2 downto 0) := &quot;000&quot;;&#xd;
     signal previous_i4: std_logic;&#xd;
 begin&#xd;
-    process(combined_state, i1, i2, i3, i4) is&#xd;
+    process(ck) is&#xd;
         variable combined_input: std_logic_vector(3 downto 0);&#xd;
     begin&#xd;
         o1 &lt;= &apos;0&apos;;&#xd;
@@ -76,11 +76,11 @@ begin&#xd;
     process(msg) is  &#xd;
     begin&#xd;
         combined_state &lt;= &quot;000&quot;;&#xd;
-        if (msg = &quot;01010101&quot;) then&#xd;
+        if (msg = &quot;10000000&quot;) then -- Process&#xd;
             combined_state &lt;= &quot;001&quot;;&#xd;
-        elsif (msg = &quot;00000000&quot; or msg = &quot;01001001&quot;) then -- Idle&#xd;
+        elsif (msg = &quot;00000000&quot; or msg = &quot;00001001&quot;) then -- Idle&#xd;
             combined_state &lt;= &quot;010&quot;;&#xd;
-        elsif (msg = &quot;01010000&quot;) then -- Move&#xd;
+        elsif (msg = &quot;00010000&quot;) then -- Move&#xd;
             combined_state &lt;= &quot;100&quot;;&#xd;
         end if;&#xd;
     end process;&#xd;
@@ -183,7 +183,7 @@ end arc_decoder_5_6;</string>
         </entry>
         <entry>
           <string>externalInputs</string>
-          <string>state_vector:7,ext_error,clk</string>
+          <string>state_vector:8,ext_error,clk</string>
         </entry>
         <entry>
           <string>Code</string>
@@ -191,16 +191,16 @@ end arc_decoder_5_6;</string>
 use ieee.std_logic_1164.all;&#xd;
 &#xd;
 entity write_uart_sm is&#xd;
-	port ( state_vector: in std_logic_vector(6 downto 0);&#xd;
+	port ( state_vector: in std_logic_vector(7 downto 0);&#xd;
            ext_error: in std_logic;&#xd;
            clk: in std_logic;&#xd;
-	       data_write: out std_logic_vector(6 downto 0); &#xd;
+	       data_write: out std_logic_vector(7 downto 0); &#xd;
            data_write_bool: out std_logic);&#xd;
 end entity write_uart_sm;&#xd;
 &#xd;
 architecture arc_write_uart_sm of write_uart_sm is&#xd;
     signal state_changed: std_logic;&#xd;
-    signal current_state: std_logic_vector(6 downto 0);&#xd;
+    signal current_state: std_logic_vector(7 downto 0);&#xd;
 begin&#xd;
     process(clk) is&#xd;
     begin&#xd;
@@ -219,7 +219,7 @@ end arc_write_uart_sm;</string>
         </entry>
         <entry>
           <string>externalOutputs</string>
-          <string>data_write:7,data_write_bool</string>
+          <string>data_write:8,data_write_bool</string>
         </entry>
         <entry>
           <string>Width</string>
@@ -237,11 +237,7 @@ end arc_write_uart_sm;</string>
       <elementAttributes>
         <entry>
           <string>Input Splitting</string>
-          <string>1,1,1,1,1,1,1</string>
-        </entry>
-        <entry>
-          <string>Output Splitting</string>
-          <string>7</string>
+          <string>1,1,1,1,1,1,1,1</string>
         </entry>
       </elementAttributes>
       <pos x="820" y="100"/>
@@ -255,7 +251,7 @@ end arc_write_uart_sm;</string>
         </entry>
         <entry>
           <string>Bits</string>
-          <int>7</int>
+          <int>8</int>
         </entry>
       </elementAttributes>
       <pos x="880" y="-40"/>
@@ -265,7 +261,7 @@ end arc_write_uart_sm;</string>
       <elementAttributes>
         <entry>
           <string>Bits</string>
-          <int>7</int>
+          <int>8</int>
         </entry>
       </elementAttributes>
       <pos x="1360" y="100"/>
@@ -281,10 +277,6 @@ end arc_write_uart_sm;</string>
         <entry>
           <string>runRealTime</string>
           <boolean>true</boolean>
-        </entry>
-        <entry>
-          <string>Frequency</string>
-          <int>50000</int>
         </entry>
       </elementAttributes>
       <pos x="900" y="200"/>
@@ -302,16 +294,6 @@ end arc_write_uart_sm;</string>
         </entry>
       </elementAttributes>
       <pos x="1400" y="-100"/>
-    </visualElement>
-    <visualElement>
-      <elementName>Splitter</elementName>
-      <elementAttributes>
-        <entry>
-          <string>Input Splitting</string>
-          <string>7,1</string>
-        </entry>
-      </elementAttributes>
-      <pos x="1300" y="-140"/>
     </visualElement>
     <visualElement>
       <elementName>Out</elementName>
@@ -389,7 +371,7 @@ begin&#xd;
         tof2 &lt;= i2;&#xd;
         tof3 &lt;= i3;&#xd;
         tof4 &lt;= i4;&#xd;
-        if (mv_counter) then&#xd;
+        if (mv_counter = &apos;1&apos;) then&#xd;
             tof1 &lt;= &apos;0&apos;;&#xd;
             tof2 &lt;= &apos;0&apos;;&#xd;
             tof3 &lt;= &apos;0&apos;;&#xd;
@@ -404,7 +386,7 @@ begin&#xd;
         end if;&#xd;
     end process;&#xd;
 &#xd;
-    upd: process(mv_msg, i1, i2, i3, i4)&#xd;
+    upd: process(state_msg, i1, i2, i3, i4)&#xd;
     begin&#xd;
         if (i1&apos;event and i1 = &apos;1&apos;) then&#xd;
             mv_counter &lt;= &apos;0&apos;;&#xd;
@@ -414,8 +396,12 @@ begin&#xd;
             mv_counter &lt;= &apos;0&apos;;&#xd;
         elsif (i4&apos;event and i4 = &apos;1&apos;) then&#xd;
             mv_counter &lt;= &apos;0&apos;;&#xd;
-        elsif (mv_msg&apos;event and state_msg = &quot;10010000&quot;) then&#xd;
-            mv_counter &lt;= &apos;1&apos;;&#xd;
+        elsif (state_msg&apos;event) then&#xd;
+            if state_msg = &quot;00010000&quot; then&#xd;
+                mv_counter &lt;= &apos;1&apos;;&#xd;
+            else    &#xd;
+                mv_counter &lt;= &apos;0&apos;;&#xd;
+            end if;&#xd;
         end if;&#xd;
     end process;&#xd;
 end arc_tof_mimic;</string>
@@ -544,9 +530,135 @@ end behav;</string>
       <pos x="600" y="-200"/>
     </visualElement>
     <visualElement>
+      <elementName>External</elementName>
+      <elementAttributes>
+        <entry>
+          <string>applicationType</string>
+          <appType>GHDL</appType>
+        </entry>
+        <entry>
+          <string>Label</string>
+          <string>RegistroIncDec8bit</string>
+        </entry>
+        <entry>
+          <string>externalInputs</string>
+          <string>D:8,Set,Inc,Dec,Clk,Reset</string>
+        </entry>
+        <entry>
+          <string>Code</string>
+          <string>library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+-- per dare un senso agli operatori +1 e -1:
+use ieee.std_logic_unsigned.all; 
+
+
+entity RegistroIncDec8bit is
+
+	port 
+	(
+		Q : out  std_logic_vector(7 downto 0);
+		D : in  std_logic_vector(7 downto 0);
+		Set: in std_logic;
+		Inc: in std_logic;
+		Dec: in std_logic;
+		Clk : in std_logic;
+		Reset : in std_logic
+	);
+
+end RegistroIncDec8bit;
+architecture behav of RegistroIncDec8bit is
+signal currVal  :  std_logic_vector(7 downto 0);
+signal nextVal :  std_logic_vector(7 downto 0);
+signal IncDecSet :  std_logic_vector(2 downto 0); -- segnale ausiliario
+begin
+
+	process(clk)
+	begin
+		if (clk=&apos;1&apos; and clk&apos;event) then
+			if (reset =&apos;1&apos;) then	
+				currVal &lt;= (others =&gt;&apos;0&apos;);
+			else
+				currVal &lt;= nextVal;
+			end if;
+		end if;
+	end process;
+	
+	-- selezione del prossimo valore interno
+	IncDecSet &lt;= Inc &amp; Dec &amp; Set;
+	with IncDecSet select
+		nextVal &lt;= D		when &quot;001&quot;,
+			   currVal + 1  when &quot;100&quot;,
+			   currVal - 1  when &quot;010&quot;,
+			   currVal		when others;  -- others assures combinatorial synthesis	
+			   				  
+	Q &lt;= currVal;
+
+end behav;</string>
+        </entry>
+        <entry>
+          <string>externalOutputs</string>
+          <string>Q:8</string>
+        </entry>
+        <entry>
+          <string>Width</string>
+          <int>6</int>
+        </entry>
+      </elementAttributes>
+      <pos x="1280" y="340"/>
+    </visualElement>
+    <visualElement>
       <elementName>Const</elementName>
+      <elementAttributes>
+        <entry>
+          <string>Value</string>
+          <long>0</long>
+        </entry>
+      </elementAttributes>
+      <pos x="1200" y="420"/>
+    </visualElement>
+    <visualElement>
+      <elementName>Seven-Seg-Hex</elementName>
       <elementAttributes/>
-      <pos x="1280" y="-120"/>
+      <pos x="1640" y="240"/>
+    </visualElement>
+    <visualElement>
+      <elementName>Seven-Seg-Hex</elementName>
+      <elementAttributes/>
+      <pos x="1740" y="240"/>
+    </visualElement>
+    <visualElement>
+      <elementName>Splitter</elementName>
+      <elementAttributes>
+        <entry>
+          <string>Input Splitting</string>
+          <string>8</string>
+        </entry>
+        <entry>
+          <string>Output Splitting</string>
+          <string>4,4</string>
+        </entry>
+      </elementAttributes>
+      <pos x="1500" y="400"/>
+    </visualElement>
+    <visualElement>
+      <elementName>Const</elementName>
+      <elementAttributes>
+        <entry>
+          <string>Value</string>
+          <long>0</long>
+        </entry>
+        <entry>
+          <string>Bits</string>
+          <int>8</int>
+        </entry>
+      </elementAttributes>
+      <pos x="1200" y="320"/>
+    </visualElement>
+    <visualElement>
+      <elementName>In</elementName>
+      <elementAttributes/>
+      <pos x="1120" y="540"/>
     </visualElement>
   </visualElements>
   <wires>
@@ -565,6 +677,10 @@ end behav;</string>
     <wire>
       <p1 x="40" y="320"/>
       <p2 x="80" y="320"/>
+    </wire>
+    <wire>
+      <p1 x="1200" y="320"/>
+      <p2 x="1260" y="320"/>
     </wire>
     <wire>
       <p1 x="660" y="320"/>
@@ -596,6 +712,10 @@ end behav;</string>
     </wire>
     <wire>
       <p1 x="1060" y="200"/>
+      <p2 x="1160" y="200"/>
+    </wire>
+    <wire>
+      <p1 x="1160" y="200"/>
       <p2 x="1400" y="200"/>
     </wire>
     <wire>
@@ -607,12 +727,12 @@ end behav;</string>
       <p2 x="1060" y="520"/>
     </wire>
     <wire>
-      <p1 x="1320" y="-140"/>
-      <p2 x="1360" y="-140"/>
+      <p1 x="1240" y="520"/>
+      <p2 x="1700" y="520"/>
     </wire>
     <wire>
       <p1 x="1240" y="-140"/>
-      <p2 x="1300" y="-140"/>
+      <p2 x="1360" y="-140"/>
     </wire>
     <wire>
       <p1 x="1360" y="-140"/>
@@ -635,6 +755,10 @@ end behav;</string>
       <p2 x="760" y="460"/>
     </wire>
     <wire>
+      <p1 x="1240" y="460"/>
+      <p2 x="1280" y="460"/>
+    </wire>
+    <wire>
       <p1 x="760" y="460"/>
       <p2 x="780" y="460"/>
     </wire>
@@ -655,6 +779,18 @@ end behav;</string>
       <p2 x="740" y="400"/>
     </wire>
     <wire>
+      <p1 x="1400" y="400"/>
+      <p2 x="1500" y="400"/>
+    </wire>
+    <wire>
+      <p1 x="1520" y="400"/>
+      <p2 x="1680" y="400"/>
+    </wire>
+    <wire>
+      <p1 x="1700" y="400"/>
+      <p2 x="1800" y="400"/>
+    </wire>
+    <wire>
       <p1 x="740" y="400"/>
       <p2 x="840" y="400"/>
     </wire>
@@ -665,6 +801,10 @@ end behav;</string>
     <wire>
       <p1 x="440" y="340"/>
       <p2 x="540" y="340"/>
+    </wire>
+    <wire>
+      <p1 x="1260" y="340"/>
+      <p2 x="1280" y="340"/>
     </wire>
     <wire>
       <p1 x="680" y="340"/>
@@ -724,11 +864,27 @@ end behav;</string>
     </wire>
     <wire>
       <p1 x="620" y="420"/>
-      <p2 x="880" y="420"/>
+      <p2 x="800" y="420"/>
     </wire>
     <wire>
       <p1 x="360" y="420"/>
       <p2 x="540" y="420"/>
+    </wire>
+    <wire>
+      <p1 x="1200" y="420"/>
+      <p2 x="1240" y="420"/>
+    </wire>
+    <wire>
+      <p1 x="1520" y="420"/>
+      <p2 x="1780" y="420"/>
+    </wire>
+    <wire>
+      <p1 x="800" y="420"/>
+      <p2 x="880" y="420"/>
+    </wire>
+    <wire>
+      <p1 x="1240" y="420"/>
+      <p2 x="1280" y="420"/>
     </wire>
     <wire>
       <p1 x="660" y="100"/>
@@ -763,6 +919,10 @@ end behav;</string>
       <p2 x="100" y="360"/>
     </wire>
     <wire>
+      <p1 x="1120" y="360"/>
+      <p2 x="1280" y="360"/>
+    </wire>
+    <wire>
       <p1 x="700" y="360"/>
       <p2 x="860" y="360"/>
     </wire>
@@ -795,6 +955,10 @@ end behav;</string>
       <p2 x="140" y="240"/>
     </wire>
     <wire>
+      <p1 x="800" y="240"/>
+      <p2 x="820" y="240"/>
+    </wire>
+    <wire>
       <p1 x="580" y="-180"/>
       <p2 x="1480" y="-180"/>
     </wire>
@@ -805,10 +969,6 @@ end behav;</string>
     <wire>
       <p1 x="740" y="180"/>
       <p2 x="820" y="180"/>
-    </wire>
-    <wire>
-      <p1 x="1280" y="-120"/>
-      <p2 x="1300" y="-120"/>
     </wire>
     <wire>
       <p1 x="680" y="120"/>
@@ -831,6 +991,10 @@ end behav;</string>
       <p2 x="760" y="440"/>
     </wire>
     <wire>
+      <p1 x="1160" y="440"/>
+      <p2 x="1280" y="440"/>
+    </wire>
+    <wire>
       <p1 x="1380" y="-60"/>
       <p2 x="1400" y="-60"/>
     </wire>
@@ -841,6 +1005,10 @@ end behav;</string>
     <wire>
       <p1 x="400" y="380"/>
       <p2 x="540" y="380"/>
+    </wire>
+    <wire>
+      <p1 x="1120" y="380"/>
+      <p2 x="1280" y="380"/>
     </wire>
     <wire>
       <p1 x="720" y="380"/>
@@ -859,28 +1027,44 @@ end behav;</string>
       <p2 x="640" y="-320"/>
     </wire>
     <wire>
-      <p1 x="960" y="120"/>
-      <p2 x="960" y="500"/>
-    </wire>
-    <wire>
       <p1 x="1280" y="40"/>
       <p2 x="1280" y="100"/>
+    </wire>
+    <wire>
+      <p1 x="960" y="120"/>
+      <p2 x="960" y="500"/>
     </wire>
     <wire>
       <p1 x="580" y="-300"/>
       <p2 x="580" y="-180"/>
     </wire>
     <wire>
+      <p1 x="1160" y="200"/>
+      <p2 x="1160" y="440"/>
+    </wire>
+    <wire>
+      <p1 x="1800" y="380"/>
+      <p2 x="1800" y="400"/>
+    </wire>
+    <wire>
       <p1 x="1480" y="-180"/>
       <p2 x="1480" y="-80"/>
+    </wire>
+    <wire>
+      <p1 x="780" y="220"/>
+      <p2 x="780" y="460"/>
     </wire>
     <wire>
       <p1 x="460" y="240"/>
       <p2 x="460" y="320"/>
     </wire>
     <wire>
-      <p1 x="780" y="220"/>
-      <p2 x="780" y="460"/>
+      <p1 x="400" y="300"/>
+      <p2 x="400" y="380"/>
+    </wire>
+    <wire>
+      <p1 x="1680" y="380"/>
+      <p2 x="1680" y="400"/>
     </wire>
     <wire>
       <p1 x="720" y="160"/>
@@ -889,10 +1073,6 @@ end behav;</string>
     <wire>
       <p1 x="1360" y="-220"/>
       <p2 x="1360" y="-140"/>
-    </wire>
-    <wire>
-      <p1 x="400" y="300"/>
-      <p2 x="400" y="380"/>
     </wire>
     <wire>
       <p1 x="80" y="280"/>
@@ -915,12 +1095,28 @@ end behav;</string>
       <p2 x="1240" y="40"/>
     </wire>
     <wire>
+      <p1 x="1240" y="420"/>
+      <p2 x="1240" y="460"/>
+    </wire>
+    <wire>
+      <p1 x="1240" y="460"/>
+      <p2 x="1240" y="520"/>
+    </wire>
+    <wire>
+      <p1 x="800" y="240"/>
+      <p2 x="800" y="420"/>
+    </wire>
+    <wire>
       <p1 x="480" y="400"/>
       <p2 x="480" y="520"/>
     </wire>
     <wire>
-      <p1 x="1380" y="-140"/>
-      <p2 x="1380" y="-100"/>
+      <p1 x="1120" y="360"/>
+      <p2 x="1120" y="380"/>
+    </wire>
+    <wire>
+      <p1 x="1120" y="380"/>
+      <p2 x="1120" y="540"/>
     </wire>
     <wire>
       <p1 x="420" y="280"/>
@@ -929,6 +1125,18 @@ end behav;</string>
     <wire>
       <p1 x="1060" y="200"/>
       <p2 x="1060" y="520"/>
+    </wire>
+    <wire>
+      <p1 x="1700" y="380"/>
+      <p2 x="1700" y="400"/>
+    </wire>
+    <wire>
+      <p1 x="1700" y="400"/>
+      <p2 x="1700" y="520"/>
+    </wire>
+    <wire>
+      <p1 x="1380" y="-140"/>
+      <p2 x="1380" y="-100"/>
     </wire>
     <wire>
       <p1 x="100" y="300"/>
@@ -955,6 +1163,14 @@ end behav;</string>
       <p2 x="940" y="200"/>
     </wire>
     <wire>
+      <p1 x="1260" y="320"/>
+      <p2 x="1260" y="340"/>
+    </wire>
+    <wire>
+      <p1 x="560" y="-320"/>
+      <p2 x="560" y="-160"/>
+    </wire>
+    <wire>
       <p1 x="880" y="-40"/>
       <p2 x="880" y="60"/>
     </wire>
@@ -967,8 +1183,12 @@ end behav;</string>
       <p2 x="1520" y="-100"/>
     </wire>
     <wire>
-      <p1 x="560" y="-320"/>
-      <p2 x="560" y="-160"/>
+      <p1 x="1780" y="380"/>
+      <p2 x="1780" y="420"/>
+    </wire>
+    <wire>
+      <p1 x="440" y="260"/>
+      <p2 x="440" y="340"/>
     </wire>
     <wire>
       <p1 x="760" y="-260"/>
@@ -985,10 +1205,6 @@ end behav;</string>
     <wire>
       <p1 x="1400" y="-40"/>
       <p2 x="1400" y="200"/>
-    </wire>
-    <wire>
-      <p1 x="440" y="260"/>
-      <p2 x="440" y="340"/>
     </wire>
     <wire>
       <p1 x="120" y="-320"/>

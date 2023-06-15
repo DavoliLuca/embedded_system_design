@@ -395,144 +395,152 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;utils.c: 3:     lcd_dat(state_machine_code);
 [e ( _lcd_dat (1 _state_machine_code ]
 "4
-[; ;utils.c: 4:     if (state_machine_code == 0x81){
-[e $ ! == -> _state_machine_code `i -> 129 `i 239  ]
+[; ;utils.c: 4:     if (state_machine_code == 0x01){
+[e $ ! == -> _state_machine_code `i -> 1 `i 239  ]
 {
 "5
 [; ;utils.c: 5:         *state = 1;
 [e = *U _state -> 1 `i ]
 "6
-[; ;utils.c: 6:     } else if (state_machine_code == 0x82){
+[; ;utils.c: 6:     } else if (state_machine_code == 0x02){
 }
 [e $U 240  ]
 [e :U 239 ]
-[e $ ! == -> _state_machine_code `i -> 130 `i 241  ]
+[e $ ! == -> _state_machine_code `i -> 2 `i 241  ]
 {
 "7
 [; ;utils.c: 7:         *state = 3;
 [e = *U _state -> 3 `i ]
 "8
-[; ;utils.c: 8:     } else if (state_machine_code == 0x84){
+[; ;utils.c: 8:     } else if (state_machine_code == 0x04){
 }
 [e $U 242  ]
 [e :U 241 ]
-[e $ ! == -> _state_machine_code `i -> 132 `i 243  ]
+[e $ ! == -> _state_machine_code `i -> 4 `i 243  ]
 {
 "9
 [; ;utils.c: 9:         *state = 4;
 [e = *U _state -> 4 `i ]
 "10
-[; ;utils.c: 10:     } else if (state_machine_code == 0x88){
+[; ;utils.c: 10:     } else if (state_machine_code == 0x08){
 }
 [e $U 244  ]
 [e :U 243 ]
-[e $ ! == -> _state_machine_code `i -> 136 `i 245  ]
+[e $ ! == -> _state_machine_code `i -> 8 `i 245  ]
 {
 "11
 [; ;utils.c: 11:         *state = 7;
 [e = *U _state -> 7 `i ]
 "12
-[; ;utils.c: 12:     } else if (state_machine_code == 0x90){
+[; ;utils.c: 12:     } else if (state_machine_code == 0x10){
 }
 [e $U 246  ]
 [e :U 245 ]
-[e $ ! == -> _state_machine_code `i -> 144 `i 247  ]
+[e $ ! == -> _state_machine_code `i -> 16 `i 247  ]
 {
 "13
 [; ;utils.c: 13:         *state = 2;
 [e = *U _state -> 2 `i ]
 "14
-[; ;utils.c: 14:     } else if (state_machine_code == 0xA0){
+[; ;utils.c: 14:     } else if (state_machine_code == 0x40){
 }
 [e $U 248  ]
 [e :U 247 ]
-[e $ ! == -> _state_machine_code `i -> 160 `i 249  ]
+[e $ ! == -> _state_machine_code `i -> 64 `i 249  ]
 {
 "15
 [; ;utils.c: 15:         *state = 8;
 [e = *U _state -> 8 `i ]
 "16
-[; ;utils.c: 16:     } else {
+[; ;utils.c: 16:     } else if (state_machine_code == 0x80){
 }
 [e $U 250  ]
 [e :U 249 ]
+[e $ ! == -> _state_machine_code `i -> 128 `i 251  ]
 {
-"17
-[; ;utils.c: 17:         *state = 0;
-[e = *U _state -> 0 `i ]
 "18
-[; ;utils.c: 18:     }
+[; ;utils.c: 18:     } else {
 }
+[e $U 252  ]
+[e :U 251 ]
+{
+"19
+[; ;utils.c: 19:         *state = 0;
+[e = *U _state -> 0 `i ]
+"20
+[; ;utils.c: 20:     }
+}
+[e :U 252 ]
 [e :U 250 ]
 [e :U 248 ]
 [e :U 246 ]
 [e :U 244 ]
 [e :U 242 ]
 [e :U 240 ]
-"19
-[; ;utils.c: 19:     return;
+"21
+[; ;utils.c: 21:     return;
 [e $UE 238  ]
-"20
-[; ;utils.c: 20: }
+"22
+[; ;utils.c: 22: }
 [e :UE 238 ]
 }
-"22
-[; ;utils.c: 22: unsigned char state_translator_micro_to_fpga(int* state){
+"24
+[; ;utils.c: 24: unsigned char state_translator_micro_to_fpga(int* state){
 [v _state_translator_micro_to_fpga `(uc ~T0 @X0 1 ef1`*i ]
 {
 [e :U _state_translator_micro_to_fpga ]
 [v _state `*i ~T0 @X0 1 r1 ]
 [f ]
-"23
-[; ;utils.c: 23:     unsigned char state_machine_code;
-[v _state_machine_code `uc ~T0 @X0 1 a ]
-"24
-[; ;utils.c: 24:     if (*state == 2){
-[e $ ! == *U _state -> 2 `i 252  ]
-{
 "25
-[; ;utils.c: 25:         state_machine_code = 0x90;
-[e = _state_machine_code -> -> 144 `i `uc ]
+[; ;utils.c: 25:     unsigned char state_machine_code;
+[v _state_machine_code `uc ~T0 @X0 1 a ]
 "26
-[; ;utils.c: 26:     } else if (*state == 0) {
-}
-[e $U 253  ]
-[e :U 252 ]
-[e $ ! == *U _state -> 0 `i 254  ]
+[; ;utils.c: 26:     if (*state == 2){
+[e $ ! == *U _state -> 2 `i 254  ]
 {
 "27
-[; ;utils.c: 27:         state_machine_code = 0x89;
-[e = _state_machine_code -> -> 137 `i `uc ]
+[; ;utils.c: 27:         state_machine_code = 0x10;
+[e = _state_machine_code -> -> 16 `i `uc ]
 "28
-[; ;utils.c: 28:     } else if (*state == 8) {
+[; ;utils.c: 28:     } else if (*state == 0) {
 }
 [e $U 255  ]
 [e :U 254 ]
-[e $ ! == *U _state -> 8 `i 256  ]
+[e $ ! == *U _state -> 0 `i 256  ]
 {
 "29
-[; ;utils.c: 29:         state_machine_code = 0xA0;
-[e = _state_machine_code -> -> 160 `i `uc ]
+[; ;utils.c: 29:         state_machine_code = 0x09;
+[e = _state_machine_code -> -> 9 `i `uc ]
 "30
-[; ;utils.c: 30:     } else {
+[; ;utils.c: 30:     } else if (*state == 8) {
 }
 [e $U 257  ]
 [e :U 256 ]
+[e $ ! == *U _state -> 8 `i 258  ]
 {
 "31
-[; ;utils.c: 31:         state_machine_code = 0x93;
-[e = _state_machine_code -> -> 147 `i `uc ]
+[; ;utils.c: 31:         state_machine_code = 0x40;
+[e = _state_machine_code -> -> 64 `i `uc ]
 "32
-[; ;utils.c: 32:     }
+[; ;utils.c: 32:     } else {
 }
+[e $U 259  ]
+[e :U 258 ]
+{
+"33
+[; ;utils.c: 33:         state_machine_code = 0x80;
+[e = _state_machine_code -> -> 128 `i `uc ]
+"34
+[; ;utils.c: 34:     }
+}
+[e :U 259 ]
 [e :U 257 ]
 [e :U 255 ]
-[e :U 253 ]
-"33
-[; ;utils.c: 33:     return state_machine_code;
+"35
+[; ;utils.c: 35:     return state_machine_code;
 [e ) _state_machine_code ]
-[e $UE 251  ]
-"34
-[; ;utils.c: 34: }
-[e :UE 251 ]
+[e $UE 253  ]
+"36
+[; ;utils.c: 36: }
+[e :UE 253 ]
 }
