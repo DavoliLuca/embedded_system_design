@@ -3830,6 +3830,8 @@ void state_translator_fpga_to_micro(unsigned char state_machine_code, int* state
         *state = 8;
     } else if (state_machine_code == 0x80){
 
+    } else if (state_machine_code == 0x20){
+
     } else {
         *state = 0;
     }

@@ -15,6 +15,8 @@ void state_translator_fpga_to_micro(unsigned char state_machine_code, int* state
         *state = 8; // Error
     } else if (state_machine_code == 0x80){
         // No change in state
+    } else if (state_machine_code == 0x20){
+        // No change in state
     } else {
         *state = 0;
     }

@@ -459,17 +459,25 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $ ! == -> _state_machine_code `i -> 128 `i 251  ]
 {
 "18
-[; ;utils.c: 18:     } else {
+[; ;utils.c: 18:     } else if (state_machine_code == 0x20){
 }
 [e $U 252  ]
 [e :U 251 ]
+[e $ ! == -> _state_machine_code `i -> 32 `i 253  ]
 {
-"19
-[; ;utils.c: 19:         *state = 0;
-[e = *U _state -> 0 `i ]
 "20
-[; ;utils.c: 20:     }
+[; ;utils.c: 20:     } else {
 }
+[e $U 254  ]
+[e :U 253 ]
+{
+"21
+[; ;utils.c: 21:         *state = 0;
+[e = *U _state -> 0 `i ]
+"22
+[; ;utils.c: 22:     }
+}
+[e :U 254 ]
 [e :U 252 ]
 [e :U 250 ]
 [e :U 248 ]
@@ -477,70 +485,70 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 244 ]
 [e :U 242 ]
 [e :U 240 ]
-"21
-[; ;utils.c: 21:     return;
+"23
+[; ;utils.c: 23:     return;
 [e $UE 238  ]
-"22
-[; ;utils.c: 22: }
+"24
+[; ;utils.c: 24: }
 [e :UE 238 ]
 }
-"24
-[; ;utils.c: 24: unsigned char state_translator_micro_to_fpga(int* state){
+"26
+[; ;utils.c: 26: unsigned char state_translator_micro_to_fpga(int* state){
 [v _state_translator_micro_to_fpga `(uc ~T0 @X0 1 ef1`*i ]
 {
 [e :U _state_translator_micro_to_fpga ]
 [v _state `*i ~T0 @X0 1 r1 ]
 [f ]
-"25
-[; ;utils.c: 25:     unsigned char state_machine_code;
-[v _state_machine_code `uc ~T0 @X0 1 a ]
-"26
-[; ;utils.c: 26:     if (*state == 2){
-[e $ ! == *U _state -> 2 `i 254  ]
-{
 "27
-[; ;utils.c: 27:         state_machine_code = 0x10;
-[e = _state_machine_code -> -> 16 `i `uc ]
+[; ;utils.c: 27:     unsigned char state_machine_code;
+[v _state_machine_code `uc ~T0 @X0 1 a ]
 "28
-[; ;utils.c: 28:     } else if (*state == 0) {
-}
-[e $U 255  ]
-[e :U 254 ]
-[e $ ! == *U _state -> 0 `i 256  ]
+[; ;utils.c: 28:     if (*state == 2){
+[e $ ! == *U _state -> 2 `i 256  ]
 {
 "29
-[; ;utils.c: 29:         state_machine_code = 0x09;
-[e = _state_machine_code -> -> 9 `i `uc ]
+[; ;utils.c: 29:         state_machine_code = 0x10;
+[e = _state_machine_code -> -> 16 `i `uc ]
 "30
-[; ;utils.c: 30:     } else if (*state == 8) {
+[; ;utils.c: 30:     } else if (*state == 0) {
 }
 [e $U 257  ]
 [e :U 256 ]
-[e $ ! == *U _state -> 8 `i 258  ]
+[e $ ! == *U _state -> 0 `i 258  ]
 {
 "31
-[; ;utils.c: 31:         state_machine_code = 0x40;
-[e = _state_machine_code -> -> 64 `i `uc ]
+[; ;utils.c: 31:         state_machine_code = 0x09;
+[e = _state_machine_code -> -> 9 `i `uc ]
 "32
-[; ;utils.c: 32:     } else {
+[; ;utils.c: 32:     } else if (*state == 8) {
 }
 [e $U 259  ]
 [e :U 258 ]
+[e $ ! == *U _state -> 8 `i 260  ]
 {
 "33
-[; ;utils.c: 33:         state_machine_code = 0x80;
-[e = _state_machine_code -> -> 128 `i `uc ]
+[; ;utils.c: 33:         state_machine_code = 0x40;
+[e = _state_machine_code -> -> 64 `i `uc ]
 "34
-[; ;utils.c: 34:     }
+[; ;utils.c: 34:     } else {
 }
+[e $U 261  ]
+[e :U 260 ]
+{
+"35
+[; ;utils.c: 35:         state_machine_code = 0x80;
+[e = _state_machine_code -> -> 128 `i `uc ]
+"36
+[; ;utils.c: 36:     }
+}
+[e :U 261 ]
 [e :U 259 ]
 [e :U 257 ]
-[e :U 255 ]
-"35
-[; ;utils.c: 35:     return state_machine_code;
+"37
+[; ;utils.c: 37:     return state_machine_code;
 [e ) _state_machine_code ]
-[e $UE 253  ]
-"36
-[; ;utils.c: 36: }
-[e :UE 253 ]
+[e $UE 255  ]
+"38
+[; ;utils.c: 38: }
+[e :UE 255 ]
 }

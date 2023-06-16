@@ -36,7 +36,7 @@ architecture arc_decoder_5_6 of decoder_5_6 is&#xd;
     signal combined_state: std_logic_vector(2 downto 0) := &quot;000&quot;;&#xd;
     signal previous_i4: std_logic;&#xd;
 begin&#xd;
-    process(ck) is&#xd;
+    process(combined_state, i1, i2, i3, i4) is&#xd;
         variable combined_input: std_logic_vector(3 downto 0);&#xd;
     begin&#xd;
         o1 &lt;= &apos;0&apos;;&#xd;
@@ -66,9 +66,10 @@ begin&#xd;
             end case;&#xd;
         elsif combined_state(0) = &apos;1&apos; and i4 = &apos;0&apos; and previous_i4 = &apos;1&apos; then -- Picked condition&#xd;
             picked &lt;= &apos;1&apos;;&#xd;
-        elsif combined_state(1) then -- Idle should be interrupted when vial at first station&#xd;
+        elsif combined_state(1) or combined_state(2) then -- Idle should be interrupted when vial at first station&#xd;
             if (combined_input = &quot;0001&quot;) then&#xd;
                 o1 &lt;= &apos;1&apos;;&#xd;
+                pr &lt;= &apos;0&apos;;&#xd;
             end if;&#xd;
         end if;&#xd;
     end process;&#xd;
@@ -855,12 +856,16 @@ end behav;</string>
       <p2 x="1520" y="-100"/>
     </wire>
     <wire>
-      <p1 x="360" y="-100"/>
-      <p2 x="760" y="-100"/>
+      <p1 x="120" y="-100"/>
+      <p2 x="360" y="-100"/>
     </wire>
     <wire>
       <p1 x="1520" y="-100"/>
       <p2 x="1580" y="-100"/>
+    </wire>
+    <wire>
+      <p1 x="360" y="-100"/>
+      <p2 x="760" y="-100"/>
     </wire>
     <wire>
       <p1 x="620" y="420"/>
@@ -1017,10 +1022,6 @@ end behav;</string>
     <wire>
       <p1 x="880" y="60"/>
       <p2 x="980" y="60"/>
-    </wire>
-    <wire>
-      <p1 x="120" y="-320"/>
-      <p2 x="560" y="-320"/>
     </wire>
     <wire>
       <p1 x="560" y="-320"/>
@@ -1207,7 +1208,7 @@ end behav;</string>
       <p2 x="1400" y="200"/>
     </wire>
     <wire>
-      <p1 x="120" y="-320"/>
+      <p1 x="120" y="-100"/>
       <p2 x="120" y="320"/>
     </wire>
     <wire>

@@ -466,8 +466,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;oven.c: 10:     PORTA = 0;
 [e = _PORTA -> -> 0 `i `uc ]
 "11
-[; ;oven.c: 11:     TRISA = 0xFF;
-[e = _TRISA -> -> 255 `i `uc ]
+[; ;oven.c: 11:     TRISA = 0xF0;
+[e = _TRISA -> -> 240 `i `uc ]
 "12
 [; ;oven.c: 12:     ADCON0 = 0;
 [e = _ADCON0 -> -> 0 `i `uc ]

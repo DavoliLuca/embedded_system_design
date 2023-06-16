@@ -44,9 +44,11 @@ begin
             end case;
         elsif combined_state(0) = '1' and i4 = '0' and previous_i4 = '1' then -- Picked condition
             picked <= '1';
-        elsif combined_state(1) then -- Idle should be interrupted when vial at first station
+            pr <= '0';
+        elsif combined_state(1) or combined_state(0) then -- Idle should be interrupted when vial at first station
             if (combined_input = "0001") then
                 o1 <= '1';
+                pr <= '0';
             end if;
         end if;
     end process;

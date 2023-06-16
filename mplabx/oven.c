@@ -8,7 +8,7 @@ int temperature_scaled;
 void configure_analog_digital_conversion(void){
     LATA = 0;
     PORTA = 0;
-    TRISA = 0xFF;
+    TRISA = 0xF0;
     ADCON0 = 0;
     ADCON0bits.CHS0 = 0; // CHS<0:2> to 100 so that AN4, RA5, is A/D
     ADCON0bits.CHS1 = 0;

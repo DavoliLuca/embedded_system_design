@@ -4198,6 +4198,8 @@ stepperMotor joint_stepper;
 
 stepperMotor end_effector_stepper;
 
+stepperMotor joint_dilutor_stepper;
+
 
 void main(void){
     unsigned char rx_char = ' ';
@@ -4209,6 +4211,7 @@ void main(void){
     configure_analog_digital_conversion();
     init_stepper(&joint_stepper, 0, 0, 1, hex_joint_values);
     init_stepper(&end_effector_stepper, 0, 0, 1, hex_end_effector_values);
+    init_stepper(&joint_dilutor_stepper, 0, 0, 1, hex_end_effector_values);
     lcd_init();
     lcd_cmd(0x0C);
 
@@ -4229,13 +4232,13 @@ void main(void){
 
                 state_translator_fpga_to_micro(rx_char, &state);
                 read_new_char = 0;
+                snprintf(greet_str, sizeof(greet_str), "%s", state_msgs[state]);
+                lcd_cmd(0x01);
+                lcd_cmd(0x80);
+                lcd_str(greet_str);
             } else {
                 serial_tx_char(state_translator_micro_to_fpga(&state));
             }
-            snprintf(greet_str, sizeof(greet_str), "%s", state_msgs[state]);
-            lcd_cmd(0x01);
-            lcd_cmd(0x80);
-            lcd_str(greet_str);
 
             state_changed = 0;
             idle_msg_sent = 0;
@@ -4247,6 +4250,7 @@ void main(void){
             if (move_to_trash && trash_counter < 100){
                 trash_counter++;
             } else if (move_to_trash && trash_counter >= 100){
+                move_to_trash = 0;
                 state = 0;
                 state_changed = 1;
             }
@@ -4337,6 +4341,10 @@ void main(void){
                     }
 
                 }
+            } else if (state == 12){
+                state = 0;
+                state_changed = 1;
+                T0CONbits.TMR0ON = 0;
             }
         }
     }
