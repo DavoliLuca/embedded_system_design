@@ -1,14 +1,5 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"722 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h
-[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 722: extern volatile unsigned char LATA __attribute__((address(0xF89)));
-[v _LATA `Vuc ~T0 @X0 0 e@3977 ]
-"52
-[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 52: extern volatile unsigned char PORTA __attribute__((address(0xF80)));
-[v _PORTA `Vuc ~T0 @X0 0 e@3968 ]
-"1210
-[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 1210: extern volatile unsigned char TRISA __attribute__((address(0xF92)));
-[v _TRISA `Vuc ~T0 @X0 0 e@3986 ]
-"3659
+"3659 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 3659: extern volatile unsigned char ADCON0 __attribute__((address(0xFC2)));
 [v _ADCON0 `Vuc ~T0 @X0 0 e@4034 ]
 "3665
@@ -454,137 +445,186 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;oven.c: 6: int temperature_scaled;
 [v _temperature_scaled `i ~T0 @X0 1 e ]
 "8
-[; ;oven.c: 8: void configure_analog_digital_conversion(void){
-[v _configure_analog_digital_conversion `(v ~T0 @X0 1 ef ]
+[; ;oven.c: 8: void configure_ad_conversion_oven(void){
+[v _configure_ad_conversion_oven `(v ~T0 @X0 1 ef ]
 {
-[e :U _configure_analog_digital_conversion ]
+[e :U _configure_ad_conversion_oven ]
 [f ]
 "9
-[; ;oven.c: 9:     LATA = 0;
-[e = _LATA -> -> 0 `i `uc ]
-"10
-[; ;oven.c: 10:     PORTA = 0;
-[e = _PORTA -> -> 0 `i `uc ]
-"11
-[; ;oven.c: 11:     TRISA = 0xF0;
-[e = _TRISA -> -> 240 `i `uc ]
-"12
-[; ;oven.c: 12:     ADCON0 = 0;
+[; ;oven.c: 9:     ADCON0 = 0;
 [e = _ADCON0 -> -> 0 `i `uc ]
-"13
-[; ;oven.c: 13:     ADCON0bits.CHS0 = 0;
+"10
+[; ;oven.c: 10:     ADCON0bits.CHS0 = 0;
 [e = . . _ADCON0bits 2 2 -> -> 0 `i `uc ]
-"14
-[; ;oven.c: 14:     ADCON0bits.CHS1 = 0;
+"11
+[; ;oven.c: 11:     ADCON0bits.CHS1 = 0;
 [e = . . _ADCON0bits 2 3 -> -> 0 `i `uc ]
-"15
-[; ;oven.c: 15:     ADCON0bits.CHS2 = 1;
+"12
+[; ;oven.c: 12:     ADCON0bits.CHS2 = 1;
 [e = . . _ADCON0bits 2 4 -> -> 1 `i `uc ]
-"16
-[; ;oven.c: 16:     ADCON0bits.ADON = 1;
+"13
+[; ;oven.c: 13:     ADCON0bits.ADON = 1;
 [e = . . _ADCON0bits 1 0 -> -> 1 `i `uc ]
-"17
-[; ;oven.c: 17:     ADRESH = 0;
+"14
+[; ;oven.c: 14:     ADRESH = 0;
 [e = _ADRESH -> -> 0 `i `uc ]
-"18
-[; ;oven.c: 18:     ADRESL = 0;
+"15
+[; ;oven.c: 15:     ADRESL = 0;
 [e = _ADRESL -> -> 0 `i `uc ]
-"19
-[; ;oven.c: 19:     ADCON1 = 0;
+"16
+[; ;oven.c: 16:     ADCON1 = 0;
 [e = _ADCON1 -> -> 0 `i `uc ]
-"20
-[; ;oven.c: 20: }
+"17
+[; ;oven.c: 17: }
 [e :UE 239 ]
 }
+"19
+[; ;oven.c: 19: void configure_ad_conversion_tank(void){
+[v _configure_ad_conversion_tank `(v ~T0 @X0 1 ef ]
+{
+[e :U _configure_ad_conversion_tank ]
+[f ]
+"20
+[; ;oven.c: 20:     ADCON0 = 0;
+[e = _ADCON0 -> -> 0 `i `uc ]
+"21
+[; ;oven.c: 21:     ADCON0bits.CHS0 = 0;
+[e = . . _ADCON0bits 2 2 -> -> 0 `i `uc ]
 "22
-[; ;oven.c: 22: int get_temperature(void){
+[; ;oven.c: 22:     ADCON0bits.CHS1 = 0;
+[e = . . _ADCON0bits 2 3 -> -> 0 `i `uc ]
+"23
+[; ;oven.c: 23:     ADCON0bits.CHS2 = 0;
+[e = . . _ADCON0bits 2 4 -> -> 0 `i `uc ]
+"24
+[; ;oven.c: 24:     ADCON0bits.ADON = 1;
+[e = . . _ADCON0bits 1 0 -> -> 1 `i `uc ]
+"25
+[; ;oven.c: 25:     ADRESH = 0;
+[e = _ADRESH -> -> 0 `i `uc ]
+"26
+[; ;oven.c: 26:     ADRESL = 0;
+[e = _ADRESL -> -> 0 `i `uc ]
+"27
+[; ;oven.c: 27:     ADCON1 = 0;
+[e = _ADCON1 -> -> 0 `i `uc ]
+"28
+[; ;oven.c: 28: }
+[e :UE 240 ]
+}
+"30
+[; ;oven.c: 30: int get_temperature(void){
 [v _get_temperature `(i ~T0 @X0 1 ef ]
 {
 [e :U _get_temperature ]
 [f ]
-"23
-[; ;oven.c: 23:     ADCON0bits.GO = 1;
+"31
+[; ;oven.c: 31:     ADCON0bits.GO = 1;
 [e = . . _ADCON0bits 2 1 -> -> 1 `i `uc ]
-"24
-[; ;oven.c: 24:     while(ADCON0bits.GO == 1);
-[e $U 241  ]
-[e :U 242 ]
-[e :U 241 ]
-[e $ == -> . . _ADCON0bits 2 1 `i -> 1 `i 242  ]
+"32
+[; ;oven.c: 32:     while(ADCON0bits.GO == 1);
+[e $U 242  ]
 [e :U 243 ]
-"25
-[; ;oven.c: 25:     return (int) (ADRESH * 0.25) + -55;
+[e :U 242 ]
+[e $ == -> . . _ADCON0bits 2 1 `i -> 1 `i 243  ]
+[e :U 244 ]
+"33
+[; ;oven.c: 33:     return (int) (ADRESH * 0.25) + -55;
 [e ) + -> * -> -> _ADRESH `i `d .0.25 `i -U -> 55 `i ]
-[e $UE 240  ]
-"26
-[; ;oven.c: 26: }
-[e :UE 240 ]
+[e $UE 241  ]
+"34
+[; ;oven.c: 34: }
+[e :UE 241 ]
 }
-"28
-[; ;oven.c: 28: void wait_for_zero(void){
+"36
+[; ;oven.c: 36: int get_liters(void){
+[v _get_liters `(i ~T0 @X0 1 ef ]
+{
+[e :U _get_liters ]
+[f ]
+"37
+[; ;oven.c: 37:     ADCON0bits.GO = 1;
+[e = . . _ADCON0bits 2 1 -> -> 1 `i `uc ]
+"38
+[; ;oven.c: 38:     while(ADCON0bits.GO == 1);
+[e $U 246  ]
+[e :U 247 ]
+[e :U 246 ]
+[e $ == -> . . _ADCON0bits 2 1 `i -> 1 `i 247  ]
+[e :U 248 ]
+"39
+[; ;oven.c: 39:     return (int) (ADRESH * 0.01);
+[e ) -> * -> -> _ADRESH `i `d .0.01 `i ]
+[e $UE 245  ]
+"40
+[; ;oven.c: 40: }
+[e :UE 245 ]
+}
+"42
+[; ;oven.c: 42: void wait_for_zero(void){
 [v _wait_for_zero `(v ~T0 @X0 1 ef ]
 {
 [e :U _wait_for_zero ]
 [f ]
-"29
-[; ;oven.c: 29:     while(1){
-[e :U 246 ]
+"43
+[; ;oven.c: 43:     while(1){
+[e :U 251 ]
 {
-"30
-[; ;oven.c: 30:         if (get_temperature() == -55){
-[e $ ! == ( _get_temperature ..  -U -> 55 `i 248  ]
+"44
+[; ;oven.c: 44:         if (get_temperature() == -55){
+[e $ ! == ( _get_temperature ..  -U -> 55 `i 253  ]
 {
-"31
-[; ;oven.c: 31:             break;
-[e $U 247  ]
-"32
-[; ;oven.c: 32:         }
+"45
+[; ;oven.c: 45:             break;
+[e $U 252  ]
+"46
+[; ;oven.c: 46:         }
 }
-[e :U 248 ]
-"33
-[; ;oven.c: 33:     }
+[e :U 253 ]
+"47
+[; ;oven.c: 47:     }
 }
-[e :U 245 ]
-[e $U 246  ]
-[e :U 247 ]
-"34
-[; ;oven.c: 34: }
-[e :UE 244 ]
+[e :U 250 ]
+[e $U 251  ]
+[e :U 252 ]
+"48
+[; ;oven.c: 48: }
+[e :UE 249 ]
 }
-"36
-[; ;oven.c: 36: int check_temperature(int temp_to_be_checked){
+"50
+[; ;oven.c: 50: int check_temperature(int temp_to_be_checked){
 [v _check_temperature `(i ~T0 @X0 1 ef1`i ]
 {
 [e :U _check_temperature ]
 [v _temp_to_be_checked `i ~T0 @X0 1 r1 ]
 [f ]
-"37
-[; ;oven.c: 37:     float grad = abs(temp_to_be_checked - (-63))/5;
+"51
+[; ;oven.c: 51:     float grad = abs(temp_to_be_checked - (-63))/5;
 [v _grad `f ~T0 @X0 1 a ]
 [e = _grad -> / ( _abs (1 - _temp_to_be_checked -U -> 63 `i -> 5 `i `f ]
-"38
-[; ;oven.c: 38:     if (grad >= 12 && grad <= 13){
-[e $ ! && >= _grad -> -> 12 `i `f <= _grad -> -> 13 `i `f 250  ]
+"52
+[; ;oven.c: 52:     if (grad >= 12 && grad <= 13){
+[e $ ! && >= _grad -> -> 12 `i `f <= _grad -> -> 13 `i `f 255  ]
 {
-"39
-[; ;oven.c: 39:         return 1;
+"53
+[; ;oven.c: 53:         return 1;
 [e ) -> 1 `i ]
-[e $UE 249  ]
-"40
-[; ;oven.c: 40:     } else {
+[e $UE 254  ]
+"54
+[; ;oven.c: 54:     } else {
 }
-[e $U 251  ]
-[e :U 250 ]
+[e $U 256  ]
+[e :U 255 ]
 {
-"41
-[; ;oven.c: 41:         return 0;
+"55
+[; ;oven.c: 55:         return 0;
 [e ) -> 0 `i ]
-[e $UE 249  ]
-"42
-[; ;oven.c: 42:     }
+[e $UE 254  ]
+"56
+[; ;oven.c: 56:     }
 }
-[e :U 251 ]
-"43
-[; ;oven.c: 43: }
-[e :UE 249 ]
+[e :U 256 ]
+"57
+[; ;oven.c: 57: }
+[e :UE 254 ]
 }

@@ -82,11 +82,12 @@ typedef struct {
     int current_coil;
     int step_counter;
     int direction;
-    unsigned int hex_coil_register_values[COILS_NUMBER];
+    unsigned char hex_coil_register_values[COILS_NUMBER];
+    volatile unsigned char* register_name;
 } stepperMotor;
 
 void turn_on_current_coil(stepperMotor* stepper_motor);
-void init_stepper(stepperMotor* stepper_motor, int current_step, int step_counter, int direction, int hex_coil_register_values[4]);
+void init_stepper(stepperMotor* stepper_motor, int current_step, int step_counter, int direction, unsigned char hex_coil_register_values[COILS_NUMBER], volatile unsigned char *register_name);
 void update_current_coil(stepperMotor* stepper_motor);
 int reach_goal(stepperMotor* stepper_motor, int goal_to_reach);
 void change_direction(stepperMotor* stepper_motor);

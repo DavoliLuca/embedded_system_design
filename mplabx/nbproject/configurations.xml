@@ -28,6 +28,7 @@
       <itemPath>timer.c</itemPath>
       <itemPath>stepper_motor.c</itemPath>
       <itemPath>oven.c</itemPath>
+      <itemPath>debug.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -642,6 +643,16 @@
         <XC8-config-global>
         </XC8-config-global>
       </item>
+      <item path="debug.c" ex="true" overriding="false">
+        <HI-TECH-COMP>
+        </HI-TECH-COMP>
+        <HI-TECH-LINK>
+        </HI-TECH-LINK>
+        <XC8-CO>
+        </XC8-CO>
+        <XC8-config-global>
+        </XC8-config-global>
+      </item>
       <item path="init_PIC.c" ex="false" overriding="false">
         <HI-TECH-COMP>
         </HI-TECH-COMP>
@@ -673,6 +684,16 @@
         </XC8-config-global>
       </item>
       <item path="main.c" ex="false" overriding="false">
+        <HI-TECH-COMP>
+        </HI-TECH-COMP>
+        <HI-TECH-LINK>
+        </HI-TECH-LINK>
+        <XC8-CO>
+        </XC8-CO>
+        <XC8-config-global>
+        </XC8-config-global>
+      </item>
+      <item path="oven.c" ex="false" overriding="false">
         <HI-TECH-COMP>
         </HI-TECH-COMP>
         <HI-TECH-LINK>

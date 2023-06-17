@@ -3812,28 +3812,30 @@ typedef struct {
     int current_coil;
     int step_counter;
     int direction;
-    unsigned int hex_coil_register_values[4];
+    unsigned char hex_coil_register_values[4];
+    volatile unsigned char* register_name;
 } stepperMotor;
 
 void turn_on_current_coil(stepperMotor* stepper_motor);
-void init_stepper(stepperMotor* stepper_motor, int current_step, int step_counter, int direction, int hex_coil_register_values[4]);
+void init_stepper(stepperMotor* stepper_motor, int current_step, int step_counter, int direction, unsigned char hex_coil_register_values[4], volatile unsigned char *register_name);
 void update_current_coil(stepperMotor* stepper_motor);
 int reach_goal(stepperMotor* stepper_motor, int goal_to_reach);
 void change_direction(stepperMotor* stepper_motor);
 # 2 "stepper_motor.c" 2
 
 
-void init_stepper(stepperMotor* stepper_motor, int current_coil, int step_counter, int direction, int hex_coil_register_values[4]){
+void init_stepper(stepperMotor* stepper_motor, int current_coil, int step_counter, int direction, unsigned char hex_coil_register_values[4], volatile unsigned char *register_name){
     for (int i = 0; i < 4; i++) {
        stepper_motor -> hex_coil_register_values[i] = hex_coil_register_values[i];
     }
     stepper_motor -> current_coil = current_coil;
     stepper_motor -> step_counter = step_counter;
     stepper_motor -> direction = direction;
+    stepper_motor -> register_name = register_name;
 }
 
 void turn_on_current_coil(stepperMotor* stepper_motor){
-    LATB = stepper_motor -> hex_coil_register_values[stepper_motor -> current_coil];
+    *(stepper_motor -> register_name) = stepper_motor -> hex_coil_register_values[stepper_motor -> current_coil];
     return;
 }
 

@@ -4135,8 +4135,10 @@ typedef struct {
     int stop_temp;
 } oven;
 
-void configure_analog_digital_conversion(void);
+void configure_ad_conversion_oven(void);
+void configure_ad_conversion_tank(void);
 int get_temperature(void);
+int get_liters(void);
 void wait_for_zero(void);
 int check_temperature(int temp_to_be_checked);
 # 17 "main.c" 2
@@ -4155,11 +4157,12 @@ typedef struct {
     int current_coil;
     int step_counter;
     int direction;
-    unsigned int hex_coil_register_values[4];
+    unsigned char hex_coil_register_values[4];
+    volatile unsigned char* register_name;
 } stepperMotor;
 
 void turn_on_current_coil(stepperMotor* stepper_motor);
-void init_stepper(stepperMotor* stepper_motor, int current_step, int step_counter, int direction, int hex_coil_register_values[4]);
+void init_stepper(stepperMotor* stepper_motor, int current_step, int step_counter, int direction, unsigned char hex_coil_register_values[4], volatile unsigned char *register_name);
 void update_current_coil(stepperMotor* stepper_motor);
 int reach_goal(stepperMotor* stepper_motor, int goal_to_reach);
 void change_direction(stepperMotor* stepper_motor);
@@ -4187,12 +4190,21 @@ int mix_current_step;
 int mix_direction;
 int mix_step_counter;
 int mix_counter;
-int hex_joint_values[4] = {0x01, 0x02, 0x04, 0x08};
-int hex_end_effector_values[4] = {0x01*16, 0x02*16, 0x04*16, 0x08*16};
-int joint_homed = 0;
-int end_effector_homed = 0;
+char hex_joint_values[4] = {0x01, 0x02, 0x04, 0x08};
+char hex_end_effector_values[4] = {0x10, 0x20, 0x40, 0x80};
+
+int dilution_done = 0;
 int trash_counter = 0;
 int move_to_trash = 0;
+
+int grasping_joint_position_reached = 0;
+int grasping_ee_position_reached = 0;
+int diluting_position_reached = 0;
+
+int joint_homed = 0;
+int end_effector_homed = 0;
+int joint_dilutor_homed = 0;
+
 
 stepperMotor joint_stepper;
 
@@ -4208,10 +4220,11 @@ void main(void){
     init_timer_2();
     init_ccp1();
     init_interrupts();
-    configure_analog_digital_conversion();
-    init_stepper(&joint_stepper, 0, 0, 1, hex_joint_values);
-    init_stepper(&end_effector_stepper, 0, 0, 1, hex_end_effector_values);
-    init_stepper(&joint_dilutor_stepper, 0, 0, 1, hex_end_effector_values);
+
+    init_stepper(&joint_stepper, 0, 0, 1, hex_joint_values, &LATB);
+    init_stepper(&end_effector_stepper, 0, 0, 1, hex_end_effector_values, &LATB);
+    init_stepper(&joint_dilutor_stepper, 0, 0, 1, hex_joint_values, &LATC);
+
     lcd_init();
     lcd_cmd(0x0C);
 
@@ -4244,10 +4257,18 @@ void main(void){
             idle_msg_sent = 0;
         }
 
+        configure_ad_conversion_tank();
+        if (get_liters() < 5){
+            lcd_cmd(0x01);
+            lcd_cmd(0x80);
+            lcd_str("Not enough diluting solution, please refill");
+            state == 8;
+        }
 
         if (state == 2){
             LATAbits.LATA1 = 1;
             if (move_to_trash && trash_counter < 100){
+                _delay((unsigned long)((10)*(4000000/4000.0)));
                 trash_counter++;
             } else if (move_to_trash && trash_counter >= 100){
                 move_to_trash = 0;
@@ -4276,6 +4297,7 @@ void main(void){
 
                 } else {
                     if (T0CONbits.TMR0ON == 0){
+                        configure_ad_conversion_oven();
                         wait_for_zero();
                         init_timer_0();
                     }
@@ -4287,13 +4309,14 @@ void main(void){
                 state_changed = 1;
             }else if (state == 10){
                 _delay((unsigned long)((3)*(4000000/4000.0)));
-                if (joint_homed && reach_goal(&joint_stepper, 50)){
-                    joint_homed = 0;
+                if (!grasping_joint_position_reached){
+                    grasping_joint_position_reached = reach_goal(&joint_stepper, 50);
                 }
-                if (!joint_homed && end_effector_homed && reach_goal(&end_effector_stepper, 100)){
-                    end_effector_homed = 0;
+
+                if (grasping_joint_position_reached && !grasping_ee_position_reached){
+                    grasping_ee_position_reached = reach_goal(&end_effector_stepper, 100);
                 }
-                if (!end_effector_homed * !joint_homed){
+                if (grasping_joint_position_reached * grasping_ee_position_reached){
                     state = 5;
                     state_changed = 1;
                 }
@@ -4304,28 +4327,50 @@ void main(void){
                     mix_counter++;
                 }
 
-                if (mix_counter >= 20){
+                if (mix_counter == 20 && !dilution_done){
+                    state = 15;
+                } else if (mix_counter == 40) {
+                    dilution_done = 0;
                     state = 6;
                     mix_counter = 0;
-                    init_stepper(&joint_stepper, 0, 0, 1, hex_joint_values);
+
                     change_direction(&joint_stepper);
                     change_direction(&end_effector_stepper);
                 }
             } else if (state == 6){
                 _delay((unsigned long)((3)*(4000000/4000.0)));
 
-                if (!end_effector_homed && reach_goal(&end_effector_stepper, 100)){
-                    end_effector_homed = 1;
+                if (!end_effector_homed){
+                    end_effector_homed = reach_goal(&end_effector_stepper, 100);
                 }
 
-                if (end_effector_homed && !joint_homed && reach_goal(&joint_stepper, 50)){
-                    joint_homed = 1;
+                if (end_effector_homed && !joint_homed){
+                    joint_homed = reach_goal(&joint_stepper, 50);
                 }
 
                 if (end_effector_homed * joint_homed){
                     state = 2;
                     state_changed = 1;
                 }
+            } else if (state == 15){
+                _delay((unsigned long)((3)*(4000000/4000.0)));
+                if (!diluting_position_reached){
+                    diluting_position_reached = reach_goal(&joint_dilutor_stepper, 200);
+                } else if (!dilution_done && diluting_position_reached){
+
+                    lcd_cmd(0x01);
+                    lcd_cmd(0x80);
+                    lcd_str("Dilution ongoing");
+                    _delay((unsigned long)((1000)*(4000000/4000.0)));
+                    dilution_done = 1;
+                    change_direction(&joint_dilutor_stepper);
+                } else if (dilution_done && !joint_dilutor_homed){
+                    joint_dilutor_homed = reach_goal(&joint_dilutor_stepper, 200);
+                } else if (dilution_done && joint_dilutor_homed){
+                    state = 5;
+                    diluting_position_reached = 0;
+                }
+
             } else if (state == 7){
                 state = 11;
                 state_changed = 1;
@@ -4335,6 +4380,9 @@ void main(void){
                     state = 2;
                     move_to_trash = 1;
                     trash_counter = 0;
+                    lcd_cmd(0x01);
+                    lcd_cmd(0x80);
+                    lcd_str("Moved to trash! Restarting from Idle");
                 } else {
                     if (T0CONbits.TMR0ON == 0){
                         init_timer_0();

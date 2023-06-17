@@ -62,7 +62,7 @@ void init_PORTS(void){
     // Init usart and debug led
     LATA = 0;
     PORTA = 0;
-    TRISA = 0xF0;
+    TRISA = 0xF1; // RA0 and RA5 AD conversion so we set them as inputs RA1 output for conv belt
     
     LATB = 0;
     PORTB = 0;
@@ -71,8 +71,7 @@ void init_PORTS(void){
     // PORTC
     LATC = 0;
     PORTC = 0;
-    TRISCbits.RC2 = 0; // Set RC6 as output
-    TRISCbits.RC7 = 1; // All pins as input by default
+    TRISC = 0xF0; // Least significant 4 bits as output 
     TRISCbits.RC6 = 0; // Set RC6 as output
     
     return;

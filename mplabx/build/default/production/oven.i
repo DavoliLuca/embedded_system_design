@@ -3815,8 +3815,10 @@ typedef struct {
     int stop_temp;
 } oven;
 
-void configure_analog_digital_conversion(void);
+void configure_ad_conversion_oven(void);
+void configure_ad_conversion_tank(void);
 int get_temperature(void);
+int get_liters(void);
 void wait_for_zero(void);
 int check_temperature(int temp_to_be_checked);
 # 3 "oven.c" 2
@@ -3825,10 +3827,7 @@ int check_temperature(int temp_to_be_checked);
 int temperature_int;
 int temperature_scaled;
 
-void configure_analog_digital_conversion(void){
-    LATA = 0;
-    PORTA = 0;
-    TRISA = 0xF0;
+void configure_ad_conversion_oven(void){
     ADCON0 = 0;
     ADCON0bits.CHS0 = 0;
     ADCON0bits.CHS1 = 0;
@@ -3839,10 +3838,27 @@ void configure_analog_digital_conversion(void){
     ADCON1 = 0;
 }
 
+void configure_ad_conversion_tank(void){
+    ADCON0 = 0;
+    ADCON0bits.CHS0 = 0;
+    ADCON0bits.CHS1 = 0;
+    ADCON0bits.CHS2 = 0;
+    ADCON0bits.ADON = 1;
+    ADRESH = 0;
+    ADRESL = 0;
+    ADCON1 = 0;
+}
+
 int get_temperature(void){
     ADCON0bits.GO = 1;
     while(ADCON0bits.GO == 1);
     return (int) (ADRESH * 0.25) + -55;
+}
+
+int get_liters(void){
+    ADCON0bits.GO = 1;
+    while(ADCON0bits.GO == 1);
+    return (int) (ADRESH * 0.01);
 }
 
 void wait_for_zero(void){

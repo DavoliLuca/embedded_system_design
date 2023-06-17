@@ -1,8 +1,8 @@
 Version 4.0 HI-TECH Software Intermediate Code
 "81 ./stepper_motor.h
 [; ;./stepper_motor.h: 81: typedef struct {
-[s S242 `i 1 `i 1 `i 1 `ui -> 4 `i ]
-[n S242 . current_coil step_counter direction hex_coil_register_values ]
+[s S242 `i 1 `i 1 `i 1 `uc -> 4 `i `*Vuc 1 ]
+[n S242 . current_coil step_counter direction hex_coil_register_values register_name ]
 [p mainexit ]
 "79 ./init_PIC.h
 [; ;./init_PIC.h: 79: void init_PORTS(void);
@@ -19,12 +19,15 @@ Version 4.0 HI-TECH Software Intermediate Code
 "81 ./init_PIC.h
 [; ;./init_PIC.h: 81: void init_interrupts(void);
 [v _init_interrupts `(v ~T0 @X0 0 ef ]
-"90 ./oven.h
-[; ;./oven.h: 90: void configure_analog_digital_conversion(void);
-[v _configure_analog_digital_conversion `(v ~T0 @X0 0 ef ]
-"89 ./stepper_motor.h
-[; ;./stepper_motor.h: 89: void init_stepper(stepperMotor* stepper_motor, int current_step, int step_counter, int direction, int hex_coil_register_values[4]);
-[v _init_stepper `(v ~T0 @X0 0 ef5`*S242`i`i`i`*i ]
+"90 ./stepper_motor.h
+[; ;./stepper_motor.h: 90: void init_stepper(stepperMotor* stepper_motor, int current_step, int step_counter, int direction, unsigned char hex_coil_register_values[4], volatile unsigned char *register_name);
+[v _init_stepper `(v ~T0 @X0 0 ef6`*S242`i`i`i`*uc`*Vuc ]
+"822 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 822: extern volatile unsigned char LATB __attribute__((address(0xF8A)));
+[v _LATB `Vuc ~T0 @X0 0 e@3978 ]
+"934
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 934: extern volatile unsigned char LATC __attribute__((address(0xF8B)));
+[v _LATC `Vuc ~T0 @X0 0 e@3979 ]
 "98 ./lcd.h
 [; ;./lcd.h: 98: void lcd_init(void);
 [v _lcd_init `(v ~T0 @X0 0 ef ]
@@ -67,6 +70,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 "80 ./utils.h
 [; ;./utils.h: 80: unsigned char state_translator_micro_to_fpga(int* state);
 [v _state_translator_micro_to_fpga `(uc ~T0 @X0 0 ef1`*i ]
+"91 ./oven.h
+[; ;./oven.h: 91: void configure_ad_conversion_tank(void);
+[v _configure_ad_conversion_tank `(v ~T0 @X0 0 ef ]
+"93
+[; ;./oven.h: 93: int get_liters(void);
+[v _get_liters `(i ~T0 @X0 0 ef ]
 "728 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 728:     struct {
 [s S33 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
@@ -82,11 +91,15 @@ Version 4.0 HI-TECH Software Intermediate Code
 "747
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 747: extern volatile LATAbits_t LATAbits __attribute__((address(0xF89)));
 [v _LATAbits `VS32 ~T0 @X0 0 e@3977 ]
-"93 ./oven.h
-[; ;./oven.h: 93: int check_temperature(int temp_to_be_checked);
+[v F2107 `(v ~T0 @X0 1 tf1`ul ]
+"203 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\pic18.h
+[v __delay `JF2107 ~T0 @X0 0 e ]
+[p i __delay ]
+"95 ./oven.h
+[; ;./oven.h: 95: int check_temperature(int temp_to_be_checked);
 [v _check_temperature `(i ~T0 @X0 0 ef1`i ]
-"91
-[; ;./oven.h: 91: int get_temperature(void);
+"92
+[; ;./oven.h: 92: int get_temperature(void);
 [v _get_temperature `(i ~T0 @X0 0 ef ]
 "4795 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 4795:     struct {
@@ -103,21 +116,20 @@ Version 4.0 HI-TECH Software Intermediate Code
 "4809
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 4809: extern volatile T0CONbits_t T0CONbits __attribute__((address(0xFD5)));
 [v _T0CONbits `VS213 ~T0 @X0 0 e@4053 ]
-"92 ./oven.h
-[; ;./oven.h: 92: void wait_for_zero(void);
+"90 ./oven.h
+[; ;./oven.h: 90: void configure_ad_conversion_oven(void);
+[v _configure_ad_conversion_oven `(v ~T0 @X0 0 ef ]
+"94
+[; ;./oven.h: 94: void wait_for_zero(void);
 [v _wait_for_zero `(v ~T0 @X0 0 ef ]
 "79 ./timer.h
 [; ;./timer.h: 79: void init_timer_0(void);
 [v _init_timer_0 `(v ~T0 @X0 0 ef ]
-[v F2107 `(v ~T0 @X0 1 tf1`ul ]
-"203 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\pic18.h
-[v __delay `JF2107 ~T0 @X0 0 e ]
-[p i __delay ]
-"91 ./stepper_motor.h
-[; ;./stepper_motor.h: 91: int reach_goal(stepperMotor* stepper_motor, int goal_to_reach);
+"92 ./stepper_motor.h
+[; ;./stepper_motor.h: 92: int reach_goal(stepperMotor* stepper_motor, int goal_to_reach);
 [v _reach_goal `(i ~T0 @X0 0 ef2`*S242`i ]
-"92
-[; ;./stepper_motor.h: 92: void change_direction(stepperMotor* stepper_motor);
+"93
+[; ;./stepper_motor.h: 93: void change_direction(stepperMotor* stepper_motor);
 [v _change_direction `(v ~T0 @X0 0 ef1`*S242 ]
 [t ~ __interrupt . k ]
 [t T39 __interrupt ]
@@ -590,37 +602,31 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 41: int mix_counter;
 [v _mix_counter `i ~T0 @X0 1 e ]
 "42
-[; ;main.c: 42: int hex_joint_values[4] = {0x01, 0x02, 0x04, 0x08};
-[v _hex_joint_values `i ~T0 @X0 -> 4 `i e ]
+[; ;main.c: 42: char hex_joint_values[4] = {0x01, 0x02, 0x04, 0x08};
+[v _hex_joint_values `uc ~T0 @X0 -> 4 `i e ]
 [i _hex_joint_values
 :U ..
--> 1 `i
--> 2 `i
--> 4 `i
--> 8 `i
+-> -> 1 `i `uc
+-> -> 2 `i `uc
+-> -> 4 `i `uc
+-> -> 8 `i `uc
 ..
 ]
 "43
-[; ;main.c: 43: int hex_end_effector_values[4] = {0x01*16, 0x02*16, 0x04*16, 0x08*16};
-[v _hex_end_effector_values `i ~T0 @X0 -> 4 `i e ]
+[; ;main.c: 43: char hex_end_effector_values[4] = {0x10, 0x20, 0x40, 0x80};
+[v _hex_end_effector_values `uc ~T0 @X0 -> 4 `i e ]
 [i _hex_end_effector_values
 :U ..
-* -> 1 `i -> 16 `i
-* -> 2 `i -> 16 `i
-* -> 4 `i -> 16 `i
-* -> 8 `i -> 16 `i
+-> -> 16 `i `uc
+-> -> 32 `i `uc
+-> -> 64 `i `uc
+-> -> 128 `i `uc
 ..
 ]
-"44
-[; ;main.c: 44: int joint_homed = 0;
-[v _joint_homed `i ~T0 @X0 1 e ]
-[i _joint_homed
--> 0 `i
-]
 "45
-[; ;main.c: 45: int end_effector_homed = 0;
-[v _end_effector_homed `i ~T0 @X0 1 e ]
-[i _end_effector_homed
+[; ;main.c: 45: int dilution_done = 0;
+[v _dilution_done `i ~T0 @X0 1 e ]
+[i _dilution_done
 -> 0 `i
 ]
 "46
@@ -636,573 +642,769 @@ Version 4.0 HI-TECH Software Intermediate Code
 -> 0 `i
 ]
 "49
-[; ;main.c: 49: stepperMotor joint_stepper;
-[v _joint_stepper `S242 ~T0 @X0 1 e ]
+[; ;main.c: 49: int grasping_joint_position_reached = 0;
+[v _grasping_joint_position_reached `i ~T0 @X0 1 e ]
+[i _grasping_joint_position_reached
+-> 0 `i
+]
+"50
+[; ;main.c: 50: int grasping_ee_position_reached = 0;
+[v _grasping_ee_position_reached `i ~T0 @X0 1 e ]
+[i _grasping_ee_position_reached
+-> 0 `i
+]
 "51
-[; ;main.c: 51: stepperMotor end_effector_stepper;
-[v _end_effector_stepper `S242 ~T0 @X0 1 e ]
+[; ;main.c: 51: int diluting_position_reached = 0;
+[v _diluting_position_reached `i ~T0 @X0 1 e ]
+[i _diluting_position_reached
+-> 0 `i
+]
 "53
-[; ;main.c: 53: stepperMotor joint_dilutor_stepper;
+[; ;main.c: 53: int joint_homed = 0;
+[v _joint_homed `i ~T0 @X0 1 e ]
+[i _joint_homed
+-> 0 `i
+]
+"54
+[; ;main.c: 54: int end_effector_homed = 0;
+[v _end_effector_homed `i ~T0 @X0 1 e ]
+[i _end_effector_homed
+-> 0 `i
+]
+"55
+[; ;main.c: 55: int joint_dilutor_homed = 0;
+[v _joint_dilutor_homed `i ~T0 @X0 1 e ]
+[i _joint_dilutor_homed
+-> 0 `i
+]
+"57
+[; ;main.c: 57: int state_before_error = 8;
+[v _state_before_error `i ~T0 @X0 1 e ]
+[i _state_before_error
+-> 8 `i
+]
+"58
+[; ;main.c: 58: int tank_error = 0;
+[v _tank_error `i ~T0 @X0 1 e ]
+[i _tank_error
+-> 0 `i
+]
+"60
+[; ;main.c: 60: stepperMotor joint_stepper;
+[v _joint_stepper `S242 ~T0 @X0 1 e ]
+"62
+[; ;main.c: 62: stepperMotor end_effector_stepper;
+[v _end_effector_stepper `S242 ~T0 @X0 1 e ]
+"64
+[; ;main.c: 64: stepperMotor joint_dilutor_stepper;
 [v _joint_dilutor_stepper `S242 ~T0 @X0 1 e ]
 [v $root$_main `(v ~T0 @X0 0 e ]
-"56
-[; ;main.c: 56: void main(void){
+"67
+[; ;main.c: 67: void main(void){
 [v _main `(v ~T0 @X0 1 ef ]
 {
 [e :U _main ]
 [f ]
-"57
-[; ;main.c: 57:     unsigned char rx_char = ' ';
+"68
+[; ;main.c: 68:     unsigned char rx_char = ' ';
 [v _rx_char `uc ~T0 @X0 1 a ]
 [e = _rx_char -> -> 32 `ui `uc ]
-"58
-[; ;main.c: 58:     init_PORTS();
+"69
+[; ;main.c: 69:     init_PORTS();
 [e ( _init_PORTS ..  ]
-"59
-[; ;main.c: 59:     init_USART();
-[e ( _init_USART ..  ]
-"60
-[; ;main.c: 60:     init_timer_2();
-[e ( _init_timer_2 ..  ]
-"61
-[; ;main.c: 61:     init_ccp1();
-[e ( _init_ccp1 ..  ]
-"62
-[; ;main.c: 62:     init_interrupts();
-[e ( _init_interrupts ..  ]
-"63
-[; ;main.c: 63:     configure_analog_digital_conversion();
-[e ( _configure_analog_digital_conversion ..  ]
-"64
-[; ;main.c: 64:     init_stepper(&joint_stepper, 0, 0, 1, hex_joint_values);
-[e ( _init_stepper (4 , , , , &U _joint_stepper -> 0 `i -> 0 `i -> 1 `i &U _hex_joint_values ]
-"65
-[; ;main.c: 65:     init_stepper(&end_effector_stepper, 0, 0, 1, hex_end_effector_values);
-[e ( _init_stepper (4 , , , , &U _end_effector_stepper -> 0 `i -> 0 `i -> 1 `i &U _hex_end_effector_values ]
-"66
-[; ;main.c: 66:     init_stepper(&joint_dilutor_stepper, 0, 0, 1, hex_end_effector_values);
-[e ( _init_stepper (4 , , , , &U _joint_dilutor_stepper -> 0 `i -> 0 `i -> 1 `i &U _hex_end_effector_values ]
-"67
-[; ;main.c: 67:     lcd_init();
-[e ( _lcd_init ..  ]
-"68
-[; ;main.c: 68:     lcd_cmd(0x0C);
-[e ( _lcd_cmd (1 -> -> 12 `i `uc ]
 "70
-[; ;main.c: 70:     lcd_cmd(0x01);
-[e ( _lcd_cmd (1 -> -> 1 `i `uc ]
+[; ;main.c: 70:     init_USART();
+[e ( _init_USART ..  ]
 "71
-[; ;main.c: 71:     lcd_cmd(0x80);
-[e ( _lcd_cmd (1 -> -> 128 `i `uc ]
+[; ;main.c: 71:     init_timer_2();
+[e ( _init_timer_2 ..  ]
 "72
-[; ;main.c: 72:     lcd_str("Device has been reset");
-[e ( _lcd_str (1 :s 9C ]
-"74
-[; ;main.c: 74:     (INTCONbits.GIE = 1);
-[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
+[; ;main.c: 72:     init_ccp1();
+[e ( _init_ccp1 ..  ]
+"73
+[; ;main.c: 73:     init_interrupts();
+[e ( _init_interrupts ..  ]
+"75
+[; ;main.c: 75:     init_stepper(&joint_stepper, 0, 0, 1, hex_joint_values, &LATB);
+[e ( _init_stepper (4 , , , , , &U _joint_stepper -> 0 `i -> 0 `i -> 1 `i -> &U _hex_joint_values `*uc &U _LATB ]
 "76
-[; ;main.c: 76:     mix_counter = 0;
+[; ;main.c: 76:     init_stepper(&end_effector_stepper, 0, 0, 1, hex_end_effector_values, &LATB);
+[e ( _init_stepper (4 , , , , , &U _end_effector_stepper -> 0 `i -> 0 `i -> 1 `i -> &U _hex_end_effector_values `*uc &U _LATB ]
+"77
+[; ;main.c: 77:     init_stepper(&joint_dilutor_stepper, 0, 0, 1, hex_joint_values, &LATC);
+[e ( _init_stepper (4 , , , , , &U _joint_dilutor_stepper -> 0 `i -> 0 `i -> 1 `i -> &U _hex_joint_values `*uc &U _LATC ]
+"79
+[; ;main.c: 79:     lcd_init();
+[e ( _lcd_init ..  ]
+"80
+[; ;main.c: 80:     lcd_cmd(0x0C);
+[e ( _lcd_cmd (1 -> -> 12 `i `uc ]
+"82
+[; ;main.c: 82:     lcd_cmd(0x01);
+[e ( _lcd_cmd (1 -> -> 1 `i `uc ]
+"83
+[; ;main.c: 83:     lcd_cmd(0x80);
+[e ( _lcd_cmd (1 -> -> 128 `i `uc ]
+"84
+[; ;main.c: 84:     lcd_str("Device has been reset");
+[e ( _lcd_str (1 :s 9C ]
+"86
+[; ;main.c: 86:     (INTCONbits.GIE = 1);
+[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
+"88
+[; ;main.c: 88:     mix_counter = 0;
 [e = _mix_counter -> 0 `i ]
-"78
-[; ;main.c: 78:     while(1){
+"90
+[; ;main.c: 90:     while(1){
 [e :U 245 ]
 {
-"79
-[; ;main.c: 79:         if (state_changed){
+"91
+[; ;main.c: 91:         if (state_changed){
 [e $ ! != -> _state_changed `i -> 0 `i 247  ]
 {
-"80
-[; ;main.c: 80:             const char* greet_str[80];
+"92
+[; ;main.c: 92:             const char* greet_str[80];
 [v _greet_str `*Cuc ~T0 @X0 -> 80 `i a ]
-"81
-[; ;main.c: 81:             if (read_new_char){
+"93
+[; ;main.c: 93:             if (read_new_char){
 [e $ ! != -> _read_new_char `i -> 0 `i 248  ]
 {
-"82
-[; ;main.c: 82:                 rx_char = get_reg_value();
+"94
+[; ;main.c: 94:                 rx_char = get_reg_value();
 [e = _rx_char ( _get_reg_value ..  ]
-"85
-[; ;main.c: 85:                 state_translator_fpga_to_micro(rx_char, &state);
+"97
+[; ;main.c: 97:                 state_translator_fpga_to_micro(rx_char, &state);
 [e ( _state_translator_fpga_to_micro (2 , -> _rx_char `uc &U _state ]
-"86
-[; ;main.c: 86:                 read_new_char = 0;
+"98
+[; ;main.c: 98:                 read_new_char = 0;
 [e = _read_new_char -> -> 0 `i `a ]
-"87
-[; ;main.c: 87:                 snprintf(greet_str, sizeof(greet_str), "%s", state_msgs[state]);
+"99
+[; ;main.c: 99:                 snprintf(greet_str, sizeof(greet_str), "%s", state_msgs[state]);
 [e ( _snprintf (2 , (. , , -> &U _greet_str `*uc -> # _greet_str `ui :s 10C *U + &U _state_msgs * -> -> _state `ui `ux -> -> # *U &U _state_msgs `ui `ux ]
-"88
-[; ;main.c: 88:                 lcd_cmd(0x01);
+"100
+[; ;main.c: 100:                 lcd_cmd(0x01);
 [e ( _lcd_cmd (1 -> -> 1 `i `uc ]
-"89
-[; ;main.c: 89:                 lcd_cmd(0x80);
+"101
+[; ;main.c: 101:                 lcd_cmd(0x80);
 [e ( _lcd_cmd (1 -> -> 128 `i `uc ]
-"90
-[; ;main.c: 90:                 lcd_str(greet_str);
+"102
+[; ;main.c: 102:                 lcd_str(greet_str);
 [e ( _lcd_str (1 -> &U _greet_str `*Cuc ]
-"91
-[; ;main.c: 91:             } else {
+"103
+[; ;main.c: 103:             } else {
 }
 [e $U 249  ]
 [e :U 248 ]
 {
-"92
-[; ;main.c: 92:                 serial_tx_char(state_translator_micro_to_fpga(&state));
+"104
+[; ;main.c: 104:                 serial_tx_char(state_translator_micro_to_fpga(&state));
 [e ( _serial_tx_char (1 ( _state_translator_micro_to_fpga (1 &U _state ]
-"93
-[; ;main.c: 93:             }
+"105
+[; ;main.c: 105:             }
 }
 [e :U 249 ]
-"95
-[; ;main.c: 95:             state_changed = 0;
+"107
+[; ;main.c: 107:             state_changed = 0;
 [e = _state_changed -> -> 0 `i `a ]
-"96
-[; ;main.c: 96:             idle_msg_sent = 0;
+"108
+[; ;main.c: 108:             idle_msg_sent = 0;
 [e = _idle_msg_sent -> -> 0 `i `a ]
-"97
-[; ;main.c: 97:         }
+"109
+[; ;main.c: 109:         }
 }
 [e :U 247 ]
-"100
-[; ;main.c: 100:         if (state == 2){
-[e $ ! == _state -> 2 `i 250  ]
-{
-"101
-[; ;main.c: 101:             LATAbits.LATA1 = 1;
-[e = . . _LATAbits 0 1 -> -> 1 `i `uc ]
-"102
-[; ;main.c: 102:             if (move_to_trash && trash_counter < 100){
-[e $ ! && != _move_to_trash -> 0 `i < _trash_counter -> 100 `i 251  ]
-{
-"103
-[; ;main.c: 103:                 trash_counter++;
-[e ++ _trash_counter -> 1 `i ]
-"104
-[; ;main.c: 104:             } else if (move_to_trash && trash_counter >= 100){
-}
-[e $U 252  ]
-[e :U 251 ]
-[e $ ! && != _move_to_trash -> 0 `i >= _trash_counter -> 100 `i 253  ]
-{
-"105
-[; ;main.c: 105:                 move_to_trash = 0;
-[e = _move_to_trash -> 0 `i ]
-"106
-[; ;main.c: 106:                 state = 0;
-[e = _state -> 0 `i ]
-"107
-[; ;main.c: 107:                 state_changed = 1;
-[e = _state_changed -> -> 1 `i `a ]
-"108
-[; ;main.c: 108:             }
-}
-[e :U 253 ]
-[e :U 252 ]
-"109
-[; ;main.c: 109:         } else {
-}
-[e $U 254  ]
-[e :U 250 ]
-{
-"110
-[; ;main.c: 110:             LATAbits.LATA1 = 0;
-[e = . . _LATAbits 0 1 -> -> 0 `i `uc ]
 "111
-[; ;main.c: 111:             if (state == 0) {
-[e $ ! == _state -> 0 `i 255  ]
-{
+[; ;main.c: 111:         configure_ad_conversion_tank();
+[e ( _configure_ad_conversion_tank ..  ]
 "113
-[; ;main.c: 113:             } else if (state == 1){
-}
-[e $U 256  ]
-[e :U 255 ]
-[e $ ! == _state -> 1 `i 257  ]
-{
-"114
-[; ;main.c: 114:                 state = 2;
-[e = _state -> 2 `i ]
+[; ;main.c: 113:         tank_error = 0;
+[e = _tank_error -> 0 `i ]
 "115
-[; ;main.c: 115:                 state_changed = 1;
-[e = _state_changed -> -> 1 `i `a ]
+[; ;main.c: 115:         if (get_liters() < 0.1){
+[e $ ! < -> ( _get_liters ..  `d .0.1 250  ]
+{
 "116
-[; ;main.c: 116:             } else if (state == 3){
-}
-[e $U 258  ]
-[e :U 257 ]
-[e $ ! == _state -> 3 `i 259  ]
-{
+[; ;main.c: 116:             lcd_cmd(0x01);
+[e ( _lcd_cmd (1 -> -> 1 `i `uc ]
 "117
-[; ;main.c: 117:                 state = 9;
-[e = _state -> 9 `i ]
+[; ;main.c: 117:             lcd_cmd(0x80);
+[e ( _lcd_cmd (1 -> -> 128 `i `uc ]
 "118
-[; ;main.c: 118:                 state_changed = 1;
-[e = _state_changed -> -> 1 `i `a ]
+[; ;main.c: 118:             lcd_str("Not enough diluting solution, please refill");
+[e ( _lcd_str (1 :s 11C ]
 "119
-[; ;main.c: 119:             } else if (state == 9){
-}
-[e $U 260  ]
-[e :U 259 ]
-[e $ ! == _state -> 9 `i 261  ]
-{
+[; ;main.c: 119:             state_before_error = state;
+[e = _state_before_error _state ]
 "120
-[; ;main.c: 120:                 if (timer_done){
-[e $ ! != -> _timer_done `i -> 0 `i 262  ]
-{
+[; ;main.c: 120:             state = 8;
+[e = _state -> 8 `i ]
 "121
-[; ;main.c: 121:                     if(check_temperature(get_temperature())){
-[e $ ! != ( _check_temperature (1 ( _get_temperature ..  -> 0 `i 263  ]
-{
-"122
-[; ;main.c: 122:                         state = 2;
-[e = _state -> 2 `i ]
+[; ;main.c: 121:             tank_error = 1;
+[e = _tank_error -> 1 `i ]
 "123
-[; ;main.c: 123:                         state_changed = 1;
-[e = _state_changed -> -> 1 `i `a ]
-"124
-[; ;main.c: 124:                         timer_done = 0;
-[e = _timer_done -> -> 0 `i `a ]
+[; ;main.c: 123:         }
+}
+[e :U 250 ]
 "125
-[; ;main.c: 125:                     } else{
-}
-[e $U 264  ]
-[e :U 263 ]
+[; ;main.c: 125:         if (state == 2){
+[e $ ! == _state -> 2 `i 251  ]
 {
+"126
+[; ;main.c: 126:             LATAbits.LATA1 = 1;
+[e = . . _LATAbits 0 1 -> -> 1 `i `uc ]
 "127
-[; ;main.c: 127:                     }
-}
-[e :U 264 ]
-"129
-[; ;main.c: 129:                 } else {
-}
-[e $U 265  ]
-[e :U 262 ]
+[; ;main.c: 127:             if (move_to_trash && trash_counter < 100){
+[e $ ! && != _move_to_trash -> 0 `i < _trash_counter -> 100 `i 252  ]
 {
+"128
+[; ;main.c: 128:                 _delay((unsigned long)((10)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"129
+[; ;main.c: 129:                 trash_counter++;
+[e ++ _trash_counter -> 1 `i ]
 "130
-[; ;main.c: 130:                     if (T0CONbits.TMR0ON == 0){
-[e $ ! == -> . . _T0CONbits 0 5 `i -> 0 `i 266  ]
+[; ;main.c: 130:             } else if (move_to_trash && trash_counter >= 100){
+}
+[e $U 253  ]
+[e :U 252 ]
+[e $ ! && != _move_to_trash -> 0 `i >= _trash_counter -> 100 `i 254  ]
 {
 "131
-[; ;main.c: 131:                         wait_for_zero();
-[e ( _wait_for_zero ..  ]
+[; ;main.c: 131:                 move_to_trash = 0;
+[e = _move_to_trash -> 0 `i ]
 "132
-[; ;main.c: 132:                         init_timer_0();
-[e ( _init_timer_0 ..  ]
+[; ;main.c: 132:                 state = 0;
+[e = _state -> 0 `i ]
 "133
-[; ;main.c: 133:                     }
-}
-[e :U 266 ]
-"134
-[; ;main.c: 134:                     int current_temp = get_temperature();
-[v _current_temp `i ~T0 @X0 1 a ]
-[e = _current_temp ( _get_temperature ..  ]
-"135
-[; ;main.c: 135:                 }
-}
-[e :U 265 ]
-"137
-[; ;main.c: 137:             } else if (state == 4){
-}
-[e $U 267  ]
-[e :U 261 ]
-[e $ ! == _state -> 4 `i 268  ]
-{
-"138
-[; ;main.c: 138:                 state = 10;
-[e = _state -> 10 `i ]
-"139
-[; ;main.c: 139:                 state_changed = 1;
+[; ;main.c: 133:                 state_changed = 1;
 [e = _state_changed -> -> 1 `i `a ]
-"140
-[; ;main.c: 140:             }else if (state == 10){
+"134
+[; ;main.c: 134:             }
 }
-[e $U 269  ]
-[e :U 268 ]
-[e $ ! == _state -> 10 `i 270  ]
+[e :U 254 ]
+[e :U 253 ]
+"135
+[; ;main.c: 135:         } else {
+}
+[e $U 255  ]
+[e :U 251 ]
 {
+"136
+[; ;main.c: 136:             LATAbits.LATA1 = 0;
+[e = . . _LATAbits 0 1 -> -> 0 `i `uc ]
+"137
+[; ;main.c: 137:             if (state == 0) {
+[e $ ! == _state -> 0 `i 256  ]
+{
+"139
+[; ;main.c: 139:             } else if (state == 1){
+}
+[e $U 257  ]
+[e :U 256 ]
+[e $ ! == _state -> 1 `i 258  ]
+{
+"140
+[; ;main.c: 140:                 state = 2;
+[e = _state -> 2 `i ]
 "141
-[; ;main.c: 141:                 _delay((unsigned long)((3)*(4000000/4000.0)));
-[e ( __delay (1 -> * -> -> 3 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+[; ;main.c: 141:                 state_changed = 1;
+[e = _state_changed -> -> 1 `i `a ]
 "142
-[; ;main.c: 142:                 if (joint_homed && reach_goal(&joint_stepper, 50)){
-[e $ ! && != _joint_homed -> 0 `i != ( _reach_goal (2 , &U _joint_stepper -> 50 `i -> 0 `i 271  ]
+[; ;main.c: 142:             } else if (state == 3){
+}
+[e $U 259  ]
+[e :U 258 ]
+[e $ ! == _state -> 3 `i 260  ]
 {
 "143
-[; ;main.c: 143:                     joint_homed = 0;
-[e = _joint_homed -> 0 `i ]
+[; ;main.c: 143:                 state = 9;
+[e = _state -> 9 `i ]
 "144
-[; ;main.c: 144:                 }
-}
-[e :U 271 ]
+[; ;main.c: 144:                 state_changed = 1;
+[e = _state_changed -> -> 1 `i `a ]
 "145
-[; ;main.c: 145:                 if (!joint_homed && end_effector_homed && reach_goal(&end_effector_stepper, 100)){
-[e $ ! && && ! != _joint_homed -> 0 `i != _end_effector_homed -> 0 `i != ( _reach_goal (2 , &U _end_effector_stepper -> 100 `i -> 0 `i 272  ]
+[; ;main.c: 145:             } else if (state == 9){
+}
+[e $U 261  ]
+[e :U 260 ]
+[e $ ! == _state -> 9 `i 262  ]
 {
 "146
-[; ;main.c: 146:                     end_effector_homed = 0;
-[e = _end_effector_homed -> 0 `i ]
-"147
-[; ;main.c: 147:                 }
-}
-[e :U 272 ]
-"148
-[; ;main.c: 148:                 if (!end_effector_homed * !joint_homed){
-[e $ ! != * -> ! != _end_effector_homed -> 0 `i `i -> ! != _joint_homed -> 0 `i `i -> 0 `i 273  ]
+[; ;main.c: 146:                 if (timer_done){
+[e $ ! != -> _timer_done `i -> 0 `i 263  ]
 {
+"147
+[; ;main.c: 147:                     if(check_temperature(get_temperature())){
+[e $ ! != ( _check_temperature (1 ( _get_temperature ..  -> 0 `i 264  ]
+{
+"148
+[; ;main.c: 148:                         state = 2;
+[e = _state -> 2 `i ]
 "149
-[; ;main.c: 149:                     state = 5;
-[e = _state -> 5 `i ]
-"150
-[; ;main.c: 150:                     state_changed = 1;
+[; ;main.c: 149:                         state_changed = 1;
 [e = _state_changed -> -> 1 `i `a ]
+"150
+[; ;main.c: 150:                         timer_done = 0;
+[e = _timer_done -> -> 0 `i `a ]
 "151
-[; ;main.c: 151:                 }
+[; ;main.c: 151:                     } else{
 }
-[e :U 273 ]
-"152
-[; ;main.c: 152:             } else if (state == 5){
-}
-[e $U 274  ]
-[e :U 270 ]
-[e $ ! == _state -> 5 `i 275  ]
+[e $U 265  ]
+[e :U 264 ]
 {
 "153
-[; ;main.c: 153:                 _delay((unsigned long)((3)*(4000000/4000.0)));
-[e ( __delay (1 -> * -> -> 3 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-"154
-[; ;main.c: 154:                 if (reach_goal(&joint_stepper, 100)) {
-[e $ ! != ( _reach_goal (2 , &U _joint_stepper -> 100 `i -> 0 `i 276  ]
-{
+[; ;main.c: 153:                     }
+}
+[e :U 265 ]
 "155
-[; ;main.c: 155:                     change_direction(&joint_stepper);
-[e ( _change_direction (1 &U _joint_stepper ]
+[; ;main.c: 155:                 } else {
+}
+[e $U 266  ]
+[e :U 263 ]
+{
 "156
-[; ;main.c: 156:                     mix_counter++;
-[e ++ _mix_counter -> 1 `i ]
+[; ;main.c: 156:                     if (T0CONbits.TMR0ON == 0){
+[e $ ! == -> . . _T0CONbits 0 5 `i -> 0 `i 267  ]
+{
 "157
-[; ;main.c: 157:                 }
-}
-[e :U 276 ]
+[; ;main.c: 157:                         configure_ad_conversion_oven();
+[e ( _configure_ad_conversion_oven ..  ]
+"158
+[; ;main.c: 158:                         wait_for_zero();
+[e ( _wait_for_zero ..  ]
 "159
-[; ;main.c: 159:                 if (mix_counter >= 20){
-[e $ ! >= _mix_counter -> 20 `i 277  ]
-{
+[; ;main.c: 159:                         init_timer_0();
+[e ( _init_timer_0 ..  ]
 "160
-[; ;main.c: 160:                     state = 6;
-[e = _state -> 6 `i ]
+[; ;main.c: 160:                     }
+}
+[e :U 267 ]
 "161
-[; ;main.c: 161:                     mix_counter = 0;
-[e = _mix_counter -> 0 `i ]
+[; ;main.c: 161:                     int current_temp = get_temperature();
+[v _current_temp `i ~T0 @X0 1 a ]
+[e = _current_temp ( _get_temperature ..  ]
 "162
-[; ;main.c: 162:                     init_stepper(&joint_stepper, 0, 0, 1, hex_joint_values);
-[e ( _init_stepper (4 , , , , &U _joint_stepper -> 0 `i -> 0 `i -> 1 `i &U _hex_joint_values ]
-"163
-[; ;main.c: 163:                     change_direction(&joint_stepper);
-[e ( _change_direction (1 &U _joint_stepper ]
+[; ;main.c: 162:                 }
+}
+[e :U 266 ]
 "164
-[; ;main.c: 164:                     change_direction(&end_effector_stepper);
-[e ( _change_direction (1 &U _end_effector_stepper ]
-"165
-[; ;main.c: 165:                 }
+[; ;main.c: 164:             } else if (state == 4){
 }
-[e :U 277 ]
-"166
-[; ;main.c: 166:             } else if (state == 6){
-}
-[e $U 278  ]
-[e :U 275 ]
-[e $ ! == _state -> 6 `i 279  ]
+[e $U 268  ]
+[e :U 262 ]
+[e $ ! == _state -> 4 `i 269  ]
 {
+"165
+[; ;main.c: 165:                 state = 10;
+[e = _state -> 10 `i ]
+"166
+[; ;main.c: 166:                 state_changed = 1;
+[e = _state_changed -> -> 1 `i `a ]
 "167
-[; ;main.c: 167:                 _delay((unsigned long)((3)*(4000000/4000.0)));
+[; ;main.c: 167:             }else if (state == 10){
+}
+[e $U 270  ]
+[e :U 269 ]
+[e $ ! == _state -> 10 `i 271  ]
+{
+"168
+[; ;main.c: 168:                 _delay((unsigned long)((3)*(4000000/4000.0)));
 [e ( __delay (1 -> * -> -> 3 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
 "169
-[; ;main.c: 169:                 if (!end_effector_homed && reach_goal(&end_effector_stepper, 100)){
-[e $ ! && ! != _end_effector_homed -> 0 `i != ( _reach_goal (2 , &U _end_effector_stepper -> 100 `i -> 0 `i 280  ]
+[; ;main.c: 169:                 if (!grasping_joint_position_reached){
+[e $ ! ! != _grasping_joint_position_reached -> 0 `i 272  ]
 {
 "170
-[; ;main.c: 170:                     end_effector_homed = 1;
-[e = _end_effector_homed -> 1 `i ]
+[; ;main.c: 170:                     grasping_joint_position_reached = reach_goal(&joint_stepper, 50);
+[e = _grasping_joint_position_reached ( _reach_goal (2 , &U _joint_stepper -> 50 `i ]
 "171
 [; ;main.c: 171:                 }
 }
-[e :U 280 ]
+[e :U 272 ]
 "173
-[; ;main.c: 173:                 if (end_effector_homed && !joint_homed && reach_goal(&joint_stepper, 50)){
-[e $ ! && && != _end_effector_homed -> 0 `i ! != _joint_homed -> 0 `i != ( _reach_goal (2 , &U _joint_stepper -> 50 `i -> 0 `i 281  ]
+[; ;main.c: 173:                 if (grasping_joint_position_reached && !grasping_ee_position_reached){
+[e $ ! && != _grasping_joint_position_reached -> 0 `i ! != _grasping_ee_position_reached -> 0 `i 273  ]
 {
 "174
-[; ;main.c: 174:                     joint_homed = 1;
-[e = _joint_homed -> 1 `i ]
+[; ;main.c: 174:                     grasping_ee_position_reached = reach_goal(&end_effector_stepper, 100);
+[e = _grasping_ee_position_reached ( _reach_goal (2 , &U _end_effector_stepper -> 100 `i ]
 "175
 [; ;main.c: 175:                 }
 }
-[e :U 281 ]
+[e :U 273 ]
+"176
+[; ;main.c: 176:                 if (grasping_joint_position_reached * grasping_ee_position_reached){
+[e $ ! != * _grasping_joint_position_reached _grasping_ee_position_reached -> 0 `i 274  ]
+{
 "177
-[; ;main.c: 177:                 if (end_effector_homed * joint_homed){
-[e $ ! != * _end_effector_homed _joint_homed -> 0 `i 282  ]
-{
+[; ;main.c: 177:                     state = 5;
+[e = _state -> 5 `i ]
 "178
-[; ;main.c: 178:                     state = 2;
-[e = _state -> 2 `i ]
+[; ;main.c: 178:                     state_changed = 1;
+[e = _state_changed -> -> 1 `i `a ]
 "179
-[; ;main.c: 179:                     state_changed = 1;
-[e = _state_changed -> -> 1 `i `a ]
-"180
-[; ;main.c: 180:                 }
+[; ;main.c: 179:                 }
 }
-[e :U 282 ]
-"181
-[; ;main.c: 181:             } else if (state == 7){
-}
-[e $U 283  ]
-[e :U 279 ]
-[e $ ! == _state -> 7 `i 284  ]
-{
-"182
-[; ;main.c: 182:                 state = 11;
-[e = _state -> 11 `i ]
-"183
-[; ;main.c: 183:                 state_changed = 1;
-[e = _state_changed -> -> 1 `i `a ]
-"184
-[; ;main.c: 184:             }else if (state == 11){
-}
-[e $U 285  ]
-[e :U 284 ]
-[e $ ! == _state -> 11 `i 286  ]
-{
-"185
-[; ;main.c: 185:                 if (timer_done){
-[e $ ! != -> _timer_done `i -> 0 `i 287  ]
-{
-"186
-[; ;main.c: 186:                     state_changed = 1;
-[e = _state_changed -> -> 1 `i `a ]
-"187
-[; ;main.c: 187:                     state = 2;
-[e = _state -> 2 `i ]
-"188
-[; ;main.c: 188:                     move_to_trash = 1;
-[e = _move_to_trash -> 1 `i ]
-"189
-[; ;main.c: 189:                     trash_counter = 0;
-[e = _trash_counter -> 0 `i ]
-"190
-[; ;main.c: 190:                 } else {
-}
-[e $U 288  ]
-[e :U 287 ]
-{
-"191
-[; ;main.c: 191:                     if (T0CONbits.TMR0ON == 0){
-[e $ ! == -> . . _T0CONbits 0 5 `i -> 0 `i 289  ]
-{
-"192
-[; ;main.c: 192:                         init_timer_0();
-[e ( _init_timer_0 ..  ]
-"193
-[; ;main.c: 193:                     }
-}
-[e :U 289 ]
-"195
-[; ;main.c: 195:                 }
-}
-[e :U 288 ]
-"196
-[; ;main.c: 196:             } else if (state == 12){
-}
-[e $U 290  ]
-[e :U 286 ]
-[e $ ! == _state -> 12 `i 291  ]
-{
-"197
-[; ;main.c: 197:                 state = 0;
-[e = _state -> 0 `i ]
-"198
-[; ;main.c: 198:                 state_changed = 1;
-[e = _state_changed -> -> 1 `i `a ]
-"199
-[; ;main.c: 199:                 T0CONbits.TMR0ON = 0;
-[e = . . _T0CONbits 0 5 -> -> 0 `i `uc ]
-"200
-[; ;main.c: 200:             }
-}
-[e :U 291 ]
-[e :U 290 ]
-[e :U 285 ]
-[e :U 283 ]
-[e :U 278 ]
 [e :U 274 ]
-[e :U 269 ]
-[e :U 267 ]
-[e :U 260 ]
-[e :U 258 ]
-[e :U 256 ]
-"201
-[; ;main.c: 201:         }
+"180
+[; ;main.c: 180:             } else if (state == 5){
 }
-[e :U 254 ]
+[e $U 275  ]
+[e :U 271 ]
+[e $ ! == _state -> 5 `i 276  ]
+{
+"181
+[; ;main.c: 181:                 _delay((unsigned long)((3)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 3 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"182
+[; ;main.c: 182:                 if (reach_goal(&joint_stepper, 100)) {
+[e $ ! != ( _reach_goal (2 , &U _joint_stepper -> 100 `i -> 0 `i 277  ]
+{
+"183
+[; ;main.c: 183:                     change_direction(&joint_stepper);
+[e ( _change_direction (1 &U _joint_stepper ]
+"184
+[; ;main.c: 184:                     mix_counter++;
+[e ++ _mix_counter -> 1 `i ]
+"185
+[; ;main.c: 185:                 }
+}
+[e :U 277 ]
+"187
+[; ;main.c: 187:                 if (mix_counter == 20 && !dilution_done){
+[e $ ! && == _mix_counter -> 20 `i ! != _dilution_done -> 0 `i 278  ]
+{
+"188
+[; ;main.c: 188:                     state = 15;
+[e = _state -> 15 `i ]
+"189
+[; ;main.c: 189:                 } else if (mix_counter == 40) {
+}
+[e $U 279  ]
+[e :U 278 ]
+[e $ ! == _mix_counter -> 40 `i 280  ]
+{
+"190
+[; ;main.c: 190:                     dilution_done = 0;
+[e = _dilution_done -> 0 `i ]
+"191
+[; ;main.c: 191:                     state = 6;
+[e = _state -> 6 `i ]
+"192
+[; ;main.c: 192:                     mix_counter = 0;
+[e = _mix_counter -> 0 `i ]
+"194
+[; ;main.c: 194:                     change_direction(&joint_stepper);
+[e ( _change_direction (1 &U _joint_stepper ]
+"195
+[; ;main.c: 195:                     change_direction(&end_effector_stepper);
+[e ( _change_direction (1 &U _end_effector_stepper ]
+"196
+[; ;main.c: 196:                 }
+}
+[e :U 280 ]
+[e :U 279 ]
+"197
+[; ;main.c: 197:             } else if (state == 6){
+}
+[e $U 281  ]
+[e :U 276 ]
+[e $ ! == _state -> 6 `i 282  ]
+{
+"198
+[; ;main.c: 198:                 _delay((unsigned long)((3)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 3 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"200
+[; ;main.c: 200:                 if (!end_effector_homed){
+[e $ ! ! != _end_effector_homed -> 0 `i 283  ]
+{
+"201
+[; ;main.c: 201:                     end_effector_homed = reach_goal(&end_effector_stepper, 100);
+[e = _end_effector_homed ( _reach_goal (2 , &U _end_effector_stepper -> 100 `i ]
 "202
-[; ;main.c: 202:     }
+[; ;main.c: 202:                 }
+}
+[e :U 283 ]
+"204
+[; ;main.c: 204:                 if (end_effector_homed && !joint_homed){
+[e $ ! && != _end_effector_homed -> 0 `i ! != _joint_homed -> 0 `i 284  ]
+{
+"205
+[; ;main.c: 205:                     joint_homed = reach_goal(&joint_stepper, 50);
+[e = _joint_homed ( _reach_goal (2 , &U _joint_stepper -> 50 `i ]
+"206
+[; ;main.c: 206:                 }
+}
+[e :U 284 ]
+"208
+[; ;main.c: 208:                 if (end_effector_homed * joint_homed){
+[e $ ! != * _end_effector_homed _joint_homed -> 0 `i 285  ]
+{
+"209
+[; ;main.c: 209:                     state = 2;
+[e = _state -> 2 `i ]
+"210
+[; ;main.c: 210:                     state_changed = 1;
+[e = _state_changed -> -> 1 `i `a ]
+"211
+[; ;main.c: 211:                 }
+}
+[e :U 285 ]
+"212
+[; ;main.c: 212:             } else if (state == 15){
+}
+[e $U 286  ]
+[e :U 282 ]
+[e $ ! == _state -> 15 `i 287  ]
+{
+"213
+[; ;main.c: 213:                 _delay((unsigned long)((3)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 3 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"214
+[; ;main.c: 214:                 if (!diluting_position_reached){
+[e $ ! ! != _diluting_position_reached -> 0 `i 288  ]
+{
+"215
+[; ;main.c: 215:                     diluting_position_reached = reach_goal(&joint_dilutor_stepper, 200);
+[e = _diluting_position_reached ( _reach_goal (2 , &U _joint_dilutor_stepper -> 200 `i ]
+"216
+[; ;main.c: 216:                 } else if (!dilution_done && diluting_position_reached){
+}
+[e $U 289  ]
+[e :U 288 ]
+[e $ ! && ! != _dilution_done -> 0 `i != _diluting_position_reached -> 0 `i 290  ]
+{
+"218
+[; ;main.c: 218:                     lcd_cmd(0x01);
+[e ( _lcd_cmd (1 -> -> 1 `i `uc ]
+"219
+[; ;main.c: 219:                     lcd_cmd(0x80);
+[e ( _lcd_cmd (1 -> -> 128 `i `uc ]
+"220
+[; ;main.c: 220:                     lcd_str("Dilution ongoing");
+[e ( _lcd_str (1 :s 12C ]
+"221
+[; ;main.c: 221:                     _delay((unsigned long)((1000)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"222
+[; ;main.c: 222:                     dilution_done = 1;
+[e = _dilution_done -> 1 `i ]
+"223
+[; ;main.c: 223:                     change_direction(&joint_dilutor_stepper);
+[e ( _change_direction (1 &U _joint_dilutor_stepper ]
+"224
+[; ;main.c: 224:                 } else if (dilution_done && !joint_dilutor_homed){
+}
+[e $U 291  ]
+[e :U 290 ]
+[e $ ! && != _dilution_done -> 0 `i ! != _joint_dilutor_homed -> 0 `i 292  ]
+{
+"225
+[; ;main.c: 225:                     joint_dilutor_homed = reach_goal(&joint_dilutor_stepper, 200);
+[e = _joint_dilutor_homed ( _reach_goal (2 , &U _joint_dilutor_stepper -> 200 `i ]
+"226
+[; ;main.c: 226:                 } else if (dilution_done && joint_dilutor_homed){
+}
+[e $U 293  ]
+[e :U 292 ]
+[e $ ! && != _dilution_done -> 0 `i != _joint_dilutor_homed -> 0 `i 294  ]
+{
+"227
+[; ;main.c: 227:                     state = 5;
+[e = _state -> 5 `i ]
+"228
+[; ;main.c: 228:                     diluting_position_reached = 0;
+[e = _diluting_position_reached -> 0 `i ]
+"229
+[; ;main.c: 229:                 }
+}
+[e :U 294 ]
+[e :U 293 ]
+[e :U 291 ]
+[e :U 289 ]
+"231
+[; ;main.c: 231:             } else if (state == 7){
+}
+[e $U 295  ]
+[e :U 287 ]
+[e $ ! == _state -> 7 `i 296  ]
+{
+"232
+[; ;main.c: 232:                 state = 11;
+[e = _state -> 11 `i ]
+"233
+[; ;main.c: 233:                 state_changed = 1;
+[e = _state_changed -> -> 1 `i `a ]
+"234
+[; ;main.c: 234:             }else if (state == 11){
+}
+[e $U 297  ]
+[e :U 296 ]
+[e $ ! == _state -> 11 `i 298  ]
+{
+"235
+[; ;main.c: 235:                 if (timer_done){
+[e $ ! != -> _timer_done `i -> 0 `i 299  ]
+{
+"236
+[; ;main.c: 236:                     state_changed = 1;
+[e = _state_changed -> -> 1 `i `a ]
+"237
+[; ;main.c: 237:                     state = 2;
+[e = _state -> 2 `i ]
+"238
+[; ;main.c: 238:                     move_to_trash = 1;
+[e = _move_to_trash -> 1 `i ]
+"239
+[; ;main.c: 239:                     trash_counter = 0;
+[e = _trash_counter -> 0 `i ]
+"240
+[; ;main.c: 240:                     lcd_cmd(0x01);
+[e ( _lcd_cmd (1 -> -> 1 `i `uc ]
+"241
+[; ;main.c: 241:                     lcd_cmd(0x80);
+[e ( _lcd_cmd (1 -> -> 128 `i `uc ]
+"242
+[; ;main.c: 242:                     lcd_str("Moved to trash! Restarting from Idle");
+[e ( _lcd_str (1 :s 13C ]
+"243
+[; ;main.c: 243:                 } else {
+}
+[e $U 300  ]
+[e :U 299 ]
+{
+"244
+[; ;main.c: 244:                     if (T0CONbits.TMR0ON == 0){
+[e $ ! == -> . . _T0CONbits 0 5 `i -> 0 `i 301  ]
+{
+"245
+[; ;main.c: 245:                         init_timer_0();
+[e ( _init_timer_0 ..  ]
+"246
+[; ;main.c: 246:                     }
+}
+[e :U 301 ]
+"248
+[; ;main.c: 248:                 }
+}
+[e :U 300 ]
+"249
+[; ;main.c: 249:             } else if (state == 12){
+}
+[e $U 302  ]
+[e :U 298 ]
+[e $ ! == _state -> 12 `i 303  ]
+{
+"250
+[; ;main.c: 250:                 state = 0;
+[e = _state -> 0 `i ]
+"251
+[; ;main.c: 251:                 state_changed = 1;
+[e = _state_changed -> -> 1 `i `a ]
+"252
+[; ;main.c: 252:                 T0CONbits.TMR0ON = 0;
+[e = . . _T0CONbits 0 5 -> -> 0 `i `uc ]
+"253
+[; ;main.c: 253:             } if (state == 8){
+}
+[e :U 303 ]
+[e :U 302 ]
+[e :U 297 ]
+[e :U 295 ]
+[e :U 286 ]
+[e :U 281 ]
+[e :U 275 ]
+[e :U 270 ]
+[e :U 268 ]
+[e :U 261 ]
+[e :U 259 ]
+[e :U 257 ]
+[e $ ! == _state -> 8 `i 304  ]
+{
+"255
+[; ;main.c: 255:                 if (tank_error == 0){
+[e $ ! == _tank_error -> 0 `i 305  ]
+{
+"256
+[; ;main.c: 256:                     state = state_before_error;
+[e = _state _state_before_error ]
+"257
+[; ;main.c: 257:                 }
+}
+[e :U 305 ]
+"259
+[; ;main.c: 259:             }
+}
+[e :U 304 ]
+"260
+[; ;main.c: 260:         }
+}
+[e :U 255 ]
+"261
+[; ;main.c: 261:     }
 }
 [e :U 244 ]
 [e $U 245  ]
 [e :U 246 ]
-"203
-[; ;main.c: 203: }
+"262
+[; ;main.c: 262: }
 [e :UE 243 ]
 }
 [v $root$_rx_char_usart `(v ~T0 @X0 0 e ]
-"206
-[; ;main.c: 206: void __attribute__((picinterrupt(("")))) rx_char_usart(void){
+"265
+[; ;main.c: 265: void __attribute__((picinterrupt(("")))) rx_char_usart(void){
 [v _rx_char_usart `(v ~T39 @X0 1 ef ]
 {
 [e :U _rx_char_usart ]
 [f ]
-"207
-[; ;main.c: 207:     if(PIE1bits.RCIE && PIR1bits.RCIF){
-[e $ ! && != -> . . _PIE1bits 0 5 `i -> 0 `i != -> . . _PIR1bits 0 5 `i -> 0 `i 293  ]
+"266
+[; ;main.c: 266:     if(PIE1bits.RCIE && PIR1bits.RCIF){
+[e $ ! && != -> . . _PIE1bits 0 5 `i -> 0 `i != -> . . _PIR1bits 0 5 `i -> 0 `i 307  ]
 {
-"208
-[; ;main.c: 208:         PIR1bits.RCIF = 0;
+"267
+[; ;main.c: 267:         PIR1bits.RCIF = 0;
 [e = . . _PIR1bits 0 5 -> -> 0 `i `uc ]
-"209
-[; ;main.c: 209:         state_changed = 1;
+"268
+[; ;main.c: 268:         state_changed = 1;
 [e = _state_changed -> -> 1 `i `a ]
-"210
-[; ;main.c: 210:         read_new_char = 1;
+"269
+[; ;main.c: 269:         read_new_char = 1;
 [e = _read_new_char -> -> 1 `i `a ]
-"211
-[; ;main.c: 211:     }
+"270
+[; ;main.c: 270:     }
 }
-[e :U 293 ]
-"212
-[; ;main.c: 212:     if(INTCONbits.TMR0IE && INTCONbits.TMR0IF){
-[e $ ! && != -> . . _INTCONbits 0 5 `i -> 0 `i != -> . . _INTCONbits 0 2 `i -> 0 `i 294  ]
+[e :U 307 ]
+"271
+[; ;main.c: 271:     if(INTCONbits.TMR0IE && INTCONbits.TMR0IF){
+[e $ ! && != -> . . _INTCONbits 0 5 `i -> 0 `i != -> . . _INTCONbits 0 2 `i -> 0 `i 308  ]
 {
-"213
-[; ;main.c: 213:         T0CON = 0;
+"272
+[; ;main.c: 272:         T0CON = 0;
 [e = _T0CON -> -> 0 `i `uc ]
-"214
-[; ;main.c: 214:         INTCONbits.TMR0IF = 0;
+"273
+[; ;main.c: 273:         INTCONbits.TMR0IF = 0;
 [e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
-"215
-[; ;main.c: 215:         timer_done = 1;
+"274
+[; ;main.c: 274:         timer_done = 1;
 [e = _timer_done -> -> 1 `i `a ]
-"216
-[; ;main.c: 216:     }
+"275
+[; ;main.c: 275:     }
 }
-[e :U 294 ]
-"217
-[; ;main.c: 217: }
-[e :UE 292 ]
+[e :U 308 ]
+"276
+[; ;main.c: 276: }
+[e :UE 306 ]
 }
 [p f _snprintf 8650752 ]
 [a 9C 68 101 118 105 99 101 32 104 97 115 32 98 101 101 110 32 114 101 115 101 116 0 ]
 [a 1C 73 68 76 69 58 32 119 97 105 116 105 110 103 32 102 111 114 32 32 118 105 97 108 32 116 111 32 98 101 32 112 108 97 99 101 100 32 105 110 32 105 110 105 116 32 112 111 115 0 ]
 [a 10C 37 115 0 ]
 [a 8C 80 73 67 75 95 85 80 58 32 116 104 101 32 118 105 97 108 32 104 97 115 32 114 101 97 99 104 101 100 32 116 104 101 32 112 105 99 107 32 117 112 32 115 116 97 116 105 111 110 0 ]
+[a 11C 78 111 116 32 101 110 111 117 103 104 32 100 105 108 117 116 105 110 103 32 115 111 108 117 116 105 111 110 44 32 112 108 101 97 115 101 32 114 101 102 105 108 108 0 ]
 [a 2C 73 78 73 84 95 80 79 83 58 32 116 104 101 32 118 105 97 108 32 105 115 32 97 116 32 116 104 101 32 105 110 105 116 32 112 111 115 105 116 105 111 110 44 32 112 114 111 99 101 115 115 32 105 115 32 115 116 97 114 116 105 110 103 0 ]
+[a 12C 68 105 108 117 116 105 111 110 32 111 110 103 111 105 110 103 0 ]
 [a 4C 79 86 69 78 58 32 114 101 97 99 104 105 110 103 32 116 104 101 32 99 111 114 114 101 99 116 32 116 101 109 112 101 114 97 116 117 114 101 0 ]
+[a 13C 77 111 118 101 100 32 116 111 32 116 114 97 115 104 33 32 82 101 115 116 97 114 116 105 110 103 32 102 114 111 109 32 73 100 108 101 0 ]
 [a 3C 77 79 86 69 77 69 78 84 0 ]
 [a 6C 77 73 88 73 78 71 0 ]
 [a 7C 68 73 76 85 84 73 78 71 0 ]

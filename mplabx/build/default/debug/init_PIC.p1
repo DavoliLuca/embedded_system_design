@@ -23,6 +23,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 "322
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 322: extern volatile unsigned char PORTC __attribute__((address(0xF82)));
 [v _PORTC `Vuc ~T0 @X0 0 e@3970 ]
+"1648
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 1648: extern volatile unsigned char TRISC __attribute__((address(0xF94)));
+[v _TRISC `Vuc ~T0 @X0 0 e@3988 ]
 "1659
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 1659:     struct {
 [s S62 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
@@ -541,8 +544,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;init_PIC.c: 64:     PORTA = 0;
 [e = _PORTA -> -> 0 `i `uc ]
 "65
-[; ;init_PIC.c: 65:     TRISA = 0xF0;
-[e = _TRISA -> -> 240 `i `uc ]
+[; ;init_PIC.c: 65:     TRISA = 0xF1;
+[e = _TRISA -> -> 241 `i `uc ]
 "67
 [; ;init_PIC.c: 67:     LATB = 0;
 [e = _LATB -> -> 0 `i `uc ]
@@ -559,40 +562,37 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;init_PIC.c: 73:     PORTC = 0;
 [e = _PORTC -> -> 0 `i `uc ]
 "74
-[; ;init_PIC.c: 74:     TRISCbits.RC2 = 0;
-[e = . . _TRISCbits 1 2 -> -> 0 `i `uc ]
+[; ;init_PIC.c: 74:     TRISC = 0xF0;
+[e = _TRISC -> -> 240 `i `uc ]
 "75
-[; ;init_PIC.c: 75:     TRISCbits.RC7 = 1;
-[e = . . _TRISCbits 1 7 -> -> 1 `i `uc ]
-"76
-[; ;init_PIC.c: 76:     TRISCbits.RC6 = 0;
+[; ;init_PIC.c: 75:     TRISCbits.RC6 = 0;
 [e = . . _TRISCbits 1 6 -> -> 0 `i `uc ]
-"78
-[; ;init_PIC.c: 78:     return;
+"77
+[; ;init_PIC.c: 77:     return;
 [e $UE 238  ]
-"79
-[; ;init_PIC.c: 79: }
+"78
+[; ;init_PIC.c: 78: }
 [e :UE 238 ]
 }
-"81
-[; ;init_PIC.c: 81: void init_interrupts(void){
+"80
+[; ;init_PIC.c: 80: void init_interrupts(void){
 [v _init_interrupts `(v ~T0 @X0 1 ef ]
 {
 [e :U _init_interrupts ]
 [f ]
-"83
-[; ;init_PIC.c: 83:     PIR1bits.RCIF = 0;
+"82
+[; ;init_PIC.c: 82:     PIR1bits.RCIF = 0;
 [e = . . _PIR1bits 0 5 -> -> 0 `i `uc ]
-"84
-[; ;init_PIC.c: 84:     PIE1bits.RCIE = 1;
+"83
+[; ;init_PIC.c: 83:     PIE1bits.RCIE = 1;
 [e = . . _PIE1bits 0 5 -> -> 1 `i `uc ]
-"85
-[; ;init_PIC.c: 85:     INTCONbits.PEIE = 1;
+"84
+[; ;init_PIC.c: 84:     INTCONbits.PEIE = 1;
 [e = . . _INTCONbits 1 6 -> -> 1 `i `uc ]
-"87
-[; ;init_PIC.c: 87:     return;
+"86
+[; ;init_PIC.c: 86:     return;
 [e $UE 239  ]
-"88
-[; ;init_PIC.c: 88: }
+"87
+[; ;init_PIC.c: 87: }
 [e :UE 239 ]
 }

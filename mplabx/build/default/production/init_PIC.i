@@ -3876,7 +3876,7 @@ void init_PORTS(void){
 
     LATA = 0;
     PORTA = 0;
-    TRISA = 0xF0;
+    TRISA = 0xF1;
 
     LATB = 0;
     PORTB = 0;
@@ -3885,8 +3885,7 @@ void init_PORTS(void){
 
     LATC = 0;
     PORTC = 0;
-    TRISCbits.RC2 = 0;
-    TRISCbits.RC7 = 1;
+    TRISC = 0xF0;
     TRISCbits.RC6 = 0;
 
     return;

@@ -87,7 +87,9 @@ typedef struct {
     int stop_temp;
 } oven;
 
-void configure_analog_digital_conversion(void);
+void configure_ad_conversion_oven(void);
+void configure_ad_conversion_tank(void);
 int get_temperature(void);
+int get_liters(void);
 void wait_for_zero(void);
 int check_temperature(int temp_to_be_checked);
