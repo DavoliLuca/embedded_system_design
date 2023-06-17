@@ -2,6 +2,11 @@
 #include <xc.h>
 #include "lcd.h"
 
+const char const_msgs[2][8][20] = {
+    {"IDLE: waiting for\0","vial to be placed\0","in init pos\0","\0"},
+    {"debug\0","ri\0","","jeep\0"},
+};
+
 void lcd_wr(unsigned char val)
 {
     LPORT=val;
@@ -68,4 +73,30 @@ void lcd_str(const char* str)
       lcd_dat(str[i]);
       i++;
     }  
+}
+
+void lcd_manager_init(lcdManager* lcd_manager, unsigned char* new_msg, unsigned char* current_msg){
+    lcd_manager -> new_msg = new_msg;
+    lcd_manager -> current_msg = new_msg;
+}
+
+/*
+void lcd_update(lcdManager* lcd_manager){
+    if (lcd_manager -> new_msg == "" || lcd_manager -> new_msg == lcd_manager -> current_msg){
+        asm("nop");
+    } else {
+        lcd_cmd(L_CLR);
+        lcd_cmd(L_L1);
+        lcd_str(lcd_manager -> new_msg[0:20]);
+    }
+}*/
+
+
+void lcd_update(int state){
+    lcd_cmd(L_CLR);
+    const char line_select[4] = {L_L1, L_L2, L_L3, L_L4};
+    for (int i=0;i<4;i++ ){
+        lcd_cmd(line_select[i]);
+        lcd_str(const_msgs[state][i]);          
+    }
 }

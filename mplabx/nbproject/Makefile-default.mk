@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=serial_rs232.c main.c init_PIC.c lcd.c utils.c timer.c stepper_motor.c oven.c
+SOURCEFILES_QUOTED_IF_SPACED=serial_rs232.c init_PIC.c lcd.c utils.c timer.c stepper_motor.c oven.c debug.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/serial_rs232.p1 ${OBJECTDIR}/main.p1 ${OBJECTDIR}/init_PIC.p1 ${OBJECTDIR}/lcd.p1 ${OBJECTDIR}/utils.p1 ${OBJECTDIR}/timer.p1 ${OBJECTDIR}/stepper_motor.p1 ${OBJECTDIR}/oven.p1
-POSSIBLE_DEPFILES=${OBJECTDIR}/serial_rs232.p1.d ${OBJECTDIR}/main.p1.d ${OBJECTDIR}/init_PIC.p1.d ${OBJECTDIR}/lcd.p1.d ${OBJECTDIR}/utils.p1.d ${OBJECTDIR}/timer.p1.d ${OBJECTDIR}/stepper_motor.p1.d ${OBJECTDIR}/oven.p1.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/serial_rs232.p1 ${OBJECTDIR}/init_PIC.p1 ${OBJECTDIR}/lcd.p1 ${OBJECTDIR}/utils.p1 ${OBJECTDIR}/timer.p1 ${OBJECTDIR}/stepper_motor.p1 ${OBJECTDIR}/oven.p1 ${OBJECTDIR}/debug.p1
+POSSIBLE_DEPFILES=${OBJECTDIR}/serial_rs232.p1.d ${OBJECTDIR}/init_PIC.p1.d ${OBJECTDIR}/lcd.p1.d ${OBJECTDIR}/utils.p1.d ${OBJECTDIR}/timer.p1.d ${OBJECTDIR}/stepper_motor.p1.d ${OBJECTDIR}/oven.p1.d ${OBJECTDIR}/debug.p1.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/serial_rs232.p1 ${OBJECTDIR}/main.p1 ${OBJECTDIR}/init_PIC.p1 ${OBJECTDIR}/lcd.p1 ${OBJECTDIR}/utils.p1 ${OBJECTDIR}/timer.p1 ${OBJECTDIR}/stepper_motor.p1 ${OBJECTDIR}/oven.p1
+OBJECTFILES=${OBJECTDIR}/serial_rs232.p1 ${OBJECTDIR}/init_PIC.p1 ${OBJECTDIR}/lcd.p1 ${OBJECTDIR}/utils.p1 ${OBJECTDIR}/timer.p1 ${OBJECTDIR}/stepper_motor.p1 ${OBJECTDIR}/oven.p1 ${OBJECTDIR}/debug.p1
 
 # Source Files
-SOURCEFILES=serial_rs232.c main.c init_PIC.c lcd.c utils.c timer.c stepper_motor.c oven.c
+SOURCEFILES=serial_rs232.c init_PIC.c lcd.c utils.c timer.c stepper_motor.c oven.c debug.c
 
 
 
@@ -101,14 +101,6 @@ ${OBJECTDIR}/serial_rs232.p1: serial_rs232.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-download -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/serial_rs232.p1 serial_rs232.c 
 	@-${MV} ${OBJECTDIR}/serial_rs232.d ${OBJECTDIR}/serial_rs232.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/serial_rs232.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
-	
-${OBJECTDIR}/main.p1: main.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/main.p1.d 
-	@${RM} ${OBJECTDIR}/main.p1 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-download -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/main.p1 main.c 
-	@-${MV} ${OBJECTDIR}/main.d ${OBJECTDIR}/main.p1.d 
-	@${FIXDEPS} ${OBJECTDIR}/main.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 ${OBJECTDIR}/init_PIC.p1: init_PIC.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
@@ -158,6 +150,14 @@ ${OBJECTDIR}/oven.p1: oven.c  nbproject/Makefile-${CND_CONF}.mk
 	@-${MV} ${OBJECTDIR}/oven.d ${OBJECTDIR}/oven.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/oven.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
+${OBJECTDIR}/debug.p1: debug.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/debug.p1.d 
+	@${RM} ${OBJECTDIR}/debug.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-download -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/debug.p1 debug.c 
+	@-${MV} ${OBJECTDIR}/debug.d ${OBJECTDIR}/debug.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/debug.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
 else
 ${OBJECTDIR}/serial_rs232.p1: serial_rs232.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
@@ -166,14 +166,6 @@ ${OBJECTDIR}/serial_rs232.p1: serial_rs232.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-download -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/serial_rs232.p1 serial_rs232.c 
 	@-${MV} ${OBJECTDIR}/serial_rs232.d ${OBJECTDIR}/serial_rs232.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/serial_rs232.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
-	
-${OBJECTDIR}/main.p1: main.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/main.p1.d 
-	@${RM} ${OBJECTDIR}/main.p1 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-download -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/main.p1 main.c 
-	@-${MV} ${OBJECTDIR}/main.d ${OBJECTDIR}/main.p1.d 
-	@${FIXDEPS} ${OBJECTDIR}/main.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 ${OBJECTDIR}/init_PIC.p1: init_PIC.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
@@ -222,6 +214,14 @@ ${OBJECTDIR}/oven.p1: oven.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-download -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/oven.p1 oven.c 
 	@-${MV} ${OBJECTDIR}/oven.d ${OBJECTDIR}/oven.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/oven.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/debug.p1: debug.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/debug.p1.d 
+	@${RM} ${OBJECTDIR}/debug.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-download -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/debug.p1 debug.c 
+	@-${MV} ${OBJECTDIR}/debug.d ${OBJECTDIR}/debug.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/debug.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 endif
 

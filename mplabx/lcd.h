@@ -88,6 +88,8 @@ extern "C" {
 #define L_CLR	0x01
 #define L_L1	0x80
 #define L_L2	0xC0
+#define L_L3	0x94
+#define L_L4	0xD4
 #define L_CR	0x0F		
 #define L_NCR	0x0C	
 
@@ -95,8 +97,16 @@ extern "C" {
 
 #define _XTAL_FREQ 4000000
 
+typedef struct {
+    unsigned char* new_msg;
+    unsigned char* current_msg;
+} lcdManager;
+
 void lcd_init(void);
 void lcd_cmd(unsigned char val); 
 void lcd_dat(unsigned char val);
 void lcd_str(const char* str);
+void lcd_manager_init(lcdManager* lcd_manager, unsigned char* new_msg, unsigned char* current_msg);
+//void lcd_update(lcdManager* lcd_manager, const char* str);
+void lcd_update(int state);
 

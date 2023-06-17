@@ -24,15 +24,15 @@ static _Bool state_changed = false;
 static _Bool idle_msg_sent = false;
 static _Bool read_new_char = false;
 static _Bool timer_done = false;
-const char* state_msgs[8] = {
-    "IDLE: waiting for  vial to be placed in init pos",
-    "INIT_POS: the vial is at the init position, process is starting",
-    "MOVEMENT",
-    "OVEN: reaching the correct temperature",
-    "GRASPING",
-    "MIXING",
-    "DILUTING",
-    "PICK_UP: the vial has reached the pick up station"
+const char state_msgs[4][8][20] = {
+    {"IDLE: waiting for","vial to be placed","in init pos",""},
+    {"INIT_POS: the vial is","at the init position,", "process is starting", ""},
+    {"MOVEMENT", "", "", ""},
+    {"OVEN: reaching the", "correct temperature", "", ""},
+    {"GRASPING","","",""},
+    {"MIXING","","",""},
+    {"DILUTING","","",""},
+    {"PICK_UP: the vial has","reached the pick up", "station", ""}
 };
 int state;
 int mix_current_step;
@@ -96,10 +96,10 @@ void main(void){
                 // serial_tx_char(rx_char); // Debug
                 state_translator_fpga_to_micro(rx_char, &state);  // Send state update to fpga
                 read_new_char = false;
-                snprintf(greet_str, sizeof(greet_str), "%s", state_msgs[state]);
+                /*snprintf(greet_str, sizeof(greet_str), "%s", state_msgs[state]);
                 lcd_cmd(L_CLR);
                 lcd_cmd(L_L1);
-                lcd_str(greet_str);
+                lcd_str(greet_str);*/
             } else {
                 serial_tx_char(state_translator_micro_to_fpga(&state));
             }

@@ -3808,13 +3808,26 @@ extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 2 "lcd.c" 2
 
 # 1 "./lcd.h" 1
-# 98 "./lcd.h"
+# 100 "./lcd.h"
+typedef struct {
+    unsigned char* new_msg;
+    unsigned char* current_msg;
+} lcdManager;
+
 void lcd_init(void);
 void lcd_cmd(unsigned char val);
 void lcd_dat(unsigned char val);
 void lcd_str(const char* str);
+void lcd_manager_init(lcdManager* lcd_manager, unsigned char* new_msg, unsigned char* current_msg);
+
+void lcd_update(int state);
 # 3 "lcd.c" 2
 
+
+const char const_msgs[2][8][20] = {
+    {"IDLE: waiting for","vial to be placed","in init pos",""},
+    {"debug","ri","","jeep"},
+};
 
 void lcd_wr(unsigned char val)
 {
@@ -3881,5 +3894,19 @@ void lcd_str(const char* str)
     {
       lcd_dat(str[i]);
       i++;
+    }
+}
+
+void lcd_manager_init(lcdManager* lcd_manager, unsigned char* new_msg, unsigned char* current_msg){
+    lcd_manager -> new_msg = new_msg;
+    lcd_manager -> current_msg = new_msg;
+}
+# 95 "lcd.c"
+void lcd_update(int state){
+    lcd_cmd(0x01);
+    const char line_select[4] = {0x80, 0xC0, 0x94, 0xD4};
+    for (int i=0;i<4;i++ ){
+        lcd_cmd(line_select[i]);
+        lcd_str(const_msgs[i][state]);
     }
 }
