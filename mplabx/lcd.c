@@ -2,9 +2,22 @@
 #include <xc.h>
 #include "lcd.h"
 
-const char const_msgs[2][8][20] = {
-    {"IDLE: waiting for\0","vial to be placed\0","in init pos\0","\0"},
-    {"debug\0","ri\0","","jeep\0"},
+const char const_msgs[15][4][20] = {
+    {"IDLE: waiting for","vial to be placed","in init pos",""},
+    {"INIT_POS: the vial","is at the init pos", "process is starting", ""},
+    {"MOVEMENT", "", "", ""},
+    {"OVEN:", "vial has reached", "the oven", ""},
+    {"OVEN: reaching the", "correct temperature", "", ""},
+    {"GRASPING: the vial","has reached the","mixing station",""},
+    {"GRASPING:","grasping has","started",""},
+    {"MIXING: the vial","will now be","tilted 10 times",""},
+    {"DILUTING: the","vaccine will now","be diluted",""},
+    {"RELEASING:","releasing has","started",""},
+    {"PICK_UP: the vial","has reached the", "pick up station", ""},
+    {"PICK_UP: please","pick up the", "vial before", "timeout"},
+    {"PICK_UP: the vial","has been picked", "going back to", "idle"},
+    {"TRASH: timeout","exceeded the", "vial will be", "trashed"},
+    {"ERROR","", "", ""},
 };
 
 void lcd_wr(unsigned char val)

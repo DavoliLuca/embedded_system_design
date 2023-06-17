@@ -419,8 +419,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $ ! == -> _state_machine_code `i -> 4 `i 244  ]
 {
 "9
-[; ;utils.c: 9:         *state = 4;
-[e = *U _state -> 4 `i ]
+[; ;utils.c: 9:         *state = 5;
+[e = *U _state -> 5 `i ]
 "10
 [; ;utils.c: 10:     } else if (state_machine_code == 0x08){
 }
@@ -429,8 +429,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $ ! == -> _state_machine_code `i -> 8 `i 246  ]
 {
 "11
-[; ;utils.c: 11:         *state = 7;
-[e = *U _state -> 7 `i ]
+[; ;utils.c: 11:         *state = 10;
+[e = *U _state -> 10 `i ]
 "12
 [; ;utils.c: 12:     } else if (state_machine_code == 0x10){
 }
@@ -449,8 +449,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $ ! == -> _state_machine_code `i -> 64 `i 250  ]
 {
 "15
-[; ;utils.c: 15:         *state = 8;
-[e = *U _state -> 8 `i ]
+[; ;utils.c: 15:         *state = 14;
+[e = *U _state -> 14 `i ]
 "16
 [; ;utils.c: 16:     } else if (state_machine_code == 0x80){
 }
@@ -465,6 +465,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 252 ]
 [e $ ! == -> _state_machine_code `i -> 32 `i 254  ]
 {
+"19
+[; ;utils.c: 19:         *state = 12;
+[e = *U _state -> 12 `i ]
 "20
 [; ;utils.c: 20:     } else {
 }
@@ -520,11 +523,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;utils.c: 31:         state_machine_code = 0x09;
 [e = _state_machine_code -> -> 9 `i `uc ]
 "32
-[; ;utils.c: 32:     } else if (*state == 8) {
+[; ;utils.c: 32:     } else if (*state == 14) {
 }
 [e $U 260  ]
 [e :U 259 ]
-[e $ ! == *U _state -> 8 `i 261  ]
+[e $ ! == *U _state -> 14 `i 261  ]
 {
 "33
 [; ;utils.c: 33:         state_machine_code = 0x40;

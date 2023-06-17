@@ -1,4 +1,4 @@
-# 1 "debug.c"
+# 1 "main.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,7 +6,10 @@
 # 1 "<built-in>" 2
 # 1 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "debug.c" 2
+# 1 "main.c" 2
+
+
+
 # 1 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\\pic\\include\\xc.h" 1 3
 # 18 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -3804,7 +3807,7 @@ extern __attribute__((nonreentrant)) void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 33 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\\pic\\include\\xc.h" 2 3
-# 1 "debug.c" 2
+# 4 "main.c" 2
 
 
 
@@ -3946,7 +3949,7 @@ char *ctermid(char *);
 
 
 char *tempnam(const char *, const char *);
-# 4 "debug.c" 2
+# 7 "main.c" 2
 
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\stdint.h" 1 3
 # 22 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\stdint.h" 3
@@ -4031,10 +4034,10 @@ typedef int32_t int_fast32_t;
 typedef uint32_t uint_fast16_t;
 typedef uint32_t uint_fast32_t;
 # 139 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\stdint.h" 2 3
-# 5 "debug.c" 2
+# 8 "main.c" 2
 
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\stdbool.h" 1 3
-# 6 "debug.c" 2
+# 9 "main.c" 2
 
 
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.20\\pic\\include\\c99\\string.h" 1 3
@@ -4092,7 +4095,7 @@ size_t strxfrm_l (char *restrict, const char *restrict, size_t, locale_t);
 
 
 void *memccpy (void *restrict, const void *restrict, int, size_t);
-# 8 "debug.c" 2
+# 11 "main.c" 2
 
 
 # 1 "./serial_rs232.h" 1
@@ -4101,14 +4104,60 @@ void init_USART(void);
 void serial_tx_char(unsigned char val);
 void serial_tx_string(const char* val);
 unsigned char get_reg_value();
-# 10 "debug.c" 2
+# 13 "main.c" 2
 
 # 1 "./init_PIC.h" 1
 # 79 "./init_PIC.h"
 void init_PORTS(void);
 
 void init_interrupts(void);
-# 11 "debug.c" 2
+# 14 "main.c" 2
+
+# 1 "./lcd.h" 1
+# 100 "./lcd.h"
+typedef struct {
+    unsigned char* new_msg;
+    unsigned char* current_msg;
+} lcdManager;
+
+void lcd_init(void);
+void lcd_cmd(unsigned char val);
+void lcd_dat(unsigned char val);
+void lcd_str(const char* str);
+void lcd_manager_init(lcdManager* lcd_manager, unsigned char* new_msg, unsigned char* current_msg);
+
+void lcd_update(int state);
+# 15 "main.c" 2
+
+# 1 "./utils.h" 1
+# 79 "./utils.h"
+void state_translator_fpga_to_micro(char state_machine_code, int* state);
+unsigned char state_translator_micro_to_fpga(int* state);
+# 16 "main.c" 2
+
+# 1 "./oven.h" 1
+# 84 "./oven.h"
+typedef struct {
+    int phase;
+    int start_temp;
+    int stop_temp;
+} oven;
+
+void configure_ad_conversion_oven(void);
+void configure_ad_conversion_tank(void);
+int get_temperature(void);
+int get_liters(void);
+void wait_for_zero(void);
+int check_temperature(int temp_to_be_checked);
+# 17 "main.c" 2
+
+# 1 "./timer.h" 1
+# 79 "./timer.h"
+void init_timer_0(void);
+void init_timer_2(void);
+void init_ccp1(void);
+void update_pwm_duty_ccp1(double time_up);
+# 18 "main.c" 2
 
 # 1 "./stepper_motor.h" 1
 # 81 "./stepper_motor.h"
@@ -4125,38 +4174,56 @@ void init_stepper(stepperMotor* stepper_motor, int current_step, int step_counte
 void update_current_coil(stepperMotor* stepper_motor);
 int reach_goal(stepperMotor* stepper_motor, int goal_to_reach);
 void change_direction(stepperMotor* stepper_motor);
-# 12 "debug.c" 2
-
-# 1 "./lcd.h" 1
-# 100 "./lcd.h"
-typedef struct {
-    unsigned char* new_msg;
-    unsigned char* current_msg;
-} lcdManager;
-
-void lcd_init(void);
-void lcd_cmd(unsigned char val);
-void lcd_dat(unsigned char val);
-void lcd_str(const char* str);
-void lcd_manager_init(lcdManager* lcd_manager, unsigned char* new_msg, unsigned char* current_msg);
-
-void lcd_update(int state);
-# 13 "debug.c" 2
+# 19 "main.c" 2
 
 
-void set_register(volatile unsigned char *reg_name, unsigned char hex_value);
+void __attribute__((picinterrupt(("")))) rx_char_usart(void);
 
-void set_register(volatile unsigned char *reg_name, unsigned char hex_value){
-    *reg_name = 0x00;
-}
+static _Bool state_changed = 0;
+static _Bool idle_msg_sent = 0;
+static _Bool read_new_char = 0;
+static _Bool timer_done = 0;
+
+int state;
+int mix_current_step;
+int mix_direction;
+int mix_step_counter;
+int mix_counter;
 char hex_joint_values[4] = {0x01, 0x02, 0x04, 0x08};
 char hex_end_effector_values[4] = {0x10, 0x20, 0x40, 0x80};
 
+int dilution_done = 0;
+int trash_counter = 0;
+
+int grasping_joint_position_reached = 0;
+int grasping_ee_position_reached = 0;
+int diluting_position_reached = 0;
+
+int joint_homed = 0;
+int end_effector_homed = 0;
+int joint_dilutor_homed = 0;
+
+int state_before_error = 8;
+int tank_error = 0;
+
 stepperMotor joint_stepper;
 
+stepperMotor end_effector_stepper;
 
-void main (void){
+stepperMotor joint_dilutor_stepper;
+
+
+void main(void){
+    unsigned char rx_char = ' ';
     init_PORTS();
+    init_USART();
+    init_timer_2();
+    init_ccp1();
+    init_interrupts();
+
+    init_stepper(&joint_stepper, 0, 0, 1, hex_joint_values, &LATB);
+    init_stepper(&end_effector_stepper, 0, 0, 1, hex_end_effector_values, &LATB);
+    init_stepper(&joint_dilutor_stepper, 0, 0, 1, hex_joint_values, &LATC);
 
     lcd_init();
     lcd_cmd(0x0C);
@@ -4165,11 +4232,184 @@ void main (void){
     lcd_cmd(0x80);
     lcd_str("Device has been reset");
 
+    (INTCONbits.GIE = 1);
+
+    mix_counter = 0;
+
     while(1){
-        lcd_update(0);
-        _delay((unsigned long)((2000)*(4000000/4000.0)));
-        lcd_update(1);
-        _delay((unsigned long)((2000)*(4000000/4000.0)));
-# 54 "debug.c"
+        if (state_changed){
+            const char* greet_str[80];
+            if (read_new_char){
+                rx_char = get_reg_value();
+                state_translator_fpga_to_micro(rx_char, &state);
+                read_new_char = 0;
+            } else {
+                serial_tx_char(state_translator_micro_to_fpga(&state));
+            }
+            lcd_update(state);
+            state_changed = 0;
+            idle_msg_sent = 0;
+        }
+
+        tank_error = 0;
+# 107 "main.c"
+        if (state == 2){
+            LATAbits.LATA1 = 1;
+        } else {
+            LATAbits.LATA1 = 0;
+            if (state == 0) {
+
+                configure_ad_conversion_tank();
+                if (get_liters() < 0.1){
+                    state = 14;
+                    state_changed = 1;
+                    tank_error = 1;
+                    state_before_error = 0;
+                }
+            } else if (state == 1){
+                state = 2;
+                state_changed = 1;
+            } else if (state == 3){
+                state = 4;
+                state_changed = 1;
+            } else if (state == 4){
+                if (timer_done){
+                    if(check_temperature(get_temperature())){
+                        state = 2;
+                        state_changed = 1;
+                        timer_done = 0;
+                    } else{
+
+                    }
+
+                } else {
+                    if (T0CONbits.TMR0ON == 0){
+                        configure_ad_conversion_oven();
+                        wait_for_zero();
+                        init_timer_0();
+                    }
+                    int current_temp = get_temperature();
+                }
+
+            } else if (state == 5){
+                state = 6;
+                state_changed = 1;
+            }else if (state == 6){
+                _delay((unsigned long)((3)*(4000000/4000.0)));
+                if (!grasping_joint_position_reached){
+                    grasping_joint_position_reached = reach_goal(&joint_stepper, 50);
+                }
+
+                if (grasping_joint_position_reached && !grasping_ee_position_reached){
+                    grasping_ee_position_reached = reach_goal(&end_effector_stepper, 100);
+                }
+                if (grasping_joint_position_reached * grasping_ee_position_reached){
+                    state = 7;
+                    state_changed = 1;
+                }
+            } else if (state == 7){
+                _delay((unsigned long)((3)*(4000000/4000.0)));
+                if (reach_goal(&joint_stepper, 100)) {
+                    change_direction(&joint_stepper);
+                    mix_counter++;
+                }
+
+                if (mix_counter == 20 && !dilution_done){
+                    state = 8;
+                    state_changed = 1;
+                } else if (mix_counter == 40) {
+                    dilution_done = 0;
+                    state = 9;
+                    state_changed = 1;
+                    mix_counter = 0;
+
+                    change_direction(&joint_stepper);
+                    change_direction(&end_effector_stepper);
+                }
+            } else if (state == 8){
+                _delay((unsigned long)((3)*(4000000/4000.0)));
+                if (!diluting_position_reached){
+                    diluting_position_reached = reach_goal(&joint_dilutor_stepper, 200);
+                } else if (!dilution_done && diluting_position_reached){
+
+
+                    _delay((unsigned long)((1000)*(4000000/4000.0)));
+                    dilution_done = 1;
+                    change_direction(&joint_dilutor_stepper);
+                } else if (dilution_done && !joint_dilutor_homed){
+                    joint_dilutor_homed = reach_goal(&joint_dilutor_stepper, 200);
+                } else if (dilution_done && joint_dilutor_homed){
+                    state = 7;
+                    state_changed = 1;
+                    diluting_position_reached = 0;
+                }
+
+            } else if (state == 9){
+                _delay((unsigned long)((3)*(4000000/4000.0)));
+
+                if (!end_effector_homed){
+                    end_effector_homed = reach_goal(&end_effector_stepper, 100);
+                }
+
+                if (end_effector_homed && !joint_homed){
+                    joint_homed = reach_goal(&joint_stepper, 50);
+                }
+
+                if (end_effector_homed * joint_homed){
+                    state = 2;
+                    state_changed = 1;
+                }
+            } else if (state == 10){
+                state = 11;
+                state_changed = 1;
+            }else if (state == 11){
+                if (timer_done){
+                    state_changed = 1;
+                    state = 13;
+                    trash_counter = 0;
+                    timer_done = 0;
+                } else {
+                    if (T0CONbits.TMR0ON == 0){
+                        init_timer_0();
+                    }
+
+                }
+            } else if (state == 12){
+                state = 0;
+                state_changed = 1;
+                T0CONbits.TMR0ON = 0;
+            } else if (state == 13){
+                LATAbits.LATA1 = 1;
+                if ( trash_counter < 100){
+                    _delay((unsigned long)((10)*(4000000/4000.0)));
+                    trash_counter++;
+                } else if (trash_counter >= 100){
+                    state = 0;
+                    state_changed = 1;
+                    T0CONbits.TMR0ON = 0;
+                }
+            } if (state == 14){
+
+                if (tank_error == 0){
+                    state = state_before_error;
+                }
+
+            }
+        }
+    }
+}
+
+
+void __attribute__((picinterrupt(("")))) rx_char_usart(void){
+    if(PIE1bits.RCIE && PIR1bits.RCIF){
+        PIR1bits.RCIF = 0;
+        state_changed = 1;
+        read_new_char = 1;
+    }
+    if(INTCONbits.TMR0IE && INTCONbits.TMR0IF){
+        T0CON = 0;
+        INTCONbits.TMR0IF = 0;
+        timer_done = 1;
+        T0CONbits.TMR0ON = 0;
     }
 }

@@ -3824,9 +3824,22 @@ void lcd_update(int state);
 # 3 "lcd.c" 2
 
 
-const char const_msgs[2][8][20] = {
+const char const_msgs[15][4][20] = {
     {"IDLE: waiting for","vial to be placed","in init pos",""},
-    {"debug","ri","","jeep"},
+    {"INIT_POS: the vial","is at the init pos", "process is starting", ""},
+    {"MOVEMENT", "", "", ""},
+    {"OVEN:", "vial has reached", "the oven", ""},
+    {"OVEN: reaching the", "correct temperature", "", ""},
+    {"GRASPING: the vial","has reached the","mixing station",""},
+    {"GRASPING:","grasping has","started",""},
+    {"MIXING: the vial","will now be","tilted 10 times",""},
+    {"DILUTING: the","vaccine will now","be diluted",""},
+    {"RELEASING:","releasing has","started",""},
+    {"PICK_UP: the vial","has reached the", "pick up station", ""},
+    {"PICK_UP: please","pick up the", "vial before", "timeout"},
+    {"PICK_UP: the vial","has been picked", "going back to", "idle"},
+    {"TRASH: timeout","exceeded the", "vial will be", "trashed"},
+    {"ERROR","", "", ""},
 };
 
 void lcd_wr(unsigned char val)
@@ -3901,12 +3914,12 @@ void lcd_manager_init(lcdManager* lcd_manager, unsigned char* new_msg, unsigned 
     lcd_manager -> new_msg = new_msg;
     lcd_manager -> current_msg = new_msg;
 }
-# 95 "lcd.c"
+# 108 "lcd.c"
 void lcd_update(int state){
     lcd_cmd(0x01);
     const char line_select[4] = {0x80, 0xC0, 0x94, 0xD4};
     for (int i=0;i<4;i++ ){
         lcd_cmd(line_select[i]);
-        lcd_str(const_msgs[i][state]);
+        lcd_str(const_msgs[state][i]);
     }
 }

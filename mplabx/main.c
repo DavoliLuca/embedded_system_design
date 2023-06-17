@@ -24,16 +24,7 @@ static _Bool state_changed = false;
 static _Bool idle_msg_sent = false;
 static _Bool read_new_char = false;
 static _Bool timer_done = false;
-const char state_msgs[4][8][20] = {
-    {"IDLE: waiting for","vial to be placed","in init pos",""},
-    {"INIT_POS: the vial is","at the init position,", "process is starting", ""},
-    {"MOVEMENT", "", "", ""},
-    {"OVEN: reaching the", "correct temperature", "", ""},
-    {"GRASPING","","",""},
-    {"MIXING","","",""},
-    {"DILUTING","","",""},
-    {"PICK_UP: the vial has","reached the pick up", "station", ""}
-};
+
 int state;
 int mix_current_step;
 int mix_direction;
@@ -44,7 +35,6 @@ char hex_end_effector_values[COILS_NUMBER] = {0x10, 0x20, 0x40, 0x80};
 
 int dilution_done = 0;
 int trash_counter = 0;
-int move_to_trash = 0;
 
 int grasping_joint_position_reached = 0;
 int grasping_ee_position_reached = 0;
@@ -92,57 +82,48 @@ void main(void){
             const char* greet_str[80];
             if (read_new_char){
                 rx_char = get_reg_value();
-
-                // serial_tx_char(rx_char); // Debug
                 state_translator_fpga_to_micro(rx_char, &state);  // Send state update to fpga
                 read_new_char = false;
-                /*snprintf(greet_str, sizeof(greet_str), "%s", state_msgs[state]);
-                lcd_cmd(L_CLR);
-                lcd_cmd(L_L1);
-                lcd_str(greet_str);*/
             } else {
                 serial_tx_char(state_translator_micro_to_fpga(&state));
             }
-            
+            lcd_update(state);
             state_changed = false;
             idle_msg_sent = false;
         }
         
-        configure_ad_conversion_tank();
-        
         tank_error = 0;
         
-        if (get_liters() < 0.1){
+        /*if (0){//get_liters() < 0.1){
             lcd_cmd(L_CLR);
             lcd_cmd(L_L1);
             lcd_str("Not enough diluting solution, please refill");
             state_before_error = state;
-            state = 8;
+            state = 14; // Error
             tank_error = 1;
             
-        }
+        }*/
         
         if (state == 2){
             LATAbits.LATA1 = 1; // Belt Movement
-            if (move_to_trash && trash_counter < 100){
-                __delay_ms(10);
-                trash_counter++;
-            } else if (move_to_trash && trash_counter >= 100){
-                move_to_trash = 0; // Trashed
-                state = 0;
-                state_changed = true;
-            }
         } else {
             LATAbits.LATA1 = 0; // Stop Belt Movement
             if (state == 0) {
                 // Idle
+                configure_ad_conversion_tank();
+                if (get_liters() < 0.1){
+                    state = 14;
+                    state_changed = true;
+                    tank_error = 1;
+                    state_before_error = 0;
+                }
             } else if (state == 1){
                 state = 2;
                 state_changed = true;
             }  else if (state == 3){
-                state = 9;
+                state = 4;
                 state_changed = true;
-            } else if (state == 9){
+            } else if (state == 4){
                 if (timer_done){
                     if(check_temperature(get_temperature())){
                         state = 2;
@@ -161,10 +142,10 @@ void main(void){
                     int current_temp = get_temperature();
                 }
                 
-            } else if (state == 4){ // Vial reached TOF 3 diluting station
-                state = 10;
+            } else if (state == 5){ // Vial reached TOF 3 diluting station
+                state = 6;
                 state_changed = true;
-            }else if (state == 10){ // Grasping
+            }else if (state == 6){ // Grasping
                 __delay_ms(3);
                 if (!grasping_joint_position_reached){ // If the motor hasn't reached the grasping position then move further
                     grasping_joint_position_reached = reach_goal(&joint_stepper, 50);
@@ -174,10 +155,10 @@ void main(void){
                     grasping_ee_position_reached = reach_goal(&end_effector_stepper, 100);
                 } 
                 if (grasping_joint_position_reached * grasping_ee_position_reached){
-                    state = 5;
+                    state = 7; // Mixing
                     state_changed = true;
                 }
-            } else if (state == 5){ // Mix 10 times and 10 times more after dilution
+            } else if (state == 7){ // Mix 10 times and 10 times more after dilution
                 __delay_ms(3);
                 if (reach_goal(&joint_stepper, 100)) {
                     change_direction(&joint_stepper);
@@ -185,16 +166,36 @@ void main(void){
                 }
                 
                 if (mix_counter == 20 && !dilution_done){
-                    state = 15; // Dilution
+                    state = 8; // Dilution
+                    state_changed = true;
                 } else if (mix_counter == 40) {
                     dilution_done = 0;
-                    state = 6;
+                    state = 9; // Release
+                    state_changed = true;
                     mix_counter = 0;
                     // Change direction so that vial released
                     change_direction(&joint_stepper);
                     change_direction(&end_effector_stepper);
                 }
-            } else if (state == 6){ // Releasing
+            } else if (state == 8){ // Dilution
+                __delay_ms(3);
+                if (!diluting_position_reached){
+                    diluting_position_reached = reach_goal(&joint_dilutor_stepper, 200);
+                } else if (!dilution_done && diluting_position_reached){
+                    //
+                    
+                    __delay_ms(1000); // Time for the fluid to flow into the vial
+                    dilution_done = 1;
+                    change_direction(&joint_dilutor_stepper);
+                } else if (dilution_done && !joint_dilutor_homed){
+                    joint_dilutor_homed = reach_goal(&joint_dilutor_stepper, 200);
+                } else if (dilution_done && joint_dilutor_homed){
+                    state = 7; // Mixing
+                    state_changed = true;
+                    diluting_position_reached = 0;
+                }
+                
+            } else if (state == 9){ // Releasing
                 __delay_ms(3);
                 
                 if (!end_effector_homed){
@@ -206,40 +207,18 @@ void main(void){
                 }
                 
                 if (end_effector_homed * joint_homed){
-                    state = 2;
+                    state = 2; // Move towards picking station once released and homed
                     state_changed = true;
                 }
-            } else if (state == 15){ // Dilution
-                __delay_ms(3);
-                if (!diluting_position_reached){
-                    diluting_position_reached = reach_goal(&joint_dilutor_stepper, 200);
-                } else if (!dilution_done && diluting_position_reached){
-                    //
-                    lcd_cmd(L_CLR);
-                    lcd_cmd(L_L1);
-                    lcd_str("Dilution ongoing");
-                    __delay_ms(1000); // Time for the fluid to flow into the vial
-                    dilution_done = 1;
-                    change_direction(&joint_dilutor_stepper);
-                } else if (dilution_done && !joint_dilutor_homed){
-                    joint_dilutor_homed = reach_goal(&joint_dilutor_stepper, 200);
-                } else if (dilution_done && joint_dilutor_homed){
-                    state = 5;
-                    diluting_position_reached = 0;
-                }
-                
-            } else if (state == 7){
+            } else if (state == 10){
                 state = 11;
                 state_changed = true;
             }else if (state == 11){
                 if (timer_done){
                     state_changed = true;
-                    state = 2; // Here it should go to trash Move [2] because the vial hasn't been picked up on time
-                    move_to_trash = 1;
+                    state = 13; // Here it should go to trash Move [2] because the vial hasn't been picked up on time
                     trash_counter = 0;
-                    lcd_cmd(L_CLR);
-                    lcd_cmd(L_L1);
-                    lcd_str("Moved to trash! Restarting from Idle");
+                    timer_done = false;
                 } else {
                     if (T0CONbits.TMR0ON == 0){ // Init if it has not been turned on yet
                         init_timer_0();
@@ -247,10 +226,20 @@ void main(void){
                     // The fpga takes care of the case in which the vial is collected before the timeout
                 }
             } else if (state == 12){ // The vial has been picked before the timeout
-                state = 0;
+                state = 0; // Back to idle once picked
                 state_changed = true;
                 T0CONbits.TMR0ON = 0;
-            } if (state == 8){
+            } else if (state == 13){ // Move to trash
+                LATAbits.LATA1 = 1; // Belt Movement
+                if ( trash_counter < 100){
+                    __delay_ms(10);
+                    trash_counter++;
+                } else if (trash_counter >= 100){
+                    state = 0; // Back to idle once trashed
+                    state_changed = true;
+                    T0CONbits.TMR0ON = 0;
+                }
+            } if (state == 14){
                 // Error state
                 if (tank_error == 0){
                     state = state_before_error;
@@ -272,5 +261,6 @@ void __interrupt() rx_char_usart(void){
         T0CON = 0; // Sets to zero also TMR0ON
         INTCONbits.TMR0IF = 0;
         timer_done = true;
+        T0CONbits.TMR0ON = 0;
     }
 }
