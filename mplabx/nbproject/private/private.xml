@@ -5,7 +5,10 @@
         <group>
             <file>file:/C:/Users/davol/embedded_system_design/mplabx/utils.c</file>
             <file>file:/C:/Users/davol/embedded_system_design/mplabx/lcd.c</file>
+            <file>file:/C:/Program%20Files/Microchip/xc8/v2.20/pic/sources/c99/common/sprcmul.c</file>
             <file>file:/C:/Users/davol/embedded_system_design/mplabx/main.c</file>
+            <file>file:/C:/Users/davol/embedded_system_design/mplabx/init_PIC.c</file>
+            <file>file:/C:/Users/davol/embedded_system_design/mplabx/oven.c</file>
         </group>
     </open-files>
 </project-private>
