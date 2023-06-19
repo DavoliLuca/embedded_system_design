@@ -599,12 +599,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _temp_to_be_checked `i ~T0 @X0 1 r1 ]
 [f ]
 "51
-[; ;oven.c: 51:     float grad = abs(temp_to_be_checked - (-63))/5;
+[; ;oven.c: 51:     float grad = abs(temp_to_be_checked - (-55))/5;
 [v _grad `f ~T0 @X0 1 a ]
-[e = _grad -> / ( _abs (1 - _temp_to_be_checked -U -> 63 `i -> 5 `i `f ]
+[e = _grad -> / ( _abs (1 - _temp_to_be_checked -U -> 55 `i -> 5 `i `f ]
 "52
-[; ;oven.c: 52:     if (grad >= 12 && grad <= 13){
-[e $ ! && >= _grad -> -> 12 `i `f <= _grad -> -> 13 `i `f 255  ]
+[; ;oven.c: 52:     if (grad >= 12 && grad <= 13.5){
+[e $ ! && >= _grad -> -> 12 `i `f <= -> _grad `d .13.5 255  ]
 {
 "53
 [; ;oven.c: 53:         return 1;

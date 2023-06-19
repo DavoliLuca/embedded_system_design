@@ -48,7 +48,7 @@ void wait_for_zero(void){
 }
 
 int check_temperature(int temp_to_be_checked){
-    float grad = abs(temp_to_be_checked - (-63))/5;
+    float grad = abs(temp_to_be_checked - (-55))/5; // 0 V mapped to -55 C, 5 is the time in s from the counter
     if (grad >= LOW_GRAD && grad <= HIGH_GRAD){
         return 1;
     } else {

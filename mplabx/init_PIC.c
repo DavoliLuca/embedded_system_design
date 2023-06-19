@@ -71,8 +71,8 @@ void init_PORTS(void){
     // PORTC
     LATC = 0;
     PORTC = 0;
-    TRISC = 0xF0; // Least significant 4 bits as output 
-    TRISCbits.RC6 = 0; // Set RC6 as output
+    TRISC = 0x00; // LATC as output 
+    TRISCbits.RC7 = 1;  // USART Tx
     
     return;
 }

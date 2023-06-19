@@ -8,7 +8,6 @@
       <itemPath>init_PIC.h</itemPath>
       <itemPath>lcd.h</itemPath>
       <itemPath>utils.h</itemPath>
-      <itemPath>dc_motor.h</itemPath>
       <itemPath>timer.h</itemPath>
       <itemPath>stepper_motor.h</itemPath>
       <itemPath>oven.h</itemPath>
@@ -28,7 +27,6 @@
       <itemPath>timer.c</itemPath>
       <itemPath>stepper_motor.c</itemPath>
       <itemPath>oven.c</itemPath>
-      <itemPath>debug.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -633,26 +631,6 @@
         <property key="stack-type" value="compiled"/>
         <property key="user-pack-device-support" value=""/>
       </XC8-config-global>
-      <item path="dc_motor.h" ex="true" overriding="false">
-        <HI-TECH-COMP>
-        </HI-TECH-COMP>
-        <HI-TECH-LINK>
-        </HI-TECH-LINK>
-        <XC8-CO>
-        </XC8-CO>
-        <XC8-config-global>
-        </XC8-config-global>
-      </item>
-      <item path="debug.c" ex="true" overriding="false">
-        <HI-TECH-COMP>
-        </HI-TECH-COMP>
-        <HI-TECH-LINK>
-        </HI-TECH-LINK>
-        <XC8-CO>
-        </XC8-CO>
-        <XC8-config-global>
-        </XC8-config-global>
-      </item>
       <item path="init_PIC.c" ex="false" overriding="false">
         <HI-TECH-COMP>
         </HI-TECH-COMP>

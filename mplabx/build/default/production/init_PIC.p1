@@ -562,11 +562,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;init_PIC.c: 73:     PORTC = 0;
 [e = _PORTC -> -> 0 `i `uc ]
 "74
-[; ;init_PIC.c: 74:     TRISC = 0xF0;
-[e = _TRISC -> -> 240 `i `uc ]
+[; ;init_PIC.c: 74:     TRISC = 0x00;
+[e = _TRISC -> -> 0 `i `uc ]
 "75
-[; ;init_PIC.c: 75:     TRISCbits.RC6 = 0;
-[e = . . _TRISCbits 1 6 -> -> 0 `i `uc ]
+[; ;init_PIC.c: 75:     TRISCbits.RC7 = 1;
+[e = . . _TRISCbits 1 7 -> -> 1 `i `uc ]
 "77
 [; ;init_PIC.c: 77:     return;
 [e $UE 238  ]

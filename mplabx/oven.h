@@ -79,7 +79,7 @@ extern "C" {
 #define TEMP_CONST 0.25 // 255/63
 #define TEMP_OFFSET -55
 #define LOW_GRAD 12
-#define HIGH_GRAD 13
+#define HIGH_GRAD 13.5
 
 typedef struct {
     int phase;

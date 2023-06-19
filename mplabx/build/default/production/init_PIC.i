@@ -3885,8 +3885,8 @@ void init_PORTS(void){
 
     LATC = 0;
     PORTC = 0;
-    TRISC = 0xF0;
-    TRISCbits.RC6 = 0;
+    TRISC = 0x00;
+    TRISCbits.RC7 = 1;
 
     return;
 }

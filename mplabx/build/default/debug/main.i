@@ -4204,7 +4204,6 @@ int end_effector_homed = 0;
 int joint_dilutor_homed = 0;
 
 int state_before_error = 8;
-int tank_error = 0;
 
 stepperMotor joint_stepper;
 
@@ -4217,8 +4216,6 @@ void main(void){
     unsigned char rx_char = ' ';
     init_PORTS();
     init_USART();
-    init_timer_2();
-    init_ccp1();
     init_interrupts();
 
     init_stepper(&joint_stepper, 0, 0, 1, hex_joint_values, &LATB);
@@ -4243,16 +4240,18 @@ void main(void){
                 rx_char = get_reg_value();
                 state_translator_fpga_to_micro(rx_char, &state);
                 read_new_char = 0;
+                if (state == 14){
+                    LATCbits.LATC4 = 1;
+                }
             } else {
                 serial_tx_char(state_translator_micro_to_fpga(&state));
             }
             lcd_update(state);
+
             state_changed = 0;
             idle_msg_sent = 0;
         }
 
-        tank_error = 0;
-# 107 "main.c"
         if (state == 2){
             LATAbits.LATA1 = 1;
         } else {
@@ -4261,9 +4260,10 @@ void main(void){
 
                 configure_ad_conversion_tank();
                 if (get_liters() < 0.1){
+                    LATCbits.LATC5 = 1;
+                    LATCbits.LATC4 = 1;
                     state = 14;
                     state_changed = 1;
-                    tank_error = 1;
                     state_before_error = 0;
                 }
             } else if (state == 1){
@@ -4276,12 +4276,12 @@ void main(void){
                 if (timer_done){
                     if(check_temperature(get_temperature())){
                         state = 2;
-                        state_changed = 1;
-                        timer_done = 0;
                     } else{
-
+                        state = 14;
+                        LATCbits.LATC4 = 1;
                     }
-
+                    state_changed = 1;
+                    timer_done = 0;
                 } else {
                     if (T0CONbits.TMR0ON == 0){
                         configure_ad_conversion_oven();
@@ -4390,8 +4390,11 @@ void main(void){
                 }
             } if (state == 14){
 
-                if (tank_error == 0){
+                if (LATCbits.LATC4 == 1 && LATCbits.LATC5 == 1 && get_liters() > 0.1){
+                    LATCbits.LATC4 = 0;
+                    LATCbits.LATC5 = 0;
                     state = state_before_error;
+                    state_changed = 1;
                 }
 
             }

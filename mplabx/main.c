@@ -45,7 +45,6 @@ int end_effector_homed = 0;
 int joint_dilutor_homed = 0;
 
 int state_before_error = 8;
-int tank_error = 0;
 
 stepperMotor joint_stepper;
 
@@ -58,8 +57,6 @@ void main(void){
     unsigned char rx_char = ' ';
     init_PORTS();
     init_USART();
-    init_timer_2();
-    init_ccp1();
     init_interrupts();
     
     init_stepper(&joint_stepper, 0, 0, 1, hex_joint_values, &LATB);
@@ -84,25 +81,17 @@ void main(void){
                 rx_char = get_reg_value();
                 state_translator_fpga_to_micro(rx_char, &state);  // Send state update to fpga
                 read_new_char = false;
+                if (state == 14){
+                    LATCbits.LATC4 = 1; // Red LED for error from FPGA requires reset
+                }
             } else {
                 serial_tx_char(state_translator_micro_to_fpga(&state));
             }
             lcd_update(state);
+            // __delay_ms(300); // Delay just to show clearly the message
             state_changed = false;
             idle_msg_sent = false;
         }
-        
-        tank_error = 0;
-        
-        /*if (0){//get_liters() < 0.1){
-            lcd_cmd(L_CLR);
-            lcd_cmd(L_L1);
-            lcd_str("Not enough diluting solution, please refill");
-            state_before_error = state;
-            state = 14; // Error
-            tank_error = 1;
-            
-        }*/
         
         if (state == 2){
             LATAbits.LATA1 = 1; // Belt Movement
@@ -112,10 +101,11 @@ void main(void){
                 // Idle
                 configure_ad_conversion_tank();
                 if (get_liters() < 0.1){
+                    LATCbits.LATC5 = 1;
+                    LATCbits.LATC4 = 1; // Turning on yellow LED for low solution level can be recovered
                     state = 14;
                     state_changed = true;
-                    tank_error = 1;
-                    state_before_error = 0;
+                    state_before_error = 0;                  
                 }
             } else if (state == 1){
                 state = 2;
@@ -127,12 +117,12 @@ void main(void){
                 if (timer_done){
                     if(check_temperature(get_temperature())){
                         state = 2;
-                        state_changed = true;
-                        timer_done = false;
                     } else{
-                        // Stop or move to trash should go by itself
+                        state = 14;
+                        LATCbits.LATC4 = 1; // Red LED for signaling temp error, not ACK
                     }
-                    
+                    state_changed = true;
+                    timer_done = false;
                 } else {
                     if (T0CONbits.TMR0ON == 0){ // The first time init the timer
                         configure_ad_conversion_oven(); // So it is init only once
@@ -241,8 +231,11 @@ void main(void){
                 }
             } if (state == 14){
                 // Error state
-                if (tank_error == 0){
+                if (LATCbits.LATC4 == 1 && LATCbits.LATC5 == 1 && get_liters() > 0.1){
+                    LATCbits.LATC4 = 0;
+                    LATCbits.LATC5 = 0;
                     state = state_before_error;
+                    state_changed = true;
                 }
                     
             }

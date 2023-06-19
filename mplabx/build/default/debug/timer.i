@@ -3901,72 +3901,18 @@ void update_pwm_duty_ccp1(double time_up);
 
 
 
-
-static double const f_osc = 1000000;
-static double const t_osc = 1/f_osc;
-static double pwm_period = 20e-3;
-static double tmr2_prescaler = 16;
-
-
 void init_timer_0(void){
 
     T0CON = 0;
 
-    TMR0L = 0x96;
-    TMR0H = 0x98;
+    TMR0L = 0x69;
+    TMR0H = 0x67;
     INTCONbits.TMR0IE = 1;
     T0CONbits.T08BIT = 0;
     T0CONbits.T0CS = 0;
     T0CONbits.PSA = 0;
-    T0CONbits.T0PS0 = 1;
+    T0CONbits.T0PS0 = 0;
     T0CONbits.T0PS1 = 1;
     T0CONbits.T0PS2 = 1;
     T0CONbits.TMR0ON = 1;
-}
-
-void init_timer_2(void){
-
-    T2CON = 0;
-    TMR2 = 0;
-
-    T2CONbits.TMR2ON = 1;
-    T2CONbits.T2CKPS0 = 1;
-    T2CONbits.T2CKPS1 = 1;
-
-    PR2 = (uint8_t) (((pwm_period / (4*t_osc*tmr2_prescaler)) - 1)*4);
-
-    return;
-}
-
-void init_ccp1(void){
-    CCP1CON = 0x00;
-
-
-    update_pwm_duty_ccp1(5e-3);
-
-
-    CCP1CONbits.CCP1M3 = 1;
-    CCP1CONbits.CCP1M2 = 1;
-    return;
-}
-
-void update_pwm_duty_ccp1(double time_up){
-
-
-    uint16_t new_duty;
-    uint8_t lsbs_duty;
-
-    new_duty = (0.001) / (t_osc * tmr2_prescaler);
-    lsbs_duty = (uint8_t) new_duty;
-
-
-
-    if (lsbs_duty & 0x01) CCP1CON |= (1u << 4);
-    else CCP1CON &= ~(1u << 4);
-
-    if (lsbs_duty & 0x02) CCP1CON |= (1u << 5);
-    else CCP1CON &= ~(1u << 5);
-
-
-    CCPR1L = (uint8_t) (new_duty >> 2);
 }
