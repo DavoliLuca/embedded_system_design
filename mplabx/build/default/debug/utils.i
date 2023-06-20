@@ -3838,7 +3838,7 @@ void state_translator_fpga_to_micro(unsigned char state_machine_code, int* state
         *state = 14;
     } else if (state_machine_code == 0x80){
 
-    } else if (state_machine_code == 0x20){
+    } else if (state_machine_code == 0xA0){
         *state = 12;
     } else {
         *state = 0;
@@ -3851,7 +3851,7 @@ unsigned char state_translator_micro_to_fpga(int* state){
     if (*state == 2){
         state_machine_code = 0x10;
     } else if (*state == 0) {
-        state_machine_code = 0x09;
+        state_machine_code = 0x00;
     } else if (*state == 14) {
         state_machine_code = 0x40;
     } else {

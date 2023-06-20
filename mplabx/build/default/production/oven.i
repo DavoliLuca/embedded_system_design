@@ -3871,7 +3871,7 @@ void wait_for_zero(void){
 
 int check_temperature(int temp_to_be_checked){
     float grad = abs(temp_to_be_checked - (-55))/5;
-    if (grad >= 12 && grad <= 13){
+    if (grad >= 12 && grad <= 13.5){
         return 1;
     } else {
         return 0;

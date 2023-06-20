@@ -1,13 +1,13 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-entity decoder_5_6 is
+entity decoder_5_8 is
 	port ( i1, i2, i3, i4, ck: in std_logic;
            msg: in std_logic_vector(7 downto 0);
-	       o1, o2, o3, o4, mv, pr, picked, err: out std_logic);
-end entity decoder_5_6;
+	       o1, o2, o3, o4, mv, picked, err, pr: out std_logic);
+end entity decoder_5_8;
 
-architecture arc_decoder_5_6 of decoder_5_6 is
+architecture arc_decoder_5_8 of decoder_5_8 is
     signal pr_state: std_logic:='0';
     signal mv_state: std_logic:='0';
     signal idle_state: std_logic:='0';
@@ -44,8 +44,7 @@ begin
             end case;
         elsif combined_state(0) = '1' and i4 = '0' and previous_i4 = '1' then -- Picked condition
             picked <= '1';
-            pr <= '0';
-        elsif combined_state(1) or combined_state(0) then -- Idle should be interrupted when vial at first station
+        elsif combined_state(1) or combined_state(2) then -- Idle should be interrupted when vial at first station
             if (combined_input = "0001") then
                 o1 <= '1';
                 pr <= '0';
@@ -73,4 +72,4 @@ begin
     end process;
 
 
-end arc_decoder_5_6;
+end arc_decoder_5_8;

@@ -133,10 +133,17 @@ void main(void){
                 }
                 
             } else if (state == 5){ // Vial reached TOF 3 diluting station
+                init_stepper(&joint_stepper, 0, 0, 1, hex_joint_values, &LATB);
+                init_stepper(&end_effector_stepper, 0, 0, 1, hex_end_effector_values, &LATB);
+                init_stepper(&joint_dilutor_stepper, 0, 0, 1, hex_joint_values, &LATC);
+                grasping_joint_position_reached = 0;
+                grasping_ee_position_reached = 0;
+                end_effector_homed = 0;
+                joint_homed = 0;
                 state = 6;
                 state_changed = true;
             }else if (state == 6){ // Grasping
-                __delay_ms(3);
+                __delay_ms(20);
                 if (!grasping_joint_position_reached){ // If the motor hasn't reached the grasping position then move further
                     grasping_joint_position_reached = reach_goal(&joint_stepper, 50);
                 }
@@ -149,7 +156,7 @@ void main(void){
                     state_changed = true;
                 }
             } else if (state == 7){ // Mix 10 times and 10 times more after dilution
-                __delay_ms(3);
+                __delay_ms(5);
                 if (reach_goal(&joint_stepper, 100)) {
                     change_direction(&joint_stepper);
                     mix_counter++;
@@ -168,13 +175,13 @@ void main(void){
                     change_direction(&end_effector_stepper);
                 }
             } else if (state == 8){ // Dilution
-                __delay_ms(3);
+                __delay_ms(5);
                 if (!diluting_position_reached){
                     diluting_position_reached = reach_goal(&joint_dilutor_stepper, 200);
                 } else if (!dilution_done && diluting_position_reached){
                     //
                     
-                    __delay_ms(1000); // Time for the fluid to flow into the vial
+                    __delay_ms(2000); // Time for the fluid to flow into the vial
                     dilution_done = 1;
                     change_direction(&joint_dilutor_stepper);
                 } else if (dilution_done && !joint_dilutor_homed){
@@ -186,7 +193,7 @@ void main(void){
                 }
                 
             } else if (state == 9){ // Releasing
-                __delay_ms(3);
+                __delay_ms(20);
                 
                 if (!end_effector_homed){
                     end_effector_homed = reach_goal(&end_effector_stepper, 100);
@@ -217,6 +224,7 @@ void main(void){
                 }
             } else if (state == 12){ // The vial has been picked before the timeout
                 state = 0; // Back to idle once picked
+                //serial_tx_char(0x00);
                 state_changed = true;
                 T0CONbits.TMR0ON = 0;
             } else if (state == 13){ // Move to trash

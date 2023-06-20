@@ -3,7 +3,6 @@ use ieee.std_logic_1164.all;
 
 entity write_uart_sm is
 	port ( state_vector: in std_logic_vector(7 downto 0);
-           ext_error: in std_logic;
            clk: in std_logic;
 	       data_write: out std_logic_vector(7 downto 0); 
            data_write_bool: out std_logic);
@@ -17,7 +16,7 @@ begin
     begin
         if (clk = '1' and clk'event) then
             data_write <= state_vector;
-            if (state_vector /= current_state and ext_error = '0') then
+            if (state_vector /= current_state) then
                 state_changed <= '1';
                 current_state <= state_vector;
                 data_write_bool <= '1';

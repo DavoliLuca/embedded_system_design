@@ -4292,10 +4292,17 @@ void main(void){
                 }
 
             } else if (state == 5){
+                init_stepper(&joint_stepper, 0, 0, 1, hex_joint_values, &LATB);
+                init_stepper(&end_effector_stepper, 0, 0, 1, hex_end_effector_values, &LATB);
+                init_stepper(&joint_dilutor_stepper, 0, 0, 1, hex_joint_values, &LATC);
+                grasping_joint_position_reached = 0;
+                grasping_ee_position_reached = 0;
+                end_effector_homed = 0;
+                joint_homed = 0;
                 state = 6;
                 state_changed = 1;
             }else if (state == 6){
-                _delay((unsigned long)((3)*(4000000/4000.0)));
+                _delay((unsigned long)((20)*(4000000/4000.0)));
                 if (!grasping_joint_position_reached){
                     grasping_joint_position_reached = reach_goal(&joint_stepper, 50);
                 }
@@ -4308,7 +4315,7 @@ void main(void){
                     state_changed = 1;
                 }
             } else if (state == 7){
-                _delay((unsigned long)((3)*(4000000/4000.0)));
+                _delay((unsigned long)((5)*(4000000/4000.0)));
                 if (reach_goal(&joint_stepper, 100)) {
                     change_direction(&joint_stepper);
                     mix_counter++;
@@ -4327,13 +4334,13 @@ void main(void){
                     change_direction(&end_effector_stepper);
                 }
             } else if (state == 8){
-                _delay((unsigned long)((3)*(4000000/4000.0)));
+                _delay((unsigned long)((5)*(4000000/4000.0)));
                 if (!diluting_position_reached){
                     diluting_position_reached = reach_goal(&joint_dilutor_stepper, 200);
                 } else if (!dilution_done && diluting_position_reached){
 
 
-                    _delay((unsigned long)((1000)*(4000000/4000.0)));
+                    _delay((unsigned long)((2000)*(4000000/4000.0)));
                     dilution_done = 1;
                     change_direction(&joint_dilutor_stepper);
                 } else if (dilution_done && !joint_dilutor_homed){
@@ -4345,7 +4352,7 @@ void main(void){
                 }
 
             } else if (state == 9){
-                _delay((unsigned long)((3)*(4000000/4000.0)));
+                _delay((unsigned long)((20)*(4000000/4000.0)));
 
                 if (!end_effector_homed){
                     end_effector_homed = reach_goal(&end_effector_stepper, 100);
@@ -4376,6 +4383,7 @@ void main(void){
                 }
             } else if (state == 12){
                 state = 0;
+
                 state_changed = 1;
                 T0CONbits.TMR0ON = 0;
             } else if (state == 13){

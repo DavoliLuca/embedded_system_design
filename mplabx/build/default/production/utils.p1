@@ -459,11 +459,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $ ! == -> _state_machine_code `i -> 128 `i 252  ]
 {
 "18
-[; ;utils.c: 18:     } else if (state_machine_code == 0x20){
+[; ;utils.c: 18:     } else if (state_machine_code == 0xA0){
 }
 [e $U 253  ]
 [e :U 252 ]
-[e $ ! == -> _state_machine_code `i -> 32 `i 254  ]
+[e $ ! == -> _state_machine_code `i -> 160 `i 254  ]
 {
 "19
 [; ;utils.c: 19:         *state = 12;
@@ -520,8 +520,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $ ! == *U _state -> 0 `i 259  ]
 {
 "31
-[; ;utils.c: 31:         state_machine_code = 0x09;
-[e = _state_machine_code -> -> 9 `i `uc ]
+[; ;utils.c: 31:         state_machine_code = 0x00;
+[e = _state_machine_code -> -> 0 `i `uc ]
 "32
 [; ;utils.c: 32:     } else if (*state == 14) {
 }

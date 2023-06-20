@@ -61,7 +61,7 @@
 [v _lcd_update lcd_update `(v  1 e 1 0 ]
 "56 C:\Users\davol\embedded_system_design\mplabx\main.c
 [v _main main `(v  1 e 1 0 ]
-"247
+"255
 [v _rx_char_usart rx_char_usart `IIH(v  1 e 1 0 ]
 "8 C:\Users\davol\embedded_system_design\mplabx\oven.c
 [v _configure_ad_conversion_oven configure_ad_conversion_oven `(v  1 e 1 0 ]
@@ -442,7 +442,7 @@
 [v main@current_temp current_temp `i  1 a 2 103 ]
 "57
 [v main@rx_char rx_char `uc  1 a 1 105 ]
-"244
+"252
 } 0
 "42 C:\Users\davol\embedded_system_design\mplabx\oven.c
 [v _wait_for_zero wait_for_zero `(v  1 e 1 0 ]
@@ -760,8 +760,8 @@
 [v change_direction@stepper_motor stepper_motor `*.39S181  1 p 2 0 ]
 "44
 } 0
-"247 C:\Users\davol\embedded_system_design\mplabx\main.c
+"255 C:\Users\davol\embedded_system_design\mplabx\main.c
 [v _rx_char_usart rx_char_usart `IIH(v  1 e 1 0 ]
 {
-"259
+"267
 } 0
