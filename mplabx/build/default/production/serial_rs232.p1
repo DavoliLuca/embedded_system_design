@@ -505,18 +505,18 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;serial_rs232.c: 37: }
 [e :UE 240 ]
 }
-"39
-[; ;serial_rs232.c: 39: void serial_tx_char(unsigned char val){
+"40
+[; ;serial_rs232.c: 40: void serial_tx_char(unsigned char val){
 [v _serial_tx_char `(v ~T0 @X0 1 ef1`uc ]
 {
 [e :U _serial_tx_char ]
 [v _val `uc ~T0 @X0 1 r1 ]
 [f ]
-"40
-[; ;serial_rs232.c: 40:     TXREG = val;
-[e = _TXREG _val ]
 "41
-[; ;serial_rs232.c: 41:     while(!TXSTAbits.TRMT);
+[; ;serial_rs232.c: 41:     TXREG = val;
+[e = _TXREG _val ]
+"42
+[; ;serial_rs232.c: 42:     while(!TXSTAbits.TRMT);
 [e $U 242  ]
 [e :U 243 ]
 [e :U 242 ]
@@ -526,54 +526,54 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;serial_rs232.c: 43: }
 [e :UE 241 ]
 }
-"45
-[; ;serial_rs232.c: 45: void serial_tx_string(const char* val){
+"46
+[; ;serial_rs232.c: 46: void serial_tx_string(const char* val){
 [v _serial_tx_string `(v ~T0 @X0 1 ef1`*Cuc ]
 {
 [e :U _serial_tx_string ]
 [v _val `*Cuc ~T0 @X0 1 r1 ]
 [f ]
-"46
-[; ;serial_rs232.c: 46:     for (int i=0; val[i] != 0; i++){
+"47
+[; ;serial_rs232.c: 47:     for (int i=0; val[i] != 0; i++){
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
 [e $U 249  ]
 [e :U 246 ]
 {
-"47
-[; ;serial_rs232.c: 47:         serial_tx_char(val[i]);
-[e ( _serial_tx_char (1 -> *U + _val * -> _i `x -> -> # *U _val `i `x `uc ]
 "48
-[; ;serial_rs232.c: 48:     }
+[; ;serial_rs232.c: 48:         serial_tx_char(val[i]);
+[e ( _serial_tx_char (1 -> *U + _val * -> _i `x -> -> # *U _val `i `x `uc ]
+"49
+[; ;serial_rs232.c: 49:     }
 }
 [e ++ _i -> 1 `i ]
 [e :U 249 ]
 [e $ != -> *U + _val * -> _i `x -> -> # *U _val `i `x `i -> 0 `i 246  ]
 [e :U 247 ]
 }
-"49
-[; ;serial_rs232.c: 49: }
+"50
+[; ;serial_rs232.c: 50: }
 [e :UE 245 ]
 }
-"51
-[; ;serial_rs232.c: 51: unsigned char get_reg_value(){
+"54
+[; ;serial_rs232.c: 54: unsigned char get_reg_value(){
 [v _get_reg_value `(uc ~T0 @X0 1 ef ]
 {
 [e :U _get_reg_value ]
 [f ]
-"52
-[; ;serial_rs232.c: 52:     unsigned char rx_char = RCREG;
+"55
+[; ;serial_rs232.c: 55:     unsigned char rx_char = RCREG;
 [v _rx_char `uc ~T0 @X0 1 a ]
 [e = _rx_char _RCREG ]
-"53
-[; ;serial_rs232.c: 53:     RCREG = 0;
+"56
+[; ;serial_rs232.c: 56:     RCREG = 0;
 [e = _RCREG -> -> 0 `i `uc ]
-"54
-[; ;serial_rs232.c: 54:     return rx_char;
+"57
+[; ;serial_rs232.c: 57:     return rx_char;
 [e ) _rx_char ]
 [e $UE 250  ]
-"55
-[; ;serial_rs232.c: 55: }
+"58
+[; ;serial_rs232.c: 58: }
 [e :UE 250 ]
 }

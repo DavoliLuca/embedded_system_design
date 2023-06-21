@@ -1,8 +1,8 @@
 Version 4.0 HI-TECH Software Intermediate Code
 "81 ./stepper_motor.h
 [; ;./stepper_motor.h: 81: typedef struct {
-[s S243 `i 1 `i 1 `i 1 `uc -> 4 `i `*Vuc 1 ]
-[n S243 . current_coil step_counter direction hex_coil_register_values register_name ]
+[s S242 `i 1 `i 1 `i 1 `uc -> 4 `i `*Vuc 1 ]
+[n S242 . current_coil step_counter direction hex_coil_register_values register_name ]
 [p mainexit ]
 "79 ./init_PIC.h
 [; ;./init_PIC.h: 79: void init_PORTS(void);
@@ -15,21 +15,21 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _init_interrupts `(v ~T0 @X0 0 ef ]
 "90 ./stepper_motor.h
 [; ;./stepper_motor.h: 90: void init_stepper(stepperMotor* stepper_motor, int current_step, int step_counter, int direction, unsigned char hex_coil_register_values[4], volatile unsigned char *register_name);
-[v _init_stepper `(v ~T0 @X0 0 ef6`*S243`i`i`i`*uc`*Vuc ]
+[v _init_stepper `(v ~T0 @X0 0 ef6`*S242`i`i`i`*uc`*Vuc ]
 "822 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 822: extern volatile unsigned char LATB __attribute__((address(0xF8A)));
 [v _LATB `Vuc ~T0 @X0 0 e@3978 ]
 "934
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 934: extern volatile unsigned char LATC __attribute__((address(0xF8B)));
 [v _LATC `Vuc ~T0 @X0 0 e@3979 ]
-"105 ./lcd.h
-[; ;./lcd.h: 105: void lcd_init(void);
+"100 ./lcd.h
+[; ;./lcd.h: 100: void lcd_init(void);
 [v _lcd_init `(v ~T0 @X0 0 ef ]
-"106
-[; ;./lcd.h: 106: void lcd_cmd(unsigned char val);
+"101
+[; ;./lcd.h: 101: void lcd_cmd(unsigned char val);
 [v _lcd_cmd `(v ~T0 @X0 0 ef1`uc ]
-"108
-[; ;./lcd.h: 108: void lcd_str(const char* str);
+"103
+[; ;./lcd.h: 103: void lcd_str(const char* str);
 [v _lcd_str `(v ~T0 @X0 0 ef1`*Cuc ]
 "5318 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 5318:     struct {
@@ -77,8 +77,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "80 ./utils.h
 [; ;./utils.h: 80: unsigned char state_translator_micro_to_fpga(int* state);
 [v _state_translator_micro_to_fpga `(uc ~T0 @X0 0 ef1`*i ]
-"111 ./lcd.h
-[; ;./lcd.h: 111: void lcd_update(int state);
+"104 ./lcd.h
+[; ;./lcd.h: 104: void lcd_update(int state);
 [v _lcd_update `(v ~T0 @X0 0 ef1`i ]
 "728 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 728:     struct {
@@ -137,10 +137,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 [p i __delay ]
 "92 ./stepper_motor.h
 [; ;./stepper_motor.h: 92: int reach_goal(stepperMotor* stepper_motor, int goal_to_reach);
-[v _reach_goal `(i ~T0 @X0 0 ef2`*S243`i ]
+[v _reach_goal `(i ~T0 @X0 0 ef2`*S242`i ]
 "93
 [; ;./stepper_motor.h: 93: void change_direction(stepperMotor* stepper_motor);
-[v _change_direction `(v ~T0 @X0 0 ef1`*S243 ]
+[v _change_direction `(v ~T0 @X0 0 ef1`*S242 ]
 [t ~ __interrupt . k ]
 [t T39 __interrupt ]
 "2268 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h
@@ -564,37 +564,31 @@ Version 4.0 HI-TECH Software Intermediate Code
 -> -> 0 `i `a
 ]
 "24
-[; ;main.c: 24: static _Bool idle_msg_sent = 0;
-[v _idle_msg_sent `a ~T0 @X0 1 s ]
-[i _idle_msg_sent
--> -> 0 `i `a
-]
-"25
-[; ;main.c: 25: static _Bool read_new_char = 0;
+[; ;main.c: 24: static _Bool read_new_char = 0;
 [v _read_new_char `a ~T0 @X0 1 s ]
 [i _read_new_char
 -> -> 0 `i `a
 ]
-"26
-[; ;main.c: 26: static _Bool timer_done = 0;
+"25
+[; ;main.c: 25: static _Bool timer_done = 0;
 [v _timer_done `a ~T0 @X0 1 s ]
 [i _timer_done
 -> -> 0 `i `a
 ]
-"28
-[; ;main.c: 28: int state;
+"27
+[; ;main.c: 27: int state;
 [v _state `i ~T0 @X0 1 e ]
-"29
-[; ;main.c: 29: int mix_current_step;
+"28
+[; ;main.c: 28: int mix_current_step;
 [v _mix_current_step `i ~T0 @X0 1 e ]
-"30
-[; ;main.c: 30: int mix_direction;
+"29
+[; ;main.c: 29: int mix_direction;
 [v _mix_direction `i ~T0 @X0 1 e ]
-"31
-[; ;main.c: 31: int mix_step_counter;
+"30
+[; ;main.c: 30: int mix_step_counter;
 [v _mix_step_counter `i ~T0 @X0 1 e ]
-"32
-[; ;main.c: 32: int mix_counter;
+"31
+[; ;main.c: 31: int mix_counter;
 [v _mix_counter `i ~T0 @X0 1 e ]
 "33
 [; ;main.c: 33: char hex_joint_values[4] = {0x01, 0x02, 0x04, 0x08};
@@ -607,8 +601,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 -> -> 8 `i `uc
 ..
 ]
-"34
-[; ;main.c: 34: char hex_end_effector_values[4] = {0x10, 0x20, 0x40, 0x80};
+"35
+[; ;main.c: 35: char hex_end_effector_values[4] = {0x10, 0x20, 0x40, 0x80};
 [v _hex_end_effector_values `uc ~T0 @X0 -> 4 `i e ]
 [i _hex_end_effector_values
 :U ..
@@ -674,13 +668,13 @@ Version 4.0 HI-TECH Software Intermediate Code
 ]
 "49
 [; ;main.c: 49: stepperMotor joint_stepper;
-[v _joint_stepper `S243 ~T0 @X0 1 e ]
+[v _joint_stepper `S242 ~T0 @X0 1 e ]
 "51
 [; ;main.c: 51: stepperMotor end_effector_stepper;
-[v _end_effector_stepper `S243 ~T0 @X0 1 e ]
+[v _end_effector_stepper `S242 ~T0 @X0 1 e ]
 "53
 [; ;main.c: 53: stepperMotor joint_dilutor_stepper;
-[v _joint_dilutor_stepper `S243 ~T0 @X0 1 e ]
+[v _joint_dilutor_stepper `S242 ~T0 @X0 1 e ]
 [v $root$_main `(v ~T0 @X0 0 e ]
 "56
 [; ;main.c: 56: void main(void){
@@ -733,680 +727,682 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = _mix_counter -> 0 `i ]
 "77
 [; ;main.c: 77:     while(1){
-[e :U 246 ]
+[e :U 245 ]
 {
 "78
 [; ;main.c: 78:         if (state_changed){
-[e $ ! != -> _state_changed `i -> 0 `i 248  ]
+[e $ ! != -> _state_changed `i -> 0 `i 247  ]
 {
 "79
-[; ;main.c: 79:             const char* greet_str[80];
-[v _greet_str `*Cuc ~T0 @X0 -> 80 `i a ]
+[; ;main.c: 79:             if (read_new_char){
+[e $ ! != -> _read_new_char `i -> 0 `i 248  ]
+{
 "80
-[; ;main.c: 80:             if (read_new_char){
-[e $ ! != -> _read_new_char `i -> 0 `i 249  ]
-{
-"81
-[; ;main.c: 81:                 rx_char = get_reg_value();
+[; ;main.c: 80:                 rx_char = get_reg_value();
 [e = _rx_char ( _get_reg_value ..  ]
-"82
-[; ;main.c: 82:                 state_translator_fpga_to_micro(rx_char, &state);
+"81
+[; ;main.c: 81:                 state_translator_fpga_to_micro(rx_char, &state);
 [e ( _state_translator_fpga_to_micro (2 , -> _rx_char `uc &U _state ]
-"83
-[; ;main.c: 83:                 read_new_char = 0;
+"82
+[; ;main.c: 82:                 read_new_char = 0;
 [e = _read_new_char -> -> 0 `i `a ]
-"84
-[; ;main.c: 84:                 if (state == 14){
-[e $ ! == _state -> 14 `i 250  ]
+"83
+[; ;main.c: 83:                 if (state == 14){
+[e $ ! == _state -> 14 `i 249  ]
 {
-"85
-[; ;main.c: 85:                     LATCbits.LATC4 = 1;
+"84
+[; ;main.c: 84:                     LATCbits.LATC4 = 1;
 [e = . . _LATCbits 0 4 -> -> 1 `i `uc ]
+"85
+[; ;main.c: 85:                 }
+}
+[e :U 249 ]
 "86
-[; ;main.c: 86:                 }
+[; ;main.c: 86:             } else {
+}
+[e $U 250  ]
+[e :U 248 ]
+{
+"87
+[; ;main.c: 87:                 serial_tx_char(state_translator_micro_to_fpga(&state));
+[e ( _serial_tx_char (1 ( _state_translator_micro_to_fpga (1 &U _state ]
+"88
+[; ;main.c: 88:             }
 }
 [e :U 250 ]
-"87
-[; ;main.c: 87:             } else {
-}
-[e $U 251  ]
-[e :U 249 ]
-{
-"88
-[; ;main.c: 88:                 serial_tx_char(state_translator_micro_to_fpga(&state));
-[e ( _serial_tx_char (1 ( _state_translator_micro_to_fpga (1 &U _state ]
 "89
-[; ;main.c: 89:             }
-}
-[e :U 251 ]
-"90
-[; ;main.c: 90:             lcd_update(state);
+[; ;main.c: 89:             lcd_update(state);
 [e ( _lcd_update (1 _state ]
-"92
-[; ;main.c: 92:             state_changed = 0;
+"91
+[; ;main.c: 91:             state_changed = 0;
 [e = _state_changed -> -> 0 `i `a ]
-"93
-[; ;main.c: 93:             idle_msg_sent = 0;
-[e = _idle_msg_sent -> -> 0 `i `a ]
-"94
-[; ;main.c: 94:         }
+"92
+[; ;main.c: 92:         }
 }
-[e :U 248 ]
+[e :U 247 ]
+"94
+[; ;main.c: 94:         if (state == 2){
+[e $ ! == _state -> 2 `i 251  ]
+{
+"95
+[; ;main.c: 95:             LATAbits.LATA1 = 1;
+[e = . . _LATAbits 0 1 -> -> 1 `i `uc ]
 "96
-[; ;main.c: 96:         if (state == 2){
-[e $ ! == _state -> 2 `i 252  ]
+[; ;main.c: 96:         } else {
+}
+[e $U 252  ]
+[e :U 251 ]
 {
 "97
-[; ;main.c: 97:             LATAbits.LATA1 = 1;
-[e = . . _LATAbits 0 1 -> -> 1 `i `uc ]
-"98
-[; ;main.c: 98:         } else {
-}
-[e $U 253  ]
-[e :U 252 ]
-{
-"99
-[; ;main.c: 99:             LATAbits.LATA1 = 0;
+[; ;main.c: 97:             LATAbits.LATA1 = 0;
 [e = . . _LATAbits 0 1 -> -> 0 `i `uc ]
+"98
+[; ;main.c: 98:             if (state == 0) {
+[e $ ! == _state -> 0 `i 253  ]
+{
 "100
-[; ;main.c: 100:             if (state == 0) {
-[e $ ! == _state -> 0 `i 254  ]
+[; ;main.c: 100:                 configure_ad_conversion_tank();
+[e ( _configure_ad_conversion_tank ..  ]
+"101
+[; ;main.c: 101:                 if (get_liters() < 0.1){
+[e $ ! < -> ( _get_liters ..  `d .0.1 254  ]
 {
 "102
-[; ;main.c: 102:                 configure_ad_conversion_tank();
-[e ( _configure_ad_conversion_tank ..  ]
-"103
-[; ;main.c: 103:                 if (get_liters() < 0.1){
-[e $ ! < -> ( _get_liters ..  `d .0.1 255  ]
-{
-"104
-[; ;main.c: 104:                     LATCbits.LATC5 = 1;
+[; ;main.c: 102:                     LATCbits.LATC5 = 1;
 [e = . . _LATCbits 0 5 -> -> 1 `i `uc ]
-"105
-[; ;main.c: 105:                     LATCbits.LATC4 = 1;
+"103
+[; ;main.c: 103:                     LATCbits.LATC4 = 1;
 [e = . . _LATCbits 0 4 -> -> 1 `i `uc ]
-"106
-[; ;main.c: 106:                     state = 14;
+"104
+[; ;main.c: 104:                     state = 14;
 [e = _state -> 14 `i ]
-"107
-[; ;main.c: 107:                     state_changed = 1;
+"105
+[; ;main.c: 105:                     state_changed = 1;
 [e = _state_changed -> -> 1 `i `a ]
-"108
-[; ;main.c: 108:                     state_before_error = 0;
+"106
+[; ;main.c: 106:                     state_before_error = 0;
 [e = _state_before_error -> 0 `i ]
-"109
-[; ;main.c: 109:                 }
+"107
+[; ;main.c: 107:                 }
 }
-[e :U 255 ]
-"110
-[; ;main.c: 110:             } else if (state == 1){
-}
-[e $U 256  ]
 [e :U 254 ]
-[e $ ! == _state -> 1 `i 257  ]
+"108
+[; ;main.c: 108:             } else if (state == 1){
+}
+[e $U 255  ]
+[e :U 253 ]
+[e $ ! == _state -> 1 `i 256  ]
 {
-"111
-[; ;main.c: 111:                 state = 2;
+"109
+[; ;main.c: 109:                 state = 2;
 [e = _state -> 2 `i ]
-"112
-[; ;main.c: 112:                 state_changed = 1;
+"110
+[; ;main.c: 110:                 state_changed = 1;
 [e = _state_changed -> -> 1 `i `a ]
-"113
-[; ;main.c: 113:             } else if (state == 3){
+"111
+[; ;main.c: 111:             } else if (state == 3){
 }
-[e $U 258  ]
-[e :U 257 ]
-[e $ ! == _state -> 3 `i 259  ]
+[e $U 257  ]
+[e :U 256 ]
+[e $ ! == _state -> 3 `i 258  ]
 {
-"114
-[; ;main.c: 114:                 state = 4;
+"112
+[; ;main.c: 112:                 state = 4;
 [e = _state -> 4 `i ]
-"115
-[; ;main.c: 115:                 state_changed = 1;
+"113
+[; ;main.c: 113:                 state_changed = 1;
 [e = _state_changed -> -> 1 `i `a ]
-"116
-[; ;main.c: 116:             } else if (state == 4){
+"114
+[; ;main.c: 114:             } else if (state == 4){
 }
-[e $U 260  ]
-[e :U 259 ]
-[e $ ! == _state -> 4 `i 261  ]
+[e $U 259  ]
+[e :U 258 ]
+[e $ ! == _state -> 4 `i 260  ]
+{
+"115
+[; ;main.c: 115:                 if (timer_done){
+[e $ ! != -> _timer_done `i -> 0 `i 261  ]
+{
+"116
+[; ;main.c: 116:                     if(check_temperature(get_temperature())){
+[e $ ! != ( _check_temperature (1 ( _get_temperature ..  -> 0 `i 262  ]
 {
 "117
-[; ;main.c: 117:                 if (timer_done){
-[e $ ! != -> _timer_done `i -> 0 `i 262  ]
-{
-"118
-[; ;main.c: 118:                     if(check_temperature(get_temperature())){
-[e $ ! != ( _check_temperature (1 ( _get_temperature ..  -> 0 `i 263  ]
-{
-"119
-[; ;main.c: 119:                         state = 2;
+[; ;main.c: 117:                         state = 2;
 [e = _state -> 2 `i ]
-"120
-[; ;main.c: 120:                     } else{
+"118
+[; ;main.c: 118:                     } else{
 }
-[e $U 264  ]
-[e :U 263 ]
-{
-"121
-[; ;main.c: 121:                         state = 14;
-[e = _state -> 14 `i ]
-"122
-[; ;main.c: 122:                         LATCbits.LATC4 = 1;
-[e = . . _LATCbits 0 4 -> -> 1 `i `uc ]
-"123
-[; ;main.c: 123:                     }
-}
-[e :U 264 ]
-"124
-[; ;main.c: 124:                     state_changed = 1;
-[e = _state_changed -> -> 1 `i `a ]
-"125
-[; ;main.c: 125:                     timer_done = 0;
-[e = _timer_done -> -> 0 `i `a ]
-"126
-[; ;main.c: 126:                 } else {
-}
-[e $U 265  ]
+[e $U 263  ]
 [e :U 262 ]
 {
-"127
-[; ;main.c: 127:                     if (T0CONbits.TMR0ON == 0){
-[e $ ! == -> . . _T0CONbits 0 5 `i -> 0 `i 266  ]
-{
-"128
-[; ;main.c: 128:                         configure_ad_conversion_oven();
-[e ( _configure_ad_conversion_oven ..  ]
-"129
-[; ;main.c: 129:                         wait_for_zero();
-[e ( _wait_for_zero ..  ]
-"130
-[; ;main.c: 130:                         init_timer_0();
-[e ( _init_timer_0 ..  ]
-"131
-[; ;main.c: 131:                     }
+"119
+[; ;main.c: 119:                         state = 14;
+[e = _state -> 14 `i ]
+"120
+[; ;main.c: 120:                         LATCbits.LATC4 = 1;
+[e = . . _LATCbits 0 4 -> -> 1 `i `uc ]
+"121
+[; ;main.c: 121:                     }
 }
-[e :U 266 ]
-"132
-[; ;main.c: 132:                     int current_temp = get_temperature();
-[v _current_temp `i ~T0 @X0 1 a ]
-[e = _current_temp ( _get_temperature ..  ]
-"133
-[; ;main.c: 133:                 }
+[e :U 263 ]
+"122
+[; ;main.c: 122:                     state_changed = 1;
+[e = _state_changed -> -> 1 `i `a ]
+"123
+[; ;main.c: 123:                     timer_done = 0;
+[e = _timer_done -> -> 0 `i `a ]
+"124
+[; ;main.c: 124:                 } else {
+}
+[e $U 264  ]
+[e :U 261 ]
+{
+"125
+[; ;main.c: 125:                     if (T0CONbits.TMR0ON == 0){
+[e $ ! == -> . . _T0CONbits 0 5 `i -> 0 `i 265  ]
+{
+"126
+[; ;main.c: 126:                         configure_ad_conversion_oven();
+[e ( _configure_ad_conversion_oven ..  ]
+"127
+[; ;main.c: 127:                         wait_for_zero();
+[e ( _wait_for_zero ..  ]
+"128
+[; ;main.c: 128:                         init_timer_0();
+[e ( _init_timer_0 ..  ]
+"129
+[; ;main.c: 129:                     }
 }
 [e :U 265 ]
+"130
+[; ;main.c: 130:                     int current_temp = get_temperature();
+[v _current_temp `i ~T0 @X0 1 a ]
+[e = _current_temp ( _get_temperature ..  ]
+"131
+[; ;main.c: 131:                 }
+}
+[e :U 264 ]
+"133
+[; ;main.c: 133:             } else if (state == 5){
+}
+[e $U 266  ]
+[e :U 260 ]
+[e $ ! == _state -> 5 `i 267  ]
+{
 "135
-[; ;main.c: 135:             } else if (state == 5){
-}
-[e $U 267  ]
-[e :U 261 ]
-[e $ ! == _state -> 5 `i 268  ]
-{
-"136
-[; ;main.c: 136:                 init_stepper(&joint_stepper, 0, 0, 1, hex_joint_values, &LATB);
+[; ;main.c: 135:                 init_stepper(&joint_stepper, 0, 0, 1, hex_joint_values, &LATB);
 [e ( _init_stepper (4 , , , , , &U _joint_stepper -> 0 `i -> 0 `i -> 1 `i -> &U _hex_joint_values `*uc &U _LATB ]
-"137
-[; ;main.c: 137:                 init_stepper(&end_effector_stepper, 0, 0, 1, hex_end_effector_values, &LATB);
+"136
+[; ;main.c: 136:                 init_stepper(&end_effector_stepper, 0, 0, 1, hex_end_effector_values, &LATB);
 [e ( _init_stepper (4 , , , , , &U _end_effector_stepper -> 0 `i -> 0 `i -> 1 `i -> &U _hex_end_effector_values `*uc &U _LATB ]
-"138
-[; ;main.c: 138:                 init_stepper(&joint_dilutor_stepper, 0, 0, 1, hex_joint_values, &LATC);
+"137
+[; ;main.c: 137:                 init_stepper(&joint_dilutor_stepper, 0, 0, 1, hex_joint_values, &LATC);
 [e ( _init_stepper (4 , , , , , &U _joint_dilutor_stepper -> 0 `i -> 0 `i -> 1 `i -> &U _hex_joint_values `*uc &U _LATC ]
-"139
-[; ;main.c: 139:                 grasping_joint_position_reached = 0;
+"138
+[; ;main.c: 138:                 grasping_joint_position_reached = 0;
 [e = _grasping_joint_position_reached -> 0 `i ]
-"140
-[; ;main.c: 140:                 grasping_ee_position_reached = 0;
+"139
+[; ;main.c: 139:                 grasping_ee_position_reached = 0;
 [e = _grasping_ee_position_reached -> 0 `i ]
-"141
-[; ;main.c: 141:                 end_effector_homed = 0;
+"140
+[; ;main.c: 140:                 end_effector_homed = 0;
 [e = _end_effector_homed -> 0 `i ]
-"142
-[; ;main.c: 142:                 joint_homed = 0;
+"141
+[; ;main.c: 141:                 joint_homed = 0;
 [e = _joint_homed -> 0 `i ]
-"143
-[; ;main.c: 143:                 state = 6;
+"142
+[; ;main.c: 142:                 state = 6;
 [e = _state -> 6 `i ]
-"144
-[; ;main.c: 144:                 state_changed = 1;
+"143
+[; ;main.c: 143:                 state_changed = 1;
 [e = _state_changed -> -> 1 `i `a ]
-"145
-[; ;main.c: 145:             }else if (state == 6){
+"144
+[; ;main.c: 144:             }else if (state == 6){
 }
-[e $U 269  ]
-[e :U 268 ]
-[e $ ! == _state -> 6 `i 270  ]
+[e $U 268  ]
+[e :U 267 ]
+[e $ ! == _state -> 6 `i 269  ]
 {
-"146
-[; ;main.c: 146:                 _delay((unsigned long)((20)*(4000000/4000.0)));
+"145
+[; ;main.c: 145:                 _delay((unsigned long)((20)*(4000000/4000.0)));
 [e ( __delay (1 -> * -> -> 20 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-"147
-[; ;main.c: 147:                 if (!grasping_joint_position_reached){
-[e $ ! ! != _grasping_joint_position_reached -> 0 `i 271  ]
+"146
+[; ;main.c: 146:                 if (!grasping_joint_position_reached){
+[e $ ! ! != _grasping_joint_position_reached -> 0 `i 270  ]
 {
-"148
-[; ;main.c: 148:                     grasping_joint_position_reached = reach_goal(&joint_stepper, 50);
+"147
+[; ;main.c: 147:                     grasping_joint_position_reached = reach_goal(&joint_stepper, 50);
 [e = _grasping_joint_position_reached ( _reach_goal (2 , &U _joint_stepper -> 50 `i ]
-"149
-[; ;main.c: 149:                 }
+"148
+[; ;main.c: 148:                 }
+}
+[e :U 270 ]
+"150
+[; ;main.c: 150:                 if (grasping_joint_position_reached && !grasping_ee_position_reached){
+[e $ ! && != _grasping_joint_position_reached -> 0 `i ! != _grasping_ee_position_reached -> 0 `i 271  ]
+{
+"151
+[; ;main.c: 151:                     grasping_ee_position_reached = reach_goal(&end_effector_stepper, 100);
+[e = _grasping_ee_position_reached ( _reach_goal (2 , &U _end_effector_stepper -> 100 `i ]
+"152
+[; ;main.c: 152:                 }
 }
 [e :U 271 ]
-"151
-[; ;main.c: 151:                 if (grasping_joint_position_reached && !grasping_ee_position_reached){
-[e $ ! && != _grasping_joint_position_reached -> 0 `i ! != _grasping_ee_position_reached -> 0 `i 272  ]
-{
-"152
-[; ;main.c: 152:                     grasping_ee_position_reached = reach_goal(&end_effector_stepper, 100);
-[e = _grasping_ee_position_reached ( _reach_goal (2 , &U _end_effector_stepper -> 100 `i ]
 "153
-[; ;main.c: 153:                 }
+[; ;main.c: 153:                 if (grasping_joint_position_reached * grasping_ee_position_reached){
+[e $ ! != * _grasping_joint_position_reached _grasping_ee_position_reached -> 0 `i 272  ]
+{
+"154
+[; ;main.c: 154:                     state = 7;
+[e = _state -> 7 `i ]
+"155
+[; ;main.c: 155:                     state_changed = 1;
+[e = _state_changed -> -> 1 `i `a ]
+"156
+[; ;main.c: 156:                 }
 }
 [e :U 272 ]
-"154
-[; ;main.c: 154:                 if (grasping_joint_position_reached * grasping_ee_position_reached){
-[e $ ! != * _grasping_joint_position_reached _grasping_ee_position_reached -> 0 `i 273  ]
-{
-"155
-[; ;main.c: 155:                     state = 7;
-[e = _state -> 7 `i ]
-"156
-[; ;main.c: 156:                     state_changed = 1;
-[e = _state_changed -> -> 1 `i `a ]
 "157
-[; ;main.c: 157:                 }
+[; ;main.c: 157:             } else if (state == 7){
 }
-[e :U 273 ]
+[e $U 273  ]
+[e :U 269 ]
+[e $ ! == _state -> 7 `i 274  ]
+{
 "158
-[; ;main.c: 158:             } else if (state == 7){
-}
-[e $U 274  ]
-[e :U 270 ]
-[e $ ! == _state -> 7 `i 275  ]
-{
+[; ;main.c: 158:                 _delay((unsigned long)((5)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
 "159
-[; ;main.c: 159:                 _delay((unsigned long)((5)*(4000000/4000.0)));
-[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+[; ;main.c: 159:                 if (reach_goal(&joint_stepper, 100)) {
+[e $ ! != ( _reach_goal (2 , &U _joint_stepper -> 100 `i -> 0 `i 275  ]
+{
 "160
-[; ;main.c: 160:                 if (reach_goal(&joint_stepper, 100)) {
-[e $ ! != ( _reach_goal (2 , &U _joint_stepper -> 100 `i -> 0 `i 276  ]
-{
+[; ;main.c: 160:                     change_direction(&joint_stepper);
+[e ( _change_direction (1 &U _joint_stepper ]
 "161
-[; ;main.c: 161:                     change_direction(&joint_stepper);
-[e ( _change_direction (1 &U _joint_stepper ]
-"162
-[; ;main.c: 162:                     mix_counter++;
+[; ;main.c: 161:                     mix_counter++;
 [e ++ _mix_counter -> 1 `i ]
-"163
-[; ;main.c: 163:                 }
+"162
+[; ;main.c: 162:                 }
 }
-[e :U 276 ]
-"165
-[; ;main.c: 165:                 if (mix_counter == 20 && !dilution_done){
-[e $ ! && == _mix_counter -> 20 `i ! != _dilution_done -> 0 `i 277  ]
-{
-"166
-[; ;main.c: 166:                     state = 8;
-[e = _state -> 8 `i ]
-"167
-[; ;main.c: 167:                     state_changed = 1;
-[e = _state_changed -> -> 1 `i `a ]
-"168
-[; ;main.c: 168:                 } else if (mix_counter == 40) {
-}
-[e $U 278  ]
-[e :U 277 ]
-[e $ ! == _mix_counter -> 40 `i 279  ]
-{
-"169
-[; ;main.c: 169:                     dilution_done = 0;
-[e = _dilution_done -> 0 `i ]
-"170
-[; ;main.c: 170:                     state = 9;
-[e = _state -> 9 `i ]
-"171
-[; ;main.c: 171:                     state_changed = 1;
-[e = _state_changed -> -> 1 `i `a ]
-"172
-[; ;main.c: 172:                     mix_counter = 0;
-[e = _mix_counter -> 0 `i ]
-"174
-[; ;main.c: 174:                     change_direction(&joint_stepper);
-[e ( _change_direction (1 &U _joint_stepper ]
-"175
-[; ;main.c: 175:                     change_direction(&end_effector_stepper);
-[e ( _change_direction (1 &U _end_effector_stepper ]
-"176
-[; ;main.c: 176:                 }
-}
-[e :U 279 ]
-[e :U 278 ]
-"177
-[; ;main.c: 177:             } else if (state == 8){
-}
-[e $U 280  ]
 [e :U 275 ]
-[e $ ! == _state -> 8 `i 281  ]
+"164
+[; ;main.c: 164:                 if (mix_counter == 20 && !dilution_done){
+[e $ ! && == _mix_counter -> 20 `i ! != _dilution_done -> 0 `i 276  ]
 {
-"178
-[; ;main.c: 178:                 _delay((unsigned long)((5)*(4000000/4000.0)));
-[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-"179
-[; ;main.c: 179:                 if (!diluting_position_reached){
-[e $ ! ! != _diluting_position_reached -> 0 `i 282  ]
-{
-"180
-[; ;main.c: 180:                     diluting_position_reached = reach_goal(&joint_dilutor_stepper, 200);
-[e = _diluting_position_reached ( _reach_goal (2 , &U _joint_dilutor_stepper -> 200 `i ]
-"181
-[; ;main.c: 181:                 } else if (!dilution_done && diluting_position_reached){
-}
-[e $U 283  ]
-[e :U 282 ]
-[e $ ! && ! != _dilution_done -> 0 `i != _diluting_position_reached -> 0 `i 284  ]
-{
-"184
-[; ;main.c: 184:                     _delay((unsigned long)((2000)*(4000000/4000.0)));
-[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-"185
-[; ;main.c: 185:                     dilution_done = 1;
-[e = _dilution_done -> 1 `i ]
-"186
-[; ;main.c: 186:                     change_direction(&joint_dilutor_stepper);
-[e ( _change_direction (1 &U _joint_dilutor_stepper ]
-"187
-[; ;main.c: 187:                 } else if (dilution_done && !joint_dilutor_homed){
-}
-[e $U 285  ]
-[e :U 284 ]
-[e $ ! && != _dilution_done -> 0 `i ! != _joint_dilutor_homed -> 0 `i 286  ]
-{
-"188
-[; ;main.c: 188:                     joint_dilutor_homed = reach_goal(&joint_dilutor_stepper, 200);
-[e = _joint_dilutor_homed ( _reach_goal (2 , &U _joint_dilutor_stepper -> 200 `i ]
-"189
-[; ;main.c: 189:                 } else if (dilution_done && joint_dilutor_homed){
-}
-[e $U 287  ]
-[e :U 286 ]
-[e $ ! && != _dilution_done -> 0 `i != _joint_dilutor_homed -> 0 `i 288  ]
-{
-"190
-[; ;main.c: 190:                     state = 7;
-[e = _state -> 7 `i ]
-"191
-[; ;main.c: 191:                     state_changed = 1;
+"165
+[; ;main.c: 165:                     state = 8;
+[e = _state -> 8 `i ]
+"166
+[; ;main.c: 166:                     state_changed = 1;
 [e = _state_changed -> -> 1 `i `a ]
-"192
-[; ;main.c: 192:                     diluting_position_reached = 0;
-[e = _diluting_position_reached -> 0 `i ]
-"193
-[; ;main.c: 193:                 }
+"167
+[; ;main.c: 167:                 } else if (mix_counter == 40) {
 }
-[e :U 288 ]
-[e :U 287 ]
-[e :U 285 ]
-[e :U 283 ]
-"195
-[; ;main.c: 195:             } else if (state == 9){
+[e $U 277  ]
+[e :U 276 ]
+[e $ ! == _mix_counter -> 40 `i 278  ]
+{
+"168
+[; ;main.c: 168:                     dilution_done = 0;
+[e = _dilution_done -> 0 `i ]
+"169
+[; ;main.c: 169:                     state = 9;
+[e = _state -> 9 `i ]
+"170
+[; ;main.c: 170:                     state_changed = 1;
+[e = _state_changed -> -> 1 `i `a ]
+"171
+[; ;main.c: 171:                     mix_counter = 0;
+[e = _mix_counter -> 0 `i ]
+"173
+[; ;main.c: 173:                     change_direction(&joint_stepper);
+[e ( _change_direction (1 &U _joint_stepper ]
+"174
+[; ;main.c: 174:                     change_direction(&end_effector_stepper);
+[e ( _change_direction (1 &U _end_effector_stepper ]
+"175
+[; ;main.c: 175:                 }
 }
-[e $U 289  ]
+[e :U 278 ]
+[e :U 277 ]
+"176
+[; ;main.c: 176:             } else if (state == 8){
+}
+[e $U 279  ]
+[e :U 274 ]
+[e $ ! == _state -> 8 `i 280  ]
+{
+"177
+[; ;main.c: 177:                 _delay((unsigned long)((5)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"178
+[; ;main.c: 178:                 if (!diluting_position_reached){
+[e $ ! ! != _diluting_position_reached -> 0 `i 281  ]
+{
+"179
+[; ;main.c: 179:                     diluting_position_reached = reach_goal(&joint_dilutor_stepper, 200);
+[e = _diluting_position_reached ( _reach_goal (2 , &U _joint_dilutor_stepper -> 200 `i ]
+"180
+[; ;main.c: 180:                 } else if (!dilution_done && diluting_position_reached){
+}
+[e $U 282  ]
 [e :U 281 ]
-[e $ ! == _state -> 9 `i 290  ]
+[e $ ! && ! != _dilution_done -> 0 `i != _diluting_position_reached -> 0 `i 283  ]
 {
-"196
-[; ;main.c: 196:                 _delay((unsigned long)((20)*(4000000/4000.0)));
+"183
+[; ;main.c: 183:                     _delay((unsigned long)((2000)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"184
+[; ;main.c: 184:                     dilution_done = 1;
+[e = _dilution_done -> 1 `i ]
+"185
+[; ;main.c: 185:                     change_direction(&joint_dilutor_stepper);
+[e ( _change_direction (1 &U _joint_dilutor_stepper ]
+"186
+[; ;main.c: 186:                 } else if (dilution_done && !joint_dilutor_homed){
+}
+[e $U 284  ]
+[e :U 283 ]
+[e $ ! && != _dilution_done -> 0 `i ! != _joint_dilutor_homed -> 0 `i 285  ]
+{
+"187
+[; ;main.c: 187:                     joint_dilutor_homed = reach_goal(&joint_dilutor_stepper, 200);
+[e = _joint_dilutor_homed ( _reach_goal (2 , &U _joint_dilutor_stepper -> 200 `i ]
+"188
+[; ;main.c: 188:                 } else if (dilution_done && joint_dilutor_homed){
+}
+[e $U 286  ]
+[e :U 285 ]
+[e $ ! && != _dilution_done -> 0 `i != _joint_dilutor_homed -> 0 `i 287  ]
+{
+"189
+[; ;main.c: 189:                     state = 7;
+[e = _state -> 7 `i ]
+"190
+[; ;main.c: 190:                     state_changed = 1;
+[e = _state_changed -> -> 1 `i `a ]
+"191
+[; ;main.c: 191:                     diluting_position_reached = 0;
+[e = _diluting_position_reached -> 0 `i ]
+"192
+[; ;main.c: 192:                 }
+}
+[e :U 287 ]
+[e :U 286 ]
+[e :U 284 ]
+[e :U 282 ]
+"194
+[; ;main.c: 194:             } else if (state == 9){
+}
+[e $U 288  ]
+[e :U 280 ]
+[e $ ! == _state -> 9 `i 289  ]
+{
+"195
+[; ;main.c: 195:                 _delay((unsigned long)((20)*(4000000/4000.0)));
 [e ( __delay (1 -> * -> -> 20 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-"198
-[; ;main.c: 198:                 if (!end_effector_homed){
-[e $ ! ! != _end_effector_homed -> 0 `i 291  ]
+"197
+[; ;main.c: 197:                 if (!end_effector_homed){
+[e $ ! ! != _end_effector_homed -> 0 `i 290  ]
 {
-"199
-[; ;main.c: 199:                     end_effector_homed = reach_goal(&end_effector_stepper, 100);
+"198
+[; ;main.c: 198:                     end_effector_homed = reach_goal(&end_effector_stepper, 100);
 [e = _end_effector_homed ( _reach_goal (2 , &U _end_effector_stepper -> 100 `i ]
-"200
-[; ;main.c: 200:                 }
+"199
+[; ;main.c: 199:                 }
+}
+[e :U 290 ]
+"201
+[; ;main.c: 201:                 if (end_effector_homed && !joint_homed){
+[e $ ! && != _end_effector_homed -> 0 `i ! != _joint_homed -> 0 `i 291  ]
+{
+"202
+[; ;main.c: 202:                     joint_homed = reach_goal(&joint_stepper, 50);
+[e = _joint_homed ( _reach_goal (2 , &U _joint_stepper -> 50 `i ]
+"203
+[; ;main.c: 203:                 }
 }
 [e :U 291 ]
-"202
-[; ;main.c: 202:                 if (end_effector_homed && !joint_homed){
-[e $ ! && != _end_effector_homed -> 0 `i ! != _joint_homed -> 0 `i 292  ]
+"205
+[; ;main.c: 205:                 if (end_effector_homed * joint_homed){
+[e $ ! != * _end_effector_homed _joint_homed -> 0 `i 292  ]
 {
-"203
-[; ;main.c: 203:                     joint_homed = reach_goal(&joint_stepper, 50);
-[e = _joint_homed ( _reach_goal (2 , &U _joint_stepper -> 50 `i ]
-"204
-[; ;main.c: 204:                 }
+"206
+[; ;main.c: 206:                     state = 2;
+[e = _state -> 2 `i ]
+"207
+[; ;main.c: 207:                     state_changed = 1;
+[e = _state_changed -> -> 1 `i `a ]
+"208
+[; ;main.c: 208:                 }
 }
 [e :U 292 ]
-"206
-[; ;main.c: 206:                 if (end_effector_homed * joint_homed){
-[e $ ! != * _end_effector_homed _joint_homed -> 0 `i 293  ]
-{
-"207
-[; ;main.c: 207:                     state = 2;
-[e = _state -> 2 `i ]
-"208
-[; ;main.c: 208:                     state_changed = 1;
-[e = _state_changed -> -> 1 `i `a ]
 "209
-[; ;main.c: 209:                 }
+[; ;main.c: 209:             } else if (state == 10){
 }
-[e :U 293 ]
-"210
-[; ;main.c: 210:             } else if (state == 10){
-}
-[e $U 294  ]
-[e :U 290 ]
-[e $ ! == _state -> 10 `i 295  ]
+[e $U 293  ]
+[e :U 289 ]
+[e $ ! == _state -> 10 `i 294  ]
 {
-"211
-[; ;main.c: 211:                 state = 11;
+"210
+[; ;main.c: 210:                 state = 11;
 [e = _state -> 11 `i ]
-"212
-[; ;main.c: 212:                 state_changed = 1;
+"211
+[; ;main.c: 211:                 state_changed = 1;
 [e = _state_changed -> -> 1 `i `a ]
-"213
-[; ;main.c: 213:             }else if (state == 11){
+"212
+[; ;main.c: 212:             }else if (state == 11){
 }
-[e $U 296  ]
-[e :U 295 ]
-[e $ ! == _state -> 11 `i 297  ]
+[e $U 295  ]
+[e :U 294 ]
+[e $ ! == _state -> 11 `i 296  ]
+{
+"213
+[; ;main.c: 213:                 if (timer_done){
+[e $ ! != -> _timer_done `i -> 0 `i 297  ]
 {
 "214
-[; ;main.c: 214:                 if (timer_done){
-[e $ ! != -> _timer_done `i -> 0 `i 298  ]
-{
-"215
-[; ;main.c: 215:                     state_changed = 1;
+[; ;main.c: 214:                     state_changed = 1;
 [e = _state_changed -> -> 1 `i `a ]
-"216
-[; ;main.c: 216:                     state = 13;
+"215
+[; ;main.c: 215:                     state = 13;
 [e = _state -> 13 `i ]
-"217
-[; ;main.c: 217:                     trash_counter = 0;
+"216
+[; ;main.c: 216:                     trash_counter = 0;
 [e = _trash_counter -> 0 `i ]
-"218
-[; ;main.c: 218:                     timer_done = 0;
+"217
+[; ;main.c: 217:                     timer_done = 0;
 [e = _timer_done -> -> 0 `i `a ]
-"219
-[; ;main.c: 219:                 } else {
+"218
+[; ;main.c: 218:                 } else {
 }
-[e $U 299  ]
-[e :U 298 ]
+[e $U 298  ]
+[e :U 297 ]
+{
+"219
+[; ;main.c: 219:                     if (T0CONbits.TMR0ON == 0){
+[e $ ! == -> . . _T0CONbits 0 5 `i -> 0 `i 299  ]
 {
 "220
-[; ;main.c: 220:                     if (T0CONbits.TMR0ON == 0){
-[e $ ! == -> . . _T0CONbits 0 5 `i -> 0 `i 300  ]
-{
-"221
-[; ;main.c: 221:                         init_timer_0();
+[; ;main.c: 220:                         init_timer_0();
 [e ( _init_timer_0 ..  ]
-"222
-[; ;main.c: 222:                     }
-}
-[e :U 300 ]
-"224
-[; ;main.c: 224:                 }
+"221
+[; ;main.c: 221:                     }
 }
 [e :U 299 ]
-"225
-[; ;main.c: 225:             } else if (state == 12){
+"223
+[; ;main.c: 223:                 }
 }
-[e $U 301  ]
-[e :U 297 ]
-[e $ ! == _state -> 12 `i 302  ]
-{
-"226
-[; ;main.c: 226:                 state = 0;
-[e = _state -> 0 `i ]
-"228
-[; ;main.c: 228:                 state_changed = 1;
-[e = _state_changed -> -> 1 `i `a ]
-"229
-[; ;main.c: 229:                 T0CONbits.TMR0ON = 0;
-[e = . . _T0CONbits 0 5 -> -> 0 `i `uc ]
-"230
-[; ;main.c: 230:             } else if (state == 13){
+[e :U 298 ]
+"224
+[; ;main.c: 224:             } else if (state == 12){
 }
-[e $U 303  ]
-[e :U 302 ]
-[e $ ! == _state -> 13 `i 304  ]
-{
-"231
-[; ;main.c: 231:                 LATAbits.LATA1 = 1;
-[e = . . _LATAbits 0 1 -> -> 1 `i `uc ]
-"232
-[; ;main.c: 232:                 if ( trash_counter < 100){
-[e $ ! < _trash_counter -> 100 `i 305  ]
-{
-"233
-[; ;main.c: 233:                     _delay((unsigned long)((10)*(4000000/4000.0)));
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-"234
-[; ;main.c: 234:                     trash_counter++;
-[e ++ _trash_counter -> 1 `i ]
-"235
-[; ;main.c: 235:                 } else if (trash_counter >= 100){
-}
-[e $U 306  ]
-[e :U 305 ]
-[e $ ! >= _trash_counter -> 100 `i 307  ]
-{
-"236
-[; ;main.c: 236:                     state = 0;
-[e = _state -> 0 `i ]
-"237
-[; ;main.c: 237:                     state_changed = 1;
-[e = _state_changed -> -> 1 `i `a ]
-"238
-[; ;main.c: 238:                     T0CONbits.TMR0ON = 0;
-[e = . . _T0CONbits 0 5 -> -> 0 `i `uc ]
-"239
-[; ;main.c: 239:                 }
-}
-[e :U 307 ]
-[e :U 306 ]
-"240
-[; ;main.c: 240:             } if (state == 14){
-}
-[e :U 304 ]
-[e :U 303 ]
-[e :U 301 ]
+[e $U 300  ]
 [e :U 296 ]
-[e :U 294 ]
-[e :U 289 ]
-[e :U 280 ]
-[e :U 274 ]
-[e :U 269 ]
-[e :U 267 ]
-[e :U 260 ]
-[e :U 258 ]
-[e :U 256 ]
-[e $ ! == _state -> 14 `i 308  ]
+[e $ ! == _state -> 12 `i 301  ]
+{
+"225
+[; ;main.c: 225:                 state = 0;
+[e = _state -> 0 `i ]
+"227
+[; ;main.c: 227:                 state_changed = 1;
+[e = _state_changed -> -> 1 `i `a ]
+"228
+[; ;main.c: 228:                 T0CONbits.TMR0ON = 0;
+[e = . . _T0CONbits 0 5 -> -> 0 `i `uc ]
+"229
+[; ;main.c: 229:             } else if (state == 13){
+}
+[e $U 302  ]
+[e :U 301 ]
+[e $ ! == _state -> 13 `i 303  ]
+{
+"230
+[; ;main.c: 230:                 LATAbits.LATA1 = 1;
+[e = . . _LATAbits 0 1 -> -> 1 `i `uc ]
+"231
+[; ;main.c: 231:                 if ( trash_counter < 100){
+[e $ ! < _trash_counter -> 100 `i 304  ]
+{
+"232
+[; ;main.c: 232:                     _delay((unsigned long)((10)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"233
+[; ;main.c: 233:                     trash_counter++;
+[e ++ _trash_counter -> 1 `i ]
+"234
+[; ;main.c: 234:                 } else if (trash_counter >= 100){
+}
+[e $U 305  ]
+[e :U 304 ]
+[e $ ! >= _trash_counter -> 100 `i 306  ]
+{
+"235
+[; ;main.c: 235:                     state = 0;
+[e = _state -> 0 `i ]
+"236
+[; ;main.c: 236:                     state_changed = 1;
+[e = _state_changed -> -> 1 `i `a ]
+"237
+[; ;main.c: 237:                     T0CONbits.TMR0ON = 0;
+[e = . . _T0CONbits 0 5 -> -> 0 `i `uc ]
+"238
+[; ;main.c: 238:                 }
+}
+[e :U 306 ]
+[e :U 305 ]
+"239
+[; ;main.c: 239:             } if (state == 14){
+}
+[e :U 303 ]
+[e :U 302 ]
+[e :U 300 ]
+[e :U 295 ]
+[e :U 293 ]
+[e :U 288 ]
+[e :U 279 ]
+[e :U 273 ]
+[e :U 268 ]
+[e :U 266 ]
+[e :U 259 ]
+[e :U 257 ]
+[e :U 255 ]
+[e $ ! == _state -> 14 `i 307  ]
+{
+"241
+[; ;main.c: 241:                 if (LATCbits.LATC4 == 1 && LATCbits.LATC5 == 1 && get_liters() > 0.1){
+[e $ ! && && == -> . . _LATCbits 0 4 `i -> 1 `i == -> . . _LATCbits 0 5 `i -> 1 `i > -> ( _get_liters ..  `d .0.1 308  ]
 {
 "242
-[; ;main.c: 242:                 if (LATCbits.LATC4 == 1 && LATCbits.LATC5 == 1 && get_liters() > 0.1){
-[e $ ! && && == -> . . _LATCbits 0 4 `i -> 1 `i == -> . . _LATCbits 0 5 `i -> 1 `i > -> ( _get_liters ..  `d .0.1 309  ]
-{
-"243
-[; ;main.c: 243:                     LATCbits.LATC4 = 0;
+[; ;main.c: 242:                     LATCbits.LATC4 = 0;
 [e = . . _LATCbits 0 4 -> -> 0 `i `uc ]
-"244
-[; ;main.c: 244:                     LATCbits.LATC5 = 0;
+"243
+[; ;main.c: 243:                     LATCbits.LATC5 = 0;
 [e = . . _LATCbits 0 5 -> -> 0 `i `uc ]
-"245
-[; ;main.c: 245:                     state = state_before_error;
+"244
+[; ;main.c: 244:                     state = state_before_error;
 [e = _state _state_before_error ]
-"246
-[; ;main.c: 246:                     state_changed = 1;
+"245
+[; ;main.c: 245:                     state_changed = 1;
 [e = _state_changed -> -> 1 `i `a ]
-"247
-[; ;main.c: 247:                 }
-}
-[e :U 309 ]
-"249
-[; ;main.c: 249:             }
+"246
+[; ;main.c: 246:                 }
 }
 [e :U 308 ]
+"248
+[; ;main.c: 248:             }
+}
+[e :U 307 ]
+"249
+[; ;main.c: 249:         }
+}
+[e :U 252 ]
 "250
-[; ;main.c: 250:         }
+[; ;main.c: 250:     }
 }
-[e :U 253 ]
+[e :U 244 ]
+[e $U 245  ]
+[e :U 246 ]
 "251
-[; ;main.c: 251:     }
+[; ;main.c: 251: }
+[e :UE 243 ]
 }
-[e :U 245 ]
-[e $U 246  ]
-[e :U 247 ]
-"252
-[; ;main.c: 252: }
-[e :UE 244 ]
-}
-[v $root$_rx_char_usart `(v ~T0 @X0 0 e ]
-"255
-[; ;main.c: 255: void __attribute__((picinterrupt(("")))) rx_char_usart(void){
-[v _rx_char_usart `(v ~T39 @X0 1 ef ]
+[v $root$_interrupt_management `(v ~T0 @X0 0 e ]
+"254
+[; ;main.c: 254: void __attribute__((picinterrupt(("")))) interrupt_management(void){
+[v _interrupt_management `(v ~T39 @X0 1 ef ]
 {
-[e :U _rx_char_usart ]
+[e :U _interrupt_management ]
 [f ]
-"256
-[; ;main.c: 256:     if(PIE1bits.RCIE && PIR1bits.RCIF){
-[e $ ! && != -> . . _PIE1bits 0 5 `i -> 0 `i != -> . . _PIR1bits 0 5 `i -> 0 `i 311  ]
+"255
+[; ;main.c: 255:     if(PIE1bits.RCIE && PIR1bits.RCIF){
+[e $ ! && != -> . . _PIE1bits 0 5 `i -> 0 `i != -> . . _PIR1bits 0 5 `i -> 0 `i 310  ]
 {
-"257
-[; ;main.c: 257:         PIR1bits.RCIF = 0;
+"256
+[; ;main.c: 256:         PIR1bits.RCIF = 0;
 [e = . . _PIR1bits 0 5 -> -> 0 `i `uc ]
+"257
+[; ;main.c: 257:         if (state != 14){
+[e $ ! != _state -> 14 `i 311  ]
+{
 "258
-[; ;main.c: 258:         state_changed = 1;
+[; ;main.c: 258:             state_changed = 1;
 [e = _state_changed -> -> 1 `i `a ]
 "259
-[; ;main.c: 259:         read_new_char = 1;
+[; ;main.c: 259:             read_new_char = 1;
 [e = _read_new_char -> -> 1 `i `a ]
 "260
-[; ;main.c: 260:     }
+[; ;main.c: 260:         }
 }
 [e :U 311 ]
 "261
-[; ;main.c: 261:     if(INTCONbits.TMR0IE && INTCONbits.TMR0IF){
+[; ;main.c: 261:     }
+}
+[e :U 310 ]
+"262
+[; ;main.c: 262:     if(INTCONbits.TMR0IE && INTCONbits.TMR0IF){
 [e $ ! && != -> . . _INTCONbits 0 5 `i -> 0 `i != -> . . _INTCONbits 0 2 `i -> 0 `i 312  ]
 {
-"262
-[; ;main.c: 262:         T0CON = 0;
-[e = _T0CON -> -> 0 `i `uc ]
 "263
-[; ;main.c: 263:         INTCONbits.TMR0IF = 0;
-[e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
+[; ;main.c: 263:         T0CON = 0;
+[e = _T0CON -> -> 0 `i `uc ]
 "264
-[; ;main.c: 264:         timer_done = 1;
-[e = _timer_done -> -> 1 `i `a ]
+[; ;main.c: 264:         INTCONbits.TMR0IF = 0;
+[e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
 "265
-[; ;main.c: 265:         T0CONbits.TMR0ON = 0;
-[e = . . _T0CONbits 0 5 -> -> 0 `i `uc ]
+[; ;main.c: 265:         timer_done = 1;
+[e = _timer_done -> -> 1 `i `a ]
 "266
-[; ;main.c: 266:     }
+[; ;main.c: 266:         T0CONbits.TMR0ON = 0;
+[e = . . _T0CONbits 0 5 -> -> 0 `i `uc ]
+"267
+[; ;main.c: 267:     }
 }
 [e :U 312 ]
-"267
-[; ;main.c: 267: }
-[e :UE 310 ]
+"268
+[; ;main.c: 268: }
+[e :UE 309 ]
 }
 [a 1C 68 101 118 105 99 101 32 104 97 115 32 98 101 101 110 32 114 101 115 101 116 0 ]

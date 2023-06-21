@@ -36,18 +36,21 @@ void init_USART(void){
     return;
 }
 
+// Sends a char through the USART
 void serial_tx_char(unsigned char val){
     TXREG = val;
-    while(!TXSTAbits.TRMT); // controllo dello stato della trasmissione, quando bit vale uno buffer di trasmissione vuoto, quindi di default e a 1
-    // ci permette di aspettare fino a quando il dato e stato mandato
+    while(!TXSTAbits.TRMT); // Waits till char sent
 }
 
+// Sends a string through the USART
 void serial_tx_string(const char* val){
     for (int i=0; val[i] != 0; i++){
         serial_tx_char(val[i]);        
     }
 }
 
+// Reads and returns the value of the rx register,
+// it's called when the interrupt kicks in
 unsigned char get_reg_value(){
     unsigned char rx_char = RCREG;
     RCREG = 0;

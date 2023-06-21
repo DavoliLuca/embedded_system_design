@@ -3809,19 +3809,13 @@ extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 
 # 1 "./lcd.h" 1
 # 100 "./lcd.h"
-typedef struct {
-    unsigned char* new_msg;
-    unsigned char* current_msg;
-} lcdManager;
-
 void lcd_init(void);
 void lcd_cmd(unsigned char val);
 void lcd_dat(unsigned char val);
 void lcd_str(const char* str);
-void lcd_manager_init(lcdManager* lcd_manager, unsigned char* new_msg, unsigned char* current_msg);
-
 void lcd_update(int state);
 # 3 "lcd.c" 2
+
 
 
 const char const_msgs[15][4][20] = {
@@ -3910,11 +3904,6 @@ void lcd_str(const char* str)
     }
 }
 
-void lcd_manager_init(lcdManager* lcd_manager, unsigned char* new_msg, unsigned char* current_msg){
-    lcd_manager -> new_msg = new_msg;
-    lcd_manager -> current_msg = new_msg;
-}
-# 108 "lcd.c"
 void lcd_update(int state){
     lcd_cmd(0x01);
     const char line_select[4] = {0x80, 0xC0, 0x94, 0xD4};

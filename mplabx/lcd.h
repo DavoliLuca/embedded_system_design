@@ -97,16 +97,9 @@ extern "C" {
 
 #define _XTAL_FREQ 4000000
 
-typedef struct {
-    unsigned char* new_msg;
-    unsigned char* current_msg;
-} lcdManager;
-
 void lcd_init(void);
 void lcd_cmd(unsigned char val); 
 void lcd_dat(unsigned char val);
 void lcd_str(const char* str);
-void lcd_manager_init(lcdManager* lcd_manager, unsigned char* new_msg, unsigned char* current_msg);
-//void lcd_update(lcdManager* lcd_manager, const char* str);
 void lcd_update(int state);
 

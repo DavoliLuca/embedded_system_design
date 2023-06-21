@@ -1,4 +1,6 @@
 #include "lcd.h"
+
+// Translates the 8bit USART msg from fpga to a uC state machine state and updates it
 void state_translator_fpga_to_micro(unsigned char state_machine_code, int* state){
     lcd_dat(state_machine_code);
     if (state_machine_code == 0x01){
@@ -23,6 +25,7 @@ void state_translator_fpga_to_micro(unsigned char state_machine_code, int* state
     return;
 }
 
+// From a state of the uC to a 8bit msg to be sent to fpga
 unsigned char state_translator_micro_to_fpga(int* state){
     unsigned char state_machine_code;
     if (*state == 2){

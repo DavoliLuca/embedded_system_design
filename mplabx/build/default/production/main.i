@@ -4115,17 +4115,10 @@ void init_interrupts(void);
 
 # 1 "./lcd.h" 1
 # 100 "./lcd.h"
-typedef struct {
-    unsigned char* new_msg;
-    unsigned char* current_msg;
-} lcdManager;
-
 void lcd_init(void);
 void lcd_cmd(unsigned char val);
 void lcd_dat(unsigned char val);
 void lcd_str(const char* str);
-void lcd_manager_init(lcdManager* lcd_manager, unsigned char* new_msg, unsigned char* current_msg);
-
 void lcd_update(int state);
 # 15 "main.c" 2
 
@@ -4177,10 +4170,9 @@ void change_direction(stepperMotor* stepper_motor);
 # 19 "main.c" 2
 
 
-void __attribute__((picinterrupt(("")))) rx_char_usart(void);
+void __attribute__((picinterrupt(("")))) interrupt_management(void);
 
 static _Bool state_changed = 0;
-static _Bool idle_msg_sent = 0;
 static _Bool read_new_char = 0;
 static _Bool timer_done = 0;
 
@@ -4189,9 +4181,10 @@ int mix_current_step;
 int mix_direction;
 int mix_step_counter;
 int mix_counter;
-char hex_joint_values[4] = {0x01, 0x02, 0x04, 0x08};
-char hex_end_effector_values[4] = {0x10, 0x20, 0x40, 0x80};
 
+char hex_joint_values[4] = {0x01, 0x02, 0x04, 0x08};
+
+char hex_end_effector_values[4] = {0x10, 0x20, 0x40, 0x80};
 int dilution_done = 0;
 int trash_counter = 0;
 
@@ -4235,7 +4228,6 @@ void main(void){
 
     while(1){
         if (state_changed){
-            const char* greet_str[80];
             if (read_new_char){
                 rx_char = get_reg_value();
                 state_translator_fpga_to_micro(rx_char, &state);
@@ -4249,7 +4241,6 @@ void main(void){
             lcd_update(state);
 
             state_changed = 0;
-            idle_msg_sent = 0;
         }
 
         if (state == 2){
@@ -4292,6 +4283,7 @@ void main(void){
                 }
 
             } else if (state == 5){
+
                 init_stepper(&joint_stepper, 0, 0, 1, hex_joint_values, &LATB);
                 init_stepper(&end_effector_stepper, 0, 0, 1, hex_end_effector_values, &LATB);
                 init_stepper(&joint_dilutor_stepper, 0, 0, 1, hex_joint_values, &LATC);
@@ -4411,11 +4403,13 @@ void main(void){
 }
 
 
-void __attribute__((picinterrupt(("")))) rx_char_usart(void){
+void __attribute__((picinterrupt(("")))) interrupt_management(void){
     if(PIE1bits.RCIE && PIR1bits.RCIF){
         PIR1bits.RCIF = 0;
-        state_changed = 1;
-        read_new_char = 1;
+        if (state != 14){
+            state_changed = 1;
+            read_new_char = 1;
+        }
     }
     if(INTCONbits.TMR0IE && INTCONbits.TMR0IF){
         T0CON = 0;

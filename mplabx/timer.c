@@ -11,7 +11,7 @@ void init_timer_0(void){
     T0CONbits.T08BIT = 0; // 16 bits
     T0CONbits.T0CS = 0;
     T0CONbits.PSA = 0;
-    T0CONbits.T0PS0 = 0; // Set prescaler to 128 so that the max count is 8388608 
+    T0CONbits.T0PS0 = 0; // Set prescaler to 1288 
     T0CONbits.T0PS1 = 1;
     T0CONbits.T0PS2 = 1;
     T0CONbits.TMR0ON = 1;

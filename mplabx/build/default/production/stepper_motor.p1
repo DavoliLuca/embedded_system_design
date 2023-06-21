@@ -384,8 +384,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "5763
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 5763: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
-"4 stepper_motor.c
-[; ;stepper_motor.c: 4: void init_stepper(stepperMotor* stepper_motor, int current_coil, int step_counter, int direction, unsigned char hex_coil_register_values[4], volatile unsigned char *register_name){
+"5 stepper_motor.c
+[; ;stepper_motor.c: 5: void init_stepper(stepperMotor* stepper_motor, int current_coil, int step_counter, int direction, unsigned char hex_coil_register_values[4], volatile unsigned char *register_name){
 [v _init_stepper `(v ~T0 @X0 1 ef6`*S238`i`i`i`*uc`*Vuc ]
 {
 [e :U _init_stepper ]
@@ -396,8 +396,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _hex_coil_register_values `*uc ~T0 @X0 1 r5 ]
 [v _register_name `*Vuc ~T0 @X0 1 r6 ]
 [f ]
-"5
-[; ;stepper_motor.c: 5:     for (int i = 0; i < 4; i++) {
+"6
+[; ;stepper_motor.c: 6:     for (int i = 0; i < 4; i++) {
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
@@ -405,148 +405,148 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $U 241  ]
 [e :U 240 ]
 {
-"6
-[; ;stepper_motor.c: 6:        stepper_motor -> hex_coil_register_values[i] = hex_coil_register_values[i];
-[e = *U + &U . *U _stepper_motor 3 * -> -> _i `ui `ux -> -> # *U &U . *U _stepper_motor 3 `ui `ux *U + _hex_coil_register_values * -> _i `x -> -> # *U _hex_coil_register_values `i `x ]
 "7
-[; ;stepper_motor.c: 7:     }
+[; ;stepper_motor.c: 7:        stepper_motor -> hex_coil_register_values[i] = hex_coil_register_values[i];
+[e = *U + &U . *U _stepper_motor 3 * -> -> _i `ui `ux -> -> # *U &U . *U _stepper_motor 3 `ui `ux *U + _hex_coil_register_values * -> _i `x -> -> # *U _hex_coil_register_values `i `x ]
+"8
+[; ;stepper_motor.c: 8:     }
 }
 [e ++ _i -> 1 `i ]
 [e $ < _i -> 4 `i 240  ]
 [e :U 241 ]
 }
-"8
-[; ;stepper_motor.c: 8:     stepper_motor -> current_coil = current_coil;
-[e = . *U _stepper_motor 0 _current_coil ]
 "9
-[; ;stepper_motor.c: 9:     stepper_motor -> step_counter = step_counter;
-[e = . *U _stepper_motor 1 _step_counter ]
+[; ;stepper_motor.c: 9:     stepper_motor -> current_coil = current_coil;
+[e = . *U _stepper_motor 0 _current_coil ]
 "10
-[; ;stepper_motor.c: 10:     stepper_motor -> direction = direction;
-[e = . *U _stepper_motor 2 _direction ]
+[; ;stepper_motor.c: 10:     stepper_motor -> step_counter = step_counter;
+[e = . *U _stepper_motor 1 _step_counter ]
 "11
-[; ;stepper_motor.c: 11:     stepper_motor -> register_name = register_name;
-[e = . *U _stepper_motor 4 _register_name ]
+[; ;stepper_motor.c: 11:     stepper_motor -> direction = direction;
+[e = . *U _stepper_motor 2 _direction ]
 "12
-[; ;stepper_motor.c: 12: }
+[; ;stepper_motor.c: 12:     stepper_motor -> register_name = register_name;
+[e = . *U _stepper_motor 4 _register_name ]
+"13
+[; ;stepper_motor.c: 13: }
 [e :UE 239 ]
 }
-"14
-[; ;stepper_motor.c: 14: void turn_on_current_coil(stepperMotor* stepper_motor){
+"16
+[; ;stepper_motor.c: 16: void turn_on_current_coil(stepperMotor* stepper_motor){
 [v _turn_on_current_coil `(v ~T0 @X0 1 ef1`*S238 ]
 {
 [e :U _turn_on_current_coil ]
 [v _stepper_motor `*S238 ~T0 @X0 1 r1 ]
 [f ]
-"15
-[; ;stepper_motor.c: 15:     *(stepper_motor -> register_name) = stepper_motor -> hex_coil_register_values[stepper_motor -> current_coil];
-[e = *U . *U _stepper_motor 4 *U + &U . *U _stepper_motor 3 * -> -> . *U _stepper_motor 0 `ui `ux -> -> # *U &U . *U _stepper_motor 3 `ui `ux ]
-"16
-[; ;stepper_motor.c: 16:     return;
-[e $UE 243  ]
 "17
-[; ;stepper_motor.c: 17: }
+[; ;stepper_motor.c: 17:     *(stepper_motor -> register_name) = stepper_motor -> hex_coil_register_values[stepper_motor -> current_coil];
+[e = *U . *U _stepper_motor 4 *U + &U . *U _stepper_motor 3 * -> -> . *U _stepper_motor 0 `ui `ux -> -> # *U &U . *U _stepper_motor 3 `ui `ux ]
+"18
+[; ;stepper_motor.c: 18:     return;
+[e $UE 243  ]
+"19
+[; ;stepper_motor.c: 19: }
 [e :UE 243 ]
 }
-"19
-[; ;stepper_motor.c: 19: void update_current_coil(stepperMotor* stepper_motor){
+"22
+[; ;stepper_motor.c: 22: void update_current_coil(stepperMotor* stepper_motor){
 [v _update_current_coil `(v ~T0 @X0 1 ef1`*S238 ]
 {
 [e :U _update_current_coil ]
 [v _stepper_motor `*S238 ~T0 @X0 1 r1 ]
 [f ]
-"20
-[; ;stepper_motor.c: 20:     stepper_motor -> current_coil = stepper_motor -> current_coil + stepper_motor -> direction;
+"23
+[; ;stepper_motor.c: 23:     stepper_motor -> current_coil = stepper_motor -> current_coil + stepper_motor -> direction;
 [e = . *U _stepper_motor 0 + . *U _stepper_motor 0 . *U _stepper_motor 2 ]
-"21
-[; ;stepper_motor.c: 21:     stepper_motor -> step_counter = stepper_motor -> step_counter + 1;
+"24
+[; ;stepper_motor.c: 24:     stepper_motor -> step_counter = stepper_motor -> step_counter + 1;
 [e = . *U _stepper_motor 1 + . *U _stepper_motor 1 -> 1 `i ]
-"22
-[; ;stepper_motor.c: 22:     if (stepper_motor -> current_coil == -1) {
+"25
+[; ;stepper_motor.c: 25:     if (stepper_motor -> current_coil == -1) {
 [e $ ! == . *U _stepper_motor 0 -U -> 1 `i 245  ]
 {
-"23
-[; ;stepper_motor.c: 23:         stepper_motor -> current_coil = 3;
+"26
+[; ;stepper_motor.c: 26:         stepper_motor -> current_coil = 3;
 [e = . *U _stepper_motor 0 -> 3 `i ]
-"24
-[; ;stepper_motor.c: 24:     } else if(stepper_motor -> current_coil == 4) {
+"27
+[; ;stepper_motor.c: 27:     } else if(stepper_motor -> current_coil == 4) {
 }
 [e $U 246  ]
 [e :U 245 ]
 [e $ ! == . *U _stepper_motor 0 -> 4 `i 247  ]
 {
-"25
-[; ;stepper_motor.c: 25:         stepper_motor -> current_coil = 0;
+"28
+[; ;stepper_motor.c: 28:         stepper_motor -> current_coil = 0;
 [e = . *U _stepper_motor 0 -> 0 `i ]
-"26
-[; ;stepper_motor.c: 26:     }
+"29
+[; ;stepper_motor.c: 29:     }
 }
 [e :U 247 ]
 [e :U 246 ]
-"27
-[; ;stepper_motor.c: 27:     return;
+"30
+[; ;stepper_motor.c: 30:     return;
 [e $UE 244  ]
-"28
-[; ;stepper_motor.c: 28: }
+"31
+[; ;stepper_motor.c: 31: }
 [e :UE 244 ]
 }
-"30
-[; ;stepper_motor.c: 30: int reach_goal(stepperMotor* stepper_motor, int goal_to_reach){
+"34
+[; ;stepper_motor.c: 34: int reach_goal(stepperMotor* stepper_motor, int goal_to_reach){
 [v _reach_goal `(i ~T0 @X0 1 ef2`*S238`i ]
 {
 [e :U _reach_goal ]
 [v _stepper_motor `*S238 ~T0 @X0 1 r1 ]
 [v _goal_to_reach `i ~T0 @X0 1 r2 ]
 [f ]
-"31
-[; ;stepper_motor.c: 31:     if(stepper_motor -> step_counter >= goal_to_reach){
+"35
+[; ;stepper_motor.c: 35:     if(stepper_motor -> step_counter >= goal_to_reach){
 [e $ ! >= . *U _stepper_motor 1 _goal_to_reach 249  ]
 {
-"32
-[; ;stepper_motor.c: 32:         stepper_motor -> step_counter = 0;
+"36
+[; ;stepper_motor.c: 36:         stepper_motor -> step_counter = 0;
 [e = . *U _stepper_motor 1 -> 0 `i ]
-"33
-[; ;stepper_motor.c: 33:         return 1;
+"37
+[; ;stepper_motor.c: 37:         return 1;
 [e ) -> 1 `i ]
 [e $UE 248  ]
-"34
-[; ;stepper_motor.c: 34:     } else {
+"38
+[; ;stepper_motor.c: 38:     } else {
 }
 [e $U 250  ]
 [e :U 249 ]
 {
-"35
-[; ;stepper_motor.c: 35:         turn_on_current_coil(stepper_motor);
+"39
+[; ;stepper_motor.c: 39:         turn_on_current_coil(stepper_motor);
 [e ( _turn_on_current_coil (1 _stepper_motor ]
-"36
-[; ;stepper_motor.c: 36:         update_current_coil(stepper_motor);
+"40
+[; ;stepper_motor.c: 40:         update_current_coil(stepper_motor);
 [e ( _update_current_coil (1 _stepper_motor ]
-"37
-[; ;stepper_motor.c: 37:         return 0;
+"41
+[; ;stepper_motor.c: 41:         return 0;
 [e ) -> 0 `i ]
 [e $UE 248  ]
-"38
-[; ;stepper_motor.c: 38:     }
+"42
+[; ;stepper_motor.c: 42:     }
 }
 [e :U 250 ]
-"39
-[; ;stepper_motor.c: 39: }
+"43
+[; ;stepper_motor.c: 43: }
 [e :UE 248 ]
 }
-"41
-[; ;stepper_motor.c: 41: void change_direction(stepperMotor* stepper_motor){
+"46
+[; ;stepper_motor.c: 46: void change_direction(stepperMotor* stepper_motor){
 [v _change_direction `(v ~T0 @X0 1 ef1`*S238 ]
 {
 [e :U _change_direction ]
 [v _stepper_motor `*S238 ~T0 @X0 1 r1 ]
 [f ]
-"42
-[; ;stepper_motor.c: 42:     stepper_motor -> direction = stepper_motor -> direction*(-1);
+"47
+[; ;stepper_motor.c: 47:     stepper_motor -> direction = stepper_motor -> direction*(-1);
 [e = . *U _stepper_motor 2 * . *U _stepper_motor 2 -U -> 1 `i ]
-"43
-[; ;stepper_motor.c: 43:     return;
+"48
+[; ;stepper_motor.c: 48:     return;
 [e $UE 251  ]
-"44
-[; ;stepper_motor.c: 44: }
+"49
+[; ;stepper_motor.c: 49: }
 [e :UE 251 ]
 }

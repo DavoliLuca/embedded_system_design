@@ -444,187 +444,187 @@ Version 4.0 HI-TECH Software Intermediate Code
 "6
 [; ;oven.c: 6: int temperature_scaled;
 [v _temperature_scaled `i ~T0 @X0 1 e ]
-"8
-[; ;oven.c: 8: void configure_ad_conversion_oven(void){
+"9
+[; ;oven.c: 9: void configure_ad_conversion_oven(void){
 [v _configure_ad_conversion_oven `(v ~T0 @X0 1 ef ]
 {
 [e :U _configure_ad_conversion_oven ]
 [f ]
-"9
-[; ;oven.c: 9:     ADCON0 = 0;
-[e = _ADCON0 -> -> 0 `i `uc ]
 "10
-[; ;oven.c: 10:     ADCON0bits.CHS0 = 0;
-[e = . . _ADCON0bits 2 2 -> -> 0 `i `uc ]
+[; ;oven.c: 10:     ADCON0 = 0;
+[e = _ADCON0 -> -> 0 `i `uc ]
 "11
-[; ;oven.c: 11:     ADCON0bits.CHS1 = 0;
-[e = . . _ADCON0bits 2 3 -> -> 0 `i `uc ]
+[; ;oven.c: 11:     ADCON0bits.CHS0 = 0;
+[e = . . _ADCON0bits 2 2 -> -> 0 `i `uc ]
 "12
-[; ;oven.c: 12:     ADCON0bits.CHS2 = 1;
-[e = . . _ADCON0bits 2 4 -> -> 1 `i `uc ]
+[; ;oven.c: 12:     ADCON0bits.CHS1 = 0;
+[e = . . _ADCON0bits 2 3 -> -> 0 `i `uc ]
 "13
-[; ;oven.c: 13:     ADCON0bits.ADON = 1;
-[e = . . _ADCON0bits 1 0 -> -> 1 `i `uc ]
+[; ;oven.c: 13:     ADCON0bits.CHS2 = 1;
+[e = . . _ADCON0bits 2 4 -> -> 1 `i `uc ]
 "14
-[; ;oven.c: 14:     ADRESH = 0;
-[e = _ADRESH -> -> 0 `i `uc ]
+[; ;oven.c: 14:     ADCON0bits.ADON = 1;
+[e = . . _ADCON0bits 1 0 -> -> 1 `i `uc ]
 "15
-[; ;oven.c: 15:     ADRESL = 0;
-[e = _ADRESL -> -> 0 `i `uc ]
+[; ;oven.c: 15:     ADRESH = 0;
+[e = _ADRESH -> -> 0 `i `uc ]
 "16
-[; ;oven.c: 16:     ADCON1 = 0;
-[e = _ADCON1 -> -> 0 `i `uc ]
+[; ;oven.c: 16:     ADRESL = 0;
+[e = _ADRESL -> -> 0 `i `uc ]
 "17
-[; ;oven.c: 17: }
+[; ;oven.c: 17:     ADCON1 = 0;
+[e = _ADCON1 -> -> 0 `i `uc ]
+"18
+[; ;oven.c: 18: }
 [e :UE 239 ]
 }
-"19
-[; ;oven.c: 19: void configure_ad_conversion_tank(void){
+"21
+[; ;oven.c: 21: void configure_ad_conversion_tank(void){
 [v _configure_ad_conversion_tank `(v ~T0 @X0 1 ef ]
 {
 [e :U _configure_ad_conversion_tank ]
 [f ]
-"20
-[; ;oven.c: 20:     ADCON0 = 0;
-[e = _ADCON0 -> -> 0 `i `uc ]
-"21
-[; ;oven.c: 21:     ADCON0bits.CHS0 = 0;
-[e = . . _ADCON0bits 2 2 -> -> 0 `i `uc ]
 "22
-[; ;oven.c: 22:     ADCON0bits.CHS1 = 0;
-[e = . . _ADCON0bits 2 3 -> -> 0 `i `uc ]
+[; ;oven.c: 22:     ADCON0 = 0;
+[e = _ADCON0 -> -> 0 `i `uc ]
 "23
-[; ;oven.c: 23:     ADCON0bits.CHS2 = 0;
-[e = . . _ADCON0bits 2 4 -> -> 0 `i `uc ]
+[; ;oven.c: 23:     ADCON0bits.CHS0 = 0;
+[e = . . _ADCON0bits 2 2 -> -> 0 `i `uc ]
 "24
-[; ;oven.c: 24:     ADCON0bits.ADON = 1;
-[e = . . _ADCON0bits 1 0 -> -> 1 `i `uc ]
+[; ;oven.c: 24:     ADCON0bits.CHS1 = 0;
+[e = . . _ADCON0bits 2 3 -> -> 0 `i `uc ]
 "25
-[; ;oven.c: 25:     ADRESH = 0;
-[e = _ADRESH -> -> 0 `i `uc ]
+[; ;oven.c: 25:     ADCON0bits.CHS2 = 0;
+[e = . . _ADCON0bits 2 4 -> -> 0 `i `uc ]
 "26
-[; ;oven.c: 26:     ADRESL = 0;
-[e = _ADRESL -> -> 0 `i `uc ]
+[; ;oven.c: 26:     ADCON0bits.ADON = 1;
+[e = . . _ADCON0bits 1 0 -> -> 1 `i `uc ]
 "27
-[; ;oven.c: 27:     ADCON1 = 0;
-[e = _ADCON1 -> -> 0 `i `uc ]
+[; ;oven.c: 27:     ADRESH = 0;
+[e = _ADRESH -> -> 0 `i `uc ]
 "28
-[; ;oven.c: 28: }
+[; ;oven.c: 28:     ADRESL = 0;
+[e = _ADRESL -> -> 0 `i `uc ]
+"29
+[; ;oven.c: 29:     ADCON1 = 0;
+[e = _ADCON1 -> -> 0 `i `uc ]
+"30
+[; ;oven.c: 30: }
 [e :UE 240 ]
 }
-"30
-[; ;oven.c: 30: int get_temperature(void){
+"33
+[; ;oven.c: 33: int get_temperature(void){
 [v _get_temperature `(i ~T0 @X0 1 ef ]
 {
 [e :U _get_temperature ]
 [f ]
-"31
-[; ;oven.c: 31:     ADCON0bits.GO = 1;
+"34
+[; ;oven.c: 34:     ADCON0bits.GO = 1;
 [e = . . _ADCON0bits 2 1 -> -> 1 `i `uc ]
-"32
-[; ;oven.c: 32:     while(ADCON0bits.GO == 1);
+"35
+[; ;oven.c: 35:     while(ADCON0bits.GO == 1);
 [e $U 242  ]
 [e :U 243 ]
 [e :U 242 ]
 [e $ == -> . . _ADCON0bits 2 1 `i -> 1 `i 243  ]
 [e :U 244 ]
-"33
-[; ;oven.c: 33:     return (int) (ADRESH * 0.25) + -55;
+"36
+[; ;oven.c: 36:     return (int) (ADRESH * 0.25) + -55;
 [e ) + -> * -> -> _ADRESH `i `d .0.25 `i -U -> 55 `i ]
 [e $UE 241  ]
-"34
-[; ;oven.c: 34: }
+"37
+[; ;oven.c: 37: }
 [e :UE 241 ]
 }
-"36
-[; ;oven.c: 36: int get_liters(void){
+"41
+[; ;oven.c: 41: int get_liters(void){
 [v _get_liters `(i ~T0 @X0 1 ef ]
 {
 [e :U _get_liters ]
 [f ]
-"37
-[; ;oven.c: 37:     ADCON0bits.GO = 1;
+"42
+[; ;oven.c: 42:     ADCON0bits.GO = 1;
 [e = . . _ADCON0bits 2 1 -> -> 1 `i `uc ]
-"38
-[; ;oven.c: 38:     while(ADCON0bits.GO == 1);
+"43
+[; ;oven.c: 43:     while(ADCON0bits.GO == 1);
 [e $U 246  ]
 [e :U 247 ]
 [e :U 246 ]
 [e $ == -> . . _ADCON0bits 2 1 `i -> 1 `i 247  ]
 [e :U 248 ]
-"39
-[; ;oven.c: 39:     return (int) (ADRESH * 0.01);
+"44
+[; ;oven.c: 44:     return (int) (ADRESH * 0.01);
 [e ) -> * -> -> _ADRESH `i `d .0.01 `i ]
 [e $UE 245  ]
-"40
-[; ;oven.c: 40: }
+"45
+[; ;oven.c: 45: }
 [e :UE 245 ]
 }
-"42
-[; ;oven.c: 42: void wait_for_zero(void){
+"48
+[; ;oven.c: 48: void wait_for_zero(void){
 [v _wait_for_zero `(v ~T0 @X0 1 ef ]
 {
 [e :U _wait_for_zero ]
 [f ]
-"43
-[; ;oven.c: 43:     while(1){
+"49
+[; ;oven.c: 49:     while(1){
 [e :U 251 ]
 {
-"44
-[; ;oven.c: 44:         if (get_temperature() == -55){
+"50
+[; ;oven.c: 50:         if (get_temperature() == -55){
 [e $ ! == ( _get_temperature ..  -U -> 55 `i 253  ]
 {
-"45
-[; ;oven.c: 45:             break;
+"51
+[; ;oven.c: 51:             break;
 [e $U 252  ]
-"46
-[; ;oven.c: 46:         }
+"52
+[; ;oven.c: 52:         }
 }
 [e :U 253 ]
-"47
-[; ;oven.c: 47:     }
+"53
+[; ;oven.c: 53:     }
 }
 [e :U 250 ]
 [e $U 251  ]
 [e :U 252 ]
-"48
-[; ;oven.c: 48: }
+"54
+[; ;oven.c: 54: }
 [e :UE 249 ]
 }
-"50
-[; ;oven.c: 50: int check_temperature(int temp_to_be_checked){
+"57
+[; ;oven.c: 57: int check_temperature(int temp_to_be_checked){
 [v _check_temperature `(i ~T0 @X0 1 ef1`i ]
 {
 [e :U _check_temperature ]
 [v _temp_to_be_checked `i ~T0 @X0 1 r1 ]
 [f ]
-"51
-[; ;oven.c: 51:     float grad = abs(temp_to_be_checked - (-55))/5;
+"58
+[; ;oven.c: 58:     float grad = abs(temp_to_be_checked - (-55))/5;
 [v _grad `f ~T0 @X0 1 a ]
 [e = _grad -> / ( _abs (1 - _temp_to_be_checked -U -> 55 `i -> 5 `i `f ]
-"52
-[; ;oven.c: 52:     if (grad >= 12 && grad <= 13.5){
+"59
+[; ;oven.c: 59:     if (grad >= 12 && grad <= 13.5){
 [e $ ! && >= _grad -> -> 12 `i `f <= -> _grad `d .13.5 255  ]
 {
-"53
-[; ;oven.c: 53:         return 1;
+"60
+[; ;oven.c: 60:         return 1;
 [e ) -> 1 `i ]
 [e $UE 254  ]
-"54
-[; ;oven.c: 54:     } else {
+"61
+[; ;oven.c: 61:     } else {
 }
 [e $U 256  ]
 [e :U 255 ]
 {
-"55
-[; ;oven.c: 55:         return 0;
+"62
+[; ;oven.c: 62:         return 0;
 [e ) -> 0 `i ]
 [e $UE 254  ]
-"56
-[; ;oven.c: 56:     }
+"63
+[; ;oven.c: 63:     }
 }
 [e :U 256 ]
-"57
-[; ;oven.c: 57: }
+"64
+[; ;oven.c: 64: }
 [e :UE 254 ]
 }

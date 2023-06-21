@@ -18,10 +18,9 @@
 #include "timer.h"
 #include "stepper_motor.h"
 
-void __interrupt() rx_char_usart(void);
+void __interrupt() interrupt_management(void);
 
 static _Bool state_changed = false;
-static _Bool idle_msg_sent = false;
 static _Bool read_new_char = false;
 static _Bool timer_done = false;
 
@@ -30,9 +29,10 @@ int mix_current_step;
 int mix_direction;
 int mix_step_counter;
 int mix_counter;
+// 00000001 00000010 00000100 00001000 for the stepper motor register it makes the motor use <0:3>
 char hex_joint_values[COILS_NUMBER] = {0x01, 0x02, 0x04, 0x08};
+// 00010000 00100000 01000000 10000000 for the stepper motor register it makes the motor use <4:7>
 char hex_end_effector_values[COILS_NUMBER] = {0x10, 0x20, 0x40, 0x80};
-
 int dilution_done = 0;
 int trash_counter = 0;
 
@@ -76,7 +76,6 @@ void main(void){
     
     while(1){
         if (state_changed){
-            const char* greet_str[80];
             if (read_new_char){
                 rx_char = get_reg_value();
                 state_translator_fpga_to_micro(rx_char, &state);  // Send state update to fpga
@@ -90,7 +89,6 @@ void main(void){
             lcd_update(state);
             // __delay_ms(300); // Delay just to show clearly the message
             state_changed = false;
-            idle_msg_sent = false;
         }
         
         if (state == 2){
@@ -133,6 +131,7 @@ void main(void){
                 }
                 
             } else if (state == 5){ // Vial reached TOF 3 diluting station
+                // Init all motors and process variables
                 init_stepper(&joint_stepper, 0, 0, 1, hex_joint_values, &LATB);
                 init_stepper(&end_effector_stepper, 0, 0, 1, hex_end_effector_values, &LATB);
                 init_stepper(&joint_dilutor_stepper, 0, 0, 1, hex_joint_values, &LATC);
@@ -251,12 +250,14 @@ void main(void){
     }    
 }
 
-
-void __interrupt() rx_char_usart(void){
+// Manages receiving char through USART and TMR0 overflow
+void __interrupt() interrupt_management(void){
     if(PIE1bits.RCIE && PIR1bits.RCIF){// It has to be enabled and triggered
         PIR1bits.RCIF = 0;
-        state_changed = true;
-        read_new_char = true;
+        if (state != 14){ // If error the communication has lower prio
+            state_changed = true;
+            read_new_char = true;
+        }
     }
     if(INTCONbits.TMR0IE && INTCONbits.TMR0IF){
         T0CON = 0; // Sets to zero also TMR0ON

@@ -3808,19 +3808,14 @@ extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 33 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\\pic\\include\\xc.h" 2 3
 # 34 "./lcd.h" 2
 # 100 "./lcd.h"
-typedef struct {
-    unsigned char* new_msg;
-    unsigned char* current_msg;
-} lcdManager;
-
 void lcd_init(void);
 void lcd_cmd(unsigned char val);
 void lcd_dat(unsigned char val);
 void lcd_str(const char* str);
-void lcd_manager_init(lcdManager* lcd_manager, unsigned char* new_msg, unsigned char* current_msg);
-
 void lcd_update(int state);
 # 1 "utils.c" 2
+
+
 
 void state_translator_fpga_to_micro(unsigned char state_machine_code, int* state){
     lcd_dat(state_machine_code);
@@ -3845,6 +3840,7 @@ void state_translator_fpga_to_micro(unsigned char state_machine_code, int* state
     }
     return;
 }
+
 
 unsigned char state_translator_micro_to_fpga(int* state){
     unsigned char state_machine_code;

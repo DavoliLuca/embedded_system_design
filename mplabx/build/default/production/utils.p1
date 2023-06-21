@@ -1,6 +1,6 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"107 ./lcd.h
-[; ;./lcd.h: 107: void lcd_dat(unsigned char val);
+"102 ./lcd.h
+[; ;./lcd.h: 102: void lcd_dat(unsigned char val);
 [v _lcd_dat `(v ~T0 @X0 0 ef1`uc ]
 "54 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 54: __asm("PORTA equ 0F80h");
@@ -383,175 +383,175 @@ Version 4.0 HI-TECH Software Intermediate Code
 "5763
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f452.h: 5763: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
-"2 utils.c
-[; ;utils.c: 2: void state_translator_fpga_to_micro(unsigned char state_machine_code, int* state){
+"4 utils.c
+[; ;utils.c: 4: void state_translator_fpga_to_micro(unsigned char state_machine_code, int* state){
 [v _state_translator_fpga_to_micro `(v ~T0 @X0 1 ef2`uc`*i ]
 {
 [e :U _state_translator_fpga_to_micro ]
 [v _state_machine_code `uc ~T0 @X0 1 r1 ]
 [v _state `*i ~T0 @X0 1 r2 ]
 [f ]
-"3
-[; ;utils.c: 3:     lcd_dat(state_machine_code);
-[e ( _lcd_dat (1 _state_machine_code ]
-"4
-[; ;utils.c: 4:     if (state_machine_code == 0x01){
-[e $ ! == -> _state_machine_code `i -> 1 `i 240  ]
-{
 "5
-[; ;utils.c: 5:         *state = 1;
-[e = *U _state -> 1 `i ]
+[; ;utils.c: 5:     lcd_dat(state_machine_code);
+[e ( _lcd_dat (1 _state_machine_code ]
 "6
-[; ;utils.c: 6:     } else if (state_machine_code == 0x02){
-}
-[e $U 241  ]
-[e :U 240 ]
-[e $ ! == -> _state_machine_code `i -> 2 `i 242  ]
+[; ;utils.c: 6:     if (state_machine_code == 0x01){
+[e $ ! == -> _state_machine_code `i -> 1 `i 239  ]
 {
 "7
-[; ;utils.c: 7:         *state = 3;
-[e = *U _state -> 3 `i ]
+[; ;utils.c: 7:         *state = 1;
+[e = *U _state -> 1 `i ]
 "8
-[; ;utils.c: 8:     } else if (state_machine_code == 0x04){
+[; ;utils.c: 8:     } else if (state_machine_code == 0x02){
 }
-[e $U 243  ]
-[e :U 242 ]
-[e $ ! == -> _state_machine_code `i -> 4 `i 244  ]
+[e $U 240  ]
+[e :U 239 ]
+[e $ ! == -> _state_machine_code `i -> 2 `i 241  ]
 {
 "9
-[; ;utils.c: 9:         *state = 5;
-[e = *U _state -> 5 `i ]
+[; ;utils.c: 9:         *state = 3;
+[e = *U _state -> 3 `i ]
 "10
-[; ;utils.c: 10:     } else if (state_machine_code == 0x08){
+[; ;utils.c: 10:     } else if (state_machine_code == 0x04){
 }
-[e $U 245  ]
-[e :U 244 ]
-[e $ ! == -> _state_machine_code `i -> 8 `i 246  ]
+[e $U 242  ]
+[e :U 241 ]
+[e $ ! == -> _state_machine_code `i -> 4 `i 243  ]
 {
 "11
-[; ;utils.c: 11:         *state = 10;
-[e = *U _state -> 10 `i ]
+[; ;utils.c: 11:         *state = 5;
+[e = *U _state -> 5 `i ]
 "12
-[; ;utils.c: 12:     } else if (state_machine_code == 0x10){
+[; ;utils.c: 12:     } else if (state_machine_code == 0x08){
 }
-[e $U 247  ]
-[e :U 246 ]
-[e $ ! == -> _state_machine_code `i -> 16 `i 248  ]
+[e $U 244  ]
+[e :U 243 ]
+[e $ ! == -> _state_machine_code `i -> 8 `i 245  ]
 {
 "13
-[; ;utils.c: 13:         *state = 2;
-[e = *U _state -> 2 `i ]
+[; ;utils.c: 13:         *state = 10;
+[e = *U _state -> 10 `i ]
 "14
-[; ;utils.c: 14:     } else if (state_machine_code == 0x40){
+[; ;utils.c: 14:     } else if (state_machine_code == 0x10){
 }
-[e $U 249  ]
-[e :U 248 ]
-[e $ ! == -> _state_machine_code `i -> 64 `i 250  ]
+[e $U 246  ]
+[e :U 245 ]
+[e $ ! == -> _state_machine_code `i -> 16 `i 247  ]
 {
 "15
-[; ;utils.c: 15:         *state = 14;
-[e = *U _state -> 14 `i ]
+[; ;utils.c: 15:         *state = 2;
+[e = *U _state -> 2 `i ]
 "16
-[; ;utils.c: 16:     } else if (state_machine_code == 0x80){
+[; ;utils.c: 16:     } else if (state_machine_code == 0x40){
 }
-[e $U 251  ]
-[e :U 250 ]
-[e $ ! == -> _state_machine_code `i -> 128 `i 252  ]
+[e $U 248  ]
+[e :U 247 ]
+[e $ ! == -> _state_machine_code `i -> 64 `i 249  ]
 {
+"17
+[; ;utils.c: 17:         *state = 14;
+[e = *U _state -> 14 `i ]
 "18
-[; ;utils.c: 18:     } else if (state_machine_code == 0xA0){
+[; ;utils.c: 18:     } else if (state_machine_code == 0x80){
 }
-[e $U 253  ]
-[e :U 252 ]
-[e $ ! == -> _state_machine_code `i -> 160 `i 254  ]
+[e $U 250  ]
+[e :U 249 ]
+[e $ ! == -> _state_machine_code `i -> 128 `i 251  ]
 {
-"19
-[; ;utils.c: 19:         *state = 12;
-[e = *U _state -> 12 `i ]
 "20
-[; ;utils.c: 20:     } else {
+[; ;utils.c: 20:     } else if (state_machine_code == 0xA0){
 }
-[e $U 255  ]
-[e :U 254 ]
+[e $U 252  ]
+[e :U 251 ]
+[e $ ! == -> _state_machine_code `i -> 160 `i 253  ]
 {
 "21
-[; ;utils.c: 21:         *state = 0;
-[e = *U _state -> 0 `i ]
+[; ;utils.c: 21:         *state = 12;
+[e = *U _state -> 12 `i ]
 "22
-[; ;utils.c: 22:     }
+[; ;utils.c: 22:     } else {
 }
-[e :U 255 ]
+[e $U 254  ]
 [e :U 253 ]
-[e :U 251 ]
-[e :U 249 ]
-[e :U 247 ]
-[e :U 245 ]
-[e :U 243 ]
-[e :U 241 ]
+{
 "23
-[; ;utils.c: 23:     return;
-[e $UE 239  ]
+[; ;utils.c: 23:         *state = 0;
+[e = *U _state -> 0 `i ]
 "24
-[; ;utils.c: 24: }
-[e :UE 239 ]
+[; ;utils.c: 24:     }
 }
+[e :U 254 ]
+[e :U 252 ]
+[e :U 250 ]
+[e :U 248 ]
+[e :U 246 ]
+[e :U 244 ]
+[e :U 242 ]
+[e :U 240 ]
+"25
+[; ;utils.c: 25:     return;
+[e $UE 238  ]
 "26
-[; ;utils.c: 26: unsigned char state_translator_micro_to_fpga(int* state){
+[; ;utils.c: 26: }
+[e :UE 238 ]
+}
+"29
+[; ;utils.c: 29: unsigned char state_translator_micro_to_fpga(int* state){
 [v _state_translator_micro_to_fpga `(uc ~T0 @X0 1 ef1`*i ]
 {
 [e :U _state_translator_micro_to_fpga ]
 [v _state `*i ~T0 @X0 1 r1 ]
 [f ]
-"27
-[; ;utils.c: 27:     unsigned char state_machine_code;
-[v _state_machine_code `uc ~T0 @X0 1 a ]
-"28
-[; ;utils.c: 28:     if (*state == 2){
-[e $ ! == *U _state -> 2 `i 257  ]
-{
-"29
-[; ;utils.c: 29:         state_machine_code = 0x10;
-[e = _state_machine_code -> -> 16 `i `uc ]
 "30
-[; ;utils.c: 30:     } else if (*state == 0) {
-}
-[e $U 258  ]
-[e :U 257 ]
-[e $ ! == *U _state -> 0 `i 259  ]
-{
+[; ;utils.c: 30:     unsigned char state_machine_code;
+[v _state_machine_code `uc ~T0 @X0 1 a ]
 "31
-[; ;utils.c: 31:         state_machine_code = 0x00;
-[e = _state_machine_code -> -> 0 `i `uc ]
+[; ;utils.c: 31:     if (*state == 2){
+[e $ ! == *U _state -> 2 `i 256  ]
+{
 "32
-[; ;utils.c: 32:     } else if (*state == 14) {
-}
-[e $U 260  ]
-[e :U 259 ]
-[e $ ! == *U _state -> 14 `i 261  ]
-{
+[; ;utils.c: 32:         state_machine_code = 0x10;
+[e = _state_machine_code -> -> 16 `i `uc ]
 "33
-[; ;utils.c: 33:         state_machine_code = 0x40;
-[e = _state_machine_code -> -> 64 `i `uc ]
-"34
-[; ;utils.c: 34:     } else {
+[; ;utils.c: 33:     } else if (*state == 0) {
 }
-[e $U 262  ]
-[e :U 261 ]
+[e $U 257  ]
+[e :U 256 ]
+[e $ ! == *U _state -> 0 `i 258  ]
 {
+"34
+[; ;utils.c: 34:         state_machine_code = 0x00;
+[e = _state_machine_code -> -> 0 `i `uc ]
 "35
-[; ;utils.c: 35:         state_machine_code = 0x80;
-[e = _state_machine_code -> -> 128 `i `uc ]
-"36
-[; ;utils.c: 36:     }
+[; ;utils.c: 35:     } else if (*state == 14) {
 }
-[e :U 262 ]
-[e :U 260 ]
+[e $U 259  ]
 [e :U 258 ]
+[e $ ! == *U _state -> 14 `i 260  ]
+{
+"36
+[; ;utils.c: 36:         state_machine_code = 0x40;
+[e = _state_machine_code -> -> 64 `i `uc ]
 "37
-[; ;utils.c: 37:     return state_machine_code;
-[e ) _state_machine_code ]
-[e $UE 256  ]
+[; ;utils.c: 37:     } else {
+}
+[e $U 261  ]
+[e :U 260 ]
+{
 "38
-[; ;utils.c: 38: }
-[e :UE 256 ]
+[; ;utils.c: 38:         state_machine_code = 0x80;
+[e = _state_machine_code -> -> 128 `i `uc ]
+"39
+[; ;utils.c: 39:     }
+}
+[e :U 261 ]
+[e :U 259 ]
+[e :U 257 ]
+"40
+[; ;utils.c: 40:     return state_machine_code;
+[e ) _state_machine_code ]
+[e $UE 255  ]
+"41
+[; ;utils.c: 41: }
+[e :UE 255 ]
 }

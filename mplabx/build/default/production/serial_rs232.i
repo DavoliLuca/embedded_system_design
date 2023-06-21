@@ -4439,17 +4439,20 @@ void init_USART(void){
     return;
 }
 
+
 void serial_tx_char(unsigned char val){
     TXREG = val;
     while(!TXSTAbits.TRMT);
-
 }
+
 
 void serial_tx_string(const char* val){
     for (int i=0; val[i] != 0; i++){
         serial_tx_char(val[i]);
     }
 }
+
+
 
 unsigned char get_reg_value(){
     unsigned char rx_char = RCREG;

@@ -2,6 +2,7 @@
 #include <xc.h>
 #include "lcd.h"
 
+// All the state msgs, formatted so they could easily fit in the lcd
 const char const_msgs[15][4][20] = {
     {"IDLE: waiting for","vial to be placed","in init pos",""},
     {"INIT_POS: the vial","is at the init pos", "process is starting", ""},
@@ -87,23 +88,6 @@ void lcd_str(const char* str)
       i++;
     }  
 }
-
-void lcd_manager_init(lcdManager* lcd_manager, unsigned char* new_msg, unsigned char* current_msg){
-    lcd_manager -> new_msg = new_msg;
-    lcd_manager -> current_msg = new_msg;
-}
-
-/*
-void lcd_update(lcdManager* lcd_manager){
-    if (lcd_manager -> new_msg == "" || lcd_manager -> new_msg == lcd_manager -> current_msg){
-        asm("nop");
-    } else {
-        lcd_cmd(L_CLR);
-        lcd_cmd(L_L1);
-        lcd_str(lcd_manager -> new_msg[0:20]);
-    }
-}*/
-
 
 void lcd_update(int state){
     lcd_cmd(L_CLR);
